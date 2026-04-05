@@ -18,190 +18,80 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);o
 
 /* ======================= HERO ======================= */
 .hero{
-  position:relative;min-height:100vh;display:flex;align-items:center;
+  position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
   background:var(--dark);overflow:hidden;
 }
-
-/* Full-bleed background image with overlay */
-.hero-bg-image{
-  position:absolute;inset:0;
-  background:
-    url('https://images.pexels.com/photos/479628/pexels-photo-479628.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover no-repeat,
-    radial-gradient(ellipse at 30% 40%, #8B6914 0%, #4A3608 40%, #1A1108 80%);
-  filter:brightness(.32) saturate(1.3) contrast(1.1);
-  transform:scale(1.05);
-  animation:heroZoom 30s ease-in-out infinite alternate;
+.hero-mosaic{
+  position:absolute;inset:-60px;
+  display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(4,1fr);gap:6px;
+  transform:rotate(-6deg) scale(1.25);
+  animation:mosaicDrift 80s linear infinite;
 }
-@keyframes heroZoom{0%{transform:scale(1.05)}100%{transform:scale(1.15)}}
+@keyframes mosaicDrift{0%{transform:rotate(-6deg) scale(1.25) translate(0,0)}50%{transform:rotate(-6deg) scale(1.25) translate(-80px,-30px)}100%{transform:rotate(-6deg) scale(1.25) translate(0,0)}}
+.mosaic-cell{overflow:hidden;border-radius:8px;min-height:130px}
+.mosaic-cell img{width:100%;height:100%;object-fit:cover;opacity:.4;filter:saturate(1.2);display:block}
+.mosaic-cell:nth-child(odd) img{animation:mFloat 9s ease-in-out infinite alternate}
+.mosaic-cell:nth-child(even) img{animation:mFloat 11s ease-in-out infinite alternate-reverse}
+@keyframes mFloat{0%{transform:scale(1)}100%{transform:scale(1.1)}}
 
-/* Grain texture overlay */
+.hero-dark{
+  position:absolute;inset:0;z-index:1;
+  background:radial-gradient(ellipse at 50% 50%,rgba(26,17,8,.5) 0%,rgba(26,17,8,.82) 70%);
+}
 .hero-grain{
-  position:absolute;inset:0;opacity:.08;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  position:absolute;inset:0;z-index:2;opacity:.05;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:128px;
-  pointer-events:none;
 }
-
-/* Gradient overlay for text readability */
-.hero-overlay{
-  position:absolute;inset:0;
-  background:
-    linear-gradient(135deg, rgba(26,17,8,.85) 0%, rgba(26,17,8,.4) 40%, rgba(26,17,8,.6) 100%),
-    radial-gradient(ellipse at 20% 80%, rgba(232,168,56,.08), transparent 60%);
-  pointer-events:none;
-}
-
-/* Main layout: text left, photo collage right */
-.hero-inner{
-  position:relative;z-index:2;display:grid;
-  grid-template-columns:1fr 1fr;gap:3rem;
-  max-width:1300px;margin:0 auto;padding:6rem 3rem 4rem;
-  align-items:center;width:100%;
-}
-
-/* Left: text content */
-.hero-text{animation:fadeUp .8s ease-out both}
+.hero-center{position:relative;z-index:3;text-align:center;max-width:800px;padding:2rem}
 @keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
-
 .hero-badge{
   display:inline-flex;align-items:center;gap:.5rem;
-  background:rgba(232,168,56,.12);border:1px solid rgba(232,168,56,.3);
-  padding:.35rem 1rem;border-radius:100px;margin-bottom:1.5rem;
-  animation:fadeUp .8s ease-out .1s both;
+  background:rgba(232,168,56,.1);border:1px solid rgba(232,168,56,.25);
+  padding:.35rem 1.2rem;border-radius:100px;margin-bottom:1.5rem;animation:fadeUp .8s ease-out both;
 }
 .hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero-badge span{font-size:.72rem;color:var(--gold-light);text-transform:uppercase;letter-spacing:.18em;font-weight:600}
-
+.hero-badge span{font-size:.7rem;color:var(--gold-light);text-transform:uppercase;letter-spacing:.2em;font-weight:600}
 .hero h1{
-  font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5.5rem);
-  color:var(--cream);font-weight:900;line-height:.95;letter-spacing:-.02em;
-  animation:fadeUp .8s ease-out .15s both;
+  font-family:'Playfair Display',serif;font-size:clamp(3.5rem,10vw,8rem);
+  color:var(--cream);font-weight:900;line-height:.9;letter-spacing:-.03em;animation:fadeUp .8s ease-out .15s both;
 }
-.hero h1 .line2{display:block;margin-top:.1em}
-.hero h1 .of{font-weight:400;font-style:italic;color:var(--muted);font-size:.55em;vertical-align:.1em}
-.hero h1 .chips-word{
-  color:transparent;
-  background:linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
-  -webkit-background-clip:text;background-clip:text;
+.hero h1 .line2{display:block;margin-top:.05em}
+.hero h1 .of{font-weight:400;font-style:italic;color:var(--muted);font-size:.45em;vertical-align:.15em}
+.hero h1 .chips-word{color:transparent;background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));-webkit-background-clip:text;background-clip:text}
+.hero-tagline{font-family:'Zilla Slab',serif;font-size:clamp(1rem,2.2vw,1.5rem);color:var(--gold-light);margin-top:1rem;animation:fadeUp .8s ease-out .25s both}
+.hero-desc{font-size:clamp(.85rem,1.2vw,1.05rem);color:rgba(245,236,215,.5);margin-top:.8rem;max-width:520px;margin-inline:auto;line-height:1.7;animation:fadeUp .8s ease-out .35s both}
+.hero-previews{display:flex;gap:.7rem;justify-content:center;margin-top:2rem;flex-wrap:wrap;animation:fadeUp .8s ease-out .4s both}
+.preview-chip{
+  display:flex;align-items:center;gap:.5rem;
+  background:rgba(255,248,236,.07);border:1px solid rgba(232,168,56,.12);
+  padding:.35rem .6rem .35rem .35rem;border-radius:10px;transition:all .3s;cursor:default;
 }
-
-.hero-tagline{
-  font-family:'Zilla Slab',serif;font-size:clamp(1rem,2vw,1.4rem);
-  color:var(--gold-light);margin-top:1.2rem;font-weight:400;
-  animation:fadeUp .8s ease-out .25s both;
-}
-.hero-desc{
-  font-size:clamp(.88rem,1.2vw,1.05rem);color:rgba(245,236,215,.55);
-  margin-top:1rem;max-width:480px;line-height:1.7;
-  animation:fadeUp .8s ease-out .35s both;
-}
-
-.hero-stats{
-  display:flex;gap:1.5rem;margin-top:2.5rem;flex-wrap:wrap;
-  animation:fadeUp .8s ease-out .45s both;
-}
-.hero-stat{text-align:left}
-.hero-stat .num{
-  font-family:'Zilla Slab',serif;font-size:clamp(1.5rem,2.5vw,2.2rem);
-  color:var(--gold);font-weight:700;line-height:1;
-}
-.hero-stat .label{
-  font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.2em;margin-top:.15rem;
-}
-.hero-stat-divider{width:1px;background:rgba(232,168,56,.2);align-self:stretch}
-
-.hero-cta{
-  display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;
-  animation:fadeUp .8s ease-out .55s both;
-}
-.btn-primary{
-  display:inline-block;padding:.85rem 2.2rem;background:var(--gold);color:var(--dark);
-  text-decoration:none;font-weight:700;font-size:.9rem;border-radius:100px;
-  letter-spacing:.03em;transition:all .3s;border:2px solid var(--gold);
-}
+.preview-chip:hover{background:rgba(232,168,56,.15);border-color:var(--gold);transform:translateY(-2px)}
+.preview-chip img{width:44px;height:44px;object-fit:cover;border-radius:7px}
+.preview-chip .pc-text{text-align:left}
+.preview-chip .pc-flavor{font-size:.72rem;color:var(--cream);font-weight:600;line-height:1.2}
+.preview-chip .pc-country{font-size:.58rem;color:var(--muted)}
+.hero-stats{display:flex;gap:2rem;justify-content:center;margin-top:2rem;flex-wrap:wrap;animation:fadeUp .8s ease-out .5s both}
+.hero-stat{text-align:center}
+.hero-stat .num{font-family:'Zilla Slab',serif;font-size:clamp(1.5rem,3vw,2.2rem);color:var(--gold);font-weight:700;line-height:1}
+.hero-stat .label{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.2em;margin-top:.15rem}
+.hero-stat-divider{width:1px;background:rgba(232,168,56,.15);align-self:stretch}
+.hero-cta{display:flex;gap:1rem;justify-content:center;margin-top:2rem;flex-wrap:wrap;animation:fadeUp .8s ease-out .6s both}
+.btn-primary{display:inline-block;padding:.85rem 2.5rem;background:var(--gold);color:var(--dark);text-decoration:none;font-weight:700;font-size:.9rem;border-radius:100px;letter-spacing:.03em;transition:all .3s;border:2px solid var(--gold)}
 .btn-primary:hover{background:transparent;color:var(--gold);transform:translateY(-2px)}
-.btn-secondary{
-  display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;
-  color:var(--cream);text-decoration:none;font-weight:500;font-size:.9rem;
-  border-radius:100px;border:1px solid rgba(255,248,236,.15);
-  transition:all .3s;
-}
+.btn-secondary{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;color:var(--cream);text-decoration:none;font-weight:500;font-size:.9rem;border-radius:100px;border:1px solid rgba(255,248,236,.15);transition:all .3s}
 .btn-secondary:hover{border-color:var(--gold);color:var(--gold)}
-
-/* Right: photo collage */
-.hero-collage{
-  position:relative;height:580px;
-  animation:fadeUp .9s ease-out .3s both;
-}
-.collage-img{
-  position:absolute;border-radius:16px;overflow:hidden;
-  box-shadow:0 20px 60px rgba(0,0,0,.4);
-  transition:transform .5s cubic-bezier(.4,0,.2,1);
-}
-.collage-img:hover{transform:scale(1.03) rotate(0deg) !important;z-index:10}
-.collage-img img{width:100%;height:100%;object-fit:cover;display:block;background:linear-gradient(135deg,#8B6914,#4A3608)}
-
-.collage-img.c1{
-  width:240px;height:300px;top:0;right:40px;
-  transform:rotate(3deg);z-index:3;
-}
-.collage-img.c2{
-  width:200px;height:260px;top:60px;right:260px;
-  transform:rotate(-4deg);z-index:2;
-}
-.collage-img.c3{
-  width:220px;height:180px;bottom:60px;right:20px;
-  transform:rotate(-2deg);z-index:4;
-}
-.collage-img.c4{
-  width:180px;height:220px;bottom:30px;right:230px;
-  transform:rotate(5deg);z-index:1;
-}
-/* Floating label tags on images */
-.collage-label{
-  position:absolute;bottom:12px;left:12px;
-  background:rgba(26,17,8,.75);backdrop-filter:blur(8px);
-  color:var(--cream);padding:.3rem .7rem;border-radius:8px;
-  font-size:.7rem;font-weight:600;letter-spacing:.05em;
-  border:1px solid rgba(232,168,56,.2);
-}
-
-/* Decorative ring */
-.hero-ring{
-  position:absolute;right:-60px;top:50%;transform:translateY(-50%);
-  width:500px;height:500px;border-radius:50%;
-  border:1px solid rgba(232,168,56,.08);pointer-events:none;
-}
-.hero-ring::before{
-  content:'';position:absolute;inset:30px;border-radius:50%;
-  border:1px solid rgba(232,168,56,.05);
-}
-
-/* Scroll indicator */
-.scroll-indicator{
-  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:.3rem;
-  color:var(--muted);font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
-  animation:bob 2.5s ease-in-out infinite;z-index:5;
-}
+.scroll-indicator{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.3rem;color:var(--muted);font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;animation:bob 2.5s ease-in-out infinite;z-index:5}
 .scroll-line{width:1px;height:28px;background:linear-gradient(var(--muted),transparent)}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-
-/* ===== MARQUEE ===== */
-.marquee-bar{
-  background:var(--gold);padding:.6rem 0;overflow:hidden;white-space:nowrap;
-  position:relative;z-index:10;
-}
-.marquee-track{
-  display:inline-flex;animation:marquee 40s linear infinite;
-}
-.marquee-track span{
-  font-family:'Playfair Display',serif;font-size:.85rem;color:var(--dark);
-  font-weight:700;padding:0 2rem;opacity:.7;
-}
-.marquee-track span::before{content:'🥔 '}
+.marquee-bar{background:var(--gold);padding:.6rem 0;overflow:hidden;white-space:nowrap;position:relative;z-index:10}
+.marquee-track{display:inline-flex;animation:marquee 40s linear infinite}
+.marquee-track span{font-family:'Playfair Display',serif;font-size:.85rem;color:var(--dark);font-weight:700;padding:0 2rem;opacity:.7}
+.marquee-track span::before{content:'\1F954 '}
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
 
 /* ======================= NAV ======================= */
 .nav{
@@ -323,80 +213,97 @@ footer .copy{font-size:.65rem;margin-top:1.5rem;opacity:.4}
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <div class="hero-bg-image" aria-hidden="true"></div>
+  <!-- Image mosaic background -->
+  <div class="hero-mosaic" aria-hidden="true">
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/479628/pexels-photo-479628.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/1893556/pexels-photo-1893556.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/5848677/pexels-photo-5848677.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/1618888/pexels-photo-1618888.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/1586947/pexels-photo-1586947.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/8165389/pexels-photo-8165389.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/13060695/pexels-photo-13060695.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/1618898/pexels-photo-1618898.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/1893556/pexels-photo-1893556.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/2090903/pexels-photo-2090903.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/5848676/pexels-photo-5848676.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/479628/pexels-photo-479628.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/1618888/pexels-photo-1618888.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/1586947/pexels-photo-1586947.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/8165389/pexels-photo-8165389.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/5848677/pexels-photo-5848677.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/13060695/pexels-photo-13060695.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/2090903/pexels-photo-2090903.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/1618898/pexels-photo-1618898.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/1893556/pexels-photo-1893556.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/5848676/pexels-photo-5848676.jpeg?auto=compress&w=400" alt=""></div>
+    <div class="mosaic-cell"><img src="https://images.pexels.com/photos/479628/pexels-photo-479628.jpeg?auto=compress&w=400" alt=""></div>
+  </div>
+  <div class="hero-dark" aria-hidden="true"></div>
   <div class="hero-grain" aria-hidden="true"></div>
-  <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="hero-ring" aria-hidden="true"></div>
 
-  <div class="hero-inner">
-    <!-- LEFT: Text -->
-    <div class="hero-text">
-      <div class="hero-badge">
-        <div class="hero-badge-dot"></div>
-        <span>Exploring 150+ Countries</span>
+  <div class="hero-center">
+    <div class="hero-badge"><div class="hero-badge-dot"></div><span>Exploring 150+ Countries</span></div>
+    <h1>World <span class="of">of</span> <span class="line2"><span class="chips-word">Chips</span></span></h1>
+    <p class="hero-tagline">Every Country. Every Crunch. Every Flavor.</p>
+    <p class="hero-desc">From Japan&#8217;s wasabi kettle crisps to Peru&#8217;s aj&#237; amarillo slices &#8212; explore the crunchy universe of potato chips across the globe.</p>
+
+    <div class="hero-previews">
+      <div class="preview-chip">
+        <img src="https://images.pexels.com/photos/1893556/pexels-photo-1893556.jpeg?auto=compress&w=100" alt="Chips">
+        <div class="pc-text"><div class="pc-flavor">Wasabi Nori</div><div class="pc-country">&#x1F1EF;&#x1F1F5; Japan &#183; Calbee</div></div>
       </div>
-      <h1>
-        World <span class="of">of</span>
-        <span class="line2"><span class="chips-word">Chips</span></span>
-      </h1>
-      <p class="hero-tagline">Every Country. Every Crunch. Every Flavor.</p>
-      <p class="hero-desc">From Japan's wasabi kettle crisps to Peru's ají amarillo slices — explore the crunchy universe of potato chips across the globe. Discover local brands, iconic flavors, and snacking cultures.</p>
-      <div class="hero-stats">
-        <div class="hero-stat"><div class="num">$52B+</div><div class="label">Global Market</div></div>
-        <div class="hero-stat-divider"></div>
-        <div class="hero-stat"><div class="num">200+</div><div class="label">Flavors</div></div>
-        <div class="hero-stat-divider"></div>
-        <div class="hero-stat"><div class="num">6.8B kg</div><div class="label">Consumed / Year</div></div>
+      <div class="preview-chip">
+        <img src="https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&w=100" alt="Chips">
+        <div class="pc-text"><div class="pc-flavor">Prawn Cocktail</div><div class="pc-country">&#x1F1EC;&#x1F1E7; UK &#183; Walkers</div></div>
       </div>
-      <div class="hero-cta">
-        <a href="#map-section" class="btn-primary">Explore the Map</a>
-        <a href="#news" class="btn-secondary">Latest News →</a>
+      <div class="preview-chip">
+        <img src="https://images.pexels.com/photos/1586947/pexels-photo-1586947.jpeg?auto=compress&w=100" alt="Chips">
+        <div class="pc-text"><div class="pc-flavor">Magic Masala</div><div class="pc-country">&#x1F1EE;&#x1F1F3; India &#183; Lay&#8217;s</div></div>
+      </div>
+      <div class="preview-chip">
+        <img src="https://images.pexels.com/photos/2090903/pexels-photo-2090903.jpeg?auto=compress&w=100" alt="Chips">
+        <div class="pc-text"><div class="pc-flavor">Sichuan Hot Pot</div><div class="pc-country">&#x1F1E8;&#x1F1F3; China &#183; Lay&#8217;s</div></div>
+      </div>
+      <div class="preview-chip">
+        <img src="https://images.pexels.com/photos/1618888/pexels-photo-1618888.jpeg?auto=compress&w=100" alt="Chips">
+        <div class="pc-text"><div class="pc-flavor">All-Dressed</div><div class="pc-country">&#x1F1E8;&#x1F1E6; Canada &#183; Ruffles</div></div>
       </div>
     </div>
 
-    <!-- RIGHT: Photo collage -->
-    <div class="hero-collage">
-      <div class="collage-img c1">
-        <img src="https://images.pexels.com/photos/1893556/pexels-photo-1893556.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Golden crispy potato chips close-up" loading="eager">
-        <div class="collage-label">🇯🇵 Wasabi Crisps</div>
-      </div>
-      <div class="collage-img c2">
-        <img src="https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Crispy chips in a bowl" loading="eager">
-        <div class="collage-label">🇬🇧 British Crisps</div>
-      </div>
-      <div class="collage-img c3">
-        <img src="https://images.pexels.com/photos/1618888/pexels-photo-1618888.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Chips served with dips" loading="eager">
-        <div class="collage-label">🇺🇸 Classic Dip & Chips</div>
-      </div>
-      <div class="collage-img c4">
-        <img src="https://images.pexels.com/photos/1586947/pexels-photo-1586947.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Spiced seasoned potato chips" loading="eager">
-        <div class="collage-label">🇮🇳 Masala Chips</div>
-      </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">$52B+</div><div class="label">Global Market</div></div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat"><div class="num">200+</div><div class="label">Flavors</div></div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat"><div class="num">6.8B kg</div><div class="label">Consumed / Year</div></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#map-section" class="btn-primary">Explore the Map</a>
+      <a href="#news" class="btn-secondary">Latest News &#8594;</a>
     </div>
   </div>
 
-  <div class="scroll-indicator">
-    scroll
-    <div class="scroll-line"></div>
-  </div>
+  <div class="scroll-indicator">scroll<div class="scroll-line"></div></div>
 </section>
 
 <!-- ============ MARQUEE ============ -->
 <div class="marquee-bar" aria-hidden="true">
   <div class="marquee-track">
-    <span>Sour Cream & Onion</span><span>Wasabi</span><span>Paprika</span><span>Magic Masala</span>
+    <span>Sour Cream &amp; Onion</span><span>Wasabi</span><span>Paprika</span><span>Magic Masala</span>
     <span>Ketchup</span><span>Prawn Cocktail</span><span>All-Dressed</span><span>Honey Butter</span>
-    <span>Döner Kebab</span><span>Black Truffle</span><span>Sichuan Hot Pot</span><span>Vegemite</span>
-    <span>Chile & Limón</span><span>Marmite</span><span>Currywurst</span><span>Tom Yum</span>
-    <span>Poutine</span><span>Mrs Ball's Chutney</span><span>Camembert</span><span>Spicy Crayfish</span>
-    <!-- Duplicate for seamless loop -->
-    <span>Sour Cream & Onion</span><span>Wasabi</span><span>Paprika</span><span>Magic Masala</span>
+    <span>D&#246;ner Kebab</span><span>Black Truffle</span><span>Sichuan Hot Pot</span><span>Vegemite</span>
+    <span>Chile &amp; Lim&#243;n</span><span>Marmite</span><span>Currywurst</span><span>Tom Yum</span>
+    <span>Poutine</span><span>Mrs Ball&#8217;s Chutney</span><span>Camembert</span><span>Spicy Crayfish</span>
+    <span>Sour Cream &amp; Onion</span><span>Wasabi</span><span>Paprika</span><span>Magic Masala</span>
     <span>Ketchup</span><span>Prawn Cocktail</span><span>All-Dressed</span><span>Honey Butter</span>
-    <span>Döner Kebab</span><span>Black Truffle</span><span>Sichuan Hot Pot</span><span>Vegemite</span>
-    <span>Chile & Limón</span><span>Marmite</span><span>Currywurst</span><span>Tom Yum</span>
-    <span>Poutine</span><span>Mrs Ball's Chutney</span><span>Camembert</span><span>Spicy Crayfish</span>
+    <span>D&#246;ner Kebab</span><span>Black Truffle</span><span>Sichuan Hot Pot</span><span>Vegemite</span>
+    <span>Chile &amp; Lim&#243;n</span><span>Marmite</span><span>Currywurst</span><span>Tom Yum</span>
+    <span>Poutine</span><span>Mrs Ball&#8217;s Chutney</span><span>Camembert</span><span>Spicy Crayfish</span>
   </div>
 </div>
+
 
 <!-- ============ NAV ============ -->
 <nav class="nav">
