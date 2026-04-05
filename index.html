@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World of Chips — Explore Global Potato Chip Culture</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Zilla+Slab:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--gold:#E8A838;--gold-dark:#C48A20;--gold-light:#F5D78E;--cream:#FFF8EC;
+--dark:#1A1108;--brown:#3D2B0F;--red:#D44B2C;--red-dark:#A33620;
+--green:#4A8C5C;--blue:#2C6DAA;--teal:#2A9D8F;
+--paper:#F5ECD7;--ink:#2C1B00;--muted:#8B7355;--light-border:#D4C4A0;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;line-height:1.6}
+
+/* ======================= HERO ======================= */
+.hero{
+  position:relative;min-height:100vh;display:flex;align-items:center;
+  background:var(--dark);overflow:hidden;
+}
+
+/* Full-bleed background image with overlay */
+.hero-bg-image{
+  position:absolute;inset:0;
+  background:
+    url('https://images.pexels.com/photos/479628/pexels-photo-479628.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover no-repeat,
+    radial-gradient(ellipse at 30% 40%, #8B6914 0%, #4A3608 40%, #1A1108 80%);
+  filter:brightness(.32) saturate(1.3) contrast(1.1);
+  transform:scale(1.05);
+  animation:heroZoom 30s ease-in-out infinite alternate;
+}
+@keyframes heroZoom{0%{transform:scale(1.05)}100%{transform:scale(1.15)}}
+
+/* Grain texture overlay */
+.hero-grain{
+  position:absolute;inset:0;opacity:.08;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:128px;
+  pointer-events:none;
+}
+
+/* Gradient overlay for text readability */
+.hero-overlay{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(135deg, rgba(26,17,8,.85) 0%, rgba(26,17,8,.4) 40%, rgba(26,17,8,.6) 100%),
+    radial-gradient(ellipse at 20% 80%, rgba(232,168,56,.08), transparent 60%);
+  pointer-events:none;
+}
+
+/* Main layout: text left, photo collage right */
+.hero-inner{
+  position:relative;z-index:2;display:grid;
+  grid-template-columns:1fr 1fr;gap:3rem;
+  max-width:1300px;margin:0 auto;padding:6rem 3rem 4rem;
+  align-items:center;width:100%;
+}
+
+/* Left: text content */
+.hero-text{animation:fadeUp .8s ease-out both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(232,168,56,.12);border:1px solid rgba(232,168,56,.3);
+  padding:.35rem 1rem;border-radius:100px;margin-bottom:1.5rem;
+  animation:fadeUp .8s ease-out .1s both;
+}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-badge span{font-size:.72rem;color:var(--gold-light);text-transform:uppercase;letter-spacing:.18em;font-weight:600}
+
+.hero h1{
+  font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5.5rem);
+  color:var(--cream);font-weight:900;line-height:.95;letter-spacing:-.02em;
+  animation:fadeUp .8s ease-out .15s both;
+}
+.hero h1 .line2{display:block;margin-top:.1em}
+.hero h1 .of{font-weight:400;font-style:italic;color:var(--muted);font-size:.55em;vertical-align:.1em}
+.hero h1 .chips-word{
+  color:transparent;
+  background:linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+  -webkit-background-clip:text;background-clip:text;
+}
+
+.hero-tagline{
+  font-family:'Zilla Slab',serif;font-size:clamp(1rem,2vw,1.4rem);
+  color:var(--gold-light);margin-top:1.2rem;font-weight:400;
+  animation:fadeUp .8s ease-out .25s both;
+}
+.hero-desc{
+  font-size:clamp(.88rem,1.2vw,1.05rem);color:rgba(245,236,215,.55);
+  margin-top:1rem;max-width:480px;line-height:1.7;
+  animation:fadeUp .8s ease-out .35s both;
+}
+
+.hero-stats{
+  display:flex;gap:1.5rem;margin-top:2.5rem;flex-wrap:wrap;
+  animation:fadeUp .8s ease-out .45s both;
+}
+.hero-stat{text-align:left}
+.hero-stat .num{
+  font-family:'Zilla Slab',serif;font-size:clamp(1.5rem,2.5vw,2.2rem);
+  color:var(--gold);font-weight:700;line-height:1;
+}
+.hero-stat .label{
+  font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.2em;margin-top:.15rem;
+}
+.hero-stat-divider{width:1px;background:rgba(232,168,56,.2);align-self:stretch}
+
+.hero-cta{
+  display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;
+  animation:fadeUp .8s ease-out .55s both;
+}
+.btn-primary{
+  display:inline-block;padding:.85rem 2.2rem;background:var(--gold);color:var(--dark);
+  text-decoration:none;font-weight:700;font-size:.9rem;border-radius:100px;
+  letter-spacing:.03em;transition:all .3s;border:2px solid var(--gold);
+}
+.btn-primary:hover{background:transparent;color:var(--gold);transform:translateY(-2px)}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;
+  color:var(--cream);text-decoration:none;font-weight:500;font-size:.9rem;
+  border-radius:100px;border:1px solid rgba(255,248,236,.15);
+  transition:all .3s;
+}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold)}
+
+/* Right: photo collage */
+.hero-collage{
+  position:relative;height:580px;
+  animation:fadeUp .9s ease-out .3s both;
+}
+.collage-img{
+  position:absolute;border-radius:16px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+  transition:transform .5s cubic-bezier(.4,0,.2,1);
+}
+.collage-img:hover{transform:scale(1.03) rotate(0deg) !important;z-index:10}
+.collage-img img{width:100%;height:100%;object-fit:cover;display:block;background:linear-gradient(135deg,#8B6914,#4A3608)}
+
+.collage-img.c1{
+  width:240px;height:300px;top:0;right:40px;
+  transform:rotate(3deg);z-index:3;
+}
+.collage-img.c2{
+  width:200px;height:260px;top:60px;right:260px;
+  transform:rotate(-4deg);z-index:2;
+}
+.collage-img.c3{
+  width:220px;height:180px;bottom:60px;right:20px;
+  transform:rotate(-2deg);z-index:4;
+}
+.collage-img.c4{
+  width:180px;height:220px;bottom:30px;right:230px;
+  transform:rotate(5deg);z-index:1;
+}
+/* Floating label tags on images */
+.collage-label{
+  position:absolute;bottom:12px;left:12px;
+  background:rgba(26,17,8,.75);backdrop-filter:blur(8px);
+  color:var(--cream);padding:.3rem .7rem;border-radius:8px;
+  font-size:.7rem;font-weight:600;letter-spacing:.05em;
+  border:1px solid rgba(232,168,56,.2);
+}
+
+/* Decorative ring */
+.hero-ring{
+  position:absolute;right:-60px;top:50%;transform:translateY(-50%);
+  width:500px;height:500px;border-radius:50%;
+  border:1px solid rgba(232,168,56,.08);pointer-events:none;
+}
+.hero-ring::before{
+  content:'';position:absolute;inset:30px;border-radius:50%;
+  border:1px solid rgba(232,168,56,.05);
+}
+
+/* Scroll indicator */
+.scroll-indicator{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.3rem;
+  color:var(--muted);font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
+  animation:bob 2.5s ease-in-out infinite;z-index:5;
+}
+.scroll-line{width:1px;height:28px;background:linear-gradient(var(--muted),transparent)}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* ===== MARQUEE ===== */
+.marquee-bar{
+  background:var(--gold);padding:.6rem 0;overflow:hidden;white-space:nowrap;
+  position:relative;z-index:10;
+}
+.marquee-track{
+  display:inline-flex;animation:marquee 40s linear infinite;
+}
+.marquee-track span{
+  font-family:'Playfair Display',serif;font-size:.85rem;color:var(--dark);
+  font-weight:700;padding:0 2rem;opacity:.7;
+}
+.marquee-track span::before{content:'🥔 '}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ======================= NAV ======================= */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(26,17,8,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(232,168,56,.2);
+  padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px;
+}
+.nav-logo{font-family:'Playfair Display',serif;color:var(--gold);font-size:1.2rem;font-weight:700;display:flex;align-items:center;gap:.5rem}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{color:var(--cream);text-decoration:none;font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;opacity:.6;transition:all .3s;padding:.2rem 0;border-bottom:2px solid transparent}
+.nav-links a:hover{opacity:1;color:var(--gold);border-bottom-color:var(--gold)}
+
+/* ======================= SECTIONS ======================= */
+section.content-section{padding:5rem 1.5rem}
+.section-eyebrow{text-align:center;font-size:.7rem;text-transform:uppercase;letter-spacing:.25em;color:var(--gold-dark);font-weight:600;margin-bottom:.5rem}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);text-align:center;color:var(--brown);margin-bottom:.5rem}
+.section-sub{text-align:center;color:var(--muted);margin-bottom:2.5rem;max-width:550px;margin-inline:auto;font-size:.95rem}
+
+/* ===== MAP ===== */
+#map-section{background:var(--paper);position:relative}
+.map-controls{display:flex;gap:.6rem;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap}
+.filter-btn{padding:.5rem 1.3rem;border:2px solid var(--light-border);background:var(--cream);color:var(--ink);border-radius:100px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:600;transition:all .25s}
+.filter-btn:hover{border-color:var(--gold);color:var(--gold-dark)}
+.filter-btn.active{background:var(--gold);border-color:var(--gold);color:var(--dark)}
+.map-wrapper{max-width:1100px;margin:0 auto;background:var(--cream);border:2px solid var(--light-border);border-radius:16px;padding:1rem;box-shadow:0 8px 40px rgba(0,0,0,.06);overflow:hidden}
+#mapSvg{width:100%;height:auto;display:block}
+#mapSvg .country{fill:#D4C4A0;stroke:var(--cream);stroke-width:.4;transition:fill .25s;cursor:pointer}
+#mapSvg .country:hover{fill:var(--gold)}
+#mapSvg .country.has-data{fill:#C8B88A}
+#mapSvg .country.highlighted{fill:var(--gold-dark)}
+#mapSvg .country.dimmed{fill:#E8E0CC;opacity:.5}
+#mapSvg .country.filter-popular{fill:var(--green)}
+#mapSvg .country.filter-unique{fill:var(--gold)}
+#mapSvg .country.filter-growing{fill:var(--red)}
+.map-tooltip{position:fixed;background:var(--dark);color:var(--cream);padding:.4rem .8rem;border-radius:6px;font-size:.8rem;font-weight:500;pointer-events:none;z-index:50;opacity:0;transition:opacity .15s;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.map-tooltip.visible{opacity:1}
+.map-legend{display:flex;gap:1.5rem;justify-content:center;margin-top:1rem;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--muted)}
+.legend-dot{width:12px;height:12px;border-radius:3px}
+
+/* ===== PANEL ===== */
+.overlay{position:fixed;inset:0;background:rgba(26,17,8,.55);z-index:150;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(2px)}
+.overlay.active{opacity:1;pointer-events:all}
+.detail-panel{position:fixed;top:0;right:0;width:min(520px,92vw);height:100vh;background:var(--cream);z-index:200;transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);box-shadow:-8px 0 40px rgba(0,0,0,.15);overflow-y:auto}
+.detail-panel.open{transform:translateX(0)}
+.panel-close{position:sticky;top:1rem;float:right;margin-right:1rem;width:36px;height:36px;background:var(--dark);color:var(--cream);border:none;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;transition:background .3s}
+.panel-close:hover{background:var(--red)}
+.panel-header{padding:2.5rem 2rem 1.5rem;background:var(--dark);color:var(--cream);position:relative}
+.panel-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--red),var(--gold))}
+.panel-flag{font-size:2.5rem;display:block;margin-bottom:.5rem}
+.panel-header h2{font-family:'Playfair Display',serif;font-size:1.7rem}
+.region-tag{display:inline-block;background:var(--gold);color:var(--dark);padding:.15rem .7rem;border-radius:100px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-top:.5rem}
+.panel-body{padding:1.5rem 2rem 4rem}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:2rem}
+.stat-card{background:var(--paper);border:1px solid var(--light-border);border-radius:10px;padding:.8rem;text-align:center}
+.stat-card .val{font-family:'Zilla Slab',serif;font-size:1.3rem;color:var(--gold-dark);font-weight:700}
+.stat-card .lbl{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:.15rem}
+.detail-section{margin-bottom:1.5rem}
+.detail-section h3{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:.6rem;padding-bottom:.35rem;border-bottom:2px solid var(--gold);display:inline-block}
+.chip-tag{display:inline-block;padding:.25rem .7rem;margin:.2rem;border-radius:100px;font-size:.78rem;font-weight:500;border:1px solid}
+.chip-tag.unique{background:#FFF0E0;border-color:#E8A838;color:#8B5A00}
+.chip-tag.popular{background:#E8F5E9;border-color:#4A8C5C;color:#2D5A35}
+.chip-tag.brand{background:#E3F2FD;border-color:#2C6DAA;color:#1A4570}
+.occasion-list{list-style:none}
+.occasion-list li{padding:.45rem 0;border-bottom:1px dashed var(--light-border);font-size:.85rem;padding-left:1.8rem;position:relative}
+.occasion-list li::before{content:'🥔';position:absolute;left:0;font-size:.75rem}
+.fun-fact{font-size:.88rem;line-height:1.6;background:var(--paper);padding:1rem;border-radius:8px;border-left:3px solid var(--gold);color:var(--ink)}
+
+/* ===== CONSUMPTION ===== */
+#consumption{background:var(--cream)}
+.chart-container{max-width:850px;margin:0 auto;background:var(--paper);border:2px solid var(--light-border);border-radius:16px;padding:2rem;box-shadow:0 4px 24px rgba(0,0,0,.04)}
+.bar-row{display:flex;align-items:center;gap:.8rem;margin-bottom:.55rem}
+.bar-label{width:110px;text-align:right;font-size:.78rem;font-weight:600;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;height:24px;background:rgba(212,196,160,.4);border-radius:5px;overflow:hidden}
+.bar-fill{height:100%;border-radius:5px;display:flex;align-items:center;justify-content:flex-end;padding-right:.6rem;font-family:'Zilla Slab',serif;font-size:.7rem;color:#fff;font-weight:700;transition:width 1.2s cubic-bezier(.4,0,.2,1);width:0}
+.bar-fill.animated{width:var(--w)}
+
+/* ===== NEWS ===== */
+#news{background:var(--dark);color:var(--cream)}
+#news .section-eyebrow{color:var(--gold)}
+#news .section-title{color:var(--gold)}
+#news .section-sub{color:var(--muted)}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto}
+.news-card{background:rgba(255,248,236,.04);border:1px solid rgba(232,168,56,.12);border-radius:14px;overflow:hidden;transition:transform .3s,border-color .3s}
+.news-card:hover{transform:translateY(-3px);border-color:var(--gold)}
+.news-card-top{height:8px;width:100%}
+.news-card-body{padding:1.3rem 1.5rem}
+.news-card-cat{display:inline-block;background:rgba(232,168,56,.15);color:var(--gold);padding:.15rem .6rem;border-radius:100px;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.8rem}
+.news-card-body h3{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.5rem;line-height:1.35;color:var(--cream)}
+.news-card-body p{font-size:.82rem;color:var(--muted);line-height:1.55}
+.news-card-meta{display:flex;justify-content:space-between;padding:.7rem 1.5rem;border-top:1px solid rgba(232,168,56,.08);font-size:.7rem;color:rgba(139,115,85,.6)}
+
+/* ===== FOOTER ===== */
+footer{background:var(--dark);border-top:3px solid var(--gold);padding:3rem 2rem 2rem;text-align:center;color:var(--muted)}
+footer .flogo{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--gold);margin-bottom:.4rem}
+footer p{font-size:.82rem;max-width:480px;margin:0 auto .4rem}
+footer .copy{font-size:.65rem;margin-top:1.5rem;opacity:.4}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-collage{display:none}
+  .hero-stats{justify-content:center}
+  .hero-desc{margin-inline:auto}
+  .hero-cta{justify-content:center}
+  .hero-badge{margin-inline:auto}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hero-inner{padding:5rem 1.5rem 3rem}
+  .stat-grid{grid-template-columns:1fr}
+  .news-grid{grid-template-columns:1fr}
+  .bar-label{width:70px;font-size:.7rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg-image" aria-hidden="true"></div>
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-ring" aria-hidden="true"></div>
+
+  <div class="hero-inner">
+    <!-- LEFT: Text -->
+    <div class="hero-text">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        <span>Exploring 150+ Countries</span>
+      </div>
+      <h1>
+        World <span class="of">of</span>
+        <span class="line2"><span class="chips-word">Chips</span></span>
+      </h1>
+      <p class="hero-tagline">Every Country. Every Crunch. Every Flavor.</p>
+      <p class="hero-desc">From Japan's wasabi kettle crisps to Peru's ají amarillo slices — explore the crunchy universe of potato chips across the globe. Discover local brands, iconic flavors, and snacking cultures.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">$52B+</div><div class="label">Global Market</div></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><div class="num">200+</div><div class="label">Flavors</div></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><div class="num">6.8B kg</div><div class="label">Consumed / Year</div></div>
+      </div>
+      <div class="hero-cta">
+        <a href="#map-section" class="btn-primary">Explore the Map</a>
+        <a href="#news" class="btn-secondary">Latest News →</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: Photo collage -->
+    <div class="hero-collage">
+      <div class="collage-img c1">
+        <img src="https://images.pexels.com/photos/1893556/pexels-photo-1893556.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Golden crispy potato chips close-up" loading="eager">
+        <div class="collage-label">🇯🇵 Wasabi Crisps</div>
+      </div>
+      <div class="collage-img c2">
+        <img src="https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Crispy chips in a bowl" loading="eager">
+        <div class="collage-label">🇬🇧 British Crisps</div>
+      </div>
+      <div class="collage-img c3">
+        <img src="https://images.pexels.com/photos/1618888/pexels-photo-1618888.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Chips served with dips" loading="eager">
+        <div class="collage-label">🇺🇸 Classic Dip & Chips</div>
+      </div>
+      <div class="collage-img c4">
+        <img src="https://images.pexels.com/photos/1586947/pexels-photo-1586947.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Spiced seasoned potato chips" loading="eager">
+        <div class="collage-label">🇮🇳 Masala Chips</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    scroll
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee-bar" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Sour Cream & Onion</span><span>Wasabi</span><span>Paprika</span><span>Magic Masala</span>
+    <span>Ketchup</span><span>Prawn Cocktail</span><span>All-Dressed</span><span>Honey Butter</span>
+    <span>Döner Kebab</span><span>Black Truffle</span><span>Sichuan Hot Pot</span><span>Vegemite</span>
+    <span>Chile & Limón</span><span>Marmite</span><span>Currywurst</span><span>Tom Yum</span>
+    <span>Poutine</span><span>Mrs Ball's Chutney</span><span>Camembert</span><span>Spicy Crayfish</span>
+    <!-- Duplicate for seamless loop -->
+    <span>Sour Cream & Onion</span><span>Wasabi</span><span>Paprika</span><span>Magic Masala</span>
+    <span>Ketchup</span><span>Prawn Cocktail</span><span>All-Dressed</span><span>Honey Butter</span>
+    <span>Döner Kebab</span><span>Black Truffle</span><span>Sichuan Hot Pot</span><span>Vegemite</span>
+    <span>Chile & Limón</span><span>Marmite</span><span>Currywurst</span><span>Tom Yum</span>
+    <span>Poutine</span><span>Mrs Ball's Chutney</span><span>Camembert</span><span>Spicy Crayfish</span>
+  </div>
+</div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-logo">🥔 World of Chips</div>
+  <div class="nav-links">
+    <a href="#map-section">Map</a>
+    <a href="#consumption">Consumption</a>
+    <a href="#news">News</a>
+  </div>
+</nav>
+
+<!-- ============ MAP ============ -->
+<section id="map-section" class="content-section">
+  <div class="section-eyebrow">Interactive Explorer</div>
+  <h2 class="section-title">The Global Chip Map</h2>
+  <p class="section-sub">Click any country to discover local brands, iconic flavors, market data, and snacking culture.</p>
+  <div class="map-controls">
+    <button class="filter-btn active" data-filter="all">All Countries</button>
+    <button class="filter-btn" data-filter="popular">Most Sold</button>
+    <button class="filter-btn" data-filter="unique">Most Unique</button>
+    <button class="filter-btn" data-filter="growing">Fastest Growing</button>
+  </div>
+  <div class="map-wrapper"><svg id="mapSvg" viewBox="0 0 960 500"></svg></div>
+  <div class="map-legend" id="mapLegend">
+    <div class="legend-item"><div class="legend-dot" style="background:#C8B88A"></div> Has data</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#D4C4A0"></div> No data yet</div>
+  </div>
+</section>
+
+<!-- ============ CONSUMPTION ============ -->
+<section id="consumption" class="content-section">
+  <div class="section-eyebrow">Per Capita Data</div>
+  <h2 class="section-title">Annual Chip Consumption</h2>
+  <p class="section-sub">Kilograms of potato chips consumed per person, per year.</p>
+  <div class="chart-container" id="chartContainer"></div>
+</section>
+
+<!-- ============ NEWS ============ -->
+<section id="news" class="content-section">
+  <div class="section-eyebrow">Latest Updates</div>
+  <h2 class="section-title">Chip News & Trends</h2>
+  <p class="section-sub">Industry moves, new flavors, and crunchy innovations from around the globe.</p>
+  <div class="news-grid">
+    <div class="news-card"><div class="news-card-top" style="background:linear-gradient(90deg,var(--gold),var(--red))"></div><div class="news-card-body"><span class="news-card-cat">Industry</span><h3>PepsiCo Cuts Chip Prices Up to 15% Amid Consumer Pushback</h3><p>Persistent inflation reshapes the competitive snack landscape. PepsiCo responds with significant price reductions on Frito-Lay brands across North America.</p></div><div class="news-card-meta"><span>Mar 2026</span><span>Market Trends</span></div></div>
+    <div class="news-card"><div class="news-card-top" style="background:linear-gradient(90deg,var(--teal),var(--green))"></div><div class="news-card-body"><span class="news-card-cat">Innovation</span><h3>Protein & Fiber-Rich Chips Challenge Traditional Potato Slices</h3><p>Cassava, tempeh, mushroom, and whole-egg chips hit supermarkets, reflecting demand for whole-food nutrition without sacrificing crunch.</p></div><div class="news-card-meta"><span>Mar 2026</span><span>Bloomberg</span></div></div>
+    <div class="news-card"><div class="news-card-top" style="background:linear-gradient(90deg,var(--red),var(--red-dark))"></div><div class="news-card-body"><span class="news-card-cat">Safety Recall</span><h3>Miss Vickie's Spicy Dill Chips Recalled Across 6 U.S. States</h3><p>Frito-Lay's Miss Vickie's brand faces FDA's highest risk level recall over undeclared milk allergen. Over 5,000 bags affected.</p></div><div class="news-card-meta"><span>Mar 2026</span><span>FDA / Safety</span></div></div>
+    <div class="news-card"><div class="news-card-top" style="background:linear-gradient(90deg,var(--green),var(--teal))"></div><div class="news-card-body"><span class="news-card-cat">Sustainability</span><h3>From Potato Scraps to Perfect Stackable Chips</h3><p>Sustainable processing transforms potato remnants into uniform, stackable chips — turning by-products into premium snacks while cutting waste.</p></div><div class="news-card-meta"><span>Mar 2026</span><span>PotatoPro</span></div></div>
+    <div class="news-card"><div class="news-card-top" style="background:linear-gradient(90deg,var(--gold),var(--green))"></div><div class="news-card-body"><span class="news-card-cat">New Flavor</span><h3>Cape Cod Launches Limited-Edition Lemon Herb Butter Chips</h3><p>Spring 2026 brings citrus, herbs, and buttery seasoning on Cape Cod's signature kettle chips. Now at Walmart, Publix, and Target.</p></div><div class="news-card-meta"><span>Mar 2026</span><span>Product Launch</span></div></div>
+    <div class="news-card"><div class="news-card-top" style="background:linear-gradient(90deg,var(--blue),var(--teal))"></div><div class="news-card-body"><span class="news-card-cat">Investment</span><h3>Balaji Wafers Valued at $4B — General Atlantic Takes 7% Stake</h3><p>India's leading regional chip maker attracts major investment, signaling international interest in the booming snack market.</p></div><div class="news-card-meta"><span>2026</span><span>India Market</span></div></div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="flogo">🥔 World of Chips</div>
+  <p>Your guide to global potato chip culture — flavors, brands, market insights, and crunchy news from every corner of the planet.</p>
+  <p style="font-size:.75rem;color:var(--gold);margin-top:.5rem">WorldOfChips.com — Because every chip has a story.</p>
+  <div class="copy">© 2026 World of Chips. All rights reserved.</div>
+</footer>
+
+<!-- ===== PANEL ===== -->
+<div class="overlay" id="overlay"></div>
+<div class="detail-panel" id="detailPanel">
+  <button class="panel-close" id="panelClose">✕</button>
+  <div class="panel-header"><span class="panel-flag" id="panelFlag"></span><h2 id="panelCountry">Country</h2><span class="region-tag" id="panelRegion">Region</span></div>
+  <div class="panel-body" id="panelBody"></div>
+</div>
+<div class="map-tooltip" id="tooltip"></div>
+
+<!-- D3 + TopoJSON -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+
+<script>
+// ======== COUNTRY DATA ========
+const countryData={
+"United States":{region:"North America",flag:"🇺🇸",iso:"840",marketSize:"$11B",perCapita:"1.8 kg",avgCost:"$4.50/bag",growth:"5.7%",topBrands:["Lay's","Ruffles","Pringles","Kettle Brand","Cape Cod","Utz"],popularFlavors:["Sour Cream & Onion","BBQ","Cheddar & Sour Cream","Salt & Vinegar"],uniqueFlavors:["Flamin' Hot","Dill Pickle","Honey BBQ","Swicy"],occasions:["Sporting events & tailgating","Movie nights & casual snacking","Lunch pairing with sandwiches","Road trips & convenience stores"],funFact:"Americans consume over 1.5 billion pounds of chips annually. The Super Bowl alone drives hundreds of millions in chip sales each year.",tags:["popular","unique","growing"]},
+"Canada":{region:"North America",flag:"🇨🇦",iso:"124",marketSize:"$1.2B",perCapita:"7.0 kg",avgCost:"$4.80/bag",growth:"1.3%",topBrands:["Lay's","Old Dutch","Ruffles","Miss Vickie's","Covered Bridge"],popularFlavors:["Ketchup","All-Dressed","Salt & Vinegar","Sour Cream & Onion"],uniqueFlavors:["Poutine","Dill Pickle","Lobster","Montreal Smoked Meat","Donair"],occasions:["Hockey nights & sports viewing","Cottage weekends & camping","Everyday lunch snacking","Canada Day & holiday gatherings"],funFact:"All-Dressed chips — a blend of ketchup, BBQ, sour cream, and salt & vinegar — were exclusive to Canada for decades.",tags:["popular","unique"]},
+"Mexico":{region:"North America",flag:"🇲🇽",iso:"484",marketSize:"$2.1B",perCapita:"1.1 kg",avgCost:"$1.20/bag",growth:"4.5%",topBrands:["Sabritas (Lay's)","Barcel","Takis","Totis"],popularFlavors:["Chile & Limón","Salsa Verde","Jalapeño","Adobadas"],uniqueFlavors:["Esquites","Chamoy","Tamarindo","Flamin' Hot con Limón"],occasions:["Street food accompaniment","Antojitos & casual meals","Fiestas & family gatherings","Chamoy-covered as a botana"],funFact:"Takis, the rolled tortilla chip born in Mexico, has become one of the fastest-growing spicy snack brands globally.",tags:["popular","unique","growing"]},
+"United Kingdom":{region:"Europe",flag:"🇬🇧",iso:"826",marketSize:"$3.8B",perCapita:"3.2 kg",avgCost:"£1.50/bag",growth:"2.8%",topBrands:["Walkers (Lay's)","Tyrrell's","Kettle Chips","McCoy's","Pipers"],popularFlavors:["Cheese & Onion","Salt & Vinegar","Ready Salted","Prawn Cocktail"],uniqueFlavors:["Marmite","Roast Chicken","Worcester Sauce","Lamb & Mint"],occasions:["Pub snacking with pints","Packed lunch staple","Afternoon tea-time nibbles","Picnics & gatherings"],funFact:"Walkers is actually Lay's — but the brand kept its UK name after acquisition. It's the UK's #1 crisp brand by far.",tags:["popular","unique"]},
+"Germany":{region:"Europe",flag:"🇩🇪",iso:"276",marketSize:"$2.9B",perCapita:"1.5 kg",avgCost:"€2.20/bag",growth:"2.1%",topBrands:["Lorenz","Funny-Frisch","Chio","Pringles","Lay's"],popularFlavors:["Paprika","Salted","Sour Cream","Cheese & Onion"],uniqueFlavors:["Currywurst","Döner Kebab","Bratwurst","Ungarisch"],occasions:["Beer garden snacking","TV evening (Feierabend)","Football match viewing","Carnival & festival treats"],funFact:"Paprika flavor dominates the German chip market so completely that it's considered the default — not salted.",tags:["popular","unique"]},
+"France":{region:"Europe",flag:"🇫🇷",iso:"250",marketSize:"$1.8B",perCapita:"1.0 kg",avgCost:"€2.50/bag",growth:"3.2%",topBrands:["Lay's","Bret's","Tyrrell's","Vico","Sibell"],popularFlavors:["Nature (Salted)","Vinaigre","Poulet Rôti","Emmental"],uniqueFlavors:["Camembert","Chèvre Chaud","Balsamic Vinegar","Andouillette"],occasions:["Apéritif hour before dinner","Pique-niques & outdoor dining","Casual party nibbles","Beach & vacation snacking"],funFact:"France's artisanal chip culture is booming — brands like Bret's produce chips from Brittany potatoes with regional cheese flavors.",tags:["unique"]},
+"Spain":{region:"Europe",flag:"🇪🇸",iso:"724",marketSize:"$1.2B",perCapita:"1.1 kg",avgCost:"€1.80/bag",growth:"2.5%",topBrands:["Lay's","Ruffles","Grefusa","Torres"],popularFlavors:["Campesinas","Jamón Ibérico","Mediterranean Herbs","Classic Salted"],uniqueFlavors:["Black Truffle","Caviar","Fried Egg","Sparkling Wine"],occasions:["Tapas bar accompaniment","Siesta-time snacking","Beach chiringuitos","Football viewing"],funFact:"Torres Black Truffle chips became a viral global sensation after being discovered at Barcelona's La Boquería market.",tags:["unique"]},
+"Italy":{region:"Europe",flag:"🇮🇹",iso:"380",marketSize:"$1.3B",perCapita:"0.9 kg",avgCost:"€2.30/bag",growth:"2.0%",topBrands:["San Carlo","Lay's","Pata","Amica Chips"],popularFlavors:["Classica","Paprika","Pizza","Olive Oil & Rosemary"],uniqueFlavors:["Tartufo","Prosciutto","Pesto Genovese","Lime & Pepe Rosa"],occasions:["Aperitivo with spritz","Beach & lido snacking","Football match viewing","Road trip autogrill stops"],funFact:"San Carlo, Italy's top chip brand since 1936, uses only Italian-grown potatoes for its premium lines.",tags:["unique"]},
+"Netherlands":{region:"Europe",flag:"🇳🇱",iso:"528",marketSize:"$0.6B",perCapita:"2.8 kg",avgCost:"€2.00/bag",growth:"1.8%",topBrands:["Lay's","Croky","Pringles"],popularFlavors:["Naturel","Paprika","Bolognese","Cheese Onion"],uniqueFlavors:["Patatje Joppie","Bitterbal","Frikandel Speciaal"],occasions:["Borrel gatherings","Football viewing","King's Day celebrations","Everyday snacking"],funFact:"The Netherlands is one of the world's largest chip exporters, shipping billions of euros worth globally.",tags:["popular"]},
+"Sweden":{region:"Europe",flag:"🇸🇪",iso:"752",marketSize:"$0.5B",perCapita:"1.8 kg",avgCost:"35 SEK/bag",growth:"2.0%",topBrands:["OLW","Estrella","Pringles","Lay's"],popularFlavors:["Sourcream & Onion","Dill & Gräddfil","Grill","Salt"],uniqueFlavors:["Smörstekt Lök","Räkor (Shrimp)","Västkustsallad","Kebab"],occasions:["Fredagsmys (cozy Friday)","Midsommar celebrations","Football & hockey viewing","Summer BBQ & crayfish party"],funFact:"Fredagsmys — the Swedish cozy Friday tradition — is one of Europe's biggest single-day chip consumption events.",tags:["unique"]},
+"Poland":{region:"Europe",flag:"🇵🇱",iso:"616",marketSize:"$0.7B",perCapita:"1.2 kg",avgCost:"8 PLN/bag",growth:"3.5%",topBrands:["Lay's","Crunchips","Pringles","Wiejskie Ziemniaczki"],popularFlavors:["Paprika","Fromage","Salted","Sour Cream"],uniqueFlavors:["Kebab","Żurek","Oscypek Cheese","Green Onion"],occasions:["Football match snacking","House parties","Student staple","Road trips"],funFact:"Poland's craft chip market is booming, with brands making thick-cut chips from heritage potato varieties.",tags:["growing"]},
+"Japan":{region:"Asia",flag:"🇯🇵",iso:"392",marketSize:"$3.2B",perCapita:"1.6 kg",avgCost:"¥250/bag",growth:"3.5%",topBrands:["Calbee","Koikeya","Lay's","Pringles"],popularFlavors:["Usushio","Consommé","Nori-Shio"],uniqueFlavors:["Wasabi","Matcha","Teriyaki Mayo","Sakura Shrimp","Mentaiko"],occasions:["Konbini snacking","Izakaya accompaniment","Train journey snacks","Limited-edition collecting"],funFact:"Japan releases more limited-edition chip flavors than any other country. Calbee alone launches 50+ seasonal varieties yearly.",tags:["popular","unique"]},
+"China":{region:"Asia",flag:"🇨🇳",iso:"156",marketSize:"$8.5B",perCapita:"0.5 kg",avgCost:"¥8/bag",growth:"6.8%",topBrands:["Lay's","Pringles","Master Kong","Oishi"],popularFlavors:["Cucumber","Tomato","Hot & Sour Fish Soup","BBQ"],uniqueFlavors:["Spicy Crayfish","Cumin Lamb","Sichuan Hot Pot","Blueberry","Milk Tea"],occasions:["Late-night & internet café snacking","Hot pot accompaniment","Livestream snack hauls","Train journey provisions"],funFact:"Lay's offers over 60 unique flavors for the Chinese market alone, including fruit-flavored varieties like blueberry.",tags:["popular","unique","growing"]},
+"India":{region:"Asia",flag:"🇮🇳",iso:"356",marketSize:"$4.5B",perCapita:"0.3 kg",avgCost:"₹20/bag",growth:"8.2%",topBrands:["Lay's","Balaji","Haldiram's","Bingo!","Uncle Chipps"],popularFlavors:["Magic Masala","Classic Salted","Cream & Onion","Pudina"],uniqueFlavors:["Tandoori","Spanish Tomato Tango","Mint Mischief","Macho Chili"],occasions:["Chai-time snack","Cricket match viewing","Festival celebrations","Street food pairing"],funFact:"Balaji Wafers from Gujarat recently achieved a $4 billion valuation — a sign of India's booming chip market.",tags:["popular","growing"]},
+"South Korea":{region:"Asia",flag:"🇰🇷",iso:"410",marketSize:"$1.4B",perCapita:"1.3 kg",avgCost:"₩2,500/bag",growth:"4.2%",topBrands:["Nongshim","Orion","Calbee","Lay's"],popularFlavors:["Honey Butter","Original","Onion","BBQ"],uniqueFlavors:["Octopus","Honey Butter","Seaweed","Tteokbokki"],occasions:["K-drama binge-watching","Chimaek pairing","PC bang gaming","Convenience store late-night"],funFact:"The 2014 Honey Butter craze saw bags selling on the black market for 5x retail price.",tags:["unique","growing"]},
+"Thailand":{region:"Asia",flag:"🇹🇭",iso:"764",marketSize:"$0.9B",perCapita:"0.7 kg",avgCost:"฿35/bag",growth:"5.0%",topBrands:["Lay's","Tasto","Pringles","Nori"],popularFlavors:["Hot Chili Squid","Nori Seaweed","Lobster","Mieng Kham"],uniqueFlavors:["Grilled Squid","Salmon & Cream Cheese","Crab Curry","Tom Yum"],occasions:["Street food accompaniment","7-Eleven late night","Beach snacking","Movie theater"],funFact:"Thailand's Lay's flavors are among the world's most adventurous, drawing from complex street food culture.",tags:["unique"]},
+"Indonesia":{region:"Asia",flag:"🇮🇩",iso:"360",marketSize:"$0.8B",perCapita:"0.2 kg",avgCost:"Rp 10k/bag",growth:"7.5%",topBrands:["Lay's","Chitato","Pringles","Qtela"],popularFlavors:["Original","BBQ","Cheese","Sapi Panggang"],uniqueFlavors:["Rendang","Indomie Goreng","Sambal Matah","Nasi Goreng"],occasions:["Warung snacking","Gatherings","Late-night gaming","School canteen"],funFact:"Chitato's Indomie Goreng-flavored chip collaboration became an instant bestseller across Indonesia.",tags:["growing"]},
+"Turkey":{region:"Asia",flag:"🇹🇷",iso:"792",marketSize:"$1.1B",perCapita:"0.8 kg",avgCost:"₺25/bag",growth:"5.5%",topBrands:["Lay's","Ruffles","Pringles","Doritos","Eti"],popularFlavors:["Classic","Yogurt & Herbs","BBQ","Spicy"],uniqueFlavors:["Döner Kebab","Ayran","Lahmacun","Antep Spicy"],occasions:["Çay accompaniment","Football viewing","Picnics","Late-night snacking"],funFact:"Turkish chip flavors blend Mediterranean, Middle Eastern, and Central Asian taste profiles.",tags:["growing"]},
+"Russia":{region:"Europe",flag:"🇷🇺",iso:"643",marketSize:"$2.2B",perCapita:"1.0 kg",avgCost:"₽120/bag",growth:"3.0%",topBrands:["Lay's","Московский Картофель","Estrella"],popularFlavors:["Sour Cream & Onion","Crab","Cheese"],uniqueFlavors:["Red Caviar","Dill & Sour Cream","Shashlik","Kholodets"],occasions:["Dacha weekends","Beer gatherings","Train provisions","Football viewing"],funFact:"Crab-flavored chips are a Russian staple — virtually unknown in Western markets but a top seller there.",tags:["popular","unique"]},
+"Brazil":{region:"South America",flag:"🇧🇷",iso:"076",marketSize:"$1.5B",perCapita:"0.5 kg",avgCost:"R$8/bag",growth:"4.8%",topBrands:["Ruffles","Lay's","Pringles","Elma Chips"],popularFlavors:["Cheddar","Churrasco","Original","Sour Cream & Onion"],uniqueFlavors:["Feijoada","Picanha","Steak & Onion","Coxinha"],occasions:["Churrasco accompaniment","Beach kiosk snacking","Football viewing","Bar & boteco culture"],funFact:"Ruffles holds a larger market share than Lay's in Brazil — one of the few countries where this happens.",tags:["popular","growing"]},
+"Argentina":{region:"South America",flag:"🇦🇷",iso:"032",marketSize:"$0.6B",perCapita:"0.7 kg",avgCost:"ARS 800/bag",growth:"3.5%",topBrands:["Lay's","Pringles","Pehuamar","Krachitos"],popularFlavors:["Jamón","Original","Queso","BBQ"],uniqueFlavors:["Asado","Chimichurri","Provoleta"],occasions:["Asado gatherings","Mate & snack time","Football viewing","Park picnics"],funFact:"Argentine chip culture is deeply tied to asado — brands produce flavors evoking smoky Argentine BBQ.",tags:["unique"]},
+"Colombia":{region:"South America",flag:"🇨🇴",iso:"170",marketSize:"$0.4B",perCapita:"0.4 kg",avgCost:"COP 3,500/bag",growth:"5.0%",topBrands:["Margarita (Lay's)","Super Ricas","De Todito"],popularFlavors:["Natural","Limón","BBQ","Pollo"],uniqueFlavors:["Chicharrón","Hogao","Guasacaca"],occasions:["Onces (afternoon snack)","Party accompaniment","Bus travel","Street food pairing"],funFact:"In Colombia, Lay's is known as 'Margarita' — a completely different brand name for local connection.",tags:["growing"]},
+"Peru":{region:"South America",flag:"🇵🇪",iso:"604",marketSize:"$0.3B",perCapita:"0.3 kg",avgCost:"S/5/bag",growth:"4.5%",topBrands:["Lay's","Pringles","Mr. Chips","Karinto"],popularFlavors:["Clásica","Limón y Sal","BBQ","Queso"],uniqueFlavors:["Ají Amarillo","Lomo Saltado","Ceviche","Rocoto"],occasions:["Lonche (afternoon snack)","Beach day","Football snacking","Family gatherings"],funFact:"Peru is home to over 3,000 native potato varieties — the original homeland of the potato.",tags:["unique"]},
+"Nigeria":{region:"Africa",flag:"🇳🇬",iso:"566",marketSize:"$0.3B",perCapita:"0.1 kg",avgCost:"₦500/bag",growth:"9.5%",topBrands:["Chi Chin","Pringles","Lay's"],popularFlavors:["Original","BBQ","Spicy","Chicken"],uniqueFlavors:["Jollof","Suya Spice","Plantain Chips","Pepper Soup"],occasions:["Party jollof accompaniment","Market snacking","School canteen","Owambe celebrations"],funFact:"Nigeria is the fastest-growing chip import market in the world, driven by rapid urbanization.",tags:["growing"]},
+"South Africa":{region:"Africa",flag:"🇿🇦",iso:"710",marketSize:"$0.5B",perCapita:"0.4 kg",avgCost:"R25/bag",growth:"4.0%",topBrands:["Simba","Lay's","Willards","NikNaks"],popularFlavors:["Salt & Vinegar","Cheese & Onion","BBQ","Tomato Sauce"],uniqueFlavors:["Mrs Ball's Chutney","Biltong","Boerewors","Peri-Peri"],occasions:["Braai accompaniment","Rugby & cricket viewing","Padstaal stops","School lunch boxes"],funFact:"Simba's Chutney-flavored chips — inspired by the iconic Mrs Ball's brand — are uniquely South African.",tags:["unique"]},
+"Egypt":{region:"Africa",flag:"🇪🇬",iso:"818",marketSize:"$0.7B",perCapita:"0.3 kg",avgCost:"EGP 15/bag",growth:"6.0%",topBrands:["Chipsy (Lay's)","Pringles","Tiger","Doritos"],popularFlavors:["Cheese","Chili","Salt","Ketchup"],uniqueFlavors:["Foul","Kebab","Duqqa Spice","Ta'meya"],occasions:["Street food pairing","Ramadan iftar snacking","Football viewing","Beach snacking"],funFact:"In Egypt, Lay's is known as 'Chipsy' — the name has become the generic word for any potato chip.",tags:["growing"]},
+"Australia":{region:"Oceania",flag:"🇦🇺",iso:"036",marketSize:"$1.8B",perCapita:"2.5 kg",avgCost:"A$5/bag",growth:"2.5%",topBrands:["Smith's (Lay's)","Kettle","Red Rock Deli","Tyrrells"],popularFlavors:["Original","Salt & Vinegar","Chicken","BBQ"],uniqueFlavors:["Vegemite","Chicken Crimpy","Lamb & Rosemary","Sweet Chilli & Sour Cream"],occasions:["Beach & park picnics","BBQ & barbie gatherings","Cricket & AFL viewing","Road trip servo stops"],funFact:"Red Rock Deli pioneered Australia's premium chip category, proving consumers pay more for artisanal thick-cut chips.",tags:["popular","unique"]},
+"New Zealand":{region:"Oceania",flag:"🇳🇿",iso:"554",marketSize:"$0.3B",perCapita:"2.3 kg",avgCost:"NZ$5/bag",growth:"2.0%",topBrands:["Bluebird","Kettle","Proper Crisps","ETA"],popularFlavors:["Ready Salted","Salt & Vinegar","Chicken","Sour Cream & Chives"],uniqueFlavors:["Kiwi Onion Dip","Marmite","Hokey Pokey","L&P"],occasions:["Rugby match viewing","Beach BBQs","Fish & chip shop culture","Tramping snacks"],funFact:"Bluebird's 'Kiwi Onion Dip' replicates the beloved onion-soup dip found at every NZ party.",tags:["unique"]}
+};
+
+const nameMap={"United States of America":"United States","S. Korea":"South Korea","Republic of Korea":"South Korea"};
+
+// Consumption data
+const consumptionData=[
+{country:"Canada",val:7.0,color:"#E8A838"},{country:"United Kingdom",val:3.2,color:"#D44B2C"},
+{country:"Netherlands",val:2.8,color:"#E8A838"},{country:"Australia",val:2.5,color:"#2A9D8F"},
+{country:"New Zealand",val:2.3,color:"#2A9D8F"},{country:"United States",val:1.8,color:"#2C6DAA"},
+{country:"Sweden",val:1.8,color:"#4A8C5C"},{country:"Japan",val:1.6,color:"#D44B2C"},
+{country:"Germany",val:1.5,color:"#E8A838"},{country:"South Korea",val:1.3,color:"#2C6DAA"},
+{country:"Poland",val:1.2,color:"#4A8C5C"},{country:"Mexico",val:1.1,color:"#D44B2C"},
+{country:"Spain",val:1.1,color:"#E8A838"},{country:"Russia",val:1.0,color:"#2C6DAA"},
+{country:"France",val:1.0,color:"#4A8C5C"},{country:"Italy",val:0.9,color:"#D44B2C"},
+{country:"Turkey",val:0.8,color:"#2A9D8F"},{country:"Thailand",val:0.7,color:"#E8A838"},
+{country:"Argentina",val:0.7,color:"#2C6DAA"},{country:"Brazil",val:0.5,color:"#4A8C5C"},
+{country:"China",val:0.5,color:"#D44B2C"},{country:"Colombia",val:0.4,color:"#2A9D8F"},
+{country:"South Africa",val:0.4,color:"#E8A838"},{country:"India",val:0.3,color:"#2C6DAA"},
+{country:"Egypt",val:0.3,color:"#4A8C5C"},{country:"Peru",val:0.3,color:"#D44B2C"},
+{country:"Indonesia",val:0.2,color:"#2A9D8F"},{country:"Nigeria",val:0.1,color:"#E8A838"}
+];
+
+// Build chart
+const chartEl=document.getElementById('chartContainer');
+const maxVal=Math.max(...consumptionData.map(d=>d.val));
+consumptionData.forEach(d=>{
+  const row=document.createElement('div');row.className='bar-row';
+  const pct=(d.val/maxVal*100).toFixed(1);
+  row.innerHTML=`<div class="bar-label">${d.country}</div><div class="bar-track"><div class="bar-fill" style="--w:${pct}%;background:${d.color}">${d.val}</div></div>`;
+  chartEl.appendChild(row);
+});
+const barObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.querySelectorAll('.bar-fill').forEach((b,i)=>setTimeout(()=>b.classList.add('animated'),i*40));barObs.unobserve(en.target)}})},{threshold:.15});
+barObs.observe(chartEl);
+
+// D3 Map
+const svg=d3.select('#mapSvg');
+const projection=d3.geoNaturalEarth1().scale(155).translate([480,250]);
+const path=d3.geoPath().projection(projection);
+const tooltip=document.getElementById('tooltip');
+
+fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+.then(r=>r.json()).catch(()=>fetch('https://unpkg.com/world-atlas@2/countries-110m.json').then(r=>r.json()))
+.then(world=>{
+  if(world&&world.objects)renderMap(world);
+  else document.querySelector('.map-wrapper').innerHTML='<p style="text-align:center;padding:3rem;color:var(--muted)">Could not load map. Please refresh.</p>';
+}).catch(()=>{document.querySelector('.map-wrapper').innerHTML='<p style="text-align:center;padding:3rem;color:var(--muted)">Could not load map. Please refresh.</p>'});
+
+function renderMap(world){
+  const countries=topojson.feature(world,world.objects.countries);
+  svg.append('rect').attr('width',960).attr('height',500).attr('fill','#F0E8D4').attr('rx',8);
+  svg.append('path').datum(d3.geoGraticule()()).attr('d',path).attr('fill','none').attr('stroke','#E0D8C4').attr('stroke-width',.3);
+  svg.selectAll('.country').data(countries.features).enter().append('path')
+    .attr('class',d=>'country'+(countryData[resolveName(d.properties.name,d.id)]?' has-data':''))
+    .attr('d',path).attr('data-name',d=>resolveName(d.properties.name,d.id)).attr('data-id',d=>d.id)
+    .on('click',function(ev,d){const n=resolveName(d.properties.name,d.id);const dt=countryData[n];if(dt)openPanel(n,dt)})
+    .on('mouseenter',function(ev,d){const n=resolveName(d.properties.name,d.id);tooltip.textContent=n+(countryData[n]?' — Click to explore':'');tooltip.classList.add('visible');if(countryData[n])d3.select(this).classed('highlighted',true)})
+    .on('mousemove',function(ev){tooltip.style.left=ev.clientX+12+'px';tooltip.style.top=ev.clientY-30+'px'})
+    .on('mouseleave',function(){tooltip.classList.remove('visible');d3.select(this).classed('highlighted',false)});
+  svg.append('path').datum(topojson.mesh(world,world.objects.countries,(a,b)=>a!==b)).attr('d',path).attr('fill','none').attr('stroke','#FFF8EC').attr('stroke-width',.4);
+}
+function resolveName(n,id){if(nameMap[n])return nameMap[n];for(const[k,v]of Object.entries(countryData))if(v.iso===String(id))return k;return countryData[n]?n:n}
+
+// Filters
+document.querySelectorAll('.filter-btn').forEach(btn=>{btn.addEventListener('click',()=>{
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+  const f=btn.dataset.filter;const cm={popular:'filter-popular',unique:'filter-unique',growing:'filter-growing'};
+  const legend=document.getElementById('mapLegend');
+  if(f==='all')legend.innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#C8B88A"></div> Has data</div><div class="legend-item"><div class="legend-dot" style="background:#D4C4A0"></div> No data yet</div>';
+  else{const c={popular:'#4A8C5C',unique:'#E8A838',growing:'#D44B2C'},l={popular:'Most Sold',unique:'Most Unique',growing:'Fastest Growing'};legend.innerHTML=`<div class="legend-item"><div class="legend-dot" style="background:${c[f]}"></div> ${l[f]}</div><div class="legend-item"><div class="legend-dot" style="background:#E8E0CC"></div> Other</div>`}
+  d3.selectAll('.country').each(function(){const el=d3.select(this),n=el.attr('data-name'),dt=countryData[n];
+    el.classed('filter-popular',false).classed('filter-unique',false).classed('filter-growing',false).classed('dimmed',false).classed('has-data',!!dt).classed('highlighted',false);
+    if(f==='all')return;if(dt&&dt.tags&&dt.tags.includes(f)){el.classed(cm[f],true).classed('has-data',false)}else{el.classed('dimmed',true).classed('has-data',false)}})})});
+
+// Panel
+const panel=document.getElementById('detailPanel'),overlay=document.getElementById('overlay');
+function openPanel(name,data){
+  document.getElementById('panelFlag').textContent=data.flag;document.getElementById('panelCountry').textContent=name;document.getElementById('panelRegion').textContent=data.region;
+  document.getElementById('panelBody').innerHTML=`<div class="stat-grid"><div class="stat-card"><div class="val">${data.marketSize}</div><div class="lbl">Market Size</div></div><div class="stat-card"><div class="val">${data.perCapita}</div><div class="lbl">Per Capita / Year</div></div><div class="stat-card"><div class="val">${data.avgCost}</div><div class="lbl">Avg. Bag Price</div></div><div class="stat-card"><div class="val">${data.growth}</div><div class="lbl">Annual Growth</div></div></div><div class="detail-section"><h3>🏷️ Top Brands</h3><br>${data.topBrands.map(b=>`<span class="chip-tag brand">${b}</span>`).join('')}</div><div class="detail-section"><h3>🔥 Most Popular Flavors</h3><br>${data.popularFlavors.map(f=>`<span class="chip-tag popular">${f}</span>`).join('')}</div><div class="detail-section"><h3>✨ Most Unique Flavors</h3><br>${data.uniqueFlavors.map(f=>`<span class="chip-tag unique">${f}</span>`).join('')}</div><div class="detail-section"><h3>🎉 When & How People Snack</h3><ul class="occasion-list">${data.occasions.map(o=>`<li>${o}</li>`).join('')}</ul></div><div class="detail-section"><h3>💡 Fun Fact</h3><p class="fun-fact">${data.funFact}</p></div>`;
+  panel.classList.add('open');overlay.classList.add('active');
+}
+function closePanel(){panel.classList.remove('open');overlay.classList.remove('active')}
+document.getElementById('panelClose').addEventListener('click',closePanel);
+overlay.addEventListener('click',closePanel);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel()});
+
+// Nav smooth scroll
+document.querySelectorAll('.nav-links a,.btn-primary,.btn-secondary').forEach(a=>{a.addEventListener('click',e=>{const h=a.getAttribute('href');if(h&&h.startsWith('#')){e.preventDefault();document.querySelector(h).scrollIntoView({behavior:'smooth'})}})});
+</script>
+</body>
+</html>
