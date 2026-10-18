@@ -7,7 +7,7 @@
 // then writes:
 //   /<slug>/index.html      one server-rendered page per country
 //   /assets/site.css        the homepage's inline CSS, extracted verbatim
-//   /sitemap.xml            homepage + every country URL
+//   /sitemap.xml            homepage + every country URL (keeps /news/ and /snack-boxes/)
 //   index.html              only the regions between BUILD:* markers
 //
 // Usage:  node scripts/build_country_pages.mjs [--lastmod YYYY-MM-DD]
@@ -108,6 +108,22 @@ function relatedCountries(x) {
   const same = sorted.filter((o) => o.slug !== x.slug && o.d.region === x.d.region);
   const rest = sorted.filter((o) => o.slug !== x.slug && o.d.region !== x.d.region);
   return [...same, ...rest].slice(0, 6);
+}
+
+// Cross-link the Asian snack-box comparison (/snack-boxes/, built by build_snack_boxes.mjs).
+const SNACK_BOX_COPY = {
+  japan: 'Want a box of Japanese snacks delivered? We compared Bokksu, TokyoTreat, Sakuraco, Japan Candy Box and more on price, contents (including which ones pack chips) and shipping to Europe.',
+  'south-korea': 'Want Korean snacks delivered? Our snack-box guide covers Daebak\u2019s seasonal SnackFever box from Seoul alongside the best Japanese boxes, with verified prices and shipping costs.',
+};
+function snackBoxCallout(slug) {
+  if (!SNACK_BOX_COPY[slug]) return '';
+  return `    <section class="cp-section" id="snack-boxes">
+      <h2>Snack Box Subscriptions</h2>
+      <p>${esc(SNACK_BOX_COPY[slug])}</p>
+      <p><a href="/snack-boxes/" class="cp-explore-link">🍱 Compare Asian snack boxes &#8594;</a></p>
+    </section>
+
+`;
 }
 
 const link = (o) => `<a href="/${o.slug}/" class="cp-explore-link">${o.d.flag} ${esc(o.name)}</a>`;
@@ -250,7 +266,7 @@ ${fontsLink}
       </div>
     </section>
 
-    <section class="cp-section" id="shop">
+${snackBoxCallout(slug)}    <section class="cp-section" id="shop">
       <h2>Try ${esc(name)} Chips at Home</h2>
       <p>Want to taste authentic ${esc(name)} flavors? Check out our top picks on Amazon:</p>
       <div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.8rem">
@@ -294,9 +310,17 @@ const newsPath = path.join(ROOT, 'data', 'news.json');
 const newsLastmod = fs.existsSync(newsPath)
   ? JSON.parse(fs.readFileSync(newsPath, 'utf8')).map((s) => s.date).sort().pop()
   : null;
+// Likewise /snack-boxes/ is owned by scripts/build_snack_boxes.mjs; keep it with the
+// lastmod (dateModified) of the generated page.
+const snackPath = path.join(ROOT, 'snack-boxes', 'index.html');
+const snackLastmod = fs.existsSync(snackPath)
+  ? (fs.readFileSync(snackPath, 'utf8').match(/"dateModified":"(\d{4}-\d{2}-\d{2})"/) || [])[1]
+  : null;
+if (fs.existsSync(snackPath) && !snackLastmod) throw new Error('snack-boxes/index.html has no dateModified');
 const urls = [
   { loc: `${SITE}/`, freq: 'weekly', pri: '1.0' },
   ...(newsLastmod ? [{ loc: `${SITE}/news/`, freq: 'weekly', pri: '0.7', lastmod: newsLastmod }] : []),
+  ...(snackLastmod ? [{ loc: `${SITE}/snack-boxes/`, freq: 'monthly', pri: '0.8', lastmod: snackLastmod }] : []),
   ...sorted.map((x) => ({ loc: `${SITE}/${x.slug}/`, freq: 'monthly', pri: '0.8' })),
 ];
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'),
