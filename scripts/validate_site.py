@@ -3,11 +3,13 @@
 
 Usage: python3 scripts/validate_site.py
 """
-import glob, json, os, subprocess, sys, tempfile, xml.etree.ElementTree as ET
+import datetime, glob, json, os, re, subprocess, sys, tempfile, xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://worldofchips.com"
+NEWS_CATEGORIES = {"Industry", "New Flavor", "Safety Recall", "Innovation", "Sustainability", "Investment", "Regional"}
+NEWS_FIELDS = ("id", "date", "title", "summary", "category", "source_name", "source_url")
 VOID = {"area","base","br","col","embed","hr","img","input","link","meta","source","track","wbr"}
 
 
@@ -84,11 +86,80 @@ def check(path, problems):
                 problems.append(f"{rel}: affiliate link missing target/rel: {href}")
             if "amazon.com" in href and "tag=wordofchipspr-20" not in href:
                 problems.append(f"{rel}: amazon link without affiliate tag: {href}")
+        if a.get("target") == "_blank" and "noopener" not in (a.get("rel") or "").split():
+            problems.append(f"{rel}: target=_blank link without rel=noopener: {href}")
         if href.startswith("/") and not href.startswith("//"):
             target = href.split("#")[0]
             if target and target != "/" and not os.path.exists(os.path.join(ROOT, target.strip("/"), "index.html")):
                 problems.append(f"{rel}: broken internal link {href}")
     return p
+
+
+def check_news(problems, sitemap_root, ns):
+    """Validate data/news.json and that the generated news output is in sync with it."""
+    path = os.path.join(ROOT, "data", "news.json")
+    try:
+        stories = json.load(open(path, encoding="utf-8"))
+    except (OSError, ValueError) as e:
+        problems.append(f"data/news.json: cannot load: {e}")
+        return 0
+    if not isinstance(stories, list) or not stories:
+        problems.append("data/news.json: must be a non-empty JSON array")
+        return 0
+    seen_ids, seen_urls = set(), set()
+    latest_allowed = datetime.date.today() + datetime.timedelta(days=1)
+    for i, s in enumerate(stories):
+        sid = s.get("id", f"#{i}") if isinstance(s, dict) else f"#{i}"
+        where = f"data/news.json [{sid}]"
+        if not isinstance(s, dict):
+            problems.append(f"{where}: not an object")
+            continue
+        for k in NEWS_FIELDS:
+            if not isinstance(s.get(k), str) or not s[k].strip():
+                problems.append(f"{where}: missing/empty '{k}'")
+        unknown = set(s) - set(NEWS_FIELDS) - {"country"}
+        if unknown:
+            problems.append(f"{where}: unknown fields {sorted(unknown)}")
+        if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", s.get("id", "")):
+            problems.append(f"{where}: id must be a lowercase-hyphen slug")
+        if s.get("id") in seen_ids:
+            problems.append(f"{where}: duplicate id")
+        seen_ids.add(s.get("id"))
+        try:
+            d = datetime.date.fromisoformat(s.get("date", ""))
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", s["date"]):
+                raise ValueError
+            if d > latest_allowed:
+                problems.append(f"{where}: date {d} is in the future")
+        except (ValueError, TypeError):
+            problems.append(f"{where}: date must be a real YYYY-MM-DD date")
+        words = len(str(s.get("summary", "")).split())
+        if not 40 <= words <= 80:
+            problems.append(f"{where}: summary has {words} words (want 40-80, original wording)")
+        if len(str(s.get("title", ""))) > 110:
+            problems.append(f"{where}: title longer than 110 characters")
+        if s.get("category") not in NEWS_CATEGORIES:
+            problems.append(f"{where}: category must be one of {sorted(NEWS_CATEGORIES)}")
+        c = s.get("country")
+        if c is not None and not (isinstance(c, str) and os.path.exists(os.path.join(ROOT, c, "index.html"))):
+            problems.append(f"{where}: country '{c}' is not an existing country page slug")
+        u = str(s.get("source_url", ""))
+        if not re.match(r"https?://[^\s/]+\.[^\s/]+", u) or "worldofchips.com" in u:
+            problems.append(f"{where}: source_url must be an absolute external URL")
+        if u in seen_urls:
+            problems.append(f"{where}: duplicate source_url")
+        seen_urls.add(u)
+    # Generated files in sync with the data?
+    r = subprocess.run(["node", os.path.join(ROOT, "scripts", "build_news.mjs"), "--check"], capture_output=True, text=True)
+    if r.returncode:
+        problems.append((r.stderr or r.stdout).strip()[:300])
+    # Sitemap lastmod for /news/ = newest story date
+    dates = sorted(s.get("date", "") for s in stories if isinstance(s, dict))
+    for u in sitemap_root.findall("s:url", ns):
+        if u.findtext("s:loc", namespaces=ns) == f"{SITE}/news/":
+            if u.findtext("s:lastmod", namespaces=ns) != dates[-1]:
+                problems.append(f"sitemap: /news/ lastmod should be {dates[-1]}")
+    return len(stories)
 
 
 def main():
@@ -108,11 +179,13 @@ def main():
         if not p.desc:
             problems.append(f"{slug}: missing meta description")
     ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-    locs = [e.text for e in ET.parse(os.path.join(ROOT, "sitemap.xml")).getroot().findall("s:url/s:loc", ns)]
+    sitemap_root = ET.parse(os.path.join(ROOT, "sitemap.xml")).getroot()
+    locs = [e.text for e in sitemap_root.findall("s:url/s:loc", ns)]
     expected = {f"{SITE}/"} | {p.canonical for path, p in pages.items() if os.path.dirname(path) != ROOT}
     if set(locs) != expected:
         problems.append(f"sitemap mismatch: {set(locs) ^ expected}")
-    print(f"Checked {len(pages)} HTML files, {len(locs)} sitemap URLs.")
+    n_news = check_news(problems, sitemap_root, ns)
+    print(f"Checked {len(pages)} HTML files, {len(locs)} sitemap URLs, {n_news} news stories.")
     for pr in problems:
         print("PROBLEM:", pr)
     sys.exit(1 if problems else 0)

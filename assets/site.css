@@ -233,6 +233,16 @@ section.content-section{padding:5rem 1.5rem}
 .news-card-body h3{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.5rem;line-height:1.35;color:var(--cream)}
 .news-card-body p{font-size:.82rem;color:var(--muted);line-height:1.55}
 .news-card-meta{display:flex;justify-content:space-between;padding:.7rem 1.5rem;border-top:1px solid rgba(232,168,56,.08);font-size:.7rem;color:rgba(139,115,85,.6)}
+.news-card-body h3 a{color:inherit;text-decoration:none}
+.news-card-body h3 a:hover,.news-card-body h3 a:focus{color:var(--gold)}
+.news-card-country{display:inline-block;margin-top:.8rem;font-size:.72rem;font-weight:600;color:var(--gold);text-decoration:none}
+.news-card-country:hover{text-decoration:underline}
+.news-card-meta{gap:1rem}
+.news-card-meta a{color:inherit;text-decoration:none;text-align:right}
+.news-card-meta a:hover{color:var(--gold)}
+.news-more{text-align:center;margin-top:2rem}
+.news-more a{display:inline-block;color:var(--gold);border:1px solid var(--gold);border-radius:100px;padding:.6rem 1.4rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;transition:all .3s}
+.news-more a:hover{background:var(--gold);color:var(--dark)}
 
 /* ABOUT */
 #about{background:var(--paper)}
