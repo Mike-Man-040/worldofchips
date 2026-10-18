@@ -75,6 +75,21 @@ const fontsLink = (indexHtml.match(/<link href="https:\/\/fonts\.googleapis\.com
 const css = between(indexHtml, '<style>', '</style>').text.slice('<style>'.length).trim() + '\n';
 const footerHtml = between(indexHtml, '<footer>', '</footer>').text + '</footer>';
 
+// Newsletter (MailerLite): the universal loader before </head> and the signup form markup
+// (embed div + fallback + privacy note) are reused verbatim from index.html, so the form id
+// and wording live in one place. Pages get a compact block around that shared markup.
+const mlUniversal = between(indexHtml, '<!-- MailerLite Universal -->', '<!-- End MailerLite Universal -->').text +
+  '<!-- End MailerLite Universal -->';
+if (!/ml\('account', '\d+'\)/.test(mlUniversal)) throw new Error('MailerLite universal snippet not found / account id missing');
+const nlFormRaw = between(indexHtml, '<!-- NEWSLETTER-FORM:START', '<!-- NEWSLETTER-FORM:END -->').text;
+const nlForm = nlFormRaw.slice(nlFormRaw.indexOf('-->') + 3).split('\n').map((l) => l.replace(/^ {4}/, '')).join('\n').trim();
+if (!/class="ml-embedded" data-form="[A-Za-z0-9]+"/.test(nlForm)) throw new Error('MailerLite embed div not found in NEWSLETTER-FORM region');
+const newsletterBlock = (indent) => `<aside class="nl nl-compact" id="newsletter" aria-labelledby="nl-title">
+<h2 id="nl-title">Get the monthly Chip Report</h2>
+<p class="nl-pitch">New and weird chips from around the world, once a month. No spam.</p>
+${nlForm}
+</aside>`.split('\n').map((l, i) => (i ? indent + (l.startsWith('<aside') || l.startsWith('</aside') ? '' : '  ') + l : l)).join('\n');
+
 // ---------- 2. derived country list ----------
 const names = Object.keys(countryData);
 const countries = names.map((name) => {
@@ -178,6 +193,7 @@ ${fontsLink}
 .cp-crumbs a{color:var(--gold);text-decoration:none}
 .cp-cta h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--brown);margin-bottom:.6rem}
 </style>
+${mlUniversal}
 </head>
 <body>
 
@@ -258,6 +274,8 @@ ${fontsLink}
       </div>
       <p class="aff-disc">As an Amazon Associate, World of Chips earns from qualifying purchases. This doesn&#8217;t affect our editorial content &#8212; we only feature products we genuinely think chip lovers will enjoy.</p>
     </section>
+
+    ${newsletterBlock('    ')}
 
     <nav class="cp-cta" aria-label="More country guides">
       <h2>More Chip Guides</h2>

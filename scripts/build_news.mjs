@@ -122,6 +122,21 @@ const gaSnippet = between(indexHtml, '<!-- Google tag (gtag.js) -->', '<meta cha
 const fontsLink = (indexHtml.match(/<link href="https:\/\/fonts\.googleapis\.com[^>]*>/) || [])[0];
 const footerHtml = between(indexHtml, '<footer>', '</footer>').text + '</footer>';
 
+// Newsletter (MailerLite): the universal loader before </head> and the signup form markup
+// (embed div + fallback + privacy note) are reused verbatim from index.html, so the form id
+// and wording live in one place. Pages get a compact block around that shared markup.
+const mlUniversal = between(indexHtml, '<!-- MailerLite Universal -->', '<!-- End MailerLite Universal -->').text +
+  '<!-- End MailerLite Universal -->';
+if (!/ml\('account', '\d+'\)/.test(mlUniversal)) throw new Error('MailerLite universal snippet not found / account id missing');
+const nlFormRaw = between(indexHtml, '<!-- NEWSLETTER-FORM:START', '<!-- NEWSLETTER-FORM:END -->').text;
+const nlForm = nlFormRaw.slice(nlFormRaw.indexOf('-->') + 3).split('\n').map((l) => l.replace(/^ {4}/, '')).join('\n').trim();
+if (!/class="ml-embedded" data-form="[A-Za-z0-9]+"/.test(nlForm)) throw new Error('MailerLite embed div not found in NEWSLETTER-FORM region');
+const newsletterBlock = (indent) => `<aside class="nl nl-compact" id="newsletter" aria-labelledby="nl-title">
+<h2 id="nl-title">Get the monthly Chip Report</h2>
+<p class="nl-pitch">New and weird chips from around the world, once a month. No spam.</p>
+${nlForm}
+</aside>`.split('\n').map((l, i) => (i ? indent + (l.startsWith('<aside') || l.startsWith('</aside') ? '' : '  ') + l : l)).join('\n');
+
 const url = `${SITE}/news/`;
 const title = 'Potato Chip News: New Flavors, Recalls & Industry Moves | World of Chips';
 const desc = `Potato chip and crisps news from around the world, updated weekly: new flavor launches, food-safety recalls, industry deals and regional snack trends. Updated ${fmtDate(LATEST)}.`;
@@ -204,6 +219,7 @@ ${fontsLink}
 .news-month:first-of-type{margin-top:0}
 .cp-cta h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--brown);margin-bottom:.6rem}
 </style>
+${mlUniversal}
 </head>
 <body>
 
@@ -235,6 +251,8 @@ ${groups.map((g) => `    <h2 class="news-month">${g.label}</h2>
     </div>`).join('\n')}
   </section>
   <div class="cp-body">
+    ${newsletterBlock('    ')}
+
     <nav class="cp-cta" aria-label="Country guides">
       <h2>Chip Guides for Countries in the News</h2>
       <div class="cp-explore-grid">${mentioned.map(link).join('')}</div>

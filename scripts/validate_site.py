@@ -58,9 +58,24 @@ class Page(HTMLParser):
             self._script[1] += data
 
 
-def check(path, problems):
+def check_newsletter(rel, html, problems, form_ids):
+    """Every page carries the MailerLite universal loader (in <head>) and exactly one empty embed div."""
+    head = html.split("</head>", 1)[0]
+    if head.count("https://assets.mailerlite.com/js/universal.js") != 1 or not re.search(r"ml\('account', '\d+'\)", head):
+        problems.append(f"{rel}: MailerLite universal snippet missing from <head> (or duplicated)")
+    embeds = re.findall(r'<div class="ml-embedded" data-form="([A-Za-z0-9]+)"></div>', html)
+    n = html.count('class="ml-embedded"')
+    if len(embeds) != 1 or n != 1:
+        problems.append(f"{rel}: expected exactly one empty ml-embedded div with a data-form, found {n} ml-embedded div(s), {len(embeds)} valid")
+    form_ids.update(embeds)
+
+
+def check(path, problems, form_ids=None):
+    html = open(path, encoding="utf-8").read()
+    if form_ids is not None:
+        check_newsletter(os.path.relpath(path, ROOT), html, problems, form_ids)
     p = Page()
-    p.feed(open(path, encoding="utf-8").read())
+    p.feed(html)
     p.close()
     rel = os.path.relpath(path, ROOT)
     problems += [f"{rel}: {e}" for e in p.errors]
@@ -164,9 +179,11 @@ def check_news(problems, sitemap_root, ns):
 
 def main():
     problems = []
-    pages = {}
+    pages, form_ids = {}, set()
     for path in [os.path.join(ROOT, "index.html")] + sorted(glob.glob(os.path.join(ROOT, "*", "index.html"))):
-        pages[path] = check(path, problems)
+        pages[path] = check(path, problems, form_ids)
+    if len(form_ids) > 1:
+        problems.append(f"newsletter: pages use different MailerLite form ids {sorted(form_ids)}")
     titles = [p.title for p in pages.values()]
     if len(set(titles)) != len(titles):
         problems.append("duplicate <title>s")
