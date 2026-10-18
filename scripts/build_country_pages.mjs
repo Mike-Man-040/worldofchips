@@ -187,6 +187,7 @@ ${fontsLink}
     <a href="/#countries">Countries</a>
     <a href="/#map-section">Map</a>
     <a href="/#consumption">Consumption</a>
+    <a href="/news/">News</a>
     <a href="/#shop">Where to Buy</a>
   </div>
 </nav>
@@ -287,13 +288,20 @@ for (const x of countries) {
   fs.writeFileSync(path.join(dir, 'index.html'), renderPage(x));
 }
 
+// The /news/ entry is owned by scripts/build_news.mjs; keep it (lastmod = newest story)
+// so running either build leaves the same sitemap.
+const newsPath = path.join(ROOT, 'data', 'news.json');
+const newsLastmod = fs.existsSync(newsPath)
+  ? JSON.parse(fs.readFileSync(newsPath, 'utf8')).map((s) => s.date).sort().pop()
+  : null;
 const urls = [
   { loc: `${SITE}/`, freq: 'weekly', pri: '1.0' },
+  ...(newsLastmod ? [{ loc: `${SITE}/news/`, freq: 'weekly', pri: '0.7', lastmod: newsLastmod }] : []),
   ...sorted.map((x) => ({ loc: `${SITE}/${x.slug}/`, freq: 'monthly', pri: '0.8' })),
 ];
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-  urls.map((u) => `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${LASTMOD}</lastmod>\n    <changefreq>${u.freq}</changefreq>\n    <priority>${u.pri}</priority>\n  </url>\n`).join('') +
+  urls.map((u) => `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${u.lastmod || LASTMOD}</lastmod>\n    <changefreq>${u.freq}</changefreq>\n    <priority>${u.pri}</priority>\n  </url>\n`).join('') +
   '</urlset>\n');
 
 // index.html: generated regions only
