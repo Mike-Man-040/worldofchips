@@ -227,6 +227,9 @@ def main():
         problems.append(f"sitemap mismatch: {set(locs) ^ expected}")
     n_news = check_news(problems, sitemap_root, ns)
     check_snack_boxes(problems, pages)
+    r = subprocess.run(["node", os.path.join(ROOT, "scripts", "build_guides.mjs"), "--check"], capture_output=True, text=True)
+    if r.returncode:
+        problems.append((r.stderr or r.stdout).strip()[:300])
     print(f"Checked {len(pages)} HTML files, {len(locs)} sitemap URLs, {n_news} news stories.")
     for pr in problems:
         print("PROBLEM:", pr)
