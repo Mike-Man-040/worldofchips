@@ -126,6 +126,23 @@ function snackBoxCallout(slug) {
 `;
 }
 
+// Cross-link the buyer's guides (built by build_guides.mjs).
+const GUIDE_LINKS = {
+  japan: [['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Asian chips in Europe']],
+  'south-korea': [['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Honey Butter Chip in Europe'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online']],
+  mexico: [['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Takis in the UK & Europe']],
+  'united-kingdom': [['where-to-buy-asian-chips-europe', '🇬🇧 Where to buy Takis & imported chips in the UK']],
+};
+function guideCallout(slug) {
+  if (!GUIDE_LINKS[slug]) return '';
+  return `    <section class="cp-section" id="buying-guides">
+      <h2>Buying Guides</h2>
+      <div class="cp-explore-grid">${GUIDE_LINKS[slug].map(([s, l]) => `<a href="/${s}/" class="cp-explore-link">${l} &#8594;</a>`).join('')}</div>
+    </section>
+
+`;
+}
+
 const link = (o) => `<a href="/${o.slug}/" class="cp-explore-link">${o.d.flag} ${esc(o.name)}</a>`;
 
 // ---------- 3. page template ----------
@@ -266,7 +283,7 @@ ${fontsLink}
       </div>
     </section>
 
-${snackBoxCallout(slug)}    <section class="cp-section" id="shop">
+${snackBoxCallout(slug)}${guideCallout(slug)}    <section class="cp-section" id="shop">
       <h2>Try ${esc(name)} Chips at Home</h2>
       <p>Want to taste authentic ${esc(name)} flavors? Check out our top picks on Amazon:</p>
       <div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.8rem">
@@ -317,10 +334,20 @@ const snackLastmod = fs.existsSync(snackPath)
   ? (fs.readFileSync(snackPath, 'utf8').match(/"dateModified":"(\d{4}-\d{2}-\d{2})"/) || [])[1]
   : null;
 if (fs.existsSync(snackPath) && !snackLastmod) throw new Error('snack-boxes/index.html has no dateModified');
+// Buyer's guides are owned by scripts/build_guides.mjs; keep them with their dateModified.
+const GUIDE_SLUGS = ['best-japanese-chips', 'where-to-buy-asian-chips-europe'];
+const guideUrls = GUIDE_SLUGS.flatMap((g) => {
+  const gp = path.join(ROOT, g, 'index.html');
+  if (!fs.existsSync(gp)) return [];
+  const lm = (fs.readFileSync(gp, 'utf8').match(/"dateModified":"(\d{4}-\d{2}-\d{2})"/) || [])[1];
+  if (!lm) throw new Error(`${g}/index.html has no dateModified`);
+  return [{ loc: `${SITE}/${g}/`, freq: 'monthly', pri: '0.8', lastmod: lm }];
+});
 const urls = [
   { loc: `${SITE}/`, freq: 'weekly', pri: '1.0' },
   ...(newsLastmod ? [{ loc: `${SITE}/news/`, freq: 'weekly', pri: '0.7', lastmod: newsLastmod }] : []),
   ...(snackLastmod ? [{ loc: `${SITE}/snack-boxes/`, freq: 'monthly', pri: '0.8', lastmod: snackLastmod }] : []),
+  ...guideUrls,
   ...sorted.map((x) => ({ loc: `${SITE}/${x.slug}/`, freq: 'monthly', pri: '0.8' })),
 ];
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'),
