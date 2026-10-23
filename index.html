@@ -327,6 +327,29 @@ footer .copy{font-size:.65rem;margin-top:1.5rem;opacity:.4}
   
 }
 
+/* NEWSLETTER (MailerLite embedded form; markup shared with generated pages) */
+#newsletter{background:var(--cream)}
+.nl{max-width:680px;margin:0 auto;background:var(--paper);border:2px solid var(--light-border);border-top:4px solid var(--gold);border-radius:16px;padding:2.5rem 2rem 2rem;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.04)}
+.nl .section-title{font-size:clamp(1.7rem,3.5vw,2.4rem)}
+.nl .section-sub{margin-bottom:1.5rem}
+.nl-compact{max-width:none;margin:0 0 2.5rem;padding:1.8rem 1.5rem 1.4rem}
+.nl-compact h2{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--brown);margin-bottom:.3rem}
+.nl-compact .nl-pitch{font-size:.9rem;color:var(--muted);margin:0 auto 1rem;max-width:520px;line-height:1.6}
+/* Reserve space so the page doesn't jump while the async form loads */
+.nl-form{min-height:110px;display:flex;flex-direction:column;justify-content:center}
+.nl .ml-embedded{width:100%}
+.nl .ml-embedded:empty{min-height:56px;border:1px dashed var(--light-border);border-radius:10px;background:rgba(255,248,236,.6)}
+/* The section already has the heading and pitch; hide the form's duplicate header */
+.nl .ml-form-embedContent{display:none!important}
+.nl .ml-form-embedWrapper{background-color:transparent!important}
+/* Fallback if universal.js is blocked/fails: shown after a timeout, only while the embed is still empty */
+.nl-fallback{display:none;font-size:.85rem;color:var(--ink);margin-top:.6rem}
+.nl-fallback a,.nl-noscript a{color:var(--gold-dark);font-weight:700}
+.nl-failed .ml-embedded:empty{display:none}
+.nl-failed .ml-embedded:empty+.nl-fallback{display:block}
+.nl-noscript{font-size:.85rem;color:var(--ink)}
+.nl-privacy{font-size:.7rem;color:var(--muted);margin-top:.9rem;line-height:1.5}
+
 /* ======================= COUNTRY PAGES ======================= */
 .country-page{display:none;padding:0}
 .country-page.active{display:block}
@@ -378,6 +401,15 @@ footer .copy{font-size:.65rem;margin-top:1.5rem;opacity:.4}
 }
 
 </style>
+<!-- MailerLite Universal -->
+<script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    ml('account', '2722693');
+</script>
+<!-- End MailerLite Universal -->
 </head>
 <body>
 
@@ -613,8 +645,29 @@ footer .copy{font-size:.65rem;margin-top:1.5rem;opacity:.4}
   <div class="about-inner">
     <p>We&#8217;re on a mission to document every potato chip flavor, brand, and snacking tradition on Earth. From Japan&#8217;s seasonal Calbee limited editions to South Africa&#8217;s beloved Simba Chutney chips, we believe every crisp tells a story about the culture it comes from.</p>
     <p>World of Chips is an independent project born out of a genuine love for potato chips (the thin, crispy, bagged kind &#8212; not fries!). We research global markets, track new flavor launches, and build tools to help chip enthusiasts explore snack culture worldwide.</p>
+    <p>Want the highlights in your inbox? Sign up for the <a href="#newsletter" style="color:var(--gold-dark);font-weight:600">monthly Chip Report</a>. It&#8217;s double opt-in and sent via MailerLite; we only use your email for the newsletter, and you can unsubscribe anytime.</p>
     <p>Have a tip about a rare flavor? Know a local brand we should feature? We&#8217;d love to hear from you.</p>
     <a href="mailto:michaelvdlooij@gmail.com" class="about-email">&#9993; michaelvdlooij@gmail.com</a>
+  </div>
+</section>
+
+<!-- ============ NEWSLETTER ============ -->
+<section id="newsletter" class="content-section">
+  <div class="nl">
+    <div class="section-eyebrow">Newsletter</div>
+    <h2 class="section-title">Get the monthly Chip Report</h2>
+    <p class="section-sub">New and weird chips from around the world, once a month: fresh flavor launches, regional oddities and the best stories from our news desk. No spam.</p>
+    <!-- NEWSLETTER-FORM:START (reused verbatim by scripts/build_country_pages.mjs and scripts/build_news.mjs) -->
+    <div class="nl-form">
+      <div class="ml-embedded" data-form="e7ZTaE"></div>
+      <p class="nl-fallback">The signup form didn&#8217;t load (an ad or script blocker may be stopping it). <a href="https://dashboard.mailerlite.com/forms/2722693/201684808410072477/share" target="_blank" rel="noopener">Open the signup form &#8599;</a></p>
+      <noscript><p class="nl-noscript">The signup form needs JavaScript. <a href="https://dashboard.mailerlite.com/forms/2722693/201684808410072477/share" target="_blank" rel="noopener">Sign up on MailerLite &#8599;</a></p></noscript>
+    </div>
+    <script>
+    setTimeout(function(){var f=document.querySelectorAll('.nl-form');for(var i=0;i<f.length;i++)f[i].classList.add('nl-failed');},8000);
+    </script>
+    <p class="nl-privacy">Double opt-in: we&#8217;ll email you a confirmation link first. Unsubscribe anytime. Powered by MailerLite; your email is only used to send the Chip Report.</p>
+    <!-- NEWSLETTER-FORM:END -->
   </div>
 </section>
 
@@ -920,7 +973,7 @@ function showCountryPage(name) {
   `;
   
   // Hide main content, show country page
-  document.querySelectorAll('.hero,.marquee-bar,.nav,#map-section,#consumption,#news,#shop,#about,footer,.overlay,.detail-panel,.map-tooltip').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.hero,.marquee-bar,.nav,#map-section,#consumption,#news,#shop,#about,#newsletter,footer,.overlay,.detail-panel,.map-tooltip').forEach(el => el.style.display = 'none');
   container.style.display = 'block';
   
   // Update page title and meta for SEO
@@ -953,7 +1006,7 @@ function showCountryPage(name) {
 function hideCountryPage() {
   document.getElementById('countryPageContainer').style.display = 'none';
   document.getElementById('countryPageContainer').innerHTML = '';
-  document.querySelectorAll('.hero,.marquee-bar,.nav,#map-section,#consumption,#news,#shop,#about,footer,.overlay,.detail-panel,.map-tooltip').forEach(el => el.style.display = '');
+  document.querySelectorAll('.hero,.marquee-bar,.nav,#map-section,#consumption,#news,#shop,#about,#newsletter,footer,.overlay,.detail-panel,.map-tooltip').forEach(el => el.style.display = '');
   document.title = 'World of Chips — Explore Global Potato Chip Culture';
   window.location.hash = '';
   window.scrollTo(0, 0);
