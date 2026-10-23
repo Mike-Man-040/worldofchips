@@ -170,6 +170,21 @@ const gaSnippet = between(indexHtml, '<!-- Google tag (gtag.js) -->', '<meta cha
 const fontsLink = (indexHtml.match(/<link href="https:\/\/fonts\.googleapis\.com[^>]*>/) || [])[0];
 const footerHtml = between(indexHtml, '<footer>', '</footer>').text + '</footer>';
 
+// Newsletter (MailerLite): the universal loader before </head> and the signup form markup
+// (embed div + fallback + privacy note) are reused verbatim from index.html, so the form id
+// and wording live in one place. Pages get a compact block around that shared markup.
+const mlUniversal = between(indexHtml, '<!-- MailerLite Universal -->', '<!-- End MailerLite Universal -->').text +
+  '<!-- End MailerLite Universal -->';
+if (!/ml\('account', '\d+'\)/.test(mlUniversal)) throw new Error('MailerLite universal snippet not found / account id missing');
+const nlFormRaw = between(indexHtml, '<!-- NEWSLETTER-FORM:START', '<!-- NEWSLETTER-FORM:END -->').text;
+const nlForm = nlFormRaw.slice(nlFormRaw.indexOf('-->') + 3).split('\n').map((l) => l.replace(/^ {4}/, '')).join('\n').trim();
+if (!/class="ml-embedded" data-form="[A-Za-z0-9]+"/.test(nlForm)) throw new Error('MailerLite embed div not found in NEWSLETTER-FORM region');
+const newsletterBlock = (indent) => `<aside class="nl nl-compact" id="newsletter" aria-labelledby="nl-title">
+<h2 id="nl-title">Get the monthly Chip Report</h2>
+<p class="nl-pitch">New and weird chips from around the world, once a month. No spam.</p>
+${nlForm}
+</aside>`.split('\n').map((l, i) => (i ? indent + (l.startsWith('<aside') || l.startsWith('</aside') ? '' : '  ') + l : l)).join('\n');
+
 const url = `${SITE}/snack-boxes/`;
 const h1 = 'Best Asian Snack Boxes in 2026: Bokksu vs TokyoTreat vs Sakuraco vs Daebak (and more)';
 const title = 'Best Asian Snack Boxes 2026: Bokksu vs TokyoTreat vs Daebak & More | World of Chips';
@@ -231,7 +246,7 @@ const card = (b) => `<article class="sb-box" id="${b.id}">
     </article>`;
 
 const chipRank = [...BOXES].filter((b) => b.chipScore >= 2).sort((a, b) => b.chipScore - a.chipScore);
-const otherGuides = [['japan', '🇯🇵 Japan'], ['south-korea', '🇰🇷 South Korea'], ['china', '🇨🇳 China'], ['thailand', '🇹🇭 Thailand'], ['indonesia', '🇮🇩 Indonesia']];
+const otherGuides = [['best-international-chip-variety-packs', '🌍 International chip variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying in Europe'], ['japan', '🇯🇵 Japan'], ['south-korea', '🇰🇷 South Korea'], ['china', '🇨🇳 China'], ['thailand', '🇹🇭 Thailand'], ['indonesia', '🇮🇩 Indonesia']];
 for (const [s] of otherGuides) if (!fs.existsSync(path.join(ROOT, s, 'index.html'))) throw new Error(`missing country page /${s}/`);
 
 const page = `<!DOCTYPE html>
@@ -289,6 +304,7 @@ ${fontsLink}
 .sb-faq p{margin-top:.3rem}
 .cp-section ol,.cp-section ul.sb-list{margin:.5rem 0 1rem 1.3rem;font-size:.95rem;line-height:1.8}
 </style>
+${mlUniversal}
 </head>
 <body>
 
@@ -392,6 +408,8 @@ ${fontsLink}
       <h2>How We Checked</h2>
       <p>Every price, plan, item count and shipping rule on this page was read from the company&#8217;s own website or help center in ${LAST_CHECKED_LABEL}. The sources are listed under each box. Prices, shipping fees and customs rules change often, and promotions come and go, so always confirm the total at checkout. We haven&#8217;t been paid by any of these companies, and the snack-box links on this page are plain links to their official sites.</p>
     </section>
+
+    ${newsletterBlock('    ')}
 
     <nav class="cp-cta" aria-label="More chip guides">
       <h2>More Chip Guides</h2>
