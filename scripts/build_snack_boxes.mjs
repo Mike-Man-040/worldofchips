@@ -25,7 +25,7 @@ const SITE = 'https://worldofchips.com';
 const CHECK = process.argv.includes('--check');
 const LAST_CHECKED = '2026-10-18'; // ISO date the facts below were verified
 const LAST_CHECKED_LABEL = 'October 2026';
-const AMAZON_TAG = 'wordofchipspr-20';
+const AMAZON_TAG = 'worldofchips-20';
 
 // ---------- helpers ----------
 const esc = (s) => String(s)
