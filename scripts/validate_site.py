@@ -83,9 +83,11 @@ def check(path, problems, form_ids=None):
     if p.stack:
         problems.append(f"{rel}: unclosed tags {p.stack}")
     if "amzn.to" in html:
-        problems.append(f"{rel}: amzn.to shortlinks are not allowed; use canonical amazon.com URLs with tag=")
+        problems.append(f"{rel}: amzn.to shortlinks are not allowed; use canonical amazon.com URLs with tag=worldofchips-20")
+    if "wordofchipspr" in html:
+        problems.append(f"{rel}: legacy affiliate tag found; use tag=worldofchips-20")
     for u in re.findall(r"https?://(?:www\.)?amazon\.com[^\s\"'<>]*", html):
-        if "tag=" not in u or "tag=wordofchipspr-20" not in u:
+        if "tag=" not in u or "tag=worldofchips-20" not in u:
             problems.append(f"{rel}: amazon.com URL without affiliate tag: {u}")
     for typ, body in p.scripts:
         if typ == "application/ld+json":
@@ -108,7 +110,7 @@ def check(path, problems, form_ids=None):
         if "amazon." in href:
             if a.get("target") != "_blank" or not {"sponsored", "noopener"} <= rels:
                 problems.append(f"{rel}: affiliate link missing target/rel: {href}")
-            if "amazon.com" in href and ("tag=" not in href or "tag=wordofchipspr-20" not in href):
+            if "amazon.com" in href and ("tag=" not in href or "tag=worldofchips-20" not in href):
                 problems.append(f"{rel}: amazon link without affiliate tag: {href}")
         if "data-affiliate" in a:
             # Swappable brand links (e.g. /snack-boxes/): known brand, external, never followed.

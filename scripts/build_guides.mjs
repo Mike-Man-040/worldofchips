@@ -29,7 +29,7 @@ const SITE = 'https://worldofchips.com';
 const CHECK = process.argv.includes('--check');
 const LAST_CHECKED = '2026-10-22';
 const LAST_CHECKED_LABEL = '22 October 2026';
-const AMAZON_TAG = 'wordofchipspr-20';
+const AMAZON_TAG = 'worldofchips-20';
 
 // ASIN pages opened on LAST_CHECKED and showing the product in stock on amazon.com.
 const VERIFIED_ASINS = {
