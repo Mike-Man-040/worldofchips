@@ -82,6 +82,11 @@ def check(path, problems, form_ids=None):
     problems += [f"{rel}: {e}" for e in p.errors]
     if p.stack:
         problems.append(f"{rel}: unclosed tags {p.stack}")
+    if "amzn.to" in html:
+        problems.append(f"{rel}: amzn.to shortlinks are not allowed; use canonical amazon.com URLs with tag=")
+    for u in re.findall(r"https?://(?:www\.)?amazon\.com[^\s\"'<>]*", html):
+        if "tag=" not in u or "tag=wordofchipspr-20" not in u:
+            problems.append(f"{rel}: amazon.com URL without affiliate tag: {u}")
     for typ, body in p.scripts:
         if typ == "application/ld+json":
             try:
@@ -98,10 +103,12 @@ def check(path, problems, form_ids=None):
     for a in p.links:
         href = a.get("href", "")
         rels = set((a.get("rel") or "").split())
-        if "amazon." in href or "amzn.to" in href:
+        if "amzn.to" in href:
+            problems.append(f"{rel}: amzn.to shortlink not allowed: {href}")
+        if "amazon." in href:
             if a.get("target") != "_blank" or not {"sponsored", "noopener"} <= rels:
                 problems.append(f"{rel}: affiliate link missing target/rel: {href}")
-            if "amazon.com" in href and "tag=wordofchipspr-20" not in href:
+            if "amazon.com" in href and ("tag=" not in href or "tag=wordofchipspr-20" not in href):
                 problems.append(f"{rel}: amazon link without affiliate tag: {href}")
         if "data-affiliate" in a:
             # Swappable brand links (e.g. /snack-boxes/): known brand, external, never followed.
