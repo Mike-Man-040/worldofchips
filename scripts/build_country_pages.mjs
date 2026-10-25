@@ -176,6 +176,82 @@ function guideCallout(slug) {
 `;
 }
 
+
+// ---------- Quick Facts + FAQ (for AI/LLM search) ----------
+// Built ONLY from fields already rendered on the page (countryData / countryContent / shop picks /
+// guide links). The 12 fully researched countries get 4 Q&As; the thinner ones get 3 conservative
+// ones (brands, flavours, where to buy) and no history/"what makes it unique" answer.
+const RESEARCHED = new Set(['japan', 'south-korea', 'united-kingdom', 'united-states', 'mexico', 'germany',
+  'france', 'netherlands', 'poland', 'russia', 'argentina', 'egypt']);
+const listAnd = (a) => (a.length < 2 ? a.join('') : `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}`);
+const sentences = (t) => t.match(/[^.!?]+[.!?]+(?=\s|$)/g)?.map((x) => x.trim()) || [t];
+const words = (t) => t.split(/\s+/).filter(Boolean).length;
+function capWords(parts, max = 65) {
+  const out = [];
+  for (const p of parts) { if (out.length && words([...out, p].join(' ')) > max) break; out.push(p); }
+  return out.join(' ');
+}
+function shopNames(name) { return (csm[name] || defaultShop).map((l) => l.n); }
+function buildFaq(x) {
+  const { name, slug, d, c } = x;
+  const N = inName(name);
+  const qa = [];
+  qa.push([`What are the most popular potato chip brands in ${N}?`,
+    `The leading potato chip brands in ${N} are ${listAnd(d.topBrands)}, with ${d.topBrands[0]} at the top. ` +
+    `They compete for shelf space in supermarkets, convenience stores and online. ${name}'s chip market is listed at ${d.marketSize}, ` +
+    `with an average bag price of ${d.avgCost}.`]);
+  qa.push([`What potato chip flavors are popular in ${N}?`,
+    `The bestselling, most widely available flavors in ${N} are ${listAnd(d.popularFlavors)}. ` +
+    `For something more distinctive, look for local specialities such as ${listAnd(d.uniqueFlavors)}. ` +
+    `Chips are typically eaten during ${listAnd(d.occasions.slice(0, 3).map((o) => o.charAt(0).toLowerCase() + o.slice(1)))}.`]);
+  if (RESEARCHED.has(slug)) {
+    qa.push([`What makes potato chips in ${N} unique?`,
+      capWords([...sentences(c.intro).slice(0, 2), d.funFact], 70)]);
+  }
+  const picks = shopNames(name).slice(0, 3);
+  const guides = (GUIDE_LINKS[slug] || []).map(([, l]) => l.replace(/^\S+\s/, ''));
+  qa.push([`Where can I buy chips from ${N} outside the country?`,
+    `The easiest option is online: World of Chips lists Amazon picks for chips from ${N}, including ${listAnd(picks)}. ` +
+    (guides.length ? `For more options, see our guides: ${listAnd(guides.slice(0, 2))}. ` : `Each pick links straight to its Amazon listing from this page. `) +
+    'As an Amazon Associate, World of Chips earns from qualifying purchases.']);
+  return qa;
+}
+function quickFacts(x) {
+  const { name, d, c } = x;
+  const rows = [
+    ['Leading brands', listAnd(d.topBrands)],
+    ['Signature flavors', listAnd(d.popularFlavors)],
+    ['Unique flavors', listAnd(d.uniqueFlavors)],
+    ['Market size', d.marketSize],
+    ['Per capita / year', d.perCapita],
+    ['Average bag price', d.avgCost],
+    ['Annual growth', d.growth],
+    ['Typical occasions', listAnd(d.occasions)],
+    ['Notable fact', d.funFact],
+    ['Where to buy', `Online via Amazon (e.g. ${listAnd(shopNames(name).slice(0, 2))})`],
+  ];
+  return `    <section class="cp-section" id="quick-facts">
+      <h2>Quick Facts: Chips in ${esc(inName(name))}</h2>
+      <table class="cp-facts">
+        <caption>Key facts about potato chips in ${esc(inName(name))}</caption>
+        <tbody>
+${rows.map(([k, v]) => `          <tr><th scope="row">${esc(k)}</th><td>${esc(v)}</td></tr>`).join('\n')}
+        </tbody>
+      </table>
+    </section>
+
+`;
+}
+function faqSection(x, qa) {
+  return `    <section class="cp-section cp-faq" id="faq">
+      <h2>FAQ: Potato Chips in ${esc(inName(x.name))}</h2>
+${qa.map(([q, a]) => `      <h3>${esc(q)}</h3>\n      <p>${esc(a)}</p>`).join('\n')}
+    </section>
+
+`;
+}
+
+let FAQ_COUNT = 0;
 const link = (o) => `<a href="/${o.slug}/" class="cp-explore-link">${o.d.flag} ${esc(o.name)}</a>`;
 
 // ---------- 3. page template ----------
@@ -187,6 +263,8 @@ function renderPage(x) {
     `Potato chips in ${inName(name)}: top brands like ${d.topBrands.slice(0, 3).join(', ')}, ` +
     `popular flavors such as ${d.popularFlavors.slice(0, 2).join(' and ')}, unique flavors like ` +
     `${d.uniqueFlavors.slice(0, 2).join(' and ')}, fun facts and where to buy.`, 160);
+  const faq = buildFaq(x);
+  FAQ_COUNT += faq.length;
   const ld = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -210,6 +288,11 @@ function renderPage(x) {
           { '@type': 'ListItem', position: 1, name: 'World of Chips', item: `${SITE}/` },
           { '@type': 'ListItem', position: 2, name: `Potato Chips in ${inName(name)}`, item: url },
         ],
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${url}#faq`,
+        mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
       },
     ],
   };
@@ -242,6 +325,12 @@ ${fontsLink}
 .nav-logo a{color:inherit;text-decoration:none;display:flex;align-items:center;gap:.5rem}
 .cp-crumbs{font-size:.75rem;color:var(--muted);margin-bottom:1rem}
 .cp-crumbs a{color:var(--gold);text-decoration:none}
+.cp-facts{width:100%;border-collapse:collapse;font-size:.88rem;background:var(--paper);border:1px solid var(--light-border);border-radius:10px;overflow:hidden}
+.cp-facts caption{text-align:left;font-size:.75rem;color:var(--muted);padding-bottom:.4rem}
+.cp-facts th,.cp-facts td{padding:.55rem .9rem;border-bottom:1px solid var(--light-border);text-align:left;vertical-align:top}
+.cp-facts th{width:34%;color:var(--brown);font-weight:700}
+.cp-faq h3{font-size:1rem;color:var(--brown);margin-top:1.2rem}
+.cp-faq p{margin-top:.3rem}
 .cp-cta h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--brown);margin-bottom:.6rem}
 </style>
 ${mlUniversal}
@@ -271,6 +360,7 @@ ${mlUniversal}
   <div class="cp-body">
     <p class="cp-intro">${esc(c.intro)}</p>
 
+${quickFacts(x)}
     <div class="cp-stats">
       <div class="cp-stat"><div class="val">${esc(d.marketSize)}</div><div class="lbl">Market Size</div></div>
       <div class="cp-stat"><div class="val">${esc(d.perCapita)}</div><div class="lbl">Per Capita / Year</div></div>
@@ -317,7 +407,7 @@ ${mlUniversal}
       </div>
     </section>
 
-${snackBoxCallout(slug)}${guideCallout(slug)}${sourcesCallout(c)}    <section class="cp-section" id="shop">
+${faqSection(x, faq)}${snackBoxCallout(slug)}${guideCallout(slug)}${sourcesCallout(c)}    <section class="cp-section" id="shop">
       <h2>Try ${esc(name)} Chips at Home</h2>
       <p>Want to taste authentic ${esc(name)} flavors? Check out our top picks on Amazon:</p>
       <div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.8rem">
@@ -416,5 +506,5 @@ indexHtml = replaceRegion(indexHtml, 'COUNTRY-LINKS',
 </section>`);
 fs.writeFileSync(indexPath, indexHtml);
 
-console.log(`Built ${countries.length} country pages (lastmod ${LASTMOD}):`);
+console.log(`Built ${countries.length} country pages (lastmod ${LASTMOD}), ${FAQ_COUNT} FAQ Q&As:`);
 for (const x of sorted) console.log(`  /${x.slug}/`);

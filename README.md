@@ -78,3 +78,12 @@ the guides' sitemap entries; `validate_site.py` runs `build_guides.mjs --check`.
 node scripts/build_guides.mjs
 python3 scripts/validate_site.py
 ```
+
+## AI search (llms.txt, IndexNow)
+
+- Country pages carry a generated **Quick Facts** table and an **FAQ** section + `FAQPage` JSON-LD
+  (from `scripts/build_country_pages.mjs`; answers use only data already on the page).
+- `node scripts/build_llms.mjs` regenerates `/llms.txt` and `/llms-full.txt` from the built pages.
+  Run it after the other builders; `--check` (also run by `validate_site.py`) fails if stale.
+- IndexNow key file: `/70db554b0a1ac11d64c90d0d452d821e.txt`. After a deploy, run
+  `node scripts/indexnow_ping.mjs` (or `--dry-run` to preview) to submit every sitemap URL.
