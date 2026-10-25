@@ -227,6 +227,57 @@ def check_snack_boxes(problems, pages):
         problems.append("index.html: no link to /snack-boxes/")
 
 
+def check_ai_search(problems, pages):
+    """llms.txt / llms-full.txt, IndexNow key, AI crawler robots rules, country FAQPage JSON-LD."""
+    for f in ("llms.txt", "llms-full.txt"):
+        if not os.path.isfile(os.path.join(ROOT, f)):
+            problems.append(f"{f} is missing")
+    r = subprocess.run(["node", os.path.join(ROOT, "scripts", "build_llms.mjs"), "--check"], capture_output=True, text=True)
+    if r.returncode:
+        problems.append((r.stderr or r.stdout).strip()[:300])
+    if os.path.isfile(os.path.join(ROOT, "llms.txt")):
+        txt = open(os.path.join(ROOT, "llms.txt"), encoding="utf-8").read()
+        if not txt.startswith("# "):
+            problems.append("llms.txt must start with an H1")
+        for path in pages:
+            if os.path.dirname(path) != ROOT:
+                url = f"{SITE}/{os.path.basename(os.path.dirname(path))}/"
+                if f"({url})" not in txt:
+                    problems.append(f"llms.txt does not link {url}")
+    keys = [f for f in os.listdir(ROOT) if re.fullmatch(r"[0-9a-f]{32}\.txt", f)]
+    if len(keys) != 1:
+        problems.append(f"expected exactly one IndexNow key file, found {keys}")
+    elif open(os.path.join(ROOT, keys[0])).read().strip() != keys[0][:-4]:
+        problems.append(f"{keys[0]} does not contain its own key")
+    robots = open(os.path.join(ROOT, "robots.txt")).read()
+    for bot in ("OAI-SearchBot", "GPTBot", "ChatGPT-User", "PerplexityBot", "Perplexity-User", "ClaudeBot",
+                "Claude-SearchBot", "Claude-User", "Google-Extended", "Bingbot", "Applebot-Extended"):
+        if not re.search(rf"User-agent: {re.escape(bot)}\nAllow: /\n", robots):
+            problems.append(f"robots.txt: no 'Allow: /' for {bot}")
+    if f"Sitemap: {SITE}/sitemap.xml" not in robots:
+        problems.append("robots.txt: missing Sitemap line")
+    for path, p in pages.items():
+        html = open(path, encoding="utf-8").read()
+        if 'class="cp-facts"' not in html:
+            continue  # only country pages carry Quick Facts
+        slug = os.path.basename(os.path.dirname(path))
+        faq = None
+        for typ, body in p.scripts:
+            if typ == "application/ld+json":
+                try:
+                    for node in json.loads(body).get("@graph", []):
+                        if node.get("@type") == "FAQPage":
+                            faq = node
+                except (ValueError, AttributeError) as e:
+                    problems.append(f"{slug}: JSON-LD does not parse: {e}")
+        if not faq or not faq.get("mainEntity"):
+            problems.append(f"{slug}: missing FAQPage JSON-LD")
+            continue
+        for q in faq["mainEntity"]:
+            if q.get("name") and html.count(">" + q["name"].replace("&", "&amp;").replace("'", "&#x27;") + "<") == 0 and q["name"].split("?")[0][:30] not in html.replace("&#x27;", "'"):
+                problems.append(f"{slug}: FAQ question not visible on page: {q['name']}")
+
+
 def main():
     problems = []
     pages, form_ids = {}, set()
@@ -253,9 +304,13 @@ def main():
         problems.append(f"sitemap mismatch: {set(locs) ^ expected}")
     n_news = check_news(problems, sitemap_root, ns)
     check_snack_boxes(problems, pages)
+    check_ai_search(problems, pages)
     r = subprocess.run(["node", os.path.join(ROOT, "scripts", "build_guides.mjs"), "--check"], capture_output=True, text=True)
     if r.returncode:
         problems.append((r.stderr or r.stdout).strip()[:300])
+    n_ld = sum(1 for p in pages.values() for t, _ in p.scripts if t == "application/ld+json")
+    n_country = sum(1 for path in pages if 'class="cp-facts"' in open(path, encoding="utf-8").read())
+    print(f"Checked {n_ld} JSON-LD blocks, {n_country} country pages with Quick Facts + FAQPage, llms.txt, robots.txt, IndexNow key.")
     print(f"Checked {len(pages)} HTML files, {len(locs)} sitemap URLs, {n_news} news stories.")
     for pr in problems:
         print("PROBLEM:", pr)
