@@ -185,7 +185,7 @@ function guideCallout(slug) {
 // guide links). The 15 fully researched countries get 4 Q&As; the thinner ones get 3 conservative
 // ones (brands, flavours, where to buy) and no history/"what makes it unique" answer.
 const RESEARCHED = new Set(['japan', 'south-korea', 'united-kingdom', 'united-states', 'mexico', 'germany',
-  'france', 'netherlands', 'poland', 'russia', 'argentina', 'egypt', 'thailand', 'india', 'spain']);
+  'france', 'netherlands', 'poland', 'russia', 'argentina', 'egypt', 'thailand', 'india', 'spain', 'china', 'australia', 'italy']);
 const listAnd = (a) => (a.length < 2 ? a.join('') : `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}`);
 const sentences = (t) => t.match(/[^.!?]+[.!?]+(?=\s|$)/g)?.map((x) => x.trim()) || [t];
 const words = (t) => t.split(/\s+/).filter(Boolean).length;
