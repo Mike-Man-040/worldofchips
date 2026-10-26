@@ -185,7 +185,7 @@ function guideCallout(slug) {
 // guide links). The 15 fully researched countries get 4 Q&As; the thinner ones get 3 conservative
 // ones (brands, flavours, where to buy) and no history/"what makes it unique" answer.
 const RESEARCHED = new Set(['japan', 'south-korea', 'united-kingdom', 'united-states', 'mexico', 'germany',
-  'france', 'netherlands', 'poland', 'russia', 'argentina', 'egypt', 'thailand', 'india', 'spain']);
+  'france', 'netherlands', 'poland', 'russia', 'argentina', 'egypt', 'thailand', 'india', 'spain', 'china', 'australia', 'italy', 'indonesia', 'canada']);
 const listAnd = (a) => (a.length < 2 ? a.join('') : `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}`);
 const sentences = (t) => t.match(/[^.!?]+[.!?]+(?=\s|$)/g)?.map((x) => x.trim()) || [t];
 const words = (t) => t.split(/\s+/).filter(Boolean).length;
@@ -201,8 +201,8 @@ function buildFaq(x) {
   const qa = [];
   qa.push([`What are the most popular potato chip brands in ${N}?`,
     `The leading potato chip brands in ${N} are ${listAnd(d.topBrands)}, with ${d.topBrands[0]} at the top. ` +
-    `They compete for shelf space in supermarkets, convenience stores and online. ${name}'s chip market is listed at ${d.marketSize}, ` +
-    `with an average bag price of ${d.avgCost}.`]);
+    `They compete for shelf space in supermarkets, convenience stores and online` +
+    (d.marketSize ? `, in a market estimated at ${d.marketSize}.` : '.') + ` An average bag costs about ${d.avgCost}.`]);
   qa.push([`What potato chip flavors are popular in ${N}?`,
     `The bestselling, most widely available flavors in ${N} are ${listAnd(d.popularFlavors)}. ` +
     `For something more distinctive, look for local specialities such as ${listAnd(d.uniqueFlavors)}. ` +
@@ -238,8 +238,8 @@ function quickFacts(x) {
     ['Leading brands', listAnd(d.topBrands)],
     ['Signature flavors', listAnd(d.popularFlavors)],
     ['Unique flavors', listAnd(d.uniqueFlavors)],
-    ['Market size', d.marketSize],
-    ['Per capita / year', d.perCapita],
+    ...(d.marketSize ? [['Market size', d.marketSize]] : []),
+    ...(d.perCapita ? [['Per capita / year', d.perCapita]] : []),
     ['Average bag price', d.avgCost],
     ['Annual growth', d.growth],
     ['Typical occasions', listAnd(d.occasions)],
@@ -268,6 +268,7 @@ ${qa.map(([q, a]) => `      <h3>${esc(q)}</h3>\n      <p>${esc(a)}</p>`).join('\
 }
 
 let FAQ_COUNT = 0;
+const PC_SRC = { 'United States': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/'], 'Italy': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/'], 'Germany': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/'], 'South Korea': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-asia-market-overview-2024-3/'], 'Thailand': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-asia-market-overview-2024-3/'], 'United Kingdom': ['Euromonitor via Potato Business, 2017', 'https://www.potatobusiness.com/market/snackex-2017-the-brits-buy-65-of-total-savory-snacks-in-europe/'] };
 const HOME_GUIDES = [['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy'], ['best-chip-gift-boxes', '🎁 Best chip gift boxes'],
   ['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips'], ['best-mexican-chips-to-buy-online', '🇲🇽 Best Mexican chips'],
   ['best-british-crisps-to-buy-online', '🇬🇧 Best British crisps'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'],
@@ -389,11 +390,10 @@ ${mlUniversal}
 
 ${quickFacts(x)}${buyBox(x)}
     <div class="cp-stats">
-      <div class="cp-stat"><div class="val">${esc(d.marketSize)}</div><div class="lbl">Market Size</div></div>
-      <div class="cp-stat"><div class="val">${esc(d.perCapita)}</div><div class="lbl">Per Capita / Year</div></div>
-      <div class="cp-stat"><div class="val">${esc(d.avgCost)}</div><div class="lbl">Avg. Bag Price</div></div>
+${d.marketSize ? `      <div class="cp-stat"><div class="val">${esc(d.marketSize)}</div><div class="lbl">Market Size</div></div>\n` : ''}${d.perCapita ? `      <div class="cp-stat"><div class="val">${esc(d.perCapita)}</div><div class="lbl">Per Capita / Year</div></div>\n` : ''}      <div class="cp-stat"><div class="val">${esc(d.avgCost)}</div><div class="lbl">Avg. Bag Price</div></div>
       <div class="cp-stat"><div class="val">${esc(d.growth)}</div><div class="lbl">Annual Growth</div></div>
     </div>
+    ${PC_SRC[name] ? `<p style="font-size:.72rem;color:var(--muted);margin-top:.4rem">Per-capita source: <a href="${PC_SRC[name][1]}" target="_blank" rel="nofollow noopener" style="color:var(--muted)">${PC_SRC[name][0]}</a> (potato-chip consumption per person; methods differ between sources).</p>` : ''}${d.perCapita && d.perCapita.includes('est.') ? '<p style="font-size:.72rem;color:var(--muted);margin-top:.4rem">Per-capita figure is an editorial estimate, not an official statistic. <a href="/#consumption">How we estimate</a>.</p>' : ''}
 
     <section class="cp-section">
       <h2>Top Potato Chip Brands in ${esc(inName(name))}</h2>
