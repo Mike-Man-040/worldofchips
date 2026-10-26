@@ -185,7 +185,7 @@ function guideCallout(slug) {
 // guide links). The 15 fully researched countries get 4 Q&As; the thinner ones get 3 conservative
 // ones (brands, flavours, where to buy) and no history/"what makes it unique" answer.
 const RESEARCHED = new Set(['japan', 'south-korea', 'united-kingdom', 'united-states', 'mexico', 'germany',
-  'france', 'netherlands', 'poland', 'russia', 'argentina', 'egypt', 'thailand', 'india', 'spain', 'china', 'australia', 'italy']);
+  'france', 'netherlands', 'poland', 'russia', 'argentina', 'egypt', 'thailand', 'india', 'spain', 'china', 'australia', 'italy', 'indonesia', 'canada']);
 const listAnd = (a) => (a.length < 2 ? a.join('') : `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}`);
 const sentences = (t) => t.match(/[^.!?]+[.!?]+(?=\s|$)/g)?.map((x) => x.trim()) || [t];
 const words = (t) => t.split(/\s+/).filter(Boolean).length;
@@ -201,8 +201,8 @@ function buildFaq(x) {
   const qa = [];
   qa.push([`What are the most popular potato chip brands in ${N}?`,
     `The leading potato chip brands in ${N} are ${listAnd(d.topBrands)}, with ${d.topBrands[0]} at the top. ` +
-    `They compete for shelf space in supermarkets, convenience stores and online. ${name}'s chip market is listed at ${d.marketSize}, ` +
-    `with an average bag price of ${d.avgCost}.`]);
+    `They compete for shelf space in supermarkets, convenience stores and online` +
+    (d.marketSize ? `, in a market estimated at ${d.marketSize}.` : '.') + ` An average bag costs about ${d.avgCost}.`]);
   qa.push([`What potato chip flavors are popular in ${N}?`,
     `The bestselling, most widely available flavors in ${N} are ${listAnd(d.popularFlavors)}. ` +
     `For something more distinctive, look for local specialities such as ${listAnd(d.uniqueFlavors)}. ` +
@@ -238,8 +238,8 @@ function quickFacts(x) {
     ['Leading brands', listAnd(d.topBrands)],
     ['Signature flavors', listAnd(d.popularFlavors)],
     ['Unique flavors', listAnd(d.uniqueFlavors)],
-    ['Market size', d.marketSize],
-    ['Per capita / year', d.perCapita],
+    ...(d.marketSize ? [['Market size', d.marketSize]] : []),
+    ...(d.perCapita ? [['Per capita / year', d.perCapita]] : []),
     ['Average bag price', d.avgCost],
     ['Annual growth', d.growth],
     ['Typical occasions', listAnd(d.occasions)],
@@ -369,7 +369,6 @@ ${mlUniversal}
   <div class="nav-links">
     <a href="/#countries">Countries</a>
     <a href="/#map-section">Map</a>
-    <a href="/#consumption">Consumption</a>
     <a href="/news/">News</a>
     <a href="/#shop">Where to Buy</a>
   </div>
@@ -389,9 +388,7 @@ ${mlUniversal}
 
 ${quickFacts(x)}${buyBox(x)}
     <div class="cp-stats">
-      <div class="cp-stat"><div class="val">${esc(d.marketSize)}</div><div class="lbl">Market Size</div></div>
-      <div class="cp-stat"><div class="val">${esc(d.perCapita)}</div><div class="lbl">Per Capita / Year</div></div>
-      <div class="cp-stat"><div class="val">${esc(d.avgCost)}</div><div class="lbl">Avg. Bag Price</div></div>
+${d.marketSize ? `      <div class="cp-stat"><div class="val">${esc(d.marketSize)}</div><div class="lbl">Market Size</div></div>\n` : ''}${d.perCapita ? `      <div class="cp-stat"><div class="val">${esc(d.perCapita)}</div><div class="lbl">Per Capita / Year</div></div>\n` : ''}      <div class="cp-stat"><div class="val">${esc(d.avgCost)}</div><div class="lbl">Avg. Bag Price</div></div>
       <div class="cp-stat"><div class="val">${esc(d.growth)}</div><div class="lbl">Annual Growth</div></div>
     </div>
 

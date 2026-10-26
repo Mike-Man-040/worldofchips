@@ -613,7 +613,6 @@ ${mlUniversal}
   <div class="nav-links">
     <a href="/#countries">Countries</a>
     <a href="/#map-section">Map</a>
-    <a href="/#consumption">Consumption</a>
     <a href="/news/">News</a>
     <a href="/snack-boxes/">Snack Boxes</a>
     <a href="/#shop">Where to Buy</a>
