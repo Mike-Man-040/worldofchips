@@ -13,6 +13,7 @@ URL: https://worldofchips.com/argentina/
 - **Leading brands:** Lay's, Pehuamar, Krachitos, Quento and Pringles
 - **Signature flavors:** Clásicas (Salted), Jamón Serrano, Queso Crema y Cebolla and Ketchup
 - **Unique flavors:** Asado, Chimichurri, Provoleta and Salame
+- **Per capita / year:** 0.7 kg (est.)
 - **Average bag price:** ARS 800/bag
 - **Annual growth:** 3.5%
 - **Typical occasions:** Pre-asado picada & copetín with vermouth or fernet, Afternoon mate & park gatherings, Football viewing (previa del partido) and Weekend family lunches
@@ -39,6 +40,7 @@ URL: https://worldofchips.com/australia/
 - **Signature flavors:** Original, Salt & Vinegar, Chicken and BBQ
 - **Unique flavors:** Chicken, Honey Soy Chicken, Sweet Chilli & Sour Cream and Sea Salt & Balsamic Vinegar
 - **Market size:** A$1.56B (2020, per GlobalData)
+- **Per capita / year:** 2.5 kg (est.)
 - **Average bag price:** A$5/bag
 - **Annual growth:** 2.5%
 - **Typical occasions:** Beach & park picnics, BBQ & barbie gatherings, Cricket & AFL viewing and Road trip servo stops
@@ -64,6 +66,7 @@ URL: https://worldofchips.com/brazil/
 - **Leading brands:** Ruffles, Lay's, Pringles and Elma Chips
 - **Signature flavors:** Cheddar, Churrasco, Original and Sour Cream & Onion
 - **Unique flavors:** Feijoada, Picanha, Steak & Onion and Coxinha
+- **Per capita / year:** 0.5 kg (est.)
 - **Average bag price:** R$8/bag
 - **Annual growth:** 4.8%
 - **Typical occasions:** Churrasco accompaniment, Beach kiosk snacking, Football viewing and Bar & boteco culture
@@ -86,6 +89,7 @@ URL: https://worldofchips.com/canada/
 - **Leading brands:** Lay's, Old Dutch, Humpty Dumpty and Yum Yum
 - **Signature flavors:** Ketchup, All Dressed and Salt & Vinegar
 - **Unique flavors:** Ketchup and All Dressed
+- **Per capita / year:** 7.0 kg (est.)
 - **Average bag price:** $4.80/bag
 - **Annual growth:** 1.3%
 - **Typical occasions:** Hockey nights & sports viewing, Cottage weekends & camping, Everyday lunch snacking and Canada Day & holiday gatherings
@@ -111,6 +115,7 @@ URL: https://worldofchips.com/china/
 - **Leading brands:** Lay's, Pringles and Oishi
 - **Signature flavors:** Original, Cucumber, Tomato and BBQ
 - **Unique flavors:** Spicy Crayfish, Cumin Lamb Skewer, Peking Duck, Spicy Crab and Wasabi Mustard
+- **Per capita / year:** 0.5 kg (est.)
 - **Average bag price:** ¥8/bag
 - **Annual growth:** 6.8%
 - **Typical occasions:** Late-night & internet café snacking, Hot pot accompaniment, Livestream snack hauls and Train journey provisions
@@ -136,6 +141,7 @@ URL: https://worldofchips.com/colombia/
 - **Leading brands:** Margarita (Lay's), Super Ricas and De Todito
 - **Signature flavors:** Natural, Limón, BBQ and Pollo
 - **Unique flavors:** Chicharrón, Hogao and Guasacaca
+- **Per capita / year:** 0.4 kg (est.)
 - **Average bag price:** COP 3,500/bag
 - **Annual growth:** 5.0%
 - **Typical occasions:** Onces (afternoon snack), Party accompaniment, Bus travel and Street food pairing
@@ -158,6 +164,7 @@ URL: https://worldofchips.com/egypt/
 - **Leading brands:** Chipsy (Lay's), Tiger, Spuds, Doritos and Pringles
 - **Signature flavors:** Kebab, Shatta & Lemon (Chili & Lemon), Tomato and Salt & Vinegar
 - **Unique flavors:** Kebab, Shatta & Lemon, Spiced Tomato and Prime Ribs
+- **Per capita / year:** 0.3 kg (est.)
 - **Average bag price:** EGP 15/bag
 - **Annual growth:** 6.0%
 - **Typical occasions:** Pairing with koshary, foul & ta'meya sandwiches, Ramadan post-iftar & suhoor gatherings, Football viewing at cafés & home and Mediterranean North Coast beach snacking
@@ -183,6 +190,7 @@ URL: https://worldofchips.com/france/
 - **Leading brands:** Lay's, Bret's, Vico, Tyrrell's, Doritos and Sibell
 - **Signature flavors:** Nature (Salted), Poulet Rôti, Emmental and Vinaigre
 - **Unique flavors:** Chèvre & Piment d'Espelette, Comté, Camembert and Tartiflette
+- **Per capita / year:** 1.0 kg (est.)
 - **Average bag price:** €2.50/bag
 - **Annual growth:** 3.2%
 - **Typical occasions:** Apéritif hour (l'heure de l'apéro) before dinner, Pique-niques & outdoor summer dining, Tortilla chips with salsa & guacamole at parties and Beach & vacation snacking
@@ -208,6 +216,7 @@ URL: https://worldofchips.com/germany/
 - **Leading brands:** Lorenz, Funny-Frisch, Chio, Pringles and Lay's
 - **Signature flavors:** Paprika, Salted, Sour Cream and Cheese & Onion
 - **Unique flavors:** Currywurst, Döner Kebab, Bratwurst and Ungarisch
+- **Per capita / year:** 1.5 kg (est.)
 - **Average bag price:** €2.20/bag
 - **Annual growth:** 2.1%
 - **Typical occasions:** Beer garden snacking, TV evening (Feierabend), Football match viewing and Carnival & festival treats
@@ -233,6 +242,7 @@ URL: https://worldofchips.com/india/
 - **Leading brands:** Lay's, Balaji, Haldiram's, Bingo! and Uncle Chipps
 - **Signature flavors:** India's Magic Masala, Classic Salted, American Style Cream & Onion and Masala Masti
 - **Unique flavors:** Spanish Tomato Tango, Chaat Chaska, Pudina (Mint) Twist and Achaari Masti (Mango Pickle)
+- **Per capita / year:** 0.3 kg (est.)
 - **Average bag price:** ₹20/bag
 - **Annual growth:** 8.2%
 - **Typical occasions:** Cricket match viewing, Chai-time snacking, Birthday parties and festivals and School canteen and after-school snacks
@@ -258,6 +268,7 @@ URL: https://worldofchips.com/indonesia/
 - **Leading brands:** Chitato, Lay's and Pringles
 - **Signature flavors:** Plain Salt, Spicy Chicken and Beef Barbecue
 - **Unique flavors:** Mi Goreng (Indomie)
+- **Per capita / year:** 0.2 kg (est.)
 - **Average bag price:** Rp 10k/bag
 - **Annual growth:** 7.5%
 - **Typical occasions:** Warung snacking, Gatherings, Late-night gaming and School canteen
@@ -284,6 +295,7 @@ URL: https://worldofchips.com/italy/
 - **Signature flavors:** Classica, Paprika, Pizza and Olive Oil & Rosemary
 - **Unique flavors:** Tartufo, Prosciutto, Pesto Genovese and Lime & Pepe Rosa
 - **Market size:** €580M (2024 est., per AGCM)
+- **Per capita / year:** 0.9 kg (est.)
 - **Average bag price:** €2.30/bag
 - **Annual growth:** 2.0%
 - **Typical occasions:** Aperitivo with spritz, Beach & lido snacking, Football match viewing and Road trip autogrill stops
@@ -309,6 +321,7 @@ URL: https://worldofchips.com/japan/
 - **Leading brands:** Calbee, Koikeya, Lay's and Pringles
 - **Signature flavors:** Usushio, Consommé and Nori-Shio
 - **Unique flavors:** Wasabi, Matcha, Teriyaki Mayo, Sakura Shrimp and Mentaiko
+- **Per capita / year:** 1.6 kg (est.)
 - **Average bag price:** ¥250/bag
 - **Annual growth:** 3.5%
 - **Typical occasions:** Konbini snacking, Izakaya accompaniment, Train journey snacks and Limited-edition collecting
@@ -334,6 +347,7 @@ URL: https://worldofchips.com/mexico/
 - **Leading brands:** Sabritas (Lay's), Barcel, Takis and Totis
 - **Signature flavors:** Chile & Limón, Salsa Verde, Jalapeño and Adobadas
 - **Unique flavors:** Esquites, Chamoy, Tamarindo and Flamin' Hot con Limón
+- **Per capita / year:** 1.1 kg (est.)
 - **Average bag price:** $1.20/bag
 - **Annual growth:** 4.5%
 - **Typical occasions:** Street food accompaniment, Antojitos & casual meals, Fiestas & family gatherings and Chamoy-covered as a botana
@@ -359,6 +373,7 @@ URL: https://worldofchips.com/netherlands/
 - **Leading brands:** Lay's, Croky, Chio, Doritos and Pringles
 - **Signature flavors:** Naturel, Paprika, Bolognese and Cheese Onion
 - **Unique flavors:** Patatje Joppie, Bitterbal, Frikandel Speciaal and Saté
+- **Per capita / year:** 2.8 kg (est.)
 - **Average bag price:** €2.00/bag
 - **Annual growth:** 1.8%
 - **Typical occasions:** Borrel drinks with beer, wine & tortilla nacho dips, Oranje & Eredivisie football viewing, King's Day (Koningsdag) celebrations and Friday & weekend family snacking
@@ -384,6 +399,7 @@ URL: https://worldofchips.com/new-zealand/
 - **Leading brands:** Bluebird, Kettle, Proper Crisps and ETA
 - **Signature flavors:** Ready Salted, Salt & Vinegar, Chicken and Sour Cream & Chives
 - **Unique flavors:** Kiwi Onion Dip, Marmite, Hokey Pokey and L&P
+- **Per capita / year:** 2.3 kg (est.)
 - **Average bag price:** NZ$5/bag
 - **Annual growth:** 2.0%
 - **Typical occasions:** Rugby match viewing, Beach BBQs, Fish & chip shop culture and Tramping snacks
@@ -406,6 +422,7 @@ URL: https://worldofchips.com/nigeria/
 - **Leading brands:** Chi Chin, Pringles and Lay's
 - **Signature flavors:** Original, BBQ, Spicy and Chicken
 - **Unique flavors:** Jollof, Suya Spice, Plantain Chips and Pepper Soup
+- **Per capita / year:** 0.1 kg (est.)
 - **Average bag price:** ₦500/bag
 - **Annual growth:** 9.5%
 - **Typical occasions:** Party jollof accompaniment, Market snacking, School canteen and Owambe celebrations
@@ -428,6 +445,7 @@ URL: https://worldofchips.com/peru/
 - **Leading brands:** Lay's, Pringles, Mr. Chips and Karinto
 - **Signature flavors:** Clásica, Limón y Sal, BBQ and Queso
 - **Unique flavors:** Ají Amarillo, Lomo Saltado, Ceviche and Rocoto
+- **Per capita / year:** 0.3 kg (est.)
 - **Average bag price:** S/5/bag
 - **Annual growth:** 4.5%
 - **Typical occasions:** Lonche (afternoon snack), Beach day, Football snacking and Family gatherings
@@ -450,6 +468,7 @@ URL: https://worldofchips.com/poland/
 - **Leading brands:** Lay's, Crunchips, Pringles, Przysnacki and Wiejskie Ziemniaczki
 - **Signature flavors:** Zielona Cebulka (Green Onion), Paprika, Fromage and Salted
 - **Unique flavors:** Kurki w Śmietanie (Chanterelles), Koperek (Dill), Masło z Solą (Butter & Salt) and Wędzonka (Smoked Bacon)
+- **Per capita / year:** 1.2 kg (est.)
 - **Average bag price:** 8 PLN/bag
 - **Annual growth:** 3.5%
 - **Typical occasions:** Football match viewing & grilling (grillowanie), Domówka house parties, Evening TV & student gatherings and Road trips & summer lake holidays
@@ -475,6 +494,7 @@ URL: https://worldofchips.com/russia/
 - **Leading brands:** Lay's, Московский Картофель, Русская Картошка and Pringles
 - **Signature flavors:** Sour Cream & Herbs, Crab, Cheese and Sour Cream & Onion
 - **Unique flavors:** Red Caviar, Kamchatka Crab, Olivier Salad, Shashlik and Pickled Cucumber
+- **Per capita / year:** 1.0 kg (est.)
 - **Average bag price:** ₽120/bag
 - **Annual growth:** 3.0%
 - **Typical occasions:** Dacha country weekends & picnics, Evening beer & kvass gatherings, Long-distance train provisions and Football & hockey viewing
@@ -500,6 +520,7 @@ URL: https://worldofchips.com/south-africa/
 - **Leading brands:** Simba, Lay's, Willards and NikNaks
 - **Signature flavors:** Salt & Vinegar, Cheese & Onion, BBQ and Tomato Sauce
 - **Unique flavors:** Mrs Ball's Chutney, Biltong, Boerewors and Peri-Peri
+- **Per capita / year:** 0.4 kg (est.)
 - **Average bag price:** R25/bag
 - **Annual growth:** 4.0%
 - **Typical occasions:** Braai accompaniment, Rugby & cricket viewing, Padstaal stops and School lunch boxes
@@ -522,6 +543,7 @@ URL: https://worldofchips.com/south-korea/
 - **Leading brands:** Nongshim, Orion, Calbee and Lay's
 - **Signature flavors:** Honey Butter, Original, Onion and BBQ
 - **Unique flavors:** Octopus, Honey Butter, Seaweed and Tteokbokki
+- **Per capita / year:** 1.3 kg (est.)
 - **Average bag price:** ₩2,500/bag
 - **Annual growth:** 4.2%
 - **Typical occasions:** K-drama binge-watching, Chimaek pairing, PC bang gaming and Convenience store late-night
@@ -547,6 +569,7 @@ URL: https://worldofchips.com/spain/
 - **Leading brands:** Lay's, Ruffles, Bonilla a la Vista, Torres and San Nicasio
 - **Signature flavors:** Classic Salted, Lay's Campesinas, Jamón (Ham) and Olive Oil & Sea Salt
 - **Unique flavors:** Black Truffle, Iberian Ham, Sparkling Wine and Foie Gras
+- **Per capita / year:** 1.1 kg (est.)
 - **Average bag price:** €1.80/bag
 - **Annual growth:** 2.5%
 - **Typical occasions:** Weekend vermouth hour (el vermut), Pre-lunch aperitivo with a drink, Picnics and summer beach days and Football viewing
@@ -572,6 +595,7 @@ URL: https://worldofchips.com/sweden/
 - **Leading brands:** OLW, Estrella, Pringles and Lay's
 - **Signature flavors:** Sourcream & Onion, Dill & Gräddfil, Grill and Salt
 - **Unique flavors:** Smörstekt Lök, Räkor (Shrimp), Västkustsallad and Kebab
+- **Per capita / year:** 1.8 kg (est.)
 - **Average bag price:** 35 SEK/bag
 - **Annual growth:** 2.0%
 - **Typical occasions:** Fredagsmys (cozy Friday), Midsommar celebrations, Football & hockey viewing and Summer BBQ & crayfish party
@@ -594,6 +618,7 @@ URL: https://worldofchips.com/thailand/
 - **Leading brands:** Lay's and Tasto
 - **Signature flavors:** Nori Seaweed, Crab Curry, Hot Chili Squid and Salted Egg
 - **Unique flavors:** Pla Sam Rod (Sweet, Sour & Spicy Fish), Miang Kham, Larb Tod and Crispy Holy Basil (Kaphrao)
+- **Per capita / year:** 0.7 kg (est.)
 - **Average bag price:** ฿35/bag
 - **Annual growth:** 5.0%
 - **Typical occasions:** 7-Eleven snack runs, day and night, Street food accompaniment, Beach and road-trip snacking and Take-home snack souvenirs
@@ -619,6 +644,7 @@ URL: https://worldofchips.com/turkey/
 - **Leading brands:** Lay's, Ruffles, Pringles, Doritos and Eti
 - **Signature flavors:** Classic, Yogurt & Herbs, BBQ and Spicy
 - **Unique flavors:** Döner Kebab, Ayran, Lahmacun and Antep Spicy
+- **Per capita / year:** 0.8 kg (est.)
 - **Average bag price:** ₺25/bag
 - **Annual growth:** 5.5%
 - **Typical occasions:** Çay accompaniment, Football viewing, Picnics and Late-night snacking
@@ -641,6 +667,7 @@ URL: https://worldofchips.com/united-kingdom/
 - **Leading brands:** Walkers (Lay's), Tyrrell's, Kettle Chips, McCoy's and Pipers
 - **Signature flavors:** Cheese & Onion, Salt & Vinegar, Ready Salted and Prawn Cocktail
 - **Unique flavors:** Marmite, Roast Chicken, Worcester Sauce and Lamb & Mint
+- **Per capita / year:** 3.2 kg (est.)
 - **Average bag price:** £1.50/bag
 - **Annual growth:** 2.8%
 - **Typical occasions:** Pub snacking with pints, Packed lunch staple, Afternoon tea-time nibbles and Picnics & gatherings
@@ -666,6 +693,7 @@ URL: https://worldofchips.com/united-states/
 - **Leading brands:** Lay's, Ruffles, Pringles, Kettle Brand, Cape Cod and Utz
 - **Signature flavors:** Sour Cream & Onion, BBQ, Cheddar & Sour Cream and Salt & Vinegar
 - **Unique flavors:** Flamin' Hot, Dill Pickle, Honey BBQ and Swicy
+- **Per capita / year:** 1.8 kg (est.)
 - **Average bag price:** $4.50/bag
 - **Annual growth:** 5.7%
 - **Typical occasions:** Sporting events & tailgating, Movie nights & casual snacking, Lunch pairing with sandwiches and Road trips & convenience stores

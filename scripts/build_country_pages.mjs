@@ -369,6 +369,7 @@ ${mlUniversal}
   <div class="nav-links">
     <a href="/#countries">Countries</a>
     <a href="/#map-section">Map</a>
+    <a href="/#consumption">Consumption</a>
     <a href="/news/">News</a>
     <a href="/#shop">Where to Buy</a>
   </div>
@@ -391,6 +392,7 @@ ${quickFacts(x)}${buyBox(x)}
 ${d.marketSize ? `      <div class="cp-stat"><div class="val">${esc(d.marketSize)}</div><div class="lbl">Market Size</div></div>\n` : ''}${d.perCapita ? `      <div class="cp-stat"><div class="val">${esc(d.perCapita)}</div><div class="lbl">Per Capita / Year</div></div>\n` : ''}      <div class="cp-stat"><div class="val">${esc(d.avgCost)}</div><div class="lbl">Avg. Bag Price</div></div>
       <div class="cp-stat"><div class="val">${esc(d.growth)}</div><div class="lbl">Annual Growth</div></div>
     </div>
+    ${d.perCapita && d.perCapita.includes('est.') ? '<p style="font-size:.72rem;color:var(--muted);margin-top:.4rem">Per-capita figure is an editorial estimate, not an official statistic. <a href="/#consumption">How we estimate</a>.</p>' : ''}
 
     <section class="cp-section">
       <h2>Top Potato Chip Brands in ${esc(inName(name))}</h2>
