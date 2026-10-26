@@ -268,6 +268,7 @@ ${qa.map(([q, a]) => `      <h3>${esc(q)}</h3>\n      <p>${esc(a)}</p>`).join('\
 }
 
 let FAQ_COUNT = 0;
+const PC_SRC = { 'United States': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/'], 'Italy': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/'], 'Germany': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/'], 'South Korea': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-asia-market-overview-2024-3/'], 'Thailand': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-asia-market-overview-2024-3/'], 'United Kingdom': ['Euromonitor via Potato Business, 2017', 'https://www.potatobusiness.com/market/snackex-2017-the-brits-buy-65-of-total-savory-snacks-in-europe/'] };
 const HOME_GUIDES = [['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy'], ['best-chip-gift-boxes', '🎁 Best chip gift boxes'],
   ['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips'], ['best-mexican-chips-to-buy-online', '🇲🇽 Best Mexican chips'],
   ['best-british-crisps-to-buy-online', '🇬🇧 Best British crisps'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'],
@@ -392,7 +393,7 @@ ${quickFacts(x)}${buyBox(x)}
 ${d.marketSize ? `      <div class="cp-stat"><div class="val">${esc(d.marketSize)}</div><div class="lbl">Market Size</div></div>\n` : ''}${d.perCapita ? `      <div class="cp-stat"><div class="val">${esc(d.perCapita)}</div><div class="lbl">Per Capita / Year</div></div>\n` : ''}      <div class="cp-stat"><div class="val">${esc(d.avgCost)}</div><div class="lbl">Avg. Bag Price</div></div>
       <div class="cp-stat"><div class="val">${esc(d.growth)}</div><div class="lbl">Annual Growth</div></div>
     </div>
-    ${d.perCapita && d.perCapita.includes('est.') ? '<p style="font-size:.72rem;color:var(--muted);margin-top:.4rem">Per-capita figure is an editorial estimate, not an official statistic. <a href="/#consumption">How we estimate</a>.</p>' : ''}
+    ${PC_SRC[name] ? `<p style="font-size:.72rem;color:var(--muted);margin-top:.4rem">Per-capita source: <a href="${PC_SRC[name][1]}" target="_blank" rel="nofollow noopener" style="color:var(--muted)">${PC_SRC[name][0]}</a> (potato-chip consumption per person; methods differ between sources).</p>` : ''}${d.perCapita && d.perCapita.includes('est.') ? '<p style="font-size:.72rem;color:var(--muted);margin-top:.4rem">Per-capita figure is an editorial estimate, not an official statistic. <a href="/#consumption">How we estimate</a>.</p>' : ''}
 
     <section class="cp-section">
       <h2>Top Potato Chip Brands in ${esc(inName(name))}</h2>
