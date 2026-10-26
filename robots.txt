@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /cdn-cgi/
 
 # AI search and assistant crawlers: explicitly welcome.
 User-agent: OAI-SearchBot

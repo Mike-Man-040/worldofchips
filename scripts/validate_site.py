@@ -96,6 +96,9 @@ def check(path, problems, form_ids=None):
             except ValueError as e:
                 problems.append(f"{rel}: bad JSON-LD: {e}")
         else:
+            for pat in ('href="/${', 'href="\'+', 'href="/\'+'):
+                if pat in body:
+                    problems.append(f"{rel}: script contains literal {pat} (crawlers extract it as a URL); build links via the DOM")
             with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False) as f:
                 f.write(body)
             r = subprocess.run(["node", "--check", f.name], capture_output=True, text=True)
@@ -254,6 +257,13 @@ def check_ai_search(problems, pages):
                 "Claude-SearchBot", "Claude-User", "Google-Extended", "Bingbot", "Applebot-Extended"):
         if not re.search(rf"User-agent: {re.escape(bot)}\nAllow: /\n", robots):
             problems.append(f"robots.txt: no 'Allow: /' for {bot}")
+    if "Disallow: /cdn-cgi/" not in robots:
+        problems.append("robots.txt: missing Disallow: /cdn-cgi/")
+    if not os.path.isfile(os.path.join(ROOT, "favicon.ico")):
+        problems.append("favicon.ico is missing")
+    for path in pages:
+        if '<link rel="icon" href="/favicon.ico"' not in open(path, encoding="utf-8").read():
+            problems.append(f"{os.path.relpath(path, ROOT)}: no favicon <link>")
     if f"Sitemap: {SITE}/sitemap.xml" not in robots:
         problems.append("robots.txt: missing Sitemap line")
     for path, p in pages.items():

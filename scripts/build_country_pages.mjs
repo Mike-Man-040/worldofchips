@@ -156,6 +156,9 @@ const GUIDE_LINKS = {
   russia: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   argentina: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   egypt: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
+  thailand: [['best-international-chip-variety-packs', '🌍 Best exotic Asian chip variety packs']],
+  india: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
+  spain: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
 };
 function sourcesCallout(c) {
   if (!c.sources || !c.sources.length) return '';
@@ -179,10 +182,10 @@ function guideCallout(slug) {
 
 // ---------- Quick Facts + FAQ (for AI/LLM search) ----------
 // Built ONLY from fields already rendered on the page (countryData / countryContent / shop picks /
-// guide links). The 12 fully researched countries get 4 Q&As; the thinner ones get 3 conservative
+// guide links). The 15 fully researched countries get 4 Q&As; the thinner ones get 3 conservative
 // ones (brands, flavours, where to buy) and no history/"what makes it unique" answer.
 const RESEARCHED = new Set(['japan', 'south-korea', 'united-kingdom', 'united-states', 'mexico', 'germany',
-  'france', 'netherlands', 'poland', 'russia', 'argentina', 'egypt']);
+  'france', 'netherlands', 'poland', 'russia', 'argentina', 'egypt', 'thailand', 'india', 'spain']);
 const listAnd = (a) => (a.length < 2 ? a.join('') : `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}`);
 const sentences = (t) => t.match(/[^.!?]+[.!?]+(?=\s|$)/g)?.map((x) => x.trim()) || [t];
 const words = (t) => t.split(/\s+/).filter(Boolean).length;
@@ -320,6 +323,8 @@ ${gaSnippet}
 ${jsonLd(ld)}
 </script>
 ${fontsLink}
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
 .nav-logo a{color:inherit;text-decoration:none;display:flex;align-items:center;gap:.5rem}
