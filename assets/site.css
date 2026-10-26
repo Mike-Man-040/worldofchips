@@ -146,6 +146,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);o
   padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px;
 }
 .nav-logo{font-family:'Playfair Display',serif;color:var(--gold);font-size:1.2rem;font-weight:700;display:flex;align-items:center;gap:.5rem}
+.hero-buy{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.6rem;margin:1.2rem auto 1.6rem;max-width:760px}
+.hero-buy-label{color:var(--cream);font-weight:600;font-size:.9rem}
+.hero-buy-btn{background:var(--gold);color:#fff;font-weight:700;padding:.6rem 1.1rem;border-radius:999px;text-decoration:none;font-size:.88rem}
+.hero-buy-btn:hover{filter:brightness(1.08)}
+.hero-buy-more{color:var(--gold);font-weight:600;font-size:.85rem}
+.hero-buy-disc{flex-basis:100%;text-align:center;color:var(--cream);opacity:.6;font-size:.68rem;margin:0}
 .nav-links{display:flex;gap:2rem}
 .nav-links a{color:var(--cream);text-decoration:none;font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;opacity:.6;transition:all .3s;padding:.2rem 0;border-bottom:2px solid transparent}
 .nav-links a:hover{opacity:1;color:var(--gold);border-bottom-color:var(--gold)}

@@ -54,6 +54,15 @@ const VERIFIED_ASINS = {
   B0BWSKY5FZ: 'ORION Turtle Chip Official Gift Box (Choco, 2 packs)',
   B0H7F3D75L: 'Nongshim Shrimp Crackers Original 14.1 oz, pack of 2',
   B07PZ92784: 'Orion Baked Marine Boy Sharing Box',
+  // Already live on the site as country-page shop picks (csm in index.html). Amazon served a captcha on
+  // 2026-10-26 so these were NOT re-opened that day; guides using them quote no prices or stock claims.
+  B0DG6345BV: 'Takis Variety Pack 18 bags (Mexico shop pick)',
+  B009R489PI: 'Takis Fuego 9.9 oz (Mexico shop pick)',
+  B0BQZD5QR6: 'Sabritas Chile Limon Mix 30 bags (Mexico shop pick)',
+  B083FKKRYY: "Lay's Limon 12.5 oz (Mexico shop pick)",
+  B0B8NW4ZLM: 'Walkers Variety Multipack (UK shop pick)',
+  B017IQA7R4: 'Walkers Salt & Shake (UK shop pick)',
+  B01G2873H6: "Tyrrell's Sea Salt & Cider Vinegar (UK shop pick)",
 };
 
 const esc = (s) => String(s)
@@ -407,6 +416,95 @@ const GUIDES = [
     ],
     sources: [],
     related: [['south-korea', '🇰🇷 South Korea chip guide'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying in Europe'], ['snack-boxes', '🍱 Snack boxes (Daebak)'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'], ['best-international-chip-variety-packs', '🌍 International variety packs']],
+  },
+  {
+    slug: 'best-mexican-chips-to-buy-online',
+    checked: '2026-10-26', checkedLabel: '26 October 2026',
+    flag: '🇲🇽',
+    crumb: 'Best Mexican Chips',
+    h1: 'The Best Mexican Chips to Buy Online (2026)',
+    title: 'Best Mexican Chips to Buy Online (2026): Takis, Sabritas & Barcel | World of Chips',
+    desc: 'Mexican chips you can order on Amazon.com: Takis Fuego and variety packs, Sabritas Chile Limón, Lay\u2019s Limón and Barcel Chip\u2019s Jalapeño. Chilli, lime and the brands behind them.',
+    introDark: 'Chilli, lime and the two snack giants behind them: Sabritas and Barcel.',
+    intro: 'Mexican snacking runs on lime, salt, chamoy, tamarind and chile. Two companies dominate. <strong>Sabritas</strong> began in Mexico City in 1943 and joined PepsiCo in 1966. <strong>Barcel</strong>, Grupo Bimbo&#8217;s snack arm, began in 1977 and makes Chip&#8217;s potato chips and Takis. Takis were invented in 1999, and the purple-bag Fuego arrived in 2006. Below are seven Amazon.com listings, all already featured on our site: four on the <a href="/mexico/">Mexico page</a> and three in our <a href="/spiciest-chips-you-can-buy/">spiciest chips guide</a>. We don&#8217;t quote prices, because they change often.',
+    sections: [
+      { id: 'picks', h2: 'Mexican Chips to Buy', note: '', items: [
+        ['Takis Variety Pack (18 bags)', 'Fuego, Blue Heat and more from Barcel in one box: the easiest way to find your Takis flavour.', 'dp:B0DG6345BV'],
+        ['Takis Fuego (9.9 oz)', 'Chilli pepper and lime rolled tortilla chips, sold in the purple bag since 2006.', 'dp:B009R489PI'],
+        ['Takis Fuego (17 oz, pack of 2)', 'The big fiesta-size bags. The listing rates Fuego <strong>Extreme</strong> on the Takis Heat-O-Meter.', 'dp:B0D14XB2HR'],
+        ['Takis Fuego Potato Crisps (5.5 oz can)', 'The Fuego seasoning on stackable potato crisps instead of rolled tortillas.', 'dp:B09FYHFZGS'],
+        ['Sabritas Chile Lim&#243;n Mix (30 bags)', 'A chilli-lime snack mix from Sabritas, Mexico&#8217;s original chip brand.', 'dp:B0BQZD5QR6'],
+        ['Lay&#8217;s Lim&#243;n (12.5 oz)', 'Real-lime chips from Sabritas&#8217; US sister brand.', 'dp:B083FKKRYY'],
+        ['Barcel Chip&#8217;s Jalape&#241;o (pack of 3)', 'Potato chips seasoned with jalape&#241;o and salt, from Barcel&#8217;s Chip&#8217;s range.', 'dp:B0GBYDCTXL'],
+      ] },
+    ],
+    extra: `
+    <section class="cp-section" id="compare">
+      <h2>Comparison Table</h2>
+      <div class="sb-table-wrap">
+      <table class="sb-table">
+        <thead><tr><th scope="col">Pick</th><th scope="col">Maker</th><th scope="col">Type</th><th scope="col">Flavour</th></tr></thead>
+        <tbody>
+        <tr><th scope="row">Takis Variety Pack</th><td>Barcel</td><td>Rolled tortilla chips</td><td>Fuego, Blue Heat and more</td></tr>
+        <tr><th scope="row">Takis Fuego</th><td>Barcel</td><td>Rolled tortilla chips</td><td>Chilli pepper &amp; lime</td></tr>
+        <tr><th scope="row">Takis Fuego Crisps</th><td>Barcel</td><td>Stackable potato crisps</td><td>Chilli pepper &amp; lime</td></tr>
+        <tr><th scope="row">Sabritas Chile Lim&#243;n Mix</th><td>Sabritas</td><td>Snack mix</td><td>Chilli &amp; lime</td></tr>
+        <tr><th scope="row">Lay&#8217;s Lim&#243;n</th><td>Lay&#8217;s (PepsiCo)</td><td>Potato chips</td><td>Lime</td></tr>
+        <tr><th scope="row">Chip&#8217;s Jalape&#241;o</th><td>Barcel</td><td>Potato chips</td><td>Jalape&#241;o &amp; salt</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>`,
+    faqs: [
+      ['What is the most popular chip brand in Mexico?', 'Sabritas, founded in Mexico City in 1943 and part of PepsiCo since 1966, is Mexico&#8217;s original chip brand. Its main rival is Barcel, Grupo Bimbo&#8217;s snack arm, which makes Takis and Chip&#8217;s.'],
+      ['Are Takis Mexican?', 'Yes. Takis are made by Barcel, part of Mexico&#8217;s Grupo Bimbo. They were invented in 1999, first sold as &#8220;Taquis&#8221;, and the purple-bag Fuego (chilli and lime) arrived in 2006.'],
+      ['What flavours are typical of Mexican chips?', 'Lime, salt and chile above all, often with chamoy or tamarind. In Mexico, chips are often &#8220;prepared&#8221; with hot sauce, lime and toppings rather than eaten plain.'],
+    ],
+    sources: [],
+    related: [['mexico', '🇲🇽 Mexico chip guide'], ['spiciest-chips-you-can-buy', '🌶️ Spiciest chips'], ['united-states', '🇺🇸 United States'], ['best-chip-gift-boxes', '🎁 Chip gift boxes']],
+  },
+  {
+    slug: 'best-british-crisps-to-buy-online',
+    checked: '2026-10-26', checkedLabel: '26 October 2026',
+    flag: '🇬🇧',
+    crumb: 'Best British Crisps',
+    h1: 'The Best British Crisps to Buy Online (2026)',
+    title: 'Best British Crisps to Buy Online (2026): Walkers, Tyrrell\u2019s & Monster Munch | World of Chips',
+    desc: 'British crisps you can order on Amazon.com: Walkers multipacks, Cheese & Onion and Salt & Shake, Tyrrell\u2019s Sea Salt & Cider Vinegar and Walkers MEGA Monster Munch, with the history behind them.',
+    introDark: 'Walkers&#8217; big three, hand-cooked Tyrrell&#8217;s and a pickled-onion classic, delivered.',
+    intro: 'Britain gave the world the flavoured crisp. In 1954 Ireland&#8217;s Tayto created cheese &amp; onion, and Walkers launched its own Cheese &amp; Onion the same year. Walkers was founded in Leicester in 1948 and is now Britain&#8217;s largest crisp maker. Its Salt &amp; Shake revives the old Smith&#8217;s idea of a twist of salt in the bag. Below are five crisps you can order from Amazon.com. Four link to listings already featured on our site; Cheese &amp; Onion links to an Amazon search. We don&#8217;t quote prices, because they change often. More history is in our <a href="/united-kingdom/">UK chip guide</a>.',
+    sections: [
+      { id: 'picks', h2: 'British Crisps to Buy', items: [
+        ['Walkers Variety Multipack', 'A multipack from Britain&#8217;s biggest crisp maker: the easiest way to try Walkers&#8217; range.', 'dp:B0B8NW4ZLM'],
+        ['Walkers Cheese &amp; Onion', 'A Walkers flavour since 1954, inspired by the ploughman&#8217;s lunch.', amazonSearch('walkers cheese and onion crisps')],
+        ['Walkers Salt &amp; Shake', 'Plain crisps with a twist of salt to add yourself, an old-school idea first sold by Smith&#8217;s.', 'dp:B017IQA7R4'],
+        ['Tyrrell&#8217;s Sea Salt &amp; Cider Vinegar', 'Thicker, hand-cooked British crisps, an alternative to the classic Walkers style.', 'dp:B01G2873H6'],
+        ['Walkers MEGA Monster Munch Pickled Onion (6 pack)', 'Pickled onion Monster Munch corn snacks in the bigger MEGA size.', 'dp:B004ISJK38'],
+      ] },
+    ],
+    extra: `
+    <section class="cp-section" id="compare">
+      <h2>Comparison Table</h2>
+      <div class="sb-table-wrap">
+      <table class="sb-table">
+        <thead><tr><th scope="col">Crisp</th><th scope="col">Maker</th><th scope="col">Style</th><th scope="col">Good to know</th></tr></thead>
+        <tbody>
+        <tr><th scope="row">Walkers multipack</th><td>Walkers</td><td>Thin, classic</td><td>Britain&#8217;s largest crisp maker</td></tr>
+        <tr><th scope="row">Cheese &amp; Onion</th><td>Walkers</td><td>Thin, classic</td><td>Flavour since 1954</td></tr>
+        <tr><th scope="row">Salt &amp; Shake</th><td>Walkers</td><td>Plain, salt sachet</td><td>Revives the old Smith&#8217;s idea</td></tr>
+        <tr><th scope="row">Sea Salt &amp; Cider Vinegar</th><td>Tyrrell&#8217;s</td><td>Thick, hand-cooked</td><td>A vinegar crisp</td></tr>
+        <tr><th scope="row">MEGA Monster Munch</th><td>Walkers</td><td>Corn snack</td><td>Pickled onion</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>`,
+    faqs: [
+      ['What are the most popular British crisp flavours?', 'Walkers&#8217; big three are Ready Salted, Cheese &amp; Onion (since 1954) and Salt &amp; Vinegar (since 1967, a nod to fish and chips).'],
+      ['What is the biggest crisp brand in the UK?', 'Walkers, founded in Leicester in 1948 and owned by PepsiCo since 1989, is Britain&#8217;s largest crisp maker. Tyrrell&#8217;s, Pipers, Kettle and McCoy&#8217;s are other well-known names.'],
+      ['Who invented cheese and onion crisps?', 'Cheese &amp; onion is widely credited to Joe &#8220;Spud&#8221; Murphy of Ireland&#8217;s Tayto and his employee Seamus Burke in 1954. Walkers launched its own Cheese &amp; Onion the same year.'],
+    ],
+    sources: [],
+    related: [['united-kingdom', '🇬🇧 UK chip guide'], ['best-chip-gift-boxes', '🎁 Chip gift boxes'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying in Europe'], ['best-international-chip-variety-packs', '🌍 International variety packs']],
   },
 ];
 
