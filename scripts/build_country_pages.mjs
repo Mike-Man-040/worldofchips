@@ -144,10 +144,10 @@ function snackBoxCallout(slug) {
 // Cross-link the buyer's guides (built by build_guides.mjs).
 const GUIDE_LINKS = {
   japan: [['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Asian chips in Europe']],
-  'south-korea': [['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Honey Butter Chip in Europe'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online']],
-  mexico: [['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Takis in the UK & Europe'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
-  'united-kingdom': [['where-to-buy-asian-chips-europe', '🇬🇧 Where to buy Takis & imported chips in the UK'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
-  'united-states': [['best-international-chip-variety-packs', '🌍 Best international chip variety packs to buy online'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online']],
+  'south-korea': [['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips to buy online'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Honey Butter Chip in Europe'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online']],
+  mexico: [['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy (Takis & more)'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Takis in the UK & Europe'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
+  'united-kingdom': [['best-chip-gift-boxes', '🎁 Chip gift boxes (incl. Monster Munch)'], ['where-to-buy-asian-chips-europe', '🇬🇧 Where to buy Takis & imported chips in the UK'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
+  'united-states': [['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy'], ['best-chip-gift-boxes', '🎁 Best chip gift boxes'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs to buy online'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online']],
   germany: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe']],
   china: [['best-international-chip-variety-packs', '🌍 Best exotic Asian chip variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online']],
   france: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe']],
@@ -219,6 +219,19 @@ function buildFaq(x) {
     'As an Amazon Associate, World of Chips earns from qualifying purchases.']);
   return qa;
 }
+function buyBox(x) {
+  const picks = (csm[x.name] || defaultShop).slice(0, 3);
+  return `    <aside class="cp-section buy-box" id="buy" aria-labelledby="buy-title">
+      <h2 id="buy-title">Buy ${esc(inName(x.name))} Chips on Amazon</h2>
+      <p>Our picks to taste ${esc(x.name)}&#8217;s chips at home:</p>
+      <div class="buy-grid">
+        ${picks.map((l) => `<a href="${esc(l.u)}" target="_blank" rel="sponsored nofollow noopener" class="buy-btn">${esc(l.n)} &#8594;</a>`).join('\n        ')}
+      </div>
+      <p class="aff-disc">As an Amazon Associate, World of Chips earns from qualifying purchases. <a href="#shop">More picks below</a>.</p>
+    </aside>
+
+`;
+}
 function quickFacts(x) {
   const { name, d, c } = x;
   const rows = [
@@ -255,6 +268,10 @@ ${qa.map(([q, a]) => `      <h3>${esc(q)}</h3>\n      <p>${esc(a)}</p>`).join('\
 }
 
 let FAQ_COUNT = 0;
+const HOME_GUIDES = [['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy'], ['best-chip-gift-boxes', '🎁 Best chip gift boxes'],
+  ['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'],
+  ['best-international-chip-variety-packs', '🌍 International variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying chips in Europe'],
+  ['snack-boxes', '🍱 Snack boxes compared']];
 const link = (o) => `<a href="/${o.slug}/" class="cp-explore-link">${o.d.flag} ${esc(o.name)}</a>`;
 
 // ---------- 3. page template ----------
@@ -334,6 +351,10 @@ ${fontsLink}
 .cp-facts caption{text-align:left;font-size:.75rem;color:var(--muted);padding-bottom:.4rem}
 .cp-facts th,.cp-facts td{padding:.55rem .9rem;border-bottom:1px solid var(--light-border);text-align:left;vertical-align:top}
 .cp-facts th{width:34%;color:var(--brown);font-weight:700}
+.buy-box{background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:1.2rem 1.3rem}
+.buy-grid{display:flex;flex-wrap:wrap;gap:.6rem;margin:.8rem 0}
+.buy-btn{display:inline-block;background:var(--gold);color:#fff;font-weight:700;padding:.6rem 1.1rem;border-radius:999px;text-decoration:none;font-size:.88rem}
+.buy-btn:hover{filter:brightness(1.08)}
 .cp-faq h3{font-size:1rem;color:var(--brown);margin-top:1.2rem}
 .cp-faq p{margin-top:.3rem}
 .cp-cta h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--brown);margin-bottom:.6rem}
@@ -365,7 +386,7 @@ ${mlUniversal}
   <div class="cp-body">
     <p class="cp-intro">${esc(c.intro)}</p>
 
-${quickFacts(x)}
+${quickFacts(x)}${buyBox(x)}
     <div class="cp-stats">
       <div class="cp-stat"><div class="val">${esc(d.marketSize)}</div><div class="lbl">Market Size</div></div>
       <div class="cp-stat"><div class="val">${esc(d.perCapita)}</div><div class="lbl">Per Capita / Year</div></div>
@@ -466,7 +487,7 @@ const snackLastmod = fs.existsSync(snackPath)
   : null;
 if (fs.existsSync(snackPath) && !snackLastmod) throw new Error('snack-boxes/index.html has no dateModified');
 // Buyer's guides are owned by scripts/build_guides.mjs; keep them with their dateModified.
-const GUIDE_SLUGS = ['best-japanese-chips', 'where-to-buy-asian-chips-europe', 'best-international-chip-variety-packs'];
+const GUIDE_SLUGS = ['best-japanese-chips', 'where-to-buy-asian-chips-europe', 'best-international-chip-variety-packs', 'spiciest-chips-you-can-buy', 'best-chip-gift-boxes', 'best-korean-chips-to-buy-online'];
 const guideUrls = GUIDE_SLUGS.flatMap((g) => {
   const gp = path.join(ROOT, g, 'index.html');
   if (!fs.existsSync(gp)) return [];
@@ -507,6 +528,10 @@ indexHtml = replaceRegion(indexHtml, 'COUNTRY-LINKS',
   <p class="section-sub">Brands, flavors, snacking culture and shop picks for every country we cover.</p>
   <div class="cp-explore-grid">
     ${sorted.map(link).join('\n    ')}
+  </div>
+  <h3 class="section-sub" style="margin-top:2.5rem;font-weight:700">Buying Guides</h3>
+  <div class="cp-explore-grid">
+    ${HOME_GUIDES.map(([s, l]) => `<a href="/${s}/" class="cp-explore-link">${l}</a>`).join('\n    ')}
   </div>
 </section>`);
 fs.writeFileSync(indexPath, indexHtml);

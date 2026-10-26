@@ -33,7 +33,27 @@ const AMAZON_TAG = 'worldofchips-20';
 
 // ASIN pages opened on LAST_CHECKED and showing the product in stock on amazon.com.
 const VERIFIED_ASINS = {
-  B01K9A9V50: 'Haitai Honey Butter Chips, 2.11 oz, pack of 3: $14.50, in stock',
+  B01K9A9V50: 'Haitai Honey Butter Chips, 2.11 oz, pack of 3: $14.50, in stock (2026-10-22; page re-opened 2026-10-26, add-to-cart shown)',
+  // Opened (untagged) on 2026-10-26; product title matched and an add-to-cart button was shown.
+  // Prices were not recorded (geo-located currency), so the new guides quote no prices.
+  B0D14XB2HR: 'Takis Fuego 17 oz Fiesta Size, pack of 2',
+  B09FYHFZGS: 'Takis Fuego Potato Chip Crisps, 5.5 oz can',
+  B0G44XCDZL: 'Takis Blue Heat Crisps, pack of 3 cans',
+  B0D9YF3CC2: 'Pringles Hot Ones Los Calientes Rojo, 5.5 oz can',
+  B073BYBQBJ: 'Ruffles Flaming Hot Potato Chips 8.5 oz party bag (2)',
+  B0GBYDCTXL: "Chip's Jalapeno Potato Chips, pack of 3",
+  B0FBYHGB9L: 'Cape Cod Sweet & Spicy Jalapeno Chips 7.5 oz, pack of 4',
+  B00FBGL0CK: 'Broadway Basketeers Towering Food Gift Boxes, 6 boxes',
+  B0GGVB8P7F: 'Ultimate Variety Sampler Care Package, 40 count',
+  B00E230CKE: 'Frito-Lay Flavor Variety Pack, 50 oz',
+  B0HJLYJ4QJ: 'Wise Snacks Grab & Snack 42 Variety Pack, 39 oz',
+  B0FBXZDS3Q: 'Takis 18 pc / 1 oz Variety Pack',
+  B01L7Z11SQ: 'Red Rock Deli Variety 10 Pack 280 g',
+  B004ISJK38: 'Walkers MEGA Monster Munch Pickled Onion 6 Pack',
+  B0GFPXTYHH: 'Orion Turtle Chips, Sweet Corn',
+  B0BWSKY5FZ: 'ORION Turtle Chip Official Gift Box (Choco, 2 packs)',
+  B0H7F3D75L: 'Nongshim Shrimp Crackers Original 14.1 oz, pack of 2',
+  B07PZ92784: 'Orion Baked Marine Boy Sharing Box',
 };
 
 const esc = (s) => String(s)
@@ -247,6 +267,147 @@ const GUIDES = [
     ],
     related: [['snack-boxes', '🍱 Snack boxes compared'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying in Europe'], ['japan', '🇯🇵 Japan'], ['south-korea', '🇰🇷 South Korea'], ['mexico', '🇲🇽 Mexico'], ['france', '🇫🇷 France'], ['netherlands', '🇳🇱 Netherlands']],
   },
+  {
+    slug: 'spiciest-chips-you-can-buy',
+    checked: '2026-10-26', checkedLabel: '26 October 2026',
+    flag: '🌶️',
+    crumb: 'Spiciest Chips',
+    h1: 'The Spiciest Chips You Can Buy Online (2026)',
+    title: 'Spiciest Chips You Can Buy Online in 2026: Takis, Pringles Hot Ones & More | World of Chips',
+    desc: 'Seven hot chips you can order on Amazon.com, from Takis Fuego and Blue Heat (rated Extreme on the Takis Heat-O-Meter) to Pringles Hot Ones Los Calientes and Cape Cod Sweet & Spicy Jalape\u00f1o.',
+    introDark: 'Seven hot chips you can actually order online, with the heat claims each maker puts on its own listing.',
+    intro: 'Spicy chips are one of the fastest ways to taste how different countries do heat: Mexico&#8217;s chilli-and-lime, American hot-sauce flavours and jalape&#241;o kettle chips. Below are seven spicy chips with Amazon.com product pages that we opened on ${LAST_CHECKED_LABEL} and that showed an add-to-cart button. We don&#8217;t rank them on a Scoville scale, because no maker publishes one for its chips. Instead we quote how each brand describes its own heat. We don&#8217;t quote prices either, because they change often and vary by seller.',
+    sections: [
+      { id: 'picks', h2: 'The Spicy Chips', note: '', items: [
+        ['Takis Fuego Rolled Tortilla Chips (17 oz, pack of 2)', 'Barcel&#8217;s best-known flavour. The listing calls it &#8220;zesty and intensely hot chili pepper and lime&#8221;, rated <strong>Extreme</strong> on the Takis Heat-O-Meter. Takis were invented in Mexico; see our <a href="/mexico/">Mexico chip guide</a>.', 'dp:B0D14XB2HR'],
+        ['Takis Fuego Potato Crisps (5.5 oz can)', 'The same Fuego chilli-and-lime seasoning on stackable potato crisps in a can rather than rolled tortillas. Also rated <strong>Extreme</strong> on the Heat-O-Meter.', 'dp:B09FYHFZGS'],
+        ['Takis Blue Heat Potato Crisps (pack of 3 cans)', 'A hot chilli pepper flavour in a bright blue colour, described as one that &#8220;battles for our hottest snack&#8221;. Rated <strong>Extreme</strong> on the Heat-O-Meter.', 'dp:B0G44XCDZL'],
+        ['Pringles x Hot Ones Los Calientes Rojo (5.5 oz can)', 'A collaboration with the Hot Ones interview show, made with the medium-spice jalape&#241;o and habanero flavours of Los Calientes Rojo hot sauce. The listing notes it contains milk and wheat.', 'dp:B0D9YF3CC2'],
+        ['Ruffles Flaming Hot Potato Chips (8.5 oz party bag, pack of 2)', 'Ridged Ruffles potato chips in the Flamin&#8217; Hot style. The listing warns buyers to check which pack variation they are choosing.', 'dp:B073BYBQBJ'],
+        ['Chip&#8217;s Jalape&#241;o Potato Chips (pack of 3)', 'Barcel&#8217;s Mexican-style potato chips, seasoned with jalape&#241;o and salt. Barcel makes Chip&#8217;s potato chips as well as Takis.', 'dp:B0GBYDCTXL'],
+        ['Cape Cod Sweet &amp; Spicy Jalape&#241;o Kettle Chips (7.5 oz, pack of 4)', 'The mildest pick: kettle-cooked potato chips with jalape&#241;o and a sweet touch. The listing says they are gluten-free, with no artificial flavours or preservatives.', 'dp:B0FBYHGB9L'],
+      ] },
+    ],
+    extra: `
+    <section class="cp-section" id="compare">
+      <h2>Comparison Table</h2>
+      <div class="sb-table-wrap">
+      <table class="sb-table">
+        <thead><tr><th scope="col">Chip</th><th scope="col">Type</th><th scope="col">Flavour</th><th scope="col">Heat (maker&#8217;s own claim)</th></tr></thead>
+        <tbody>
+        <tr><th scope="row">Takis Fuego</th><td>Rolled corn tortilla</td><td>Chilli pepper &amp; lime</td><td>Extreme (Heat-O-Meter)</td></tr>
+        <tr><th scope="row">Takis Fuego Crisps</th><td>Stackable potato crisps</td><td>Chilli pepper &amp; lime</td><td>Extreme (Heat-O-Meter)</td></tr>
+        <tr><th scope="row">Takis Blue Heat Crisps</th><td>Stackable potato crisps</td><td>Hot chilli pepper</td><td>Extreme (Heat-O-Meter)</td></tr>
+        <tr><th scope="row">Pringles x Hot Ones Rojo</th><td>Stackable potato crisps</td><td>Jalape&#241;o &amp; habanero hot sauce</td><td>&#8220;Blazin&#8217; hot&#8221;</td></tr>
+        <tr><th scope="row">Ruffles Flaming Hot</th><td>Ridged potato chips</td><td>Flamin&#8217; Hot</td><td>&#8220;Can you handle the heat?&#8221;</td></tr>
+        <tr><th scope="row">Chip&#8217;s Jalape&#241;o</th><td>Potato chips</td><td>Jalape&#241;o &amp; salt</td><td>&#8220;Bold, spicy&#8221;</td></tr>
+        <tr><th scope="row">Cape Cod Sweet &amp; Spicy</th><td>Kettle-cooked potato chips</td><td>Jalape&#241;o with a sweet touch</td><td>Sweet heat</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="sb-muted">Heat descriptions are quoted from each product&#8217;s Amazon listing as of ${'${LAST_CHECKED_LABEL}'}. They are marketing claims, not lab measurements.</p>
+    </section>`,
+    faqs: [
+      ['What are the spiciest Takis?', 'On the Amazon listings we checked, Takis rates both Fuego (chilli pepper and lime) and Blue Heat (hot chilli pepper) as Extreme on its own Heat-O-Meter. The Blue Heat listing describes it as a flavour that battles for the brand&#8217;s hottest snack.'],
+      ['Are Takis potato chips?', 'Classic Takis are rolled corn tortilla chips made by Barcel, Grupo Bimbo&#8217;s snack arm. Takis also sells stackable potato crisps in cans, such as Fuego Crisps and Blue Heat Crisps, with the same seasonings.'],
+      ['Is there a Scoville rating for spicy chips?', 'Not for the chips in this guide. None of the makers publishes a Scoville figure for these chips, so we quote each brand&#8217;s own heat description instead of inventing a ranking.'],
+      ['What is a milder spicy chip to start with?', 'Cape Cod Sweet &amp; Spicy Jalape&#241;o pairs jalape&#241;o with a sweet touch on kettle-cooked chips. Pringles x Hot Ones Rojo uses medium-spice jalape&#241;o and habanero hot-sauce flavours.'],
+    ],
+    sources: [],
+    related: [['mexico', '🇲🇽 Mexico chip guide'], ['united-states', '🇺🇸 United States'], ['japan', '🇯🇵 Japan (Karamucho)'], ['best-chip-gift-boxes', '🎁 Chip gift boxes'], ['best-international-chip-variety-packs', '🌍 International variety packs']],
+  },
+  {
+    slug: 'best-chip-gift-boxes',
+    checked: '2026-10-26', checkedLabel: '26 October 2026',
+    flag: '🎁',
+    crumb: 'Chip Gift Boxes',
+    h1: 'The Best Chip Gift Boxes and Snack Variety Packs to Send (2026)',
+    title: 'Best Chip Gift Boxes & Snack Variety Packs to Buy Online (2026) | World of Chips',
+    desc: 'Chip gift boxes and variety packs on Amazon.com: Broadway Basketeers gift tower, 40-count care package, Frito-Lay and Wise variety packs, Takis 18-bag mix, Australian Red Rock Deli and British Monster Munch.',
+    introDark: 'Ready-to-gift snack towers, big variety packs and imported multipacks for chip lovers.',
+    intro: 'A chip gift doesn&#8217;t have to be a fruit basket with a token bag of crisps. Below are seven Amazon.com listings we opened on ${LAST_CHECKED_LABEL}, all showing an add-to-cart button. There are two ready-to-gift boxes, three big US variety packs and two imported multipacks for someone who already has every American flavour. Details come from each listing. We don&#8217;t quote prices, because they change often and vary by seller. For monthly subscription boxes from Japan and Korea, see our <a href="/snack-boxes/">snack box comparison</a>.',
+    sections: [
+      { id: 'picks', h2: 'Gift Boxes &amp; Variety Packs', note: '', items: [
+        ['Broadway Basketeers Towering Food Gift Boxes (6 boxes)', 'A ready-to-gift tower of six stacked boxes (6&#8243; &#215; 6&#8243; &#215; 14&#8243;) with about 4 lb of sweet and savoury snacks, including chips, popcorn, cookies and trail mix. The listing says it is certified kosher, arrives fully assembled and includes a gift tag.', 'dp:B00FBGL0CK'],
+        ['Ultimate Variety Sampler Care Package (40 count)', 'A 40-item box (12&#8243; &#215; 11&#8243; &#215; 3&#8243;) mixing chips, cookies, bars, popcorn and crackers. The listing says gift wrapping and a message can be added at checkout.', 'dp:B0GGVB8P7F'],
+        ['Frito-Lay Flavor Variety Pack (50 bags)', 'Fifty single-serve bags from the Frito-Lay range, 50 oz in total. It suits office or party gifting rather than a dressed-up present.', 'dp:B00E230CKE'],
+        ['Wise Snacks Grab &amp; Snack Variety Pack (42 bags)', 'Forty-two individually packed bags from Wise, 39 oz in total. The listing pitches it for lunchboxes, offices and parties.', 'dp:B0HJLYJ4QJ'],
+        ['Takis Variety Pack (18 &#215; 1 oz)', 'Eighteen 1 oz bags of Takis rolled tortilla chips: five Fuego, five Blue Heat, four Nitro and four Crunchy Fajitas. The listing title also says &#8220;Pack of 2&#8221;, so check the quantity at checkout. A good gift for a spice fan; see also our <a href="/spiciest-chips-you-can-buy/">spiciest chips guide</a>.', 'dp:B0FBXZDS3Q'],
+        ['Red Rock Deli Variety 10 Pack (Australia)', 'Ten bags of Australian Red Rock Deli chips in flavours such as Sea Salt, Honey Soy Chicken, Sweet Chilli &amp; Sour Cream, and Sea Salt &amp; Balsamic Vinegar. More in our <a href="/australia/">Australia chip guide</a>.', 'dp:B01L7Z11SQ'],
+        ['Walkers MEGA Monster Munch Pickled Onion (6 pack)', 'A British classic: six bags of pickled onion Monster Munch corn snacks, in the bigger MEGA size. More British crisps in our <a href="/united-kingdom/">UK chip guide</a>.', 'dp:B004ISJK38'],
+      ] },
+    ],
+    extra: `
+    <section class="cp-section" id="compare">
+      <h2>Comparison Table</h2>
+      <div class="sb-table-wrap">
+      <table class="sb-table">
+        <thead><tr><th scope="col">Pick</th><th scope="col">Format</th><th scope="col">Size (per listing)</th><th scope="col">Best for</th></tr></thead>
+        <tbody>
+        <tr><th scope="row">Broadway Basketeers tower</th><td>Ready-to-gift stacked boxes</td><td>6 boxes, about 4 lb</td><td>A formal gift, sweet and savoury</td></tr>
+        <tr><th scope="row">Ultimate Variety Sampler</th><td>Care-package box</td><td>40 items</td><td>Students and care packages</td></tr>
+        <tr><th scope="row">Frito-Lay Variety Pack</th><td>Single-serve bags</td><td>50 bags, 50 oz</td><td>Offices and parties</td></tr>
+        <tr><th scope="row">Wise Grab &amp; Snack</th><td>Single-serve bags</td><td>42 bags, 39 oz</td><td>Lunchboxes and offices</td></tr>
+        <tr><th scope="row">Takis Variety Pack</th><td>Single-serve bags</td><td>18 &#215; 1 oz</td><td>Spice fans</td></tr>
+        <tr><th scope="row">Red Rock Deli 10 Pack</th><td>Imported multipack</td><td>10 bags</td><td>Trying Australian flavours</td></tr>
+        <tr><th scope="row">Walkers MEGA Monster Munch</th><td>Imported multipack</td><td>6 bags</td><td>British expats and crisp fans</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>`,
+    faqs: [
+      ['What is a good gift for someone who loves chips?', 'For a dressed-up present, a ready-to-gift box such as the Broadway Basketeers tower (six stacked boxes with chips, popcorn and cookies) works well. For a pure chip fan, an imported multipack, like Australian Red Rock Deli or British Monster Munch, offers flavours they probably can&#8217;t buy locally.'],
+      ['Can I add a gift message on Amazon?', 'The Ultimate Variety Sampler listing says gift wrapping and a message are available at checkout. The Broadway Basketeers tower comes with a gift tag. For other items, check the gift options shown at checkout.'],
+      ['Are there chip gift boxes with international flavours?', 'Yes. Imported multipacks such as Red Rock Deli (Australia) and Walkers Monster Munch (UK) are sold on Amazon.com. For a monthly box of Japanese or Korean snacks, see our snack box comparison.'],
+      ['What is the difference between a gift box and a variety pack?', 'A gift box is packaged to be given, often with mixed sweet and savoury snacks and a tag or message. A variety pack is a bulk box of single-serve chip bags, better value for offices, parties or stocking a pantry, but plainly packaged.'],
+    ],
+    sources: [],
+    related: [['snack-boxes', '🍱 Snack boxes compared'], ['best-international-chip-variety-packs', '🌍 International variety packs'], ['spiciest-chips-you-can-buy', '🌶️ Spiciest chips'], ['united-states', '🇺🇸 United States'], ['australia', '🇦🇺 Australia'], ['united-kingdom', '🇬🇧 United Kingdom']],
+  },
+  {
+    slug: 'best-korean-chips-to-buy-online',
+    checked: '2026-10-26', checkedLabel: '26 October 2026',
+    flag: '🇰🇷',
+    crumb: 'Best Korean Chips',
+    h1: 'The Best Korean Chips and Snacks to Buy Online (2026)',
+    title: 'Best Korean Chips to Buy Online in 2026: Honey Butter Chip, Turtle Chips & More | World of Chips',
+    desc: 'Korean chips you can order on Amazon.com: Haitai Honey Butter Chips, Orion Turtle Chips (sweet corn and choco), Nongshim Shrimp Crackers and Orion Marine Boy, with what each tastes like.',
+    introDark: 'Korea&#8217;s cult chips and crackers that you can order from the US Amazon store.',
+    intro: 'Korean convenience-store snacks lean sweet-savoury: honey and butter on a potato chip, corn soup on a four-layer chip, real shrimp on a baked cracker. Below are five Korean snacks with Amazon.com product pages that we opened on ${LAST_CHECKED_LABEL}, all showing an add-to-cart button. Descriptions come from each listing. We don&#8217;t quote prices, because import listings change often. For the history of Korean chips, see our <a href="/south-korea/">South Korea chip guide</a>.',
+    sections: [
+      { id: 'picks', h2: 'Korean Chips &amp; Snacks', note: '', items: [
+        ['Haitai Honey Butter Chips (pack of 3)', 'The sweet-and-buttery potato chip from Haitai that became a Korean craze in 2014. If you only try one Korean chip, make it this one.', 'dp:B01K9A9V50'],
+        ['Orion Turtle Chips, Sweet Corn', 'Orion&#8217;s four-layer chip. The listing says the layered structure adds crunch, with a lightly sweet, creamy corn-soup flavour. Made in Korea.', 'dp:B0GFPXTYHH'],
+        ['Orion Turtle Chip Official Gift Box (Choco, 2 packs)', 'The chocolate version of Turtle Chips, sold as a two-pack gift box.', 'dp:B0BWSKY5FZ'],
+        ['Nongshim Shrimp Crackers, Original (14.1 oz, pack of 2)', 'A Korean classic, baked rather than fried. The listing says it is made with ground fresh shrimp and cooked with heated salt (&#8220;parching&#8221;), so it tastes light and savoury, not greasy.', 'dp:B0H7F3D75L'],
+        ['Orion Marine Boy (Gorae-bap) Sharing Box', 'Baked crackers shaped like sea creatures, sold as a sharing gift box.', 'dp:B07PZ92784'],
+      ] },
+    ],
+    extra: `
+    <section class="cp-section" id="compare">
+      <h2>Comparison Table</h2>
+      <div class="sb-table-wrap">
+      <table class="sb-table">
+        <thead><tr><th scope="col">Snack</th><th scope="col">Maker</th><th scope="col">Type</th><th scope="col">Flavour</th></tr></thead>
+        <tbody>
+        <tr><th scope="row">Honey Butter Chip</th><td>Haitai</td><td>Potato chip</td><td>Honey and butter, sweet-savoury</td></tr>
+        <tr><th scope="row">Turtle Chips Sweet Corn</th><td>Orion</td><td>Four-layer corn chip</td><td>Lightly sweet corn soup</td></tr>
+        <tr><th scope="row">Turtle Chips Choco</th><td>Orion</td><td>Four-layer chip</td><td>Chocolate</td></tr>
+        <tr><th scope="row">Shrimp Crackers</th><td>Nongshim</td><td>Baked cracker</td><td>Shrimp, lightly salty</td></tr>
+        <tr><th scope="row">Marine Boy (Gorae-bap)</th><td>Orion</td><td>Baked shaped cracker</td><td>Savoury</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>`,
+    faqs: [
+      ['What is the most famous Korean chip?', 'Haitai&#8217;s Honey Butter Chip, a sweet-and-buttery potato chip that became a craze in South Korea in 2014. It is sold on Amazon.com in a three-bag pack, and in Europe through Asian grocers.'],
+      ['What are Turtle Chips?', 'Turtle Chips are an Orion snack built from four thin layers, which its listing says gives extra crunch. The sweet corn version tastes like a lightly sweet, creamy corn soup. A chocolate version is also sold.'],
+      ['Are Nongshim Shrimp Crackers fried?', 'No. According to the listing, Nongshim Shrimp Crackers are baked using heated salt (a method it calls parching) rather than fried in oil. They are made with ground fresh shrimp.'],
+      ['Can I buy Korean chips in Europe?', 'Yes. Several EU Asian grocers stock Haitai Honey Butter Chip; see our guide to buying Asian chips in Europe for shops and prices. Amazon.com links in this guide go to the US store.'],
+    ],
+    sources: [],
+    related: [['south-korea', '🇰🇷 South Korea chip guide'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying in Europe'], ['snack-boxes', '🍱 Snack boxes (Daebak)'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'], ['best-international-chip-variety-packs', '🌍 International variety packs']],
+  },
 ];
 
 // ---------- page template ----------
@@ -271,12 +432,15 @@ ${nlForm}
 </aside>`.split('\n').map((l, i) => (i ? indent + (l.startsWith('<aside') || l.startsWith('</aside') ? '' : '  ') + l : l)).join('\n');
 
 function render(g) {
+  const CK = g.checked || LAST_CHECKED, CKL = g.checkedLabel || LAST_CHECKED_LABEL;
+  const fill = (t) => t.replace(/\$\{LAST_CHECKED_LABEL\}/g, CKL);
+  const href = (h) => (h.startsWith('dp:') ? amazonDp(h.slice(3)) : h);
   const url = `${SITE}/${g.slug}/`;
   for (const [s] of g.related) if (!fs.existsSync(path.join(ROOT, s, 'index.html')) && !GUIDES.some((x) => x.slug === s)) throw new Error(`missing page /${s}/`);
-  const intro = g.intro.replace(/\$\{LAST_CHECKED_LABEL\}/g, LAST_CHECKED_LABEL);
+  const intro = fill(g.intro);
   const ld = { '@context': 'https://schema.org', '@graph': [
     { '@type': 'Article', '@id': `${url}#article`, headline: g.h1, description: g.desc, url, mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-      inLanguage: 'en', dateModified: LAST_CHECKED,
+      inLanguage: 'en', dateModified: CK,
       author: { '@type': 'Organization', name: 'World of Chips', url: `${SITE}/` },
       publisher: { '@type': 'Organization', name: 'World of Chips', url: `${SITE}/` },
       isPartOf: { '@type': 'WebSite', name: 'World of Chips', url: `${SITE}/` } },
@@ -290,9 +454,9 @@ function render(g) {
     <section class="cp-section" id="${s.id}">
       <h2>${s.h2}</h2>
       <ol class="gd-picks">
-        ${s.items.map(([n, d, href]) => `<li><strong>${n}</strong><p>${d.replace(/\$\{LAST_CHECKED_LABEL\}/g, LAST_CHECKED_LABEL)}</p><p>${amz(href, `Find ${n} on Amazon &#8594;`)}</p></li>`).join('\n        ')}
+        ${s.items.map(([n, d, h]) => `<li><strong>${n}</strong><p>${fill(d)}</p><p>${h.startsWith('dp:') ? `<a href="${esc(href(h))}" target="_blank" rel="sponsored nofollow noopener" class="buy-btn">Buy on Amazon &#8594;</a>` : amz(h, `Find ${n} on Amazon &#8594;`)}</p></li>`).join('\n        ')}
       </ol>
-      <p class="sb-muted">We link to Amazon searches where single import listings go in and out of stock often; pick a listing that shows as in stock and check the pack size.</p>
+      ${s.note === '' ? '' : '<p class="sb-muted">We link to Amazon searches where single import listings go in and out of stock often; pick a listing that shows as in stock and check the pack size.</p>'}
     </section>`).join('');
   return `<!DOCTYPE html>
 <html lang="en">
@@ -329,6 +493,8 @@ ${fontsLink}
 .gd-picks li{background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.9rem 1rem;margin-bottom:.8rem;font-size:.92rem;line-height:1.6}
 .gd-picks strong{color:var(--brown);font-family:'Playfair Display',serif;font-size:1.05rem}
 .gd-picks a,.cp-section a{color:#1A4570}
+.buy-btn{display:inline-block;background:var(--gold);color:#fff;font-weight:700;padding:.55rem 1.1rem;border-radius:999px;text-decoration:none;font-size:.88rem}
+.buy-btn:hover{filter:brightness(1.08)}
 .sb-table-wrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--light-border);border-radius:12px}
 .sb-table{border-collapse:collapse;width:100%;min-width:560px;font-size:.85rem;background:var(--paper)}
 .sb-table th,.sb-table td{padding:.65rem .7rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--light-border)}
@@ -363,14 +529,14 @@ ${mlUniversal}
     <nav class="cp-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › <span>${esc(g.crumb)}</span></nav>
     <span class="cp-flag">${g.flag}</span>
     <h1 class="cp-title">${esc(g.h1)}</h1>
-    <span class="cp-region">Last checked ${LAST_CHECKED_LABEL}</span>
+    <span class="cp-region">Last checked ${CKL}</span>
     <p class="cp-intro-dark">${g.introDark}</p>
   </div>
   <div class="cp-body">
     <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>
 
     <p class="cp-intro">${intro}</p>
-${sections}${g.extra}
+${sections}${fill(g.extra)}
 
     <section class="cp-section sb-faq" id="faq">
       <h2>FAQs</h2>
@@ -379,7 +545,7 @@ ${sections}${g.extra}
 ${g.sources.length ? `
     <section class="cp-section" id="sources">
       <h2>Sources</h2>
-      <p class="sb-sources">Checked on ${LAST_CHECKED_LABEL}: ${g.sources.map(srcLink).join(', ')}</p>
+      <p class="sb-sources">Checked on ${CKL}: ${g.sources.map(srcLink).join(', ')}</p>
     </section>
 ` : ''}
     <p class="aff-disc">${DISCLOSURE}</p>
@@ -409,7 +575,7 @@ for (const g of GUIDES) sm = sm.replace(new RegExp(`  <url>\\n    <loc>${SITE.re
 let at = -1;
 for (const p of ['snack-boxes/', 'news/', '']) { const i = sm.indexOf(`<loc>${SITE}/${p}</loc>`); if (i >= 0) { at = sm.indexOf('</url>\n', i); break; } }
 if (at < 0) throw new Error('sitemap.xml has no <url> entries');
-const blocks = GUIDES.map((g) => `  <url>\n    <loc>${SITE}/${g.slug}/</loc>\n    <lastmod>${LAST_CHECKED}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`).join('');
+const blocks = GUIDES.map((g) => `  <url>\n    <loc>${SITE}/${g.slug}/</loc>\n    <lastmod>${g.checked || LAST_CHECKED}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`).join('');
 const newSitemap = sm.slice(0, at + 7) + blocks + sm.slice(at + 7);
 
 const outputs = [...GUIDES.map((g) => [path.join(ROOT, g.slug, 'index.html'), render(g)]), [sitemapPath, newSitemap]];
