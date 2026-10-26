@@ -56,8 +56,6 @@ const VERIFIED_ASINS = {
   B07PZ92784: 'Orion Baked Marine Boy Sharing Box',
   // Already live on the site as country-page shop picks (csm in index.html). Amazon served a captcha on
   // 2026-10-26 so these were NOT re-opened that day; guides using them quote no prices or stock claims.
-  B00TVSGLX2: 'Calbee Japanese Chips (Japan shop pick)',
-  B0BSG75HC6: 'Calbee Hot & Spicy (Japan shop pick)',
   B0DG6345BV: 'Takis Variety Pack 18 bags (Mexico shop pick)',
   B009R489PI: 'Takis Fuego 9.9 oz (Mexico shop pick)',
   B0BQZD5QR6: 'Sabritas Chile Limon Mix 30 bags (Mexico shop pick)',
@@ -418,48 +416,6 @@ const GUIDES = [
     ],
     sources: [],
     related: [['south-korea', '🇰🇷 South Korea chip guide'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying in Europe'], ['snack-boxes', '🍱 Snack boxes (Daebak)'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'], ['best-international-chip-variety-packs', '🌍 International variety packs']],
-  },
-  {
-    slug: 'best-japanese-chips-to-buy-online',
-    checked: '2026-10-26', checkedLabel: '26 October 2026',
-    flag: '🇯🇵',
-    crumb: 'Japanese Chips to Buy Online',
-    h1: 'Japanese Chips to Buy Online: Quick Shopping List (2026)',
-    title: 'Japanese Chips to Buy Online (2026): Calbee & Koikeya Shopping List | World of Chips',
-    desc: 'A short shopping list of Japanese chips on Amazon.com: Calbee multipacks and Hot & Spicy, Consommé Punch, Norishio and Koikeya Karamucho, with the launch year of each classic.',
-    introDark: 'The short version of our Japanese chip guide: what to add to your cart and why.',
-    intro: 'If you just want a shopping list, start here. Calbee launched Usushio (lightly salted) in 1975, Norishio (seaweed salt) in 1976 and Consomm&#233; Punch in 1978. Koikeya, which made Japan&#8217;s first mass-produced potato chips, added the chilli-hot Karamucho in 1984. Two picks below link to specific Amazon.com listings already featured on our <a href="/japan/">Japan page</a>. The others link to Amazon searches, because single import listings for those flavours go in and out of stock. For the full story behind each flavour, read our <a href="/best-japanese-chips/">complete Japanese chips guide</a>.',
-    sections: [
-      { id: 'picks', h2: 'Japanese Chips Shopping List', items: [
-        ['Calbee Japanese Chips', 'A Calbee listing that is also one of our Japan page picks. Calbee is Japan&#8217;s best-known potato chip maker.', 'dp:B00TVSGLX2'],
-        ['Calbee Hot &amp; Spicy', 'Calbee&#8217;s hot and spicy chips, for bold Japanese heat.', 'dp:B0BSG75HC6'],
-        ['Calbee Consomm&#233; Punch', 'Launched in 1978. A meaty, onion-and-broth flavour with no real Western equivalent.', amazonSearch('calbee consomme punch potato chips')],
-        ['Calbee Norishio (Seaweed Salt)', 'From 1976: aonori seaweed and salt, the most distinctly Japanese of the classics.', amazonSearch('calbee norishio potato chips')],
-        ['Koikeya Karamucho Hot Chili', 'Made since 1984. Chilli heat on a meat-and-vegetable savoury base.', amazonSearch('koikeya karamucho hot chili potato chips')],
-      ] },
-    ],
-    extra: `
-    <section class="cp-section" id="compare">
-      <h2>Comparison Table</h2>
-      <div class="sb-table-wrap">
-      <table class="sb-table">
-        <thead><tr><th scope="col">Chip</th><th scope="col">Maker</th><th scope="col">Since</th><th scope="col">Flavour</th></tr></thead>
-        <tbody>
-        <tr><th scope="row">Usushio</th><td>Calbee</td><td>1975</td><td>Lightly salted</td></tr>
-        <tr><th scope="row">Norishio</th><td>Calbee</td><td>1976</td><td>Seaweed and salt</td></tr>
-        <tr><th scope="row">Consomm&#233; Punch</th><td>Calbee</td><td>1978</td><td>Consomm&#233; broth</td></tr>
-        <tr><th scope="row">Karamucho</th><td>Koikeya</td><td>1984</td><td>Hot chilli, savoury</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </section>`,
-    faqs: [
-      ['Which Japanese chips should I try first?', 'Start with Calbee&#8217;s three classics: Usushio (1975), Norishio (1976) and Consomm&#233; Punch (1978). Add Koikeya Karamucho (1984) if you like heat.'],
-      ['Who makes the most popular Japanese chips?', 'Calbee is Japan&#8217;s best-known potato chip maker. Koikeya is the other big name and was the first company in Japan to mass-produce potato chips.'],
-      ['Why are some links Amazon searches?', 'Single import listings for Japanese flavours often go out of stock, so for those we link to an Amazon search. Pick a listing that shows as in stock and check the pack size.'],
-    ],
-    sources: ['https://www.calbee.co.jp/en/corporate/history/product.php', 'https://koike-ya.com/en/'],
-    related: [['best-japanese-chips', '🇯🇵 Full Japanese chips guide'], ['japan', '🇯🇵 Japan chip guide'], ['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips'], ['snack-boxes', '🍱 Snack boxes compared']],
   },
   {
     slug: 'best-mexican-chips-to-buy-online',

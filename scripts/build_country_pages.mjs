@@ -143,7 +143,7 @@ function snackBoxCallout(slug) {
 
 // Cross-link the buyer's guides (built by build_guides.mjs).
 const GUIDE_LINKS = {
-  japan: [['best-japanese-chips-to-buy-online', '🛒 Japanese chips shopping list'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Asian chips in Europe']],
+  japan: [['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Asian chips in Europe']],
   'south-korea': [['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips to buy online'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Honey Butter Chip in Europe'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online']],
   mexico: [['best-mexican-chips-to-buy-online', '🇲🇽 Best Mexican chips to buy online'], ['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy (Takis & more)'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Takis in the UK & Europe'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   'united-kingdom': [['best-british-crisps-to-buy-online', '🇬🇧 Best British crisps to buy online'], ['best-chip-gift-boxes', '🎁 Chip gift boxes (incl. Monster Munch)'], ['where-to-buy-asian-chips-europe', '🇬🇧 Where to buy Takis & imported chips in the UK'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
@@ -270,7 +270,7 @@ ${qa.map(([q, a]) => `      <h3>${esc(q)}</h3>\n      <p>${esc(a)}</p>`).join('\
 let FAQ_COUNT = 0;
 const HOME_GUIDES = [['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy'], ['best-chip-gift-boxes', '🎁 Best chip gift boxes'],
   ['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips'], ['best-mexican-chips-to-buy-online', '🇲🇽 Best Mexican chips'],
-  ['best-british-crisps-to-buy-online', '🇬🇧 Best British crisps'], ['best-japanese-chips-to-buy-online', '🛒 Japanese chips shopping list'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'],
+  ['best-british-crisps-to-buy-online', '🇬🇧 Best British crisps'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'],
   ['best-international-chip-variety-packs', '🌍 International variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying chips in Europe'],
   ['snack-boxes', '🍱 Snack boxes compared']];
 const link = (o) => `<a href="/${o.slug}/" class="cp-explore-link">${o.d.flag} ${esc(o.name)}</a>`;
@@ -488,7 +488,7 @@ const snackLastmod = fs.existsSync(snackPath)
   : null;
 if (fs.existsSync(snackPath) && !snackLastmod) throw new Error('snack-boxes/index.html has no dateModified');
 // Buyer's guides are owned by scripts/build_guides.mjs; keep them with their dateModified.
-const GUIDE_SLUGS = ['best-japanese-chips-to-buy-online', 'best-mexican-chips-to-buy-online', 'best-british-crisps-to-buy-online', 'best-japanese-chips', 'where-to-buy-asian-chips-europe', 'best-international-chip-variety-packs', 'spiciest-chips-you-can-buy', 'best-chip-gift-boxes', 'best-korean-chips-to-buy-online'];
+const GUIDE_SLUGS = ['best-mexican-chips-to-buy-online', 'best-british-crisps-to-buy-online', 'best-japanese-chips', 'where-to-buy-asian-chips-europe', 'best-international-chip-variety-packs', 'spiciest-chips-you-can-buy', 'best-chip-gift-boxes', 'best-korean-chips-to-buy-online'];
 const guideUrls = GUIDE_SLUGS.flatMap((g) => {
   const gp = path.join(ROOT, g, 'index.html');
   if (!fs.existsSync(gp)) return [];
