@@ -209,6 +209,8 @@ ${gaSnippet}
 ${jsonLd(ld)}
 </script>
 ${fontsLink}
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
 .nav-logo a{color:inherit;text-decoration:none;display:flex;align-items:center;gap:.5rem}

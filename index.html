@@ -32,6 +32,8 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"World of Chips","url":"https://worldofchips.com/","description":"Explore potato chip culture across 28 documented countries. Brands, flavors, market data, and snacking traditions worldwide.","publisher":{"@type":"Organization","name":"World of Chips","email":"michaelvdlooij@gmail.com","url":"https://worldofchips.com/"}}
 </script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Zilla+Slab:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -761,9 +763,19 @@ const brandUrls = {
   "Московский Картофель":"https://www.moskart.ru","Krachitos":"https://www.5hispanos.com.ar"
 };
 
+// Build an <a> via the DOM so no literal href="..." URL pattern appears in script source
+// (crawlers were extracting those template strings as 404 URLs).
+function anchorHtml(href, attrs, inner){
+  var a=document.createElement('a');
+  a.setAttribute('href', href);
+  for (var k in attrs) a.setAttribute(k, attrs[k]);
+  a.innerHTML=inner;
+  return a.outerHTML;
+}
+
 function brandLink(name){
   const url = brandUrls[name];
-  if(url) return '<a href="'+url+'" target="_blank" rel="sponsored noopener" style="text-decoration:none">'+name+' ↗</a>';
+  if(url) return anchorHtml(url, {target:'_blank', rel:'sponsored noopener', style:'text-decoration:none'}, name+' ↗');
   return name;
 }
 
@@ -1000,7 +1012,7 @@ function showCountryPage(name) {
   const otherCountries = Object.keys(countryData)
     .filter(n => n !== name)
     .sort()
-    .map(n => `<a href="/${countryContent[n].slug}/" class="cp-explore-link">${countryData[n].flag} ${n}</a>`)
+    .map(n => anchorHtml('/' + countryContent[n].slug + '/', {class:'cp-explore-link'}, `${countryData[n].flag} ${n}`))
     .join('');
   
   const container = document.getElementById('countryPageContainer');
@@ -1107,7 +1119,7 @@ function showCountryPage(name) {
   var sl=document.getElementById('cpShopLinks');
   if(sl){
     var lnks=csm[name]||[{n:"Lay's Variety Pack",u:'https://www.amazon.com/dp/B07179XBP9?tag=worldofchips-20',d:"World's #1 chip brand"},{n:'Pringles Variety',u:'https://www.amazon.com/dp/B0785RNKZS?tag=worldofchips-20',d:'Loved in 140+ countries'}];
-    sl.innerHTML=lnks.map(function(l){return '<a href="'+l.u+'" target="_blank" rel="sponsored nofollow noopener" style="display:flex;align-items:center;gap:.8rem;padding:.7rem 1rem;background:var(--paper);border:1px solid var(--light-border);border-radius:10px;text-decoration:none;color:var(--ink);transition:all .3s"><div style="flex:1"><div style="font-weight:700;font-size:.88rem">'+l.n+'</div><div style="font-size:.72rem;color:var(--muted)">'+l.d+'</div></div><span style="color:var(--gold);font-weight:700">Shop &#8594;</span></a>'}).join('')+'<p style="font-size:.62rem;color:var(--muted);margin-top:.5rem">As an Amazon Associate, we earn from qualifying purchases.</p>';
+    sl.innerHTML=lnks.map(function(l){return anchorHtml(l.u, {target:'_blank', rel:'sponsored nofollow noopener', style:'display:flex;align-items:center;gap:.8rem;padding:.7rem 1rem;background:var(--paper);border:1px solid var(--light-border);border-radius:10px;text-decoration:none;color:var(--ink);transition:all .3s'}, '<div style="flex:1"><div style="font-weight:700;font-size:.88rem">'+l.n+'</div><div style="font-size:.72rem;color:var(--muted)">'+l.d+'</div></div><span style="color:var(--gold);font-weight:700">Shop &#8594;</span>')}).join('')+'<p style="font-size:.62rem;color:var(--muted);margin-top:.5rem">As an Amazon Associate, we earn from qualifying purchases.</p>';
   }
   
   window.scrollTo(0, 0);
