@@ -592,7 +592,7 @@ footer .copy{font-size:.65rem;margin-top:1.5rem;opacity:.4}
   <h2 class="section-title">Annual Chip Consumption</h2>
   <p class="section-sub">Kilograms of potato chips consumed per person, per year.</p>
   <div class="chart-container" id="chartContainer"></div>
-  <p class="section-sub" style="font-size:.78rem;margin-top:1.2rem">Estimates (est.): these per-capita figures are World of Chips editorial estimates compiled from general market reporting, not official statistics. No single public source publishes comparable potato-chip consumption per person for every country, so treat them as rough comparisons. We replace them with sourced figures as they become available. Sourced figures (no &#8220;est.&#8221;) are potato-chip consumption per person: United States, Italy and Germany from <a href="https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/" rel="nofollow noopener" target="_blank">IndexBox world market overview (2024)</a>; South Korea and Thailand from <a href="https://www.indexbox.io/blog/potato-chips-asia-market-overview-2024-3/" rel="nofollow noopener" target="_blank">IndexBox Asia overview (2024)</a>; United Kingdom (crisps, ~6 kg) from Euromonitor as reported by <a href="https://www.potatobusiness.com/market/snackex-2017-the-brits-buy-65-of-total-savory-snacks-in-europe/" rel="nofollow noopener" target="_blank">Potato Business (2017)</a>. Sources use different methods and years, so compare with care.</p>
+  <p class="section-sub" style="font-size:.7rem;margin-top:1rem;opacity:.75">Figures for the US, Italy, Germany, South Korea and Thailand: <a href="https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/" target="_blank" rel="nofollow noopener">IndexBox 2024</a>. UK: Euromonitor 2017 (crisps). Other countries: editorial estimates.</p>
 </section>
 
 <!-- ============ NEWS ============ -->
@@ -848,7 +848,7 @@ const maxVal=Math.max(...consumptionData.map(d=>d.val));
 consumptionData.forEach(d=>{
   const row=document.createElement('div');row.className='bar-row';
   const pct=(d.val/maxVal*100).toFixed(1);
-  row.innerHTML=`<div class="bar-label">${d.country}</div><div class="bar-track"><div class="bar-fill" style="--w:${pct}%;background:${d.color}">${d.val}${d.src?'':' est.'}</div></div>`;
+  row.innerHTML=`<div class="bar-label">${d.country}</div><div class="bar-track"><div class="bar-fill" style="--w:${pct}%;background:${d.color}">${d.val}</div></div>`;
   chartEl.appendChild(row);
 });
 const barObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.querySelectorAll('.bar-fill').forEach((b,i)=>setTimeout(()=>b.classList.add('animated'),i*40));barObs.unobserve(en.target)}})},{threshold:.15});
