@@ -21,6 +21,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import morePages from './guides_more.mjs';
 
 process.on('uncaughtException', (e) => { console.error(`build_guides: ${e.message}`); process.exit(1); });
 
@@ -508,6 +509,8 @@ const GUIDES = [
   },
 ];
 
+GUIDES.push(...morePages({ amazonSearch, esc, ROOT }));
+
 // ---------- page template ----------
 const indexHtml = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 const gaSnippet = between(indexHtml, '<!-- Google tag (gtag.js) -->', '<meta charset').text.trim();
@@ -544,8 +547,10 @@ function render(g) {
       isPartOf: { '@type': 'WebSite', name: 'World of Chips', url: `${SITE}/` } },
     { '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'World of Chips', item: `${SITE}/` },
-      { '@type': 'ListItem', position: 2, name: g.crumb, item: url }] },
+      ...(g.parent ? [{ '@type': 'ListItem', position: 2, name: g.parent[1], item: `${SITE}/${g.parent[0]}/` }] : []),
+      { '@type': 'ListItem', position: g.parent ? 3 : 2, name: g.crumb, item: url }] },
     ...(g.sections.length ? [{ '@type': 'ItemList', name: g.sections[0].h2, itemListElement: g.sections[0].items.map(([n], i) => ({ '@type': 'ListItem', position: i + 1, name: stripTags(n) })) }] : []),
+    ...(g.ldExtra || []),
     { '@type': 'FAQPage', '@id': `${url}#faq`, mainEntity: g.faqs.map(([q, a]) => ({ '@type': 'Question', name: stripTags(q), acceptedAnswer: { '@type': 'Answer', text: stripTags(a) } })) },
   ] };
   const sections = g.sections.map((s) => `
@@ -567,10 +572,10 @@ ${gaSnippet}
 <link rel="canonical" href="${url}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="${url}">
-<meta property="og:title" content="${esc(g.title)}</title>
+<meta property="og:title" content="${esc(g.title)}">
 <meta property="og:description" content="${esc(g.desc)}">
 <meta property="og:site_name" content="World of Chips">
-<meta name="twitter:card" content="summary">
+${g.ogImage ? `<meta property="og:image" content="${SITE}${g.ogImage}">\n<meta name="twitter:image" content="${SITE}${g.ogImage}">\n` : ''}<meta name="twitter:card" content="${g.ogImage ? 'summary_large_image' : 'summary'}">
 <meta name="twitter:title" content="${esc(g.title)}">
 <meta name="twitter:description" content="${esc(g.desc)}">
 <script type="application/ld+json">
@@ -616,6 +621,7 @@ ${mlUniversal}
     <a href="/#consumption">Consumption</a>
     <a href="/news/">News</a>
     <a href="/snack-boxes/">Snack Boxes</a>
+    <a href="/flavors/">Flavours</a>
     <a href="/#shop">Where to Buy</a>
   </div>
 </nav>
@@ -624,17 +630,17 @@ ${mlUniversal}
 <article class="country-page active" id="${g.slug}">
   <div class="cp-hero">
     <a href="/" class="cp-back">← Back to World of Chips</a>
-    <nav class="cp-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › <span>${esc(g.crumb)}</span></nav>
+    <nav class="cp-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › ${g.parent ? `<a href="/${g.parent[0]}/">${esc(g.parent[1])}</a> › ` : ''}<span>${esc(g.crumb)}</span></nav>
     <span class="cp-flag">${g.flag}</span>
     <h1 class="cp-title">${esc(g.h1)}</h1>
     <span class="cp-region">Last checked ${CKL}</span>
     <p class="cp-intro-dark">${g.introDark}</p>
   </div>
   <div class="cp-body">
-    <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>
+${g.disc === false ? '' : `    <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>`}
 
     <p class="cp-intro">${intro}</p>
-${sections}${fill(g.extra)}
+${sections}${fill(g.body || '')}${fill(g.extra || '')}
 
     <section class="cp-section sb-faq" id="faq">
       <h2>FAQs</h2>
@@ -646,8 +652,8 @@ ${g.sources.length ? `
       <p class="sb-sources">Checked on ${CKL}: ${g.sources.map(srcLink).join(', ')}</p>
     </section>
 ` : ''}
-    <p class="aff-disc">${DISCLOSURE}</p>
-
+${g.disc === false ? '' : `    <p class="aff-disc">${DISCLOSURE}</p>
+`}
     ${newsletterBlock('    ')}
 
     <nav class="cp-cta" aria-label="More chip guides">
@@ -660,7 +666,7 @@ ${g.sources.length ? `
 </main>
 
 ${footerHtml}
-
+${(g.scriptSrc || []).map((u) => `<script src="${u}"></script>\n`).join('')}${g.script ? `<script>\n${g.script}\n</script>\n` : ''}
 </body>
 </html>
 `;

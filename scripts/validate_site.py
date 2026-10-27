@@ -125,7 +125,7 @@ def check(path, problems, form_ids=None):
             problems.append(f"{rel}: target=_blank link without rel=noopener: {href}")
         if href.startswith("/") and not href.startswith("//"):
             target = href.split("#")[0]
-            if target and target != "/" and not os.path.exists(os.path.join(ROOT, target.strip("/"), "index.html")):
+            if target and target != "/" and not os.path.exists(os.path.join(ROOT, target.strip("/"), "index.html")) and not os.path.isfile(os.path.join(ROOT, target.strip("/"))):
                 problems.append(f"{rel}: broken internal link {href}")
     return p
 
@@ -244,7 +244,7 @@ def check_ai_search(problems, pages):
             problems.append("llms.txt must start with an H1")
         for path in pages:
             if os.path.dirname(path) != ROOT:
-                url = f"{SITE}/{os.path.basename(os.path.dirname(path))}/"
+                url = f"{SITE}/{os.path.relpath(os.path.dirname(path), ROOT).replace(os.sep, '/')}/"
                 if f"({url})" not in txt:
                     problems.append(f"llms.txt does not link {url}")
     keys = [f for f in os.listdir(ROOT) if re.fullmatch(r"[0-9a-f]{32}\.txt", f)]
@@ -291,7 +291,7 @@ def check_ai_search(problems, pages):
 def main():
     problems = []
     pages, form_ids = {}, set()
-    for path in [os.path.join(ROOT, "index.html")] + sorted(glob.glob(os.path.join(ROOT, "*", "index.html"))):
+    for path in [os.path.join(ROOT, "index.html")] + [q for q in sorted(glob.glob(os.path.join(ROOT, "**", "index.html"), recursive=True)) if os.path.dirname(q) != ROOT]:
         pages[path] = check(path, problems, form_ids)
     if len(form_ids) > 1:
         problems.append(f"newsletter: pages use different MailerLite form ids {sorted(form_ids)}")
@@ -299,7 +299,7 @@ def main():
     if len(set(titles)) != len(titles):
         problems.append("duplicate <title>s")
     for path, p in pages.items():
-        slug = os.path.basename(os.path.dirname(path))
+        slug = os.path.relpath(os.path.dirname(path), ROOT).replace(os.sep, "/")
         if os.path.dirname(path) == ROOT:
             continue
         if p.canonical != f"{SITE}/{slug}/":

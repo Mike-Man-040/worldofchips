@@ -160,6 +160,31 @@ const GUIDE_LINKS = {
   india: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   spain: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
 };
+// Community finds: moderated visitor submissions from data/community_flavors.json (see README).
+// Entry: { "id": "2026-11-uk-1", "country": "united-kingdom", "city": "Leeds", "flavor": "Chip Shop Curry",
+//   "brand": "Seabrook", "description": "...", "credit": "@handle" (or ""), "photo": "/assets/community/x.jpg" (or ""),
+//   "approved": "2026-11-02" }
+const COMMUNITY = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'community_flavors.json'), 'utf8'));
+for (const e of COMMUNITY) {
+  for (const k of ['id', 'country', 'flavor', 'brand', 'description', 'approved']) if (!e[k]) throw new Error(`community_flavors.json: entry ${e.id || '?'} missing ${k}`);
+  if (!fs.existsSync(path.join(ROOT, e.country, 'index.html')) && !Object.values(countryContent).some((c) => c.slug === e.country)) throw new Error(`community_flavors.json: unknown country ${e.country}`);
+  if (e.photo && !fs.existsSync(path.join(ROOT, e.photo.replace(/^\//, '')))) throw new Error(`community_flavors.json: photo not found ${e.photo}`);
+}
+function communityCard(e, withCountry) {
+  return `<li style="background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.9rem 1rem;margin-bottom:.8rem;list-style:none">${e.photo ? `<img src="${esc(e.photo)}" alt="${esc(e.brand + ' ' + e.flavor)}" loading="lazy" style="width:100%;max-width:320px;height:auto;border-radius:8px;display:block;margin-bottom:.5rem">` : ''}<strong style="font-family:'Playfair Display',serif;color:var(--brown)">${esc(e.brand)} ${esc(e.flavor)}</strong>${withCountry ? ` &#183; <a href="/${esc(e.country)}/">${esc(e.country.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join(' '))}</a>` : ''}${e.city ? ` &#183; ${esc(e.city)}` : ''}<p style="margin:.3rem 0 0">${esc(e.description)}</p><p style="font-size:.75rem;color:var(--muted);margin-top:.3rem">${e.credit ? `Spotted by ${esc(e.credit)}` : 'Community submission'}, added ${esc(e.approved)}</p></li>`;
+}
+function communitySection(slug) {
+  const list = COMMUNITY.filter((e) => e.country === slug);
+  if (!list.length) return '';
+  return `    <section class="cp-section" id="community">
+      <h2>Community Finds</h2>
+      <ul style="margin:1rem 0 0">${list.map((e) => communityCard(e, false)).join('')}</ul>
+      <p style="font-size:.85rem"><a href="/submit-a-flavor/">Add your local flavour &#8594;</a></p>
+    </section>
+
+`;
+}
+
 function sourcesCallout(c) {
   if (!c.sources || !c.sources.length) return '';
   return `    <section class="cp-section" id="sources">
@@ -269,7 +294,7 @@ ${qa.map(([q, a]) => `      <h3>${esc(q)}</h3>\n      <p>${esc(a)}</p>`).join('\
 
 let FAQ_COUNT = 0;
 const PC_SRC = { 'United States': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/'], 'Italy': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/'], 'Germany': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/'], 'South Korea': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-asia-market-overview-2024-3/'], 'Thailand': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-asia-market-overview-2024-3/'], 'United Kingdom': ['Euromonitor via Potato Business, 2017', 'https://www.potatobusiness.com/market/snackex-2017-the-brits-buy-65-of-total-savory-snacks-in-europe/'] };
-const HOME_GUIDES = [['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy'], ['best-chip-gift-boxes', '🎁 Best chip gift boxes'],
+const HOME_GUIDES = [['pringles-index', '📊 The Pringles Index'], ['flavors', '🌍 Chip flavours of the world'], ['spiciest-chips', '🌶️ The chip spice ladder'], ['limited-edition-chips', '📅 Limited-edition drops'], ['which-chip-are-you', '❓ Which country\u2019s chip are you?'], ['make-chips-at-home', '🥔 Make chips at home'],['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy'], ['best-chip-gift-boxes', '🎁 Best chip gift boxes'],
   ['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips'], ['best-mexican-chips-to-buy-online', '🇲🇽 Best Mexican chips'],
   ['best-british-crisps-to-buy-online', '🇬🇧 Best British crisps'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'],
   ['best-international-chip-variety-packs', '🌍 International variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying chips in Europe'],
@@ -434,7 +459,7 @@ ${d.marketSize ? `      <div class="cp-stat"><div class="val">${esc(d.marketSize
       </div>
     </section>
 
-${faqSection(x, faq)}${snackBoxCallout(slug)}${guideCallout(slug)}${sourcesCallout(c)}    <section class="cp-section" id="shop">
+${faqSection(x, faq)}${snackBoxCallout(slug)}${guideCallout(slug)}${communitySection(slug)}${sourcesCallout(c)}    <section class="cp-section" id="shop">
       <h2>Try ${esc(name)} Chips at Home</h2>
       <p>Want to taste authentic ${esc(name)} flavors? Check out our top picks on Amazon:</p>
       <div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.8rem">
@@ -487,15 +512,13 @@ const snackLastmod = fs.existsSync(snackPath)
   ? (fs.readFileSync(snackPath, 'utf8').match(/"dateModified":"(\d{4}-\d{2}-\d{2})"/) || [])[1]
   : null;
 if (fs.existsSync(snackPath) && !snackLastmod) throw new Error('snack-boxes/index.html has no dateModified');
-// Buyer's guides are owned by scripts/build_guides.mjs; keep them with their dateModified.
-const GUIDE_SLUGS = ['best-mexican-chips-to-buy-online', 'best-british-crisps-to-buy-online', 'best-japanese-chips', 'where-to-buy-asian-chips-europe', 'best-international-chip-variety-packs', 'spiciest-chips-you-can-buy', 'best-chip-gift-boxes', 'best-korean-chips-to-buy-online'];
-const guideUrls = GUIDE_SLUGS.flatMap((g) => {
-  const gp = path.join(ROOT, g, 'index.html');
-  if (!fs.existsSync(gp)) return [];
-  const lm = (fs.readFileSync(gp, 'utf8').match(/"dateModified":"(\d{4}-\d{2}-\d{2})"/) || [])[1];
-  if (!lm) throw new Error(`${g}/index.html has no dateModified`);
-  return [{ loc: `${SITE}/${g}/`, freq: 'monthly', pri: '0.8', lastmod: lm }];
-});
+// Buyer's guides and the other pages built by build_guides.mjs (flavours, calendar, quiz...) own their
+// sitemap entries; keep every existing entry this script doesn't own, in order, if its page still exists.
+const ownLocs = new Set([`${SITE}/`, `${SITE}/news/`, `${SITE}/snack-boxes/`, ...sorted.map((x) => `${SITE}/${x.slug}/`)]);
+const prevSitemap = fs.existsSync(path.join(ROOT, 'sitemap.xml')) ? fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8') : '';
+const guideUrls = [...prevSitemap.matchAll(/<url>\s*<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>\s*<changefreq>([^<]+)<\/changefreq>\s*<priority>([^<]+)<\/priority>\s*<\/url>/g)]
+  .filter((m) => !ownLocs.has(m[1]) && fs.existsSync(path.join(ROOT, m[1].slice(SITE.length + 1), 'index.html')))
+  .map((m) => ({ loc: m[1], lastmod: m[2], freq: m[3], pri: m[4] }));
 const urls = [
   { loc: `${SITE}/`, freq: 'weekly', pri: '1.0' },
   ...(newsLastmod ? [{ loc: `${SITE}/news/`, freq: 'weekly', pri: '0.7', lastmod: newsLastmod }] : []),
@@ -521,6 +544,12 @@ indexHtml = replaceRegion(indexHtml, 'HASH-REDIRECT',
 <script>
 (function(){var m=location.hash.match(/^#\\/chips\\/([a-z0-9-]+)\\/?$/i);if(!m)return;var s=m[1].toLowerCase(),k=${slugList};if(k.indexOf(s)>-1)location.replace('/'+s+'/');})();
 </script>`);
+const recent = [...COMMUNITY].sort((a, b) => b.approved.localeCompare(a.approved)).slice(0, 6);
+indexHtml = replaceRegion(indexHtml, 'COMMUNITY',
+`<!-- Generated by scripts/build_country_pages.mjs from data/community_flavors.json -->
+${recent.length ? `<h3 class="section-sub" style="margin-top:2rem;font-weight:700">Community Finds</h3>
+<ul style="margin:1rem auto 0;max-width:720px;padding:0">${recent.map((e) => communityCard(e, true)).join('')}</ul>
+` : ''}<p class="section-sub" style="margin-top:1.2rem;font-size:.9rem">Spotted a flavour we're missing? <a href="/submit-a-flavor/" style="color:var(--gold-dark)">Add your local flavour &#8594;</a></p>`);
 indexHtml = replaceRegion(indexHtml, 'COUNTRY-LINKS',
 `<!-- Generated by scripts/build_country_pages.mjs -->
 <section id="countries" class="content-section">

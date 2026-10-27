@@ -31,7 +31,8 @@ const pages = locs.map((loc) => {
 
 const home = pages.find((p) => p.rel === '');
 const countries = pages.filter((p) => p.isCountry);
-const guides = pages.filter((p) => p.rel && !p.isCountry && p.rel !== 'news/');
+const flavors = pages.filter((p) => p.rel.startsWith('flavors/') && p.rel !== 'flavors/');
+const guides = pages.filter((p) => p.rel && !p.isCountry && p.rel !== 'news/' && !flavors.includes(p));
 const news = pages.filter((p) => p.rel === 'news/');
 const fact = (p, k) => (p.facts.find(([n]) => n === k) || [, ''])[1];
 const line = (p) => `- [${p.title}](${p.loc}): ${p.isCountry
@@ -56,6 +57,10 @@ ${countries.map(line).join('\n')}
 ## Buyer's guides
 
 ${guides.map(line).join('\n')}
+
+## Flavour pages
+
+${flavors.map(line).join('\n')}
 
 ## Optional
 
