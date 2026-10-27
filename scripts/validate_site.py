@@ -125,7 +125,7 @@ def check(path, problems, form_ids=None):
             problems.append(f"{rel}: target=_blank link without rel=noopener: {href}")
         if href.startswith("/") and not href.startswith("//"):
             target = href.split("#")[0]
-            if target and target != "/" and not os.path.exists(os.path.join(ROOT, target.strip("/"), "index.html")):
+            if target and target != "/" and not os.path.exists(os.path.join(ROOT, target.strip("/"), "index.html")) and not os.path.isfile(os.path.join(ROOT, target.strip("/"))):
                 problems.append(f"{rel}: broken internal link {href}")
     return p
 

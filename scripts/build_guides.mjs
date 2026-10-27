@@ -666,7 +666,7 @@ ${g.disc === false ? '' : `    <p class="aff-disc">${DISCLOSURE}</p>
 </main>
 
 ${footerHtml}
-${g.script ? `<script>\n${g.script}\n</script>\n` : ''}
+${(g.scriptSrc || []).map((u) => `<script src="${u}"></script>\n`).join('')}${g.script ? `<script>\n${g.script}\n</script>\n` : ''}
 </body>
 </html>
 `;

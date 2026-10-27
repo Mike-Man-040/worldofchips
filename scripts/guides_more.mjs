@@ -4,6 +4,7 @@
 // (Amazon served captchas, so single ASIN pages were not re-verified); no prices or specs are quoted.
 import fs from 'node:fs';
 import path from 'node:path';
+import pringlesPage from './pringles_page.mjs';
 
 const WP = (t) => `https://en.wikipedia.org/wiki/${t}`;
 const FOOD52 = 'https://food52.com/recipes/18123-homemade-potato-chips';
@@ -462,5 +463,5 @@ var m=location.search.match(/[?&]r=([a-z-]+)/);if(m)show(m[1],false);})();`;
     faqs: [['How do I add a chip flavour to World of Chips?', 'Fill in the form on this page with the brand, flavour, country and a photo of the bag you took yourself. We review submissions by hand and add approved ones to the map and the country page.'], ['Will my email address be published?', 'No. Email is optional and only used if we have a question. We publish only the name or handle you enter for credit, or no name if you leave it blank.']],
     sources: [], related: [['flavors', '🌍 Chip flavours'], ['limited-edition-chips', '📅 Limited-edition drops'], ['which-chip-are-you', '❓ Chip quiz']] };
 
-  return [...hubAndRecipe, ...cluster.map((g) => ({ ...CK, ...g })), spice, flavorIndex, ...flavorPages, calendar, quiz, submit].map((g) => ({ ...CK, ...g }));
+  return [...hubAndRecipe, ...cluster.map((g) => ({ ...CK, ...g })), spice, flavorIndex, ...flavorPages, calendar, quiz, submit, pringlesPage({ esc, ROOT, CK })].map((g) => ({ ...CK, ...g }));
 }
