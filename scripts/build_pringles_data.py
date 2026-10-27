@@ -60,7 +60,7 @@ ROWS = [
   ("IT","Italy","Europe","EUR",2.55,175,"U2 Supermercato","regular","unknown","low",
    "https://www.spesaonline.unes.it/u2/Dispensa-salata/Snack-salati-e-salse/Patatine-e-pop-corn/Pringles-Original-175-g/p/78775","€14.57/kg; listing currently out of stock, date unverified."),
   ("SE","Sweden","Europe","SEK",29.90,165,"Jula","regular","2026-10","medium",
-   "https://www.jula.se/catalog/hem-och-hushall/dagligvaror/godis/notter/pringles-032787/","181.21 kr/kg. Jula is a hardware/variety chain; ICA/Coop/Willys pages were not reachable."),
+   "https://www.jula.se/catalog/hem-och-hushall/dagligvaror/godis/notter/pringles-032787/","181.21 kr/kg. Jula is a hardware/variety chain."),
   ("DK","Denmark","Europe","DKK",28.00,165,"PriceRunner (lowest of 4 shops)","lowest_listed","2026-10","low",
    "https://www.pricerunner.dk/sp/pringles-chips.html","Lowest listed price; may be a promo."),
   ("CH","Switzerland","Europe","CHF",3.30,185,"Coop","regular","2026-10","medium",
@@ -70,7 +70,7 @@ ROWS = [
   ("HU","Hungary","Europe","HUF",1499,125,"Kifli","regular","2026-10","medium",
    "https://www.kifli.hu/en-HU/122699-pringles-original","Hungarian listing is a 125 g can."),
   ("PL","Poland","Europe","PLN",17.81,165,"Kaufland.pl marketplace seller","marketplace","2026-10","low",
-   "https://www.kaufland.pl/product/491849545/","Third-party seller on Kaufland marketplace, not a store shelf price. Replace when a grocery price is found."),
+   "https://www.kaufland.pl/product/491849545/","Third-party seller on Kaufland marketplace, not a store shelf price."),
   ("TR","Turkey","Europe","TRY",325.00,165,"Trendyol","regular","2026-10","medium",
    "https://www.trendyol.com/pringles-cips-x-b107770-c103949","Akakçe lowest of 4 sellers was 345 TL on 2026-09-10. Imported; high inflation, price moves fast."),
   ("RU","Russia","Europe","RUB",399,165,"VkusVill","regular","2026-10","medium",
@@ -111,12 +111,12 @@ BACKLOG = [
   {"iso2":"PK","country":"Pakistan","currency":"PKR","local_price":1099,"pack_grams":165,"retailer":"foodpanda mart (imported)","source_url":"https://www.foodpanda.pk/groceries/product/EG9HJ3/pringles-original-165g","reason":"Need a PKR/USD rate"},
   {"iso2":"KW","country":"Kuwait","currency":"KWD","local_price":0.795,"pack_grams":165,"retailer":"Lulu","source_url":"https://gcc.luluhypermarket.com/en-kw/pringles-original-chips-165-g/p/22635/","reason":"Need a KWD/USD rate"},
   {"iso2":"OM","country":"Oman","currency":"OMR","local_price":0.990,"pack_grams":165,"retailer":"Lulu","source_url":"https://gcc.luluhypermarket.com/en-om/pringles-original-chips-165-g/p/22635/","reason":"Need an OMR/USD rate"},
-  {"iso2":"NG","country":"Nigeria","currency":"NGN","local_price":1500,"pack_grams":165,"retailer":"GoMed (pharmacy, 'last known price')","source_url":"https://gomed.ng/p/9828-pringles-original-165g","reason":"Stale; almost certainly pre-devaluation. Do not publish."},
+  {"iso2":"NG","country":"Nigeria","currency":"NGN","local_price":1500,"pack_grams":165,"retailer":"GoMed (pharmacy, 'last known price')","source_url":"https://gomed.ng/p/9828-pringles-original-165g","reason":"Only an outdated price found"},
   {"iso2":"BE","country":"Belgium","currency":"EUR","local_price":1.93,"pack_grams":165,"retailer":"Belgian supermarket test (DH)","source_url":"https://www.dhnet.be/conso/consommation/2025/04/21/le-grand-test-des-marques-les-chips-pringles-et-leur-tube-mythique-sont-mis-face-a-la-concurrence-comparatif-FO6UR75C2BFQ7N46PSNKVI643M/","reason":"April 2025, too old"},
   {"iso2":"AR","country":"Argentina","currency":"ARS","local_price":None,"pack_grams":None,"retailer":None,"source_url":None,"reason":"No price found"},
   {"iso2":"PE","country":"Peru","currency":"PEN","local_price":None,"pack_grams":None,"retailer":None,"source_url":None,"reason":"No price found"},
-  {"iso2":"NO","country":"Norway","currency":"NOK","local_price":None,"pack_grams":None,"retailer":None,"source_url":None,"reason":"No price found (FX available: ECB)"},
-  {"iso2":"SG","country":"Singapore","currency":"SGD","local_price":None,"pack_grams":None,"retailer":None,"source_url":None,"reason":"Only multipacks found (FX available: ECB)"},
+  {"iso2":"NO","country":"Norway","currency":"NOK","local_price":None,"pack_grams":None,"retailer":None,"source_url":None,"reason":"No price found"},
+  {"iso2":"SG","country":"Singapore","currency":"SGD","local_price":None,"pack_grams":None,"retailer":None,"source_url":None,"reason":"Only multipacks found"},
 ]
 
 def r(x, n=2):

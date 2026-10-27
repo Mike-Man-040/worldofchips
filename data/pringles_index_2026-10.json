@@ -157,7 +157,7 @@
       "price_observed": "2026-10",
       "confidence": "low",
       "source_url": "https://www.kaufland.pl/product/491849545/",
-      "notes": "Third-party seller on Kaufland marketplace, not a store shelf price. Replace when a grocery price is found.",
+      "notes": "Third-party seller on Kaufland marketplace, not a store shelf price.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
       "retrieved": "2026-10-27"
     },
@@ -432,7 +432,7 @@
       "price_observed": "2026-10",
       "confidence": "medium",
       "source_url": "https://www.jula.se/catalog/hem-och-hushall/dagligvaror/godis/notter/pringles-032787/",
-      "notes": "181.21 kr/kg. Jula is a hardware/variety chain; ICA/Coop/Willys pages were not reachable.",
+      "notes": "181.21 kr/kg. Jula is a hardware/variety chain.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
       "retrieved": "2026-10-27"
     },
@@ -846,7 +846,7 @@
       "pack_grams": 165,
       "retailer": "GoMed (pharmacy, 'last known price')",
       "source_url": "https://gomed.ng/p/9828-pringles-original-165g",
-      "reason": "Stale; almost certainly pre-devaluation. Do not publish."
+      "reason": "Only an outdated price found"
     },
     {
       "iso2": "BE",
@@ -886,7 +886,7 @@
       "pack_grams": null,
       "retailer": null,
       "source_url": null,
-      "reason": "No price found (FX available: ECB)"
+      "reason": "No price found"
     },
     {
       "iso2": "SG",
@@ -896,7 +896,7 @@
       "pack_grams": null,
       "retailer": null,
       "source_url": null,
-      "reason": "Only multipacks found (FX available: ECB)"
+      "reason": "Only multipacks found"
     }
   ],
   "fx_local_per_usd": {

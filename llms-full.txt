@@ -795,11 +795,11 @@ A: Among subscription boxes we checked in October 2026, Daebak’s Korean SnackF
 **Q: How much do imported chips cost on Amazon?**
 A: Expect to pay roughly $4 to $5 per small 55–60 g imported bag when buying multipacks on Amazon.com: for example, when we checked on 22 October 2026, a 3-pack of 2.11 oz Haitai Honey Butter Chips was $14.50 ($4.83/bag) and a 12-pack of 2.01 oz Koikeya Karamucho Hot Chili was $49.98 ($4.17/bag), because air/sea freight and importer handling are built into the price.
 
-### Spiciest Chips You Can Buy Online in 2026: Takis, Pringles Hot Ones & More
+### Spicy Chips to Buy Online (2026): 7 Hot Picks on Amazon
 
 URL: https://worldofchips.com/spiciest-chips-you-can-buy/
 
-Seven hot chips you can order on Amazon.com, from Takis Fuego and Blue Heat (rated Extreme on the Takis Heat-O-Meter) to Pringles Hot Ones Los Calientes and Cape Cod Sweet & Spicy Jalapeño.
+A shopping list, not a heat ranking: seven spicy chips you can order on Amazon.com, from Takis Fuego and Blue Heat (rated Extreme on the Takis Heat-O-Meter) to Pringles Hot Ones Los Calientes and Cape Cod Sweet & Spicy Jalapeño.
 
 **Q: What are the spiciest Takis?**
 A: On the Amazon listings we checked, Takis rates both Fuego (chilli pepper and lime) and Blue Heat (hot chilli pepper) as Extreme on its own Heat-O-Meter. The Blue Heat listing describes it as a flavour that battles for the brand’s hottest snack.
@@ -966,11 +966,11 @@ A: Liquid vinegar makes chips soggy, so use a vinegar powder or a salt & vinegar
 **Q: What seasonings suit air-fryer crisps?**
 A: BBC Good Food suggests barbecue rub, garlic granules or paprika, tossed with the oiled slices before cooking.
 
-### Spiciest Chips Ranked: The Chip Spice Ladder from Mild to Paqui
+### Spiciest Chips Ranked by Heat: Mild to One Chip Challenge
 
 URL: https://worldofchips.com/spiciest-chips/
 
-Eight spicy chips ranked on one ladder, from Cape Cod Sweet & Spicy Jalapeño through Takis Blue Heat to the discontinued Paqui One Chip Challenge, with pepper Scoville figures only where a source exists.
+A heat ranking, not a shopping list: eight spicy chips ranked on one ladder, from Cape Cod Sweet & Spicy Jalapeño through Takis Blue Heat to the discontinued Paqui One Chip Challenge, with pepper Scoville figures only where a source exists.
 
 **Q: What is the spiciest chip ever sold?**
 A: The Paqui One Chip Challenge chip, made with Carolina Reaper (and later Naga Viper) peppers, was marketed as one of the hottest. Paqui withdrew it in September 2023 after a teenager died, so it is no longer sold.
@@ -1015,7 +1015,7 @@ Five quick questions match you to a country's signature chip, from British salt 
 A: Each answer adds points to one or more countries, and the country with the most points is your result. The scoring is our own light-hearted editorial mapping, not a scientific test.
 
 **Q: Can I share my quiz result?**
-A: Yes. Your result gets its own link (for example worldofchips.com/which-chip-are-you/?r=japan) that opens straight to the same result.
+A: Yes. Your result gets its own link (for example worldofchips.com/which-chip-are-you/r/japan/) that opens straight to the same result.
 
 ### Add Your Local Chip Flavour to the World of Chips Map
 
@@ -1045,7 +1045,7 @@ A: India and France, at about $1.08 per 100 g. India’s figure is the legal max
 A: Pringles cans differ by market, from about 102 g in parts of Asia to 165 g in most of Europe and 195 g in France, so comparing whole cans would be misleading.
 
 **Q: How reliable is the Pringles Index?**
-A: It is one retailer per country at one point in time, a snapshot rather than an average. Low-confidence rows (ranges, marketplace or undated prices) are marked with an asterisk and can be hidden.
+A: It uses one main source per country at one point in time, a snapshot rather than an average. Low-confidence rows (ranges, marketplace or undated prices) are marked with an asterisk and can be hidden.
 
 ### Chip Shrinkflation Tracker: Lay's, Walkers, Pringles & More, Sourced
 
@@ -1061,6 +1061,18 @@ A: Yes, in several markets. For example, Verbraucherzentrale Hamburg recorded Ge
 
 **Q: What is the biggest chip shrinkflation case in the log?**
 A: Smiths Frazzles and Chipsticks multipacks (United Kingdom, 2021), which went from 8 packs to 6 packs, a change of -25.0%.
+
+### About World of Chips: Who Runs the Site and How It Works
+
+URL: https://worldofchips.com/about/
+
+World of Chips is a guide to potato chips around the world, founded by Michael van der Looij. How we research, source and fund the site.
+
+**Q: Who runs World of Chips?**
+A: World of Chips was founded by Michael van der Looij, who has a background in finance.
+
+**Q: Does World of Chips use affiliate links?**
+A: Yes. Some Amazon links are affiliate links, and World of Chips earns from qualifying purchases. This doesn’t change what we write.
 
 ## News
 

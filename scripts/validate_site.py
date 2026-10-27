@@ -124,7 +124,7 @@ def check(path, problems, form_ids=None):
         if a.get("target") == "_blank" and "noopener" not in (a.get("rel") or "").split():
             problems.append(f"{rel}: target=_blank link without rel=noopener: {href}")
         if href.startswith("/") and not href.startswith("//"):
-            target = href.split("#")[0]
+            target = href.split("#")[0].split("?")[0]
             if target and target != "/" and not os.path.exists(os.path.join(ROOT, target.strip("/"), "index.html")) and not os.path.isfile(os.path.join(ROOT, target.strip("/"))):
                 problems.append(f"{rel}: broken internal link {href}")
     return p
@@ -291,8 +291,22 @@ def check_ai_search(problems, pages):
 def main():
     problems = []
     pages, form_ids = {}, set()
+    share_stub = lambda q: os.sep + os.path.join("which-chip-are-you", "r") + os.sep in q
     for path in [os.path.join(ROOT, "index.html")] + [q for q in sorted(glob.glob(os.path.join(ROOT, "**", "index.html"), recursive=True)) if os.path.dirname(q) != ROOT]:
+        if share_stub(path):
+            # Quiz-result share pages: meta tags for social previews, then a redirect to the quiz. noindex, not in sitemap.
+            h = open(path, encoding="utf-8").read(); k = os.path.basename(os.path.dirname(path))
+            if 'content="noindex' not in h or f"/assets/og/which-chip-are-you-r-{k}.png" not in h or f"/which-chip-are-you/?r={k}" not in h:
+                problems.append(f"{os.path.relpath(path, ROOT)}: share page needs noindex, its og image and the quiz redirect")
+            continue
         pages[path] = check(path, problems, form_ids)
+    for path, p in pages.items():
+        h = open(path, encoding="utf-8").read()
+        m = re.search(r'<meta property="og:image" content="https://worldofchips\.com(/[^"]+)"', h)
+        if not m:
+            problems.append(f"{os.path.relpath(path, ROOT)}: missing og:image")
+        elif not os.path.isfile(os.path.join(ROOT, m.group(1).lstrip("/"))):
+            problems.append(f"{os.path.relpath(path, ROOT)}: og:image file missing {m.group(1)} (run scripts/build_og_images.py)")
     if len(form_ids) > 1:
         problems.append(f"newsletter: pages use different MailerLite form ids {sorted(form_ids)}")
     titles = [p.title for p in pages.values()]

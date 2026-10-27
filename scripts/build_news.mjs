@@ -203,7 +203,12 @@ ${gaSnippet}
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:site_name" content="World of Chips">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="${SITE}/assets/og/news.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${esc(title)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="${SITE}/assets/og/news.png">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(desc)}">
 <script type="application/ld+json">

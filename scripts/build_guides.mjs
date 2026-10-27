@@ -87,6 +87,7 @@ const amz = (href, label) => `<a href="${esc(href)}" target="_blank" rel="sponso
 const ext = (href, label) => `<a href="${esc(href)}" target="_blank" rel="nofollow noopener">${label}</a>`;
 const srcLink = (u) => ext(u, esc(u.replace(/^https?:\/\//, '')));
 const DISCLOSURE = 'As an Amazon Associate, World of Chips earns from qualifying purchases. Links marked &#8220;on Amazon&#8221; are affiliate links. This doesn&#8217;t affect our editorial content &#8212; we only feature products we genuinely think chip lovers will enjoy.';
+const AUTHOR = { '@type': 'Person', '@id': `${SITE}/about/#michael`, name: 'Michael van der Looij', jobTitle: 'Founder', url: `${SITE}/about/`, worksFor: { '@type': 'Organization', name: 'World of Chips', url: `${SITE}/` } };
 
 // ---------- guide data ----------
 const GUIDES = [
@@ -281,12 +282,12 @@ const GUIDES = [
     slug: 'spiciest-chips-you-can-buy',
     checked: '2026-10-26', checkedLabel: '26 October 2026',
     flag: '🌶️',
-    crumb: 'Spiciest Chips',
-    h1: 'The Spiciest Chips You Can Buy Online (2026)',
-    title: 'Spiciest Chips You Can Buy Online in 2026: Takis, Pringles Hot Ones & More | World of Chips',
-    desc: 'Seven hot chips you can order on Amazon.com, from Takis Fuego and Blue Heat (rated Extreme on the Takis Heat-O-Meter) to Pringles Hot Ones Los Calientes and Cape Cod Sweet & Spicy Jalape\u00f1o.',
-    introDark: 'Seven hot chips you can actually order online, with the heat claims each maker puts on its own listing.',
-    intro: 'Spicy chips are one of the fastest ways to taste how different countries do heat: Mexico&#8217;s chilli-and-lime, American hot-sauce flavours and jalape&#241;o kettle chips. Below are seven spicy chips with Amazon.com product pages that we opened on ${LAST_CHECKED_LABEL} and that showed an add-to-cart button. We don&#8217;t rank them on a Scoville scale, because no maker publishes one for its chips. Instead we quote how each brand describes its own heat. We don&#8217;t quote prices either, because they change often and vary by seller.',
+    crumb: 'Spicy Chips to Buy',
+    h1: 'Hot Chips to Buy Online: 7 Spicy Picks on Amazon (2026)',
+    title: 'Spicy Chips to Buy Online (2026): 7 Hot Picks on Amazon | World of Chips',
+    desc: 'A shopping list, not a heat ranking: seven spicy chips you can order on Amazon.com, from Takis Fuego and Blue Heat (rated Extreme on the Takis Heat-O-Meter) to Pringles Hot Ones Los Calientes and Cape Cod Sweet & Spicy Jalape\u00f1o.',
+    introDark: 'A buying guide: seven hot chips you can actually order online, with the heat claims each maker puts on its own listing.',
+    intro: 'Spicy chips are one of the fastest ways to taste how different countries do heat: Mexico&#8217;s chilli-and-lime, American hot-sauce flavours and jalape&#241;o kettle chips. Below are seven spicy chips with Amazon.com product pages that we opened on ${LAST_CHECKED_LABEL} and that showed an add-to-cart button. We don&#8217;t rank them on a Scoville scale, because no maker publishes one for its chips. Instead we quote how each brand describes its own heat. We don&#8217;t quote prices either, because they change often and vary by seller. Want to know which chip is actually hottest? See our <a href="/spiciest-chips/">Chip Spice Ladder</a>, which ranks heat from mild to the discontinued One Chip Challenge.',
     sections: [
       { id: 'picks', h2: 'The Spicy Chips', note: '', items: [
         ['Takis Fuego Rolled Tortilla Chips (17 oz, pack of 2)', 'Barcel&#8217;s best-known flavour. The listing calls it &#8220;zesty and intensely hot chili pepper and lime&#8221;, rated <strong>Extreme</strong> on the Takis Heat-O-Meter. Takis were invented in Mexico; see our <a href="/mexico/">Mexico chip guide</a>.', 'dp:B0D14XB2HR'],
@@ -324,7 +325,7 @@ const GUIDES = [
       ['What is a milder spicy chip to start with?', 'Cape Cod Sweet &amp; Spicy Jalape&#241;o pairs jalape&#241;o with a sweet touch on kettle-cooked chips. Pringles x Hot Ones Rojo uses medium-spice jalape&#241;o and habanero hot-sauce flavours.'],
     ],
     sources: [],
-    related: [['mexico', '🇲🇽 Mexico chip guide'], ['united-states', '🇺🇸 United States'], ['japan', '🇯🇵 Japan (Karamucho)'], ['best-chip-gift-boxes', '🎁 Chip gift boxes'], ['best-international-chip-variety-packs', '🌍 International variety packs']],
+    related: [['spiciest-chips', '🌶️ Spice ladder: ranked by heat'], ['mexico', '🇲🇽 Mexico chip guide'], ['united-states', '🇺🇸 United States'], ['japan', '🇯🇵 Japan (Karamucho)'], ['best-chip-gift-boxes', '🎁 Chip gift boxes'], ['best-international-chip-variety-packs', '🌍 International variety packs']],
   },
   {
     slug: 'best-chip-gift-boxes',
@@ -342,7 +343,7 @@ const GUIDES = [
         ['Ultimate Variety Sampler Care Package (40 count)', 'A 40-item box (12&#8243; &#215; 11&#8243; &#215; 3&#8243;) mixing chips, cookies, bars, popcorn and crackers. The listing says gift wrapping and a message can be added at checkout.', 'dp:B0GGVB8P7F'],
         ['Frito-Lay Flavor Variety Pack (50 bags)', 'Fifty single-serve bags from the Frito-Lay range, 50 oz in total. It suits office or party gifting rather than a dressed-up present.', 'dp:B00E230CKE'],
         ['Wise Snacks Grab &amp; Snack Variety Pack (42 bags)', 'Forty-two individually packed bags from Wise, 39 oz in total. The listing pitches it for lunchboxes, offices and parties.', 'dp:B0HJLYJ4QJ'],
-        ['Takis Variety Pack (18 &#215; 1 oz)', 'Eighteen 1 oz bags of Takis rolled tortilla chips: five Fuego, five Blue Heat, four Nitro and four Crunchy Fajitas. The listing title also says &#8220;Pack of 2&#8221;, so check the quantity at checkout. A good gift for a spice fan; see also our <a href="/spiciest-chips-you-can-buy/">spiciest chips guide</a>.', 'dp:B0FBXZDS3Q'],
+        ['Takis Variety Pack (18 &#215; 1 oz)', 'Eighteen 1 oz bags of Takis rolled tortilla chips: five Fuego, five Blue Heat, four Nitro and four Crunchy Fajitas. The listing title also says &#8220;Pack of 2&#8221;, so check the quantity at checkout. A good gift for a spice fan; see also our <a href="/spiciest-chips-you-can-buy/">spicy chips buying guide</a>.', 'dp:B0FBXZDS3Q'],
         ['Red Rock Deli Variety 10 Pack (Australia)', 'Ten bags of Australian Red Rock Deli chips in flavours such as Sea Salt, Honey Soy Chicken, Sweet Chilli &amp; Sour Cream, and Sea Salt &amp; Balsamic Vinegar. More in our <a href="/australia/">Australia chip guide</a>.', 'dp:B01L7Z11SQ'],
         ['Walkers MEGA Monster Munch Pickled Onion (6 pack)', 'A British classic: six bags of pickled onion Monster Munch corn snacks, in the bigger MEGA size. More British crisps in our <a href="/united-kingdom/">UK chip guide</a>.', 'dp:B004ISJK38'],
       ] },
@@ -372,7 +373,7 @@ const GUIDES = [
       ['What is the difference between a gift box and a variety pack?', 'A gift box is packaged to be given, often with mixed sweet and savoury snacks and a tag or message. A variety pack is a bulk box of single-serve chip bags, better value for offices, parties or stocking a pantry, but plainly packaged.'],
     ],
     sources: [],
-    related: [['snack-boxes', '🍱 Snack boxes compared'], ['best-international-chip-variety-packs', '🌍 International variety packs'], ['spiciest-chips-you-can-buy', '🌶️ Spiciest chips'], ['united-states', '🇺🇸 United States'], ['australia', '🇦🇺 Australia'], ['united-kingdom', '🇬🇧 United Kingdom']],
+    related: [['snack-boxes', '🍱 Snack boxes compared'], ['best-international-chip-variety-packs', '🌍 International variety packs'], ['spiciest-chips-you-can-buy', '🌶️ Spicy chips to buy'], ['united-states', '🇺🇸 United States'], ['australia', '🇦🇺 Australia'], ['united-kingdom', '🇬🇧 United Kingdom']],
   },
   {
     slug: 'best-korean-chips-to-buy-online',
@@ -427,7 +428,7 @@ const GUIDES = [
     title: 'Best Mexican Chips to Buy Online (2026): Takis, Sabritas & Barcel | World of Chips',
     desc: 'Mexican chips you can order on Amazon.com: Takis Fuego and variety packs, Sabritas Chile Limón, Lay\u2019s Limón and Barcel Chip\u2019s Jalapeño. Chilli, lime and the brands behind them.',
     introDark: 'Chilli, lime and the two snack giants behind them: Sabritas and Barcel.',
-    intro: 'Mexican snacking runs on lime, salt, chamoy, tamarind and chile. Two companies dominate. <strong>Sabritas</strong> began in Mexico City in 1943 and joined PepsiCo in 1966. <strong>Barcel</strong>, Grupo Bimbo&#8217;s snack arm, began in 1977 and makes Chip&#8217;s potato chips and Takis. Takis were invented in 1999, and the purple-bag Fuego arrived in 2006. Below are seven Amazon.com listings, all already featured on our site: four on the <a href="/mexico/">Mexico page</a> and three in our <a href="/spiciest-chips-you-can-buy/">spiciest chips guide</a>. We don&#8217;t quote prices, because they change often.',
+    intro: 'Mexican snacking runs on lime, salt, chamoy, tamarind and chile. Two companies dominate. <strong>Sabritas</strong> began in Mexico City in 1943 and joined PepsiCo in 1966. <strong>Barcel</strong>, Grupo Bimbo&#8217;s snack arm, began in 1977 and makes Chip&#8217;s potato chips and Takis. Takis were invented in 1999, and the purple-bag Fuego arrived in 2006. Below are seven Amazon.com listings, all already featured on our site: four on the <a href="/mexico/">Mexico page</a> and three in our <a href="/spiciest-chips-you-can-buy/">spicy chips buying guide</a>. We don&#8217;t quote prices, because they change often.',
     sections: [
       { id: 'picks', h2: 'Mexican Chips to Buy', note: '', items: [
         ['Takis Variety Pack (18 bags)', 'Fuego, Blue Heat and more from Barcel in one box: the easiest way to find your Takis flavour.', 'dp:B0DG6345BV'],
@@ -462,7 +463,7 @@ const GUIDES = [
       ['What flavours are typical of Mexican chips?', 'Lime, salt and chile above all, often with chamoy or tamarind. In Mexico, chips are often &#8220;prepared&#8221; with hot sauce, lime and toppings rather than eaten plain.'],
     ],
     sources: [],
-    related: [['mexico', '🇲🇽 Mexico chip guide'], ['spiciest-chips-you-can-buy', '🌶️ Spiciest chips'], ['united-states', '🇺🇸 United States'], ['best-chip-gift-boxes', '🎁 Chip gift boxes']],
+    related: [['mexico', '🇲🇽 Mexico chip guide'], ['spiciest-chips-you-can-buy', '🌶️ Spicy chips to buy'], ['united-states', '🇺🇸 United States'], ['best-chip-gift-boxes', '🎁 Chip gift boxes']],
   },
   {
     slug: 'best-british-crisps-to-buy-online',
@@ -510,6 +511,33 @@ const GUIDES = [
 ];
 
 GUIDES.push(...morePages({ amazonSearch, esc, ROOT }));
+GUIDES.push({ slug: 'about', flag: '🥔', crumb: 'About', checked: '2026-10-27', checkedLabel: '27 October 2026', disc: false,
+  h1: 'About World of Chips',
+  title: 'About World of Chips: Who Runs the Site and How It Works | World of Chips',
+  desc: 'World of Chips is a guide to potato chips around the world, founded by Michael van der Looij. How we research, source and fund the site.',
+  introDark: 'A guide to potato chips around the world: brands, flavours, prices and where to buy them.',
+  intro: 'World of Chips covers potato chips (crisps, not fries) country by country: the brands people actually buy, the flavours that only exist in one place, and where to get them online.',
+  sections: [],
+  body: `
+    <section class="cp-section" id="founder">
+      <h2>Who Runs World of Chips</h2>
+      <p><strong>Michael van der Looij</strong> is the founder of World of Chips. He has a background in finance and writes and checks the guides, including the <a href="/pringles-index/">Pringles Index</a> price comparison.</p>
+    </section>
+    <section class="cp-section" id="how">
+      <h2>How We Work</h2>
+      <ul class="sb-list">
+        <li>Facts and figures link to their sources, and each guide shows the date it was last checked.</li>
+        <li>Where we can&#8217;t find a reliable source, we say so instead of guessing.</li>
+        <li>Some links to Amazon are affiliate links: as an Amazon Associate, World of Chips earns from qualifying purchases. This doesn&#8217;t change what we write.</li>
+      </ul>
+    </section>
+    <section class="cp-section" id="contact">
+      <h2>Contact</h2>
+      <p>Email <a href="mailto:michaelvdlooij@gmail.com">michaelvdlooij@gmail.com</a>, or <a href="/submit-a-flavor/">send us a local flavour</a> we&#8217;re missing.</p>
+    </section>`,
+  ldExtra: [AUTHOR],
+  faqs: [['Who runs World of Chips?', 'World of Chips was founded by Michael van der Looij, who has a background in finance.'], ['Does World of Chips use affiliate links?', 'Yes. Some Amazon links are affiliate links, and World of Chips earns from qualifying purchases. This doesn&#8217;t change what we write.']],
+  sources: [], related: [['pringles-index', '📊 Pringles Index'], ['flavors', '🌍 Chip flavours'], ['submit-a-flavor', '📸 Add your flavour']] });
 
 // ---------- page template ----------
 const indexHtml = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
@@ -533,6 +561,14 @@ const newsletterBlock = (indent) => `<aside class="nl nl-compact" id="newsletter
 ${nlForm}
 </aside>`.split('\n').map((l, i) => (i ? indent + (l.startsWith('<aside') || l.startsWith('</aside') ? '' : '  ') + l : l)).join('\n');
 
+// Author box + Person schema on buying guides and the Pringles Index (facts only: name, role, finance background).
+const hasAuthor = (g) => g.slug === 'pringles-index' || /^best-|-buy|^where-to-buy-|^chip-seasoning-powders$/.test(g.slug);
+const authorBox = `
+    <aside class="cp-section" aria-label="About the author" style="background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:1rem 1.2rem">
+      <p style="margin:0"><strong style="color:var(--brown);font-family:'Playfair Display',serif">Michael van der Looij, founder of World of Chips</strong></p>
+      <p class="sb-muted" style="margin-top:.4rem">Michael has a background in finance and runs World of Chips, a guide to potato chips from around the world: the brands, the flavours and what they cost. Every guide links to its sources. <a href="/about/">About World of Chips</a></p>
+    </aside>
+`;
 const MORE = [['pringles-index', '📊 Pringles Index'], ['shrinkflation', '📉 Shrinkflation'], ['spiciest-chips', '🌶️ Spice Ladder'], ['which-chip-are-you', '❓ Chip Quiz'], ['make-chips-at-home', '🥔 Make at Home'], ['flavors', '🌍 Flavours'], ['limited-edition-chips', '📅 Drops'], ['submit-a-flavor', '📸 Add your flavour']];
 const isFeature = (slug) => MORE.some(([s]) => s === slug) || slug.startsWith('flavors/') || ['homemade-crisps-recipe', 'best-mandoline-slicers-for-chips', 'best-deep-fryers-for-chips', 'best-air-fryers-for-chips', 'chip-seasoning-powders'].includes(slug);
 const moreRow = (slug) => `
@@ -546,12 +582,13 @@ function render(g) {
   const fill = (t) => t.replace(/\$\{LAST_CHECKED_LABEL\}/g, CKL);
   const href = (h) => (h.startsWith('dp:') ? amazonDp(h.slice(3)) : h);
   const url = `${SITE}/${g.slug}/`;
+  const ogImg = `/assets/og/${g.slug.replace(/\//g, '-')}.png`;
   for (const [s] of g.related) if (!fs.existsSync(path.join(ROOT, s, 'index.html')) && !GUIDES.some((x) => x.slug === s)) throw new Error(`missing page /${s}/`);
   const intro = fill(g.intro);
   const ld = { '@context': 'https://schema.org', '@graph': [
     { '@type': 'Article', '@id': `${url}#article`, headline: g.h1, description: g.desc, url, mainEntityOfPage: { '@type': 'WebPage', '@id': url },
       inLanguage: 'en', dateModified: CK,
-      author: { '@type': 'Organization', name: 'World of Chips', url: `${SITE}/` },
+      author: hasAuthor(g) ? AUTHOR : { '@type': 'Organization', name: 'World of Chips', url: `${SITE}/` },
       publisher: { '@type': 'Organization', name: 'World of Chips', url: `${SITE}/` },
       isPartOf: { '@type': 'WebSite', name: 'World of Chips', url: `${SITE}/` } },
     { '@type': 'BreadcrumbList', itemListElement: [
@@ -584,7 +621,12 @@ ${gaSnippet}
 <meta property="og:title" content="${esc(g.title)}">
 <meta property="og:description" content="${esc(g.desc)}">
 <meta property="og:site_name" content="World of Chips">
-${g.ogImage ? `<meta property="og:image" content="${SITE}${g.ogImage}">\n<meta name="twitter:image" content="${SITE}${g.ogImage}">\n` : ''}<meta name="twitter:card" content="${g.ogImage ? 'summary_large_image' : 'summary'}">
+<meta property="og:image" content="${SITE}${ogImg}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${esc(g.title)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="${SITE}${ogImg}">
 <meta name="twitter:title" content="${esc(g.title)}">
 <meta name="twitter:description" content="${esc(g.desc)}">
 <script type="application/ld+json">
@@ -640,7 +682,7 @@ ${g.disc === false ? '' : `    <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>
     <p class="cp-intro">${intro}</p>
 ${sections}${fill(g.body || '')}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
 
-    <section class="cp-section sb-faq" id="faq">
+${hasAuthor(g) ? authorBox : ''}    <section class="cp-section sb-faq" id="faq">
       <h2>FAQs</h2>
       ${g.faqs.map(([q, a]) => `<h3>${q}</h3>\n      <p>${a}</p>`).join('\n      ')}
     </section>
@@ -679,7 +721,53 @@ if (at < 0) throw new Error('sitemap.xml has no <url> entries');
 const blocks = GUIDES.map((g) => `  <url>\n    <loc>${SITE}/${g.slug}/</loc>\n    <lastmod>${g.checked || LAST_CHECKED}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`).join('');
 const newSitemap = sm.slice(0, at + 7) + blocks + sm.slice(at + 7);
 
-const outputs = [...GUIDES.map((g) => [path.join(ROOT, g.slug, 'index.html'), render(g)]), [sitemapPath, newSitemap]];
+// ---------- quiz result share pages (/which-chip-are-you/r/<country>/) ----------
+// Static landing pages so each result has its own og:image / title when shared. People are sent
+// straight on to the quiz with ?r=<country>; crawlers read the meta tags. noindex, not in the sitemap.
+const quizG = GUIDES.find((g) => g.quizResults);
+const quizPage = (k, [flag, name, blurb]) => {
+  const plainName = stripTags(name).replace(/&amp;/g, '&');
+  const t = `I\u2019m ${plainName}! Which country\u2019s chip are you? | World of Chips`;
+  const d = `${stripTags(blurb).replace(/&amp;/g, '&')} Take the five-question World of Chips quiz to find your chip.`;
+  const u = `${SITE}/which-chip-are-you/r/${k}/`, img = `${SITE}/assets/og/which-chip-are-you-r-${k}.png`, to = `/which-chip-are-you/?r=${k}`;
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${esc(t)}</title>
+<meta name="description" content="${esc(d)}">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="${SITE}/which-chip-are-you/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="${u}">
+<meta property="og:title" content="${esc(t)}">
+<meta property="og:description" content="${esc(d)}">
+<meta property="og:site_name" content="World of Chips">
+<meta property="og:image" content="${img}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${esc(t)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(t)}">
+<meta name="twitter:description" content="${esc(d)}">
+<meta name="twitter:image" content="${img}">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="stylesheet" href="/assets/site.css">
+<script>location.replace(${JSON.stringify(to)});</script>
+</head>
+<body>
+<main style="max-width:640px;margin:3rem auto;padding:0 1rem;text-align:center">
+<h1 class="cp-title" style="color:var(--brown)">You are ${name}!</h1>
+<p>${blurb}</p>
+<p><a href="${to}" class="cp-explore-link">See the result and take the quiz &#8594;</a></p>
+</main>
+</body>
+</html>
+`;
+};
+const quizOutputs = quizG ? Object.entries(quizG.quizResults).map(([k, r]) => [path.join(ROOT, 'which-chip-are-you', 'r', k, 'index.html'), quizPage(k, r)]) : [];
+const outputs = [...GUIDES.map((g) => [path.join(ROOT, g.slug, 'index.html'), render(g)]), ...quizOutputs, [sitemapPath, newSitemap]];
 if (CHECK) {
   const stale = outputs.filter(([p, body]) => !fs.existsSync(p) || fs.readFileSync(p, 'utf8') !== body).map(([p]) => path.relative(ROOT, p));
   if (stale.length) { console.error(`Guide output out of date: ${stale.join(', ')}. Run: node scripts/build_guides.mjs`); process.exit(1); }
