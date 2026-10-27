@@ -27,7 +27,12 @@
 <meta property="og:title" content="Potato Chips Around the World: Brands &amp; Flavors from 28 Countries | World of Chips">
 <meta property="og:description" content="Potato chips from 28 countries: the top brands, popular and unusual flavors, snacking culture and where to buy them online, from Japan&#8217;s Calbee to Mexico&#8217;s Takis.">
 <meta property="og:site_name" content="World of Chips">
+<meta property="og:image" content="https://worldofchips.com/assets/og/home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="World of Chips: potato chips around the world">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://worldofchips.com/assets/og/home.png">
 <meta name="twitter:title" content="Potato Chips Around the World: Brands &amp; Flavors from 28 Countries | World of Chips">
 <meta name="twitter:description" content="Potato chips from 28 countries: the top brands, popular and unusual flavors, snacking culture and where to buy them online, from Japan&#8217;s Calbee to Mexico&#8217;s Takis.">
 <script type="application/ld+json">
@@ -87,15 +92,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);o
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .hero-eyebrow span{font-size:.68rem;color:var(--gold-light);text-transform:uppercase;letter-spacing:.22em;font-weight:600}
 
-.hero h1{
+.hero .hero-brand{
   font-family:'Playfair Display',serif;font-size:clamp(3rem,9vw,7.5rem);
   color:var(--cream);font-weight:900;line-height:.88;letter-spacing:-.03em;
   animation:fadeUp .7s ease-out .1s both;
   text-shadow:0 4px 30px rgba(0,0,0,.5),0 1px 3px rgba(0,0,0,.4);
 }
-.hero h1 .line2{display:block;margin-top:.05em}
-.hero h1 .of{font-weight:400;font-style:italic;color:rgba(200,185,155,.7);font-size:.45em;vertical-align:.15em}
-.hero h1 .chips-word{
+.hero .hero-brand .line2{display:block;margin-top:.05em}
+.hero .hero-brand .of{font-weight:400;font-style:italic;color:rgba(200,185,155,.7);font-size:.45em;vertical-align:.15em}
+.hero .hero-brand .chips-word{
   color:transparent;
   background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));
   -webkit-background-clip:text;background-clip:text;
@@ -106,6 +111,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);o
   margin-top:.8rem;animation:fadeUp .7s ease-out .2s both;
   text-shadow:0 2px 12px rgba(0,0,0,.5);
 }
+h1.hero-tagline{font-weight:700;letter-spacing:.01em}
+.hero-sub{font-size:clamp(.8rem,1.2vw,.95rem);color:var(--gold-light);opacity:.8;margin-top:.35rem;text-transform:uppercase;letter-spacing:.18em;animation:fadeUp .7s ease-out .25s both}
 .hero-desc{
   font-size:clamp(.82rem,1.1vw,1rem);color:rgba(245,236,215,.6);
   margin-top:.6rem;max-width:500px;margin-inline:auto;line-height:1.65;
@@ -387,6 +394,7 @@ footer .copy{font-size:.65rem;margin-top:1.5rem;opacity:.4}
 .nl-fallback a,.nl-noscript a{color:var(--gold-dark);font-weight:700}
 .nl-failed .ml-embedded:empty{display:none}
 .nl-failed .ml-embedded:empty+.nl-fallback{display:block}
+.nl-fallback[hidden]{display:none!important}
 .nl-noscript{font-size:.85rem;color:var(--ink)}
 .nl-privacy{font-size:.7rem;color:var(--muted);margin-top:.9rem;line-height:1.5}
 
@@ -503,8 +511,9 @@ footer .copy{font-size:.65rem;margin-top:1.5rem;opacity:.4}
 
   <div class="hero-center">
     <div class="hero-eyebrow"><div class="hero-eyebrow-dot"></div><span>Potato Chips From 28+ Countries</span></div>
-    <h1>World <span class="of">of</span> <span class="line2"><span class="chips-word">Chips</span></span></h1>
-    <p class="hero-tagline">Every Country. Every Crunch. Every Flavor.</p>
+    <p class="hero-brand">World <span class="of">of</span> <span class="line2"><span class="chips-word">Chips</span></span></p>
+    <h1 class="hero-tagline">Potato Chips Around the World</h1>
+    <p class="hero-sub">Every Country. Every Crunch. Every Flavor.</p>
     <p class="hero-desc">Explore the crunchy universe of potato chips (crisps, not fries!) across the globe. Discover exotic brands, wild flavors, and snacking cultures from Japan to Peru.</p>
 
     <div class="hero-buy" aria-label="Shop chip variety packs and gift boxes">
@@ -787,11 +796,11 @@ footer .copy{font-size:.65rem;margin-top:1.5rem;opacity:.4}
     <!-- NEWSLETTER-FORM:START (reused verbatim by scripts/build_country_pages.mjs and scripts/build_news.mjs) -->
     <div class="nl-form">
       <div class="ml-embedded" data-form="e7ZTaE"></div>
-      <p class="nl-fallback">The signup form didn&#8217;t load (an ad or script blocker may be stopping it). <a href="https://dashboard.mailerlite.com/forms/2722693/201684808410072477/share" target="_blank" rel="noopener">Open the signup form &#8599;</a></p>
+      <p class="nl-fallback" hidden>The signup form didn&#8217;t load (an ad or script blocker may be stopping it). <a href="https://dashboard.mailerlite.com/forms/2722693/201684808410072477/share" target="_blank" rel="noopener">Open the signup form &#8599;</a></p>
       <noscript><p class="nl-noscript">The signup form needs JavaScript. <a href="https://dashboard.mailerlite.com/forms/2722693/201684808410072477/share" target="_blank" rel="noopener">Sign up on MailerLite &#8599;</a></p></noscript>
     </div>
     <script>
-    setTimeout(function(){var f=document.querySelectorAll('.nl-form');for(var i=0;i<f.length;i++)f[i].classList.add('nl-failed');},8000);
+    setTimeout(function(){var f=document.querySelectorAll('.nl-form');for(var i=0;i<f.length;i++){var e=f[i].querySelector('.ml-embedded');if(e&&!e.children.length){f[i].classList.add('nl-failed');var b=f[i].querySelector('.nl-fallback');if(b)b.hidden=false;}}},8000);
     </script>
     <p class="nl-privacy">Double opt-in: we&#8217;ll email you a confirmation link first. Unsubscribe anytime. Powered by MailerLite; your email is only used to send the Chip Report.</p>
     <!-- NEWSLETTER-FORM:END -->
@@ -802,7 +811,7 @@ footer .copy{font-size:.65rem;margin-top:1.5rem;opacity:.4}
 <footer>
   <div class="flogo">&#x1F954; World of Chips</div>
   <p>Your guide to global potato chip culture &#8212; flavors, brands, market insights, and crunchy news from every corner of the planet.</p>
-  <p style="font-size:.8rem;margin-top:.8rem"><a href="/pringles-index/" style="color:var(--gold-light);text-decoration:none">Pringles Index</a> &#183; <a href="/flavors/" style="color:var(--gold-light);text-decoration:none">Flavours</a> &#183; <a href="/spiciest-chips/" style="color:var(--gold-light);text-decoration:none">Spice Ladder</a> &#183; <a href="/limited-edition-chips/" style="color:var(--gold-light);text-decoration:none">Limited Editions</a> &#183; <a href="/shrinkflation/" style="color:var(--gold-light);text-decoration:none">Shrinkflation</a> &#183; <a href="/which-chip-are-you/" style="color:var(--gold-light);text-decoration:none">Chip Quiz</a> &#183; <a href="/make-chips-at-home/" style="color:var(--gold-light);text-decoration:none">Make Chips at Home</a> &#183; <a href="/submit-a-flavor/" style="color:var(--gold-light);text-decoration:none">Add Your Local Flavour</a></p>
+  <p style="font-size:.8rem;margin-top:.8rem"><a href="/pringles-index/" style="color:var(--gold-light);text-decoration:none">Pringles Index</a> &#183; <a href="/about/" style="color:var(--gold-light);text-decoration:none">About</a> &#183; <a href="/flavors/" style="color:var(--gold-light);text-decoration:none">Flavours</a> &#183; <a href="/spiciest-chips/" style="color:var(--gold-light);text-decoration:none">Spice Ladder</a> &#183; <a href="/limited-edition-chips/" style="color:var(--gold-light);text-decoration:none">Limited Editions</a> &#183; <a href="/shrinkflation/" style="color:var(--gold-light);text-decoration:none">Shrinkflation</a> &#183; <a href="/which-chip-are-you/" style="color:var(--gold-light);text-decoration:none">Chip Quiz</a> &#183; <a href="/make-chips-at-home/" style="color:var(--gold-light);text-decoration:none">Make Chips at Home</a> &#183; <a href="/submit-a-flavor/" style="color:var(--gold-light);text-decoration:none">Add Your Local Flavour</a></p>
   <p style="font-size:.75rem;color:var(--gold);margin-top:.5rem">WorldOfChips.com &#8212; Because every chip has a story.</p>
   <p style="font-size:.75rem;margin-top:.5rem"><a href="mailto:michaelvdlooij@gmail.com" style="color:var(--muted);text-decoration:none">&#9993; michaelvdlooij@gmail.com</a></p>
   <div class="copy">&#169; 2026 World of Chips. All rights reserved.<br><span style="font-size:.6rem;opacity:.5">As an Amazon Associate, we earn from qualifying purchases.</span></div>

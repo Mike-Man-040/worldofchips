@@ -20,7 +20,7 @@ for i, c in enumerate(C):
 ux = x0 + int(bw * d["meta"]["base_usd_per_100g"] / mx); g.line([ux, top - 10, ux, top + rowh * len(C)], fill="#3D2B0F", width=2)
 s17 = ImageFont.truetype(sans, 17)
 g.text((60, H - 120), "* Low confidence: range, marketplace, undated or possibly promotional price.", font=s17, fill="#6B5A3E")
-g.text((60, H - 95), "One retailer per country, one point in time. FX: ECB 26 Oct 2026 and national sources.", font=s17, fill="#6B5A3E")
+g.text((60, H - 95), "One main source per country, one point in time. FX: ECB 26 Oct 2026 and national sources.", font=s17, fill="#6B5A3E")
 g.text((60, H - 60), "worldofchips.com/pringles-index/", font=ImageFont.truetype(sb, 24), fill="#C48A20")
 im.save(os.path.join(ROOT, "assets", "pringles-index-2026-10.png"), optimize=True)
 print("wrote assets/pringles-index-2026-10.png", W, H)

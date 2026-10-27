@@ -69,19 +69,19 @@ export default function pringlesPage({ esc, ROOT, CK }) {
         <li><strong>Colombia</strong> ranks high largely because the peso has strengthened in 2026, a reminder of how much exchange rates drive any price index.</li>
         <li><strong>France and India</strong> are cheapest: France sells a 195 g can at a &#8364;1.89 regular price (taken from a promo leaflet&#8217;s &#8220;prix habituel&#8221;), and India&#8217;s figure is the legal maximum retail price.</li>
         <li><strong>United Kingdom:</strong> the regular price is &#163;2.50, but the same can is &#163;1.75 at Morrisons and Iceland and &#163;1.00 at Poundland. Promotions matter.</li>
-        <li><strong>Germany:</strong> the can shrank from 185 g to 165 g in 2024 at the same &#8364;2.49 (Verbraucherzentrale Hamburg, per our source notes).</li>
+        <li><strong>Germany:</strong> the can shrank from 185 g to 165 g in 2024 at the same &#8364;2.49 (Verbraucherzentrale Hamburg).</li>
       </ul>
       <p>Pringles are cheapest in France and India, but you don&#8217;t have to fly there for the flavours. Try an <a href="/best-international-chip-variety-packs/">international chip variety pack</a> at home.</p>
     </section>
     <section class="cp-section" id="method">
       <h2>Methodology</h2>
       <ol class="sb-list">
-        <li>One standard can of Pringles Original at its regular supermarket shelf price (not a promotion), including VAT/GST where prices are shown with tax. <strong>US prices exclude sales tax.</strong></li>
+        <li>One standard can of Pringles Original at its regular (non-promotional) retail price, including VAT/GST where prices are shown with tax. <strong>US prices exclude sales tax.</strong> We use one main source per country: usually a supermarket or online grocer, but some rows come from a price comparison site, a marketplace listing, a promo leaflet&#8217;s regular price or the legal maximum retail price (India). Each row names its source and price type.</li>
         <li>Local price &#247; can weight &#215; 100 = local price per 100 g, converted to USD at the market rate.</li>
         <li>Index vs US = country USD/100 g &#247; US USD/100 g &#215; 100.</li>
         <li>Implied PPP rate = the rate that would make 100 g cost the same as in the US; valuation = implied rate &#247; actual rate &#8722; 1.</li>
       </ol>
-      <p class="sb-muted">One retailer per country, one point in time: a snapshot, not a statistical average. FX: ${esc(M.fx_date)}. * Low confidence: a range, marketplace, undated or possibly promotional price. These are shown but can be hidden with the toggle.</p>
+      <p class="sb-muted">One main source per country, one point in time: a snapshot, not a statistical average. FX: ${esc(M.fx_date)}. * Low confidence: a range, marketplace, undated or possibly promotional price. These are shown but can be hidden with the toggle.</p>
     </section>
     <section class="cp-section" id="sources">
       <h2>Prices &amp; Sources</h2>
@@ -132,7 +132,7 @@ svg.selectAll('path').data(f).enter().append('path').attr('d',gp).attr('stroke',
       [`Where are Pringles most expensive?`, `In this ${M.edition} edition, ${top.country}: $${top.usd_per_100g.toFixed(2)} per 100 g, about ${(top.index_vs_us / 100).toFixed(1)} times the US price of $${base.toFixed(2)} per 100 g.`],
       ['Where are Pringles cheapest?', `${cheap.country} and ${C[C.length - 2].country}, at about $${cheap.usd_per_100g.toFixed(2)} per 100 g. India&#8217;s figure is the legal maximum retail price, and France&#8217;s 195 g can sells at a €1.89 regular price.`],
       ['Why compare per 100 g instead of per can?', 'Pringles cans differ by market, from about 102 g in parts of Asia to 165 g in most of Europe and 195 g in France, so comparing whole cans would be misleading.'],
-      ['How reliable is the Pringles Index?', 'It is one retailer per country at one point in time, a snapshot rather than an average. Low-confidence rows (ranges, marketplace or undated prices) are marked with an asterisk and can be hidden.'],
+      ['How reliable is the Pringles Index?', 'It uses one main source per country at one point in time, a snapshot rather than an average. Low-confidence rows (ranges, marketplace or undated prices) are marked with an asterisk and can be hidden.'],
     ],
     sources: [], related: [['best-international-chip-variety-packs', '🌍 International variety packs'], ['flavors', '🌍 Chip flavours'], ['limited-edition-chips', '📅 Limited-edition drops']] };
 }

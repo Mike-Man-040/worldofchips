@@ -153,6 +153,19 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
       intro: 'Homemade chips need very little: a way to slice potatoes paper-thin, a way to cook them hot and fast, and something to season them with. Start with the recipe, then use the guides below to choose your kit.',
       sections: [],
       body: `
+    <section class="cp-section" id="what-you-need">
+      <div style="background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:1rem 1.2rem">
+      <h2 style="margin-top:0">What You&#8217;ll Need</h2>
+      <ul class="sb-list">
+        <li><strong>Potatoes, oil and salt.</strong> See the <a href="/homemade-crisps-recipe/">homemade crisps recipe</a> for quantities and method.</li>
+        <li><strong>A mandoline slicer</strong> for even, paper-thin slices: <a href="/best-mandoline-slicers-for-chips/">our mandoline guide</a> &#183; ${buy(S('OXO Good Grips Chefs Mandoline Slicer'), 'OXO Good Grips Chef&#8217;s Mandoline on Amazon')} &#183; ${buy(S('cut resistant gloves kitchen'), 'cut-resistant gloves on Amazon')}</li>
+        <li><strong>A deep fryer</strong> (classic crisps): <a href="/best-deep-fryers-for-chips/">our deep fryer guide</a> &#183; ${buy(S('T-fal Ultimate EZ Clean deep fryer'), 'T-fal Ultimate EZ Clean on Amazon')}</li>
+        <li><strong>Or an air fryer</strong> (less oil): <a href="/best-air-fryers-for-chips/">our air fryer guide</a> &#183; ${buy(S('Ninja air fryer AF101'), 'Ninja Air Fryer on Amazon')}</li>
+        <li><strong>Seasoning</strong>: <a href="/chip-seasoning-powders/">our chip seasoning guide</a> &#183; ${buy(S('Tajin Clasico seasoning'), 'Taj&#237;n Cl&#225;sico on Amazon')} &#183; ${buy(S('smoked paprika'), 'smoked paprika on Amazon')}</li>
+      </ul>
+      <p class="sb-muted">${SEARCH_NOTE}</p>
+      </div>
+    </section>
     <section class="cp-section" id="guides">
       <h2>The Make-at-Home Guides</h2>
       <div class="cp-explore-grid">
@@ -236,11 +249,11 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
     return `<li data-heat="${n}"><strong>${n}. ${name}</strong><p>${note}</p>${btn}</li>`;
   }).join('\n        ');
   const spice = { slug: 'spiciest-chips', flag: '🌶️', crumb: 'Spice Ladder', ...CK,
-    h1: 'The Chip Spice Ladder: Mild to One Chip Challenge',
-    title: 'Spiciest Chips Ranked: The Chip Spice Ladder from Mild to Paqui | World of Chips',
-    desc: 'Eight spicy chips ranked on one ladder, from Cape Cod Sweet & Spicy Jalapeño through Takis Blue Heat to the discontinued Paqui One Chip Challenge, with pepper Scoville figures only where a source exists.',
-    introDark: 'Eight rungs, from a gentle jalapeño kettle chip to the Carolina Reaper chip that was pulled from sale.',
-    intro: 'Chip makers don&#8217;t publish Scoville ratings for their chips, so this is an <strong>editorial ranking</strong> of relative heat. It&#8217;s based on the peppers each chip uses and the makers&#8217; own heat claims. Where we quote Scoville heat units (SHU), they describe the <em>pepper</em>, not the finished chip, and come from the cited source. Disagree with the order? Good: tell us via the newsletter. For a buying-focused list, see <a href="/spiciest-chips-you-can-buy/">the spiciest chips you can buy</a>.',
+    h1: 'Spiciest Chips Ranked by Heat: The Chip Spice Ladder',
+    title: 'Spiciest Chips Ranked by Heat: Mild to One Chip Challenge | World of Chips',
+    desc: 'A heat ranking, not a shopping list: eight spicy chips ranked on one ladder, from Cape Cod Sweet & Spicy Jalapeño through Takis Blue Heat to the discontinued Paqui One Chip Challenge, with pepper Scoville figures only where a source exists.',
+    introDark: 'A heat ranking in eight rungs, from a gentle jalapeño kettle chip to the Carolina Reaper chip that was pulled from sale.',
+    intro: 'Chip makers don&#8217;t publish Scoville ratings for their chips, so this is an <strong>editorial ranking</strong> of relative heat. It&#8217;s based on the peppers each chip uses and the makers&#8217; own heat claims. Where we quote Scoville heat units (SHU), they describe the <em>pepper</em>, not the finished chip, and come from the cited source. Disagree with the order? Good: tell us via the newsletter. Just want to order something hot? Our buying guide, <a href="/spiciest-chips-you-can-buy/">spicy chips to buy online</a>, lists seven picks with in-stock Amazon pages.',
     sections: [],
     body: `
     <section class="cp-section" id="ladder">
@@ -259,7 +272,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
       ['Are Takis hotter than Flamin&#8217; Hot chips?', 'Takis rates Fuego and Blue Heat as Extreme on its own Heat-O-Meter. We rank them above Ruffles Flamin&#8217; Hot, but that is our editorial judgement, not a lab measurement.'],
     ],
     sources: [WP('One_Chip_Challenge'), WP('Carolina_Reaper'), WP('Bhut_jolokia'), WP('Habanero'), WP('Jalape%C3%B1o')],
-    related: [['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy'], ['flavors/flamin-hot', '🔥 Flamin\u2019 Hot history'], ['mexico', '🇲🇽 Mexico'], ['which-chip-are-you', '❓ Which country\u2019s chip are you?']] };
+    related: [['spiciest-chips-you-can-buy', '🌶️ Spicy chips to buy online'], ['flavors/flamin-hot', '🔥 Flamin\u2019 Hot history'], ['mexico', '🇲🇽 Mexico'], ['which-chip-are-you', '❓ Which country\u2019s chip are you?']] };
 
   // ---------- flavour pages ----------
   const F = [
@@ -403,7 +416,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
 function link(path,text,cls){var a=document.createElement('a');a.setAttribute('href',path);a.textContent=text;if(cls)a.className=cls;return a;}
 function show(k,push){var r=R[k];if(!r)return;out.innerHTML='';var h=document.createElement('h3');h.style.fontFamily="'Playfair Display',serif";h.style.color='var(--brown)';h.textContent=r[0]+' You are '+r[1].replace(/&amp;/g,'&')+'!';var p=document.createElement('p');p.innerHTML=r[2];
 var g=document.createElement('p');g.appendChild(link('/'+k+'/','Read your country guide and where to buy \u2192','buy-btn'));
-var u=location.origin+location.pathname+'?r='+k;var s=document.createElement('p');var b=document.createElement('button');b.type='button';b.className='cp-explore-link';b.style.cursor='pointer';b.textContent='Share my result';
+var u=location.origin+'/which-chip-are-you/r/'+k+'/';var s=document.createElement('p');var b=document.createElement('button');b.type='button';b.className='cp-explore-link';b.style.cursor='pointer';b.textContent='Share my result';
 b.addEventListener('click',function(){if(navigator.share){navigator.share({title:'Which country\u2019s chip are you?',url:u}).catch(function(){});}else if(navigator.clipboard){navigator.clipboard.writeText(u);b.textContent='Link copied!';}});
 s.appendChild(b);s.appendChild(document.createTextNode(' '));s.appendChild(link(location.pathname,'Retake the quiz','cp-explore-link'));
 out.appendChild(h);out.appendChild(p);out.appendChild(g);out.appendChild(s);out.hidden=false;if(push&&history.replaceState)history.replaceState(null,'','?r='+k);out.scrollIntoView({behavior:'smooth',block:'start'});}
@@ -417,8 +430,8 @@ var m=location.search.match(/[?&]r=([a-z-]+)/);if(m)show(m[1],false);})();`;
     introDark: 'Five questions. Ten countries. One chip that is unmistakably you.',
     intro: 'Answer five quick questions and we&#8217;ll match you to a country&#8217;s signature chip, then send you to that country&#8217;s guide, with brands, flavours and where to buy. Your result gets its own link to share. Just for fun: the matching is our own light-hearted scoring.',
     sections: [], body: quizBody, script: quizScript,
-    faqs: [['How does the chip quiz work?', 'Each answer adds points to one or more countries, and the country with the most points is your result. The scoring is our own light-hearted editorial mapping, not a scientific test.'], ['Can I share my quiz result?', 'Yes. Your result gets its own link (for example worldofchips.com/which-chip-are-you/?r=japan) that opens straight to the same result.']],
-    sources: [], related: [['flavors', '🌍 Chip flavours'], ['spiciest-chips', '🌶️ Spice ladder'], ['make-chips-at-home', '🥔 Make chips at home']] };
+    faqs: [['How does the chip quiz work?', 'Each answer adds points to one or more countries, and the country with the most points is your result. The scoring is our own light-hearted editorial mapping, not a scientific test.'], ['Can I share my quiz result?', 'Yes. Your result gets its own link (for example worldofchips.com/which-chip-are-you/r/japan/) that opens straight to the same result.']],
+    sources: [], related: [['flavors', '🌍 Chip flavours'], ['spiciest-chips', '🌶️ Spice ladder'], ['make-chips-at-home', '🥔 Make chips at home']], quizResults: R };
 
 
   // ---------- community flavour submission (FormSubmit.co, no backend) ----------
