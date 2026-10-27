@@ -419,5 +419,48 @@ var m=location.search.match(/[?&]r=([a-z-]+)/);if(m)show(m[1],false);})();`;
     faqs: [['How does the chip quiz work?', 'Each answer adds points to one or more countries, and the country with the most points is your result. The scoring is our own light-hearted editorial mapping, not a scientific test.'], ['Can I share my quiz result?', 'Yes. Your result gets its own link (for example worldofchips.com/which-chip-are-you/?r=japan) that opens straight to the same result.']],
     sources: [], related: [['flavors', '🌍 Chip flavours'], ['spiciest-chips', '🌶️ Spice ladder'], ['make-chips-at-home', '🥔 Make chips at home']] };
 
-  return [...hubAndRecipe, ...cluster.map((g) => ({ ...CK, ...g })), spice, flavorIndex, ...flavorPages, calendar, quiz].map((g) => ({ ...CK, ...g }));
+
+  // ---------- community flavour submission (FormSubmit.co, no backend) ----------
+  const countryOpts = fs.readdirSync(ROOT).filter((d) => /cp-facts/.test(fs.existsSync(path.join(ROOT, d, 'index.html')) ? fs.readFileSync(path.join(ROOT, d, 'index.html'), 'utf8') : ''))
+    .sort().map((d) => d.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join(' '));
+  const fld = 'display:block;width:100%;max-width:520px;padding:.55rem .7rem;border:1px solid var(--light-border);border-radius:8px;font:inherit;background:#fff;margin:.25rem 0 .9rem';
+  const lab = (id, text, input) => `<label for="${id}" style="font-weight:700;color:var(--brown);font-size:.9rem">${text}</label>\n        ${input}`;
+  const submitBody = `
+    <section class="cp-section" id="thanks" hidden>
+      <h2>Thank you!</h2>
+      <p>Your flavour is in our inbox. We review every submission by hand and will add approved finds to the map and the country page, with credit if you gave a name or handle.</p>
+    </section>
+    <section class="cp-section" id="form">
+      <h2>Submit a Flavour</h2>
+      <form action="https://formsubmit.co/michaelvdlooij@mail.grokbot.com" method="POST" enctype="multipart/form-data" id="flavor-form">
+        <input type="hidden" name="_subject" value="New World of Chips flavour submission">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://worldofchips.com/submit-a-flavor/?sent=1">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+        ${lab('f-credit', 'Name or handle for credit (optional)', `<input id="f-credit" name="credit" type="text" maxlength="60" style="${fld}">`)}
+        ${lab('f-country', 'Country', `<input id="f-country" name="country" type="text" list="f-countries" required maxlength="60" style="${fld}"><datalist id="f-countries">${countryOpts.map((c) => `<option value="${c}"></option>`).join('')}</datalist>`)}
+        ${lab('f-city', 'City (optional)', `<input id="f-city" name="city" type="text" maxlength="60" style="${fld}">`)}
+        ${lab('f-flavor', 'Flavour or chip name', `<input id="f-flavor" name="flavor" type="text" required maxlength="80" style="${fld}">`)}
+        ${lab('f-brand', 'Brand', `<input id="f-brand" name="brand" type="text" required maxlength="60" style="${fld}">`)}
+        ${lab('f-desc', 'Short description (what does it taste like, where did you find it?)', `<textarea id="f-desc" name="description" required maxlength="500" rows="4" style="${fld}"></textarea>`)}
+        ${lab('f-photo', 'Photo of the bag (JPG or PNG, max 10 MB)', `<input id="f-photo" name="attachment" type="file" accept="image/jpeg,image/png,image/webp" required style="${fld}">`)}
+        ${lab('f-email', 'Email (optional, only to ask you a question; never published)', `<input id="f-email" name="email" type="email" maxlength="120" style="${fld}">`)}
+        <label style="display:block;margin:.3rem 0 1rem;font-size:.9rem"><input type="checkbox" name="consent" value="yes" required> I took this photo and allow World of Chips to publish it with credit</label>
+        <p><button type="submit" class="buy-btn" style="border:0;cursor:pointer">Send my flavour &#8594;</button></p>
+        <p class="sb-muted">Submissions are sent by email via FormSubmit.co and reviewed by hand before anything is published. We only publish the name or handle you enter above.</p>
+      </form>
+    </section>`;
+  const submit = { slug: 'submit-a-flavor', flag: '📸', crumb: 'Add Your Local Flavour', ...CK, disc: false,
+    h1: 'Add Your Local Flavour to the Map',
+    title: 'Add Your Local Chip Flavour to the World of Chips Map | World of Chips',
+    desc: 'Spotted a local chip flavour we are missing? Send us a photo and a few details. Approved finds appear on the Global Chip Map and the country page, credited to you.',
+    introDark: 'Found a chip flavour we haven&#8217;t covered? Snap the bag and tell us about it.',
+    intro: 'Every approved submission gets a &#8220;Community finds&#8221; spot on the <a href="/#map-section">Global Chip Map</a> and on its country page, credited to the name or handle you choose. We check each entry by hand, so it can take a few days to appear.',
+    sections: [], body: submitBody,
+    script: `(function(){if(/[?&]sent=1/.test(location.search)){document.getElementById('thanks').hidden=false;document.getElementById('form').hidden=true;}})();`,
+    faqs: [['How do I add a chip flavour to World of Chips?', 'Fill in the form on this page with the brand, flavour, country and a photo of the bag you took yourself. We review submissions by hand and add approved ones to the map and the country page.'], ['Will my email address be published?', 'No. Email is optional and only used if we have a question. We publish only the name or handle you enter for credit, or no name if you leave it blank.']],
+    sources: [], related: [['flavors', '🌍 Chip flavours'], ['limited-edition-chips', '📅 Limited-edition drops'], ['which-chip-are-you', '❓ Chip quiz']] };
+
+  return [...hubAndRecipe, ...cluster.map((g) => ({ ...CK, ...g })), spice, flavorIndex, ...flavorPages, calendar, quiz, submit].map((g) => ({ ...CK, ...g }));
 }

@@ -1017,6 +1017,18 @@ A: Each answer adds points to one or more countries, and the country with the mo
 **Q: Can I share my quiz result?**
 A: Yes. Your result gets its own link (for example worldofchips.com/which-chip-are-you/?r=japan) that opens straight to the same result.
 
+### Add Your Local Chip Flavour to the World of Chips Map
+
+URL: https://worldofchips.com/submit-a-flavor/
+
+Spotted a local chip flavour we are missing? Send us a photo and a few details. Approved finds appear on the Global Chip Map and the country page, credited to you.
+
+**Q: How do I add a chip flavour to World of Chips?**
+A: Fill in the form on this page with the brand, flavour, country and a photo of the bag you took yourself. We review submissions by hand and add approved ones to the map and the country page.
+
+**Q: Will my email address be published?**
+A: No. Email is optional and only used if we have a question. We publish only the name or handle you enter for credit, or no name if you leave it blank.
+
 ## News
 
 - [Potato Chip News: New Flavors, Recalls & Industry Moves](https://worldofchips.com/news/): Potato chip and crisps news from around the world, updated weekly: new flavor launches, food-safety recalls, industry deals and regional snack trends. Updated 20 Oct 2026.

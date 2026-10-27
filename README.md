@@ -87,3 +87,42 @@ python3 scripts/validate_site.py
   Run it after the other builders; `--check` (also run by `validate_site.py`) fails if stale.
 - IndexNow key file: `/70db554b0a1ac11d64c90d0d452d821e.txt`. After a deploy, run
   `node scripts/indexnow_ping.mjs` (or `--dry-run` to preview) to submit every sitemap URL.
+
+## Community flavour submissions (moderated)
+
+Visitors submit flavours at `/submit-a-flavor/` (form built in `scripts/guides_more.mjs`). The form posts to
+FormSubmit.co (`https://formsubmit.co/michaelvdlooij@mail.grokbot.com`, free, no backend), with a captcha,
+a honeypot (`_honey`), a `_subject`, a `_next` redirect to `/submit-a-flavor/?sent=1` (thank-you message) and
+`multipart/form-data` so the photo arrives as an email attachment (FormSubmit limit: 10 MB total).
+
+**One-time activation:** the first real submission makes FormSubmit send an activation email to the
+inbox above. Click the link in it, or no submissions will be delivered. Until then the form shows FormSubmit's
+"confirm your email" page.
+
+Moderation steps:
+1. Read the submission email. Approve only if the consent box was ticked, the photo looks like the
+   submitter's own, and the content is chip-related and not offensive or promotional.
+2. Save the photo (resize to about 800 px wide, JPG) to `assets/community/<id>.jpg`.
+3. Add an entry to `data/community_flavors.json` (a JSON array, starting as `[]`):
+
+```json
+[
+  {
+    "id": "2026-11-uk-1",
+    "country": "united-kingdom",
+    "city": "Leeds",
+    "flavor": "Chip Shop Curry",
+    "brand": "Seabrook",
+    "description": "Tastes like curry sauce on chips. Found at a corner shop.",
+    "credit": "@handle",
+    "photo": "/assets/community/2026-11-uk-1.jpg",
+    "approved": "2026-11-02"
+  }
+]
+```
+
+   `country` must be an existing country slug. `city`, `credit` and `photo` may be `""`. Never publish the
+   submitter's email.
+4. Rebuild and validate: `node scripts/build_country_pages.mjs && node scripts/build_llms.mjs && python3 scripts/validate_site.py`.
+   Entries appear in "Community Finds" on the country page and the 6 newest appear under the homepage map.
+5. Commit, then open a PR and merge it.
