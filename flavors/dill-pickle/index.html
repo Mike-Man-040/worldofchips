@@ -40,7 +40,7 @@
 .gd-picks li{background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.9rem 1rem;margin-bottom:.8rem;font-size:.92rem;line-height:1.6}
 .gd-picks strong{color:var(--brown);font-family:'Playfair Display',serif;font-size:1.05rem}
 .gd-picks a,.cp-section a{color:#1A4570}
-.buy-btn{display:inline-block;background:var(--gold);color:#fff;font-weight:700;padding:.55rem 1.1rem;border-radius:999px;text-decoration:none;font-size:.88rem}
+.buy-btn{display:inline-flex;align-items:center;min-height:48px;background:var(--gold);color:#fff;font-weight:700;padding:.8rem 1.5rem;border-radius:999px;text-decoration:none;font-size:.98rem}
 .buy-btn:hover{filter:brightness(1.08)}
 .sb-table-wrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--light-border);border-radius:12px}
 .sb-table{border-collapse:collapse;width:100%;min-width:560px;font-size:.85rem;background:var(--paper)}
@@ -65,18 +65,47 @@
 </head>
 <body>
 
-<nav class="nav">
+<!-- SITE-NAV:START (shared header; build scripts copy this into every page) -->
+<nav class="nav" aria-label="Main">
   <div class="nav-logo"><a href="/">🥔 World of Chips</a></div>
   <div class="nav-links">
     <a href="/#countries">Countries</a>
-    <a href="/#map-section">Map</a>
-    <a href="/#consumption">Consumption</a>
-    <a href="/news/">News</a>
-    <a href="/snack-boxes/">Snack Boxes</a>
     <a href="/flavors/">Flavours</a>
-    <a href="/#shop">Where to Buy</a>
+    <a href="/pringles-index/">Pringles Index</a>
+    <a href="/spiciest-chips/">Spice Ladder</a>
+    <a href="/make-chips-at-home/">Make at Home</a>
+    <a href="/which-chip-are-you/">Quiz</a>
+    <a href="/news/">News</a>
+    <details class="nav-more"><summary>More &#9662;</summary>
+      <div class="nav-menu">
+        <a href="/limited-edition-chips/">Limited-Edition Drops</a>
+        <a href="/shrinkflation/">Shrinkflation Tracker</a>
+        <a href="/snack-boxes/">Snack Boxes</a>
+        <a href="/#map-section">Global Chip Map</a>
+        <a href="/#consumption">Consumption</a>
+        <a href="/#shop">Where to Buy</a>
+        <a href="/submit-a-flavor/" class="nav-cta">+ Add your local flavour</a>
+      </div>
+    </details>
   </div>
+  <details class="nav-mobile"><summary aria-label="Open menu">&#9776; Menu</summary>
+    <div class="nav-menu">
+      <a href="/#countries">Countries</a>
+      <a href="/flavors/">Flavours</a>
+      <a href="/pringles-index/">Pringles Index</a>
+      <a href="/spiciest-chips/">Spice Ladder</a>
+      <a href="/make-chips-at-home/">Make Chips at Home</a>
+      <a href="/which-chip-are-you/">Which Chip Are You? Quiz</a>
+      <a href="/limited-edition-chips/">Limited-Edition Drops</a>
+      <a href="/shrinkflation/">Shrinkflation Tracker</a>
+      <a href="/news/">News</a>
+      <a href="/snack-boxes/">Snack Boxes</a>
+      <a href="/#map-section">Global Chip Map</a>
+      <a href="/submit-a-flavor/" class="nav-cta">+ Add your local flavour</a>
+    </div>
+  </details>
 </nav>
+<!-- SITE-NAV:END -->
 
 <main>
 <article class="country-page active" id="flavors/dill-pickle">
@@ -137,6 +166,11 @@
       <p class="nl-privacy">Double opt-in: we&#8217;ll email you a confirmation link first. Unsubscribe anytime. Powered by MailerLite; your email is only used to send the Chip Report.</p>
     </aside>
 
+    <nav class="cp-section" aria-label="More to explore">
+      <h2>More to Explore</h2>
+      <div class="cp-explore-grid"><a href="/pringles-index/" class="cp-explore-link">📊 Pringles Index</a><a href="/shrinkflation/" class="cp-explore-link">📉 Shrinkflation</a><a href="/spiciest-chips/" class="cp-explore-link">🌶️ Spice Ladder</a><a href="/which-chip-are-you/" class="cp-explore-link">❓ Chip Quiz</a><a href="/make-chips-at-home/" class="cp-explore-link">🥔 Make at Home</a><a href="/flavors/" class="cp-explore-link">🌍 Flavours</a><a href="/limited-edition-chips/" class="cp-explore-link">📅 Drops</a><a href="/submit-a-flavor/" class="cp-explore-link">📸 Add your flavour</a></div>
+    </nav>
+
     <nav class="cp-cta" aria-label="More chip guides">
       <h2>More Chip Guides</h2>
       <div class="cp-explore-grid"><a href="/flavors/" class="cp-explore-link">🌍 All chip flavours</a><a href="/flavors/prawn-cocktail/" class="cp-explore-link">🦐 Prawn Cocktail</a><a href="/flavors/ketchup/" class="cp-explore-link">🍅 Ketchup</a><a href="/flavors/salt-and-vinegar/" class="cp-explore-link">🧂 Salt & Vinegar</a><a href="/news/" class="cp-explore-link">📰 Chip News</a></div>
@@ -149,7 +183,7 @@
 <footer>
   <div class="flogo">&#x1F954; World of Chips</div>
   <p>Your guide to global potato chip culture &#8212; flavors, brands, market insights, and crunchy news from every corner of the planet.</p>
-  <p style="font-size:.8rem;margin-top:.8rem"><a href="/pringles-index/" style="color:var(--gold-light);text-decoration:none">Pringles Index</a> &#183; <a href="/flavors/" style="color:var(--gold-light);text-decoration:none">Flavours</a> &#183; <a href="/spiciest-chips/" style="color:var(--gold-light);text-decoration:none">Spice Ladder</a> &#183; <a href="/limited-edition-chips/" style="color:var(--gold-light);text-decoration:none">Limited Editions</a> &#183; <a href="/which-chip-are-you/" style="color:var(--gold-light);text-decoration:none">Chip Quiz</a> &#183; <a href="/make-chips-at-home/" style="color:var(--gold-light);text-decoration:none">Make Chips at Home</a> &#183; <a href="/submit-a-flavor/" style="color:var(--gold-light);text-decoration:none">Add Your Local Flavour</a></p>
+  <p style="font-size:.8rem;margin-top:.8rem"><a href="/pringles-index/" style="color:var(--gold-light);text-decoration:none">Pringles Index</a> &#183; <a href="/flavors/" style="color:var(--gold-light);text-decoration:none">Flavours</a> &#183; <a href="/spiciest-chips/" style="color:var(--gold-light);text-decoration:none">Spice Ladder</a> &#183; <a href="/limited-edition-chips/" style="color:var(--gold-light);text-decoration:none">Limited Editions</a> &#183; <a href="/shrinkflation/" style="color:var(--gold-light);text-decoration:none">Shrinkflation</a> &#183; <a href="/which-chip-are-you/" style="color:var(--gold-light);text-decoration:none">Chip Quiz</a> &#183; <a href="/make-chips-at-home/" style="color:var(--gold-light);text-decoration:none">Make Chips at Home</a> &#183; <a href="/submit-a-flavor/" style="color:var(--gold-light);text-decoration:none">Add Your Local Flavour</a></p>
   <p style="font-size:.75rem;color:var(--gold);margin-top:.5rem">WorldOfChips.com &#8212; Because every chip has a story.</p>
   <p style="font-size:.75rem;margin-top:.5rem"><a href="mailto:michaelvdlooij@gmail.com" style="color:var(--muted);text-decoration:none">&#9993; michaelvdlooij@gmail.com</a></p>
   <div class="copy">&#169; 2026 World of Chips. All rights reserved.<br><span style="font-size:.6rem;opacity:.5">As an Amazon Associate, we earn from qualifying purchases.</span></div>

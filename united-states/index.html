@@ -39,7 +39,7 @@
 .cp-facts th{width:34%;color:var(--brown);font-weight:700}
 .buy-box{background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:1.2rem 1.3rem}
 .buy-grid{display:flex;flex-wrap:wrap;gap:.6rem;margin:.8rem 0}
-.buy-btn{display:inline-block;background:var(--gold);color:#fff;font-weight:700;padding:.6rem 1.1rem;border-radius:999px;text-decoration:none;font-size:.88rem}
+.buy-btn{display:inline-flex;align-items:center;min-height:48px;background:var(--gold);color:#fff;font-weight:700;padding:.8rem 1.5rem;border-radius:999px;text-decoration:none;font-size:.98rem}
 .buy-btn:hover{filter:brightness(1.08)}
 .cp-faq h3{font-size:1rem;color:var(--brown);margin-top:1.2rem}
 .cp-faq p{margin-top:.3rem}
@@ -57,16 +57,47 @@
 </head>
 <body>
 
-<nav class="nav">
+<!-- SITE-NAV:START (shared header; build scripts copy this into every page) -->
+<nav class="nav" aria-label="Main">
   <div class="nav-logo"><a href="/">🥔 World of Chips</a></div>
   <div class="nav-links">
     <a href="/#countries">Countries</a>
-    <a href="/#map-section">Map</a>
-    <a href="/#consumption">Consumption</a>
+    <a href="/flavors/">Flavours</a>
+    <a href="/pringles-index/">Pringles Index</a>
+    <a href="/spiciest-chips/">Spice Ladder</a>
+    <a href="/make-chips-at-home/">Make at Home</a>
+    <a href="/which-chip-are-you/">Quiz</a>
     <a href="/news/">News</a>
-    <a href="/#shop">Where to Buy</a>
+    <details class="nav-more"><summary>More &#9662;</summary>
+      <div class="nav-menu">
+        <a href="/limited-edition-chips/">Limited-Edition Drops</a>
+        <a href="/shrinkflation/">Shrinkflation Tracker</a>
+        <a href="/snack-boxes/">Snack Boxes</a>
+        <a href="/#map-section">Global Chip Map</a>
+        <a href="/#consumption">Consumption</a>
+        <a href="/#shop">Where to Buy</a>
+        <a href="/submit-a-flavor/" class="nav-cta">+ Add your local flavour</a>
+      </div>
+    </details>
   </div>
+  <details class="nav-mobile"><summary aria-label="Open menu">&#9776; Menu</summary>
+    <div class="nav-menu">
+      <a href="/#countries">Countries</a>
+      <a href="/flavors/">Flavours</a>
+      <a href="/pringles-index/">Pringles Index</a>
+      <a href="/spiciest-chips/">Spice Ladder</a>
+      <a href="/make-chips-at-home/">Make Chips at Home</a>
+      <a href="/which-chip-are-you/">Which Chip Are You? Quiz</a>
+      <a href="/limited-edition-chips/">Limited-Edition Drops</a>
+      <a href="/shrinkflation/">Shrinkflation Tracker</a>
+      <a href="/news/">News</a>
+      <a href="/snack-boxes/">Snack Boxes</a>
+      <a href="/#map-section">Global Chip Map</a>
+      <a href="/submit-a-flavor/" class="nav-cta">+ Add your local flavour</a>
+    </div>
+  </details>
 </nav>
+<!-- SITE-NAV:END -->
 
 <main>
 <article class="country-page active" id="cp-united-states">
@@ -228,7 +259,7 @@
 <footer>
   <div class="flogo">&#x1F954; World of Chips</div>
   <p>Your guide to global potato chip culture &#8212; flavors, brands, market insights, and crunchy news from every corner of the planet.</p>
-  <p style="font-size:.8rem;margin-top:.8rem"><a href="/pringles-index/" style="color:var(--gold-light);text-decoration:none">Pringles Index</a> &#183; <a href="/flavors/" style="color:var(--gold-light);text-decoration:none">Flavours</a> &#183; <a href="/spiciest-chips/" style="color:var(--gold-light);text-decoration:none">Spice Ladder</a> &#183; <a href="/limited-edition-chips/" style="color:var(--gold-light);text-decoration:none">Limited Editions</a> &#183; <a href="/which-chip-are-you/" style="color:var(--gold-light);text-decoration:none">Chip Quiz</a> &#183; <a href="/make-chips-at-home/" style="color:var(--gold-light);text-decoration:none">Make Chips at Home</a> &#183; <a href="/submit-a-flavor/" style="color:var(--gold-light);text-decoration:none">Add Your Local Flavour</a></p>
+  <p style="font-size:.8rem;margin-top:.8rem"><a href="/pringles-index/" style="color:var(--gold-light);text-decoration:none">Pringles Index</a> &#183; <a href="/flavors/" style="color:var(--gold-light);text-decoration:none">Flavours</a> &#183; <a href="/spiciest-chips/" style="color:var(--gold-light);text-decoration:none">Spice Ladder</a> &#183; <a href="/limited-edition-chips/" style="color:var(--gold-light);text-decoration:none">Limited Editions</a> &#183; <a href="/shrinkflation/" style="color:var(--gold-light);text-decoration:none">Shrinkflation</a> &#183; <a href="/which-chip-are-you/" style="color:var(--gold-light);text-decoration:none">Chip Quiz</a> &#183; <a href="/make-chips-at-home/" style="color:var(--gold-light);text-decoration:none">Make Chips at Home</a> &#183; <a href="/submit-a-flavor/" style="color:var(--gold-light);text-decoration:none">Add Your Local Flavour</a></p>
   <p style="font-size:.75rem;color:var(--gold);margin-top:.5rem">WorldOfChips.com &#8212; Because every chip has a story.</p>
   <p style="font-size:.75rem;margin-top:.5rem"><a href="mailto:michaelvdlooij@gmail.com" style="color:var(--muted);text-decoration:none">&#9993; michaelvdlooij@gmail.com</a></p>
   <div class="copy">&#169; 2026 World of Chips. All rights reserved.<br><span style="font-size:.6rem;opacity:.5">As an Amazon Associate, we earn from qualifying purchases.</span></div>

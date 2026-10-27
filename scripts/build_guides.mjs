@@ -513,6 +513,7 @@ GUIDES.push(...morePages({ amazonSearch, esc, ROOT }));
 
 // ---------- page template ----------
 const indexHtml = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+const siteNav = between(indexHtml, '<!-- SITE-NAV:START', '<!-- SITE-NAV:END -->').text + '<!-- SITE-NAV:END -->';
 const gaSnippet = between(indexHtml, '<!-- Google tag (gtag.js) -->', '<meta charset').text.trim();
 const fontsLink = (indexHtml.match(/<link href="https:\/\/fonts\.googleapis\.com[^>]*>/) || [])[0];
 const footerHtml = between(indexHtml, '<footer>', '</footer>').text + '</footer>';
@@ -532,6 +533,14 @@ const newsletterBlock = (indent) => `<aside class="nl nl-compact" id="newsletter
 ${nlForm}
 </aside>`.split('\n').map((l, i) => (i ? indent + (l.startsWith('<aside') || l.startsWith('</aside') ? '' : '  ') + l : l)).join('\n');
 
+const MORE = [['pringles-index', '📊 Pringles Index'], ['shrinkflation', '📉 Shrinkflation'], ['spiciest-chips', '🌶️ Spice Ladder'], ['which-chip-are-you', '❓ Chip Quiz'], ['make-chips-at-home', '🥔 Make at Home'], ['flavors', '🌍 Flavours'], ['limited-edition-chips', '📅 Drops'], ['submit-a-flavor', '📸 Add your flavour']];
+const isFeature = (slug) => MORE.some(([s]) => s === slug) || slug.startsWith('flavors/') || ['homemade-crisps-recipe', 'best-mandoline-slicers-for-chips', 'best-deep-fryers-for-chips', 'best-air-fryers-for-chips', 'chip-seasoning-powders'].includes(slug);
+const moreRow = (slug) => `
+    <nav class="cp-section" aria-label="More to explore">
+      <h2>More to Explore</h2>
+      <div class="cp-explore-grid">${MORE.filter(([s]) => s !== slug).map(([s, l]) => `<a href="/${s}/" class="cp-explore-link">${l}</a>`).join('')}</div>
+    </nav>
+`;
 function render(g) {
   const CK = g.checked || LAST_CHECKED, CKL = g.checkedLabel || LAST_CHECKED_LABEL;
   const fill = (t) => t.replace(/\$\{LAST_CHECKED_LABEL\}/g, CKL);
@@ -596,7 +605,7 @@ ${fontsLink}
 .gd-picks li{background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.9rem 1rem;margin-bottom:.8rem;font-size:.92rem;line-height:1.6}
 .gd-picks strong{color:var(--brown);font-family:'Playfair Display',serif;font-size:1.05rem}
 .gd-picks a,.cp-section a{color:#1A4570}
-.buy-btn{display:inline-block;background:var(--gold);color:#fff;font-weight:700;padding:.55rem 1.1rem;border-radius:999px;text-decoration:none;font-size:.88rem}
+.buy-btn{display:inline-flex;align-items:center;min-height:48px;background:var(--gold);color:#fff;font-weight:700;padding:.8rem 1.5rem;border-radius:999px;text-decoration:none;font-size:.98rem}
 .buy-btn:hover{filter:brightness(1.08)}
 .sb-table-wrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--light-border);border-radius:12px}
 .sb-table{border-collapse:collapse;width:100%;min-width:560px;font-size:.85rem;background:var(--paper)}
@@ -613,18 +622,7 @@ ${mlUniversal}
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-logo"><a href="/">🥔 World of Chips</a></div>
-  <div class="nav-links">
-    <a href="/#countries">Countries</a>
-    <a href="/#map-section">Map</a>
-    <a href="/#consumption">Consumption</a>
-    <a href="/news/">News</a>
-    <a href="/snack-boxes/">Snack Boxes</a>
-    <a href="/flavors/">Flavours</a>
-    <a href="/#shop">Where to Buy</a>
-  </div>
-</nav>
+${siteNav}
 
 <main>
 <article class="country-page active" id="${g.slug}">
@@ -640,7 +638,7 @@ ${mlUniversal}
 ${g.disc === false ? '' : `    <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>`}
 
     <p class="cp-intro">${intro}</p>
-${sections}${fill(g.body || '')}${fill(g.extra || '')}
+${sections}${fill(g.body || '')}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
 
     <section class="cp-section sb-faq" id="faq">
       <h2>FAQs</h2>
@@ -654,8 +652,7 @@ ${g.sources.length ? `
 ` : ''}
 ${g.disc === false ? '' : `    <p class="aff-disc">${DISCLOSURE}</p>
 `}
-    ${newsletterBlock('    ')}
-
+${g.nlEarly ? '' : `    ${newsletterBlock('    ')}\n`}${isFeature(g.slug) ? moreRow(g.slug) : ''}
     <nav class="cp-cta" aria-label="More chip guides">
       <h2>More Chip Guides</h2>
       <div class="cp-explore-grid">${g.related.map(([s, l]) => `<a href="/${s}/" class="cp-explore-link">${l}</a>`).join('')}<a href="/news/" class="cp-explore-link">📰 Chip News</a></div>

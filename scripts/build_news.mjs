@@ -54,6 +54,7 @@ const fmtMonth = (d) => { const [y, m] = d.split('-'); return `${MONTHS_LONG[Num
 // ---------- 1. inputs ----------
 const indexPath = path.join(ROOT, 'index.html');
 const indexHtml = fs.readFileSync(indexPath, 'utf8');
+const siteNav = between(indexHtml, '<!-- SITE-NAV:START', '<!-- SITE-NAV:END -->').text + '<!-- SITE-NAV:END -->';
 const stories = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'news.json'), 'utf8'));
 if (!Array.isArray(stories) || !stories.length) throw new Error('data/news.json must be a non-empty array');
 
@@ -225,16 +226,7 @@ ${mlUniversal}
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-logo"><a href="/">🥔 World of Chips</a></div>
-  <div class="nav-links">
-    <a href="/#countries">Countries</a>
-    <a href="/#map-section">Map</a>
-    <a href="/#consumption">Consumption</a>
-    <a href="/news/" aria-current="page">News</a>
-    <a href="/#shop">Where to Buy</a>
-  </div>
-</nav>
+${siteNav}
 
 <main>
 <div class="country-page active" id="news-archive">

@@ -1047,6 +1047,21 @@ A: Pringles cans differ by market, from about 102 g in parts of Asia to 165 g in
 **Q: How reliable is the Pringles Index?**
 A: It is one retailer per country at one point in time, a snapshot rather than an average. Low-confidence rows (ranges, marketplace or undated prices) are marked with an asterisk and can be hidden.
 
+### Chip Shrinkflation Tracker: Lay's, Walkers, Pringles & More, Sourced
+
+URL: https://worldofchips.com/shrinkflation/
+
+A sourced log of chip and crisp packs that got smaller: 11 cases from Lay's, Walkers, Pringles, Doritos and others in the UK, US, Germany and the Netherlands, with old and new sizes.
+
+**Q: What is shrinkflation?**
+A: Shrinkflation is when a product gets smaller, or a multipack loses items, while the price stays the same or rises, so you pay more per gram.
+
+**Q: Have Lay's bags got smaller?**
+A: Yes, in several markets. For example, Verbraucherzentrale Hamburg recorded German Lay's Paprika going from 175 g to 150 g in 2022, and Mouseprint recorded a US Lay's bag going from 15.25 oz to 13 oz in 2020 (both via ShrinkRadar).
+
+**Q: What is the biggest chip shrinkflation case in the log?**
+A: Smiths Frazzles and Chipsticks multipacks (United Kingdom, 2021), which went from 8 packs to 6 packs, a change of -25.0%.
+
 ## News
 
 - [Potato Chip News: New Flavors, Recalls & Industry Moves](https://worldofchips.com/news/): Potato chip and crisps news from around the world, updated weekly: new flavor launches, food-safety recalls, industry deals and regional snack trends. Updated 20 Oct 2026.
