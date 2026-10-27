@@ -63,6 +63,7 @@ World of Chips is an independent guide to potato chip culture around the world: 
 - [Quiz: Which Country's Chip Are You?](https://worldofchips.com/which-chip-are-you/): Five quick questions match you to a country's signature chip, from British salt & vinegar to Korean honey butter, then take you to that country's chip guide. Shareable result link.
 - [Add Your Local Chip Flavour to the World of Chips Map](https://worldofchips.com/submit-a-flavor/): Spotted a local chip flavour we are missing? Send us a photo and a few details. Approved finds appear on the Global Chip Map and the country page, credited to you.
 - [The Pringles Index 2026: What a Can of Pringles Costs in 31 Countries](https://worldofchips.com/pringles-index/): A Big Mac Index for chips: the regular price of Pringles Original in 31 countries per 100 g in USD. Turkey is the priciest at 2.6x the US; India and France are the cheapest. Sources for every price.
+- [Chip Shrinkflation Tracker: Lay's, Walkers, Pringles & More, Sourced](https://worldofchips.com/shrinkflation/): A sourced log of chip and crisp packs that got smaller: 11 cases from Lay's, Walkers, Pringles, Doritos and others in the UK, US, Germany and the Netherlands, with old and new sizes.
 
 ## Flavour pages
 

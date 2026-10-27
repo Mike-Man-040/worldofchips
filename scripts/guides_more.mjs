@@ -374,7 +374,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
     intro: `Each entry links to its source and, where we covered it, to our news story. Dates are on-shelf dates from the source. Where the source only reported a launch, we show &#8220;Reported&#8221; with the article date. The calendar is updated weekly (${drops.length} drops listed; last checked ${CK.checkedLabel}). Know a launch we missed? Reply to the newsletter.`,
     sections: [], body: calBody,
     faqs: [['How often is the limited-edition calendar updated?', 'Weekly, from launches covered by our news desk and from brand press releases and trade press. Every entry carries its source.'], ['What are the Lay\'s holiday flavours for 2026?', 'According to PepsiCo, the Holi-LAY\'S lineup is Cheddar Scalloped-Style Potatoes and Roasted Holiday Turkey (25 October), Maple Bacon (8 November), and chocolate-covered Wavy Milk Chocolate and Dubai-Style Dark Chocolate at select retailers from 1 December.']],
-    sources: [], related: [['news', '📰 Chip news'], ['flavors', '🌍 Chip flavours'], ['spiciest-chips', '🌶️ Spice ladder']] };
+    nlEarly: 'Get the monthly drop calendar', sources: [], related: [['news', '📰 Chip news'], ['flavors', '🌍 Chip flavours'], ['spiciest-chips', '🌶️ Spice ladder']] };
   void lastDrop;
 
   // ---------- quiz ----------
@@ -463,5 +463,46 @@ var m=location.search.match(/[?&]r=([a-z-]+)/);if(m)show(m[1],false);})();`;
     faqs: [['How do I add a chip flavour to World of Chips?', 'Fill in the form on this page with the brand, flavour, country and a photo of the bag you took yourself. We review submissions by hand and add approved ones to the map and the country page.'], ['Will my email address be published?', 'No. Email is optional and only used if we have a question. We publish only the name or handle you enter for credit, or no name if you leave it blank.']],
     sources: [], related: [['flavors', '🌍 Chip flavours'], ['limited-edition-chips', '📅 Limited-edition drops'], ['which-chip-are-you', '❓ Chip quiz']] };
 
-  return [...hubAndRecipe, ...cluster.map((g) => ({ ...CK, ...g })), spice, flavorIndex, ...flavorPages, calendar, quiz, submit, pringlesPage({ esc, ROOT, CK })].map((g) => ({ ...CK, ...g }));
+  // ---------- shrinkflation tracker (data/shrinkflation.json) ----------
+  const SH = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'shrinkflation.json'), 'utf8'));
+  const cname = (slug) => slug.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
+  for (const c of SH.cases) { for (const k of ['year', 'country', 'brand', 'product', 'old', 'new', 'source_name', 'source_url']) if (!c[k]) throw new Error(`shrinkflation.json: case missing ${k}`); if (!fs.existsSync(path.join(ROOT, c.country, 'index.html'))) throw new Error(`shrinkflation.json: unknown country ${c.country}`); }
+  const srcA = (c) => c.source_url.startsWith('/') ? `<a href="${esc(c.source_url)}">${esc(c.source_name)}</a>` : `<a href="${esc(c.source_url)}" target="_blank" rel="nofollow noopener">${esc(c.source_name)}</a>`;
+  const shRows = SH.cases.map((c) => `<tr><th scope="row">${esc(c.brand)} ${esc(c.product)}</th><td><a href="/${esc(c.country)}/">${esc(cname(c.country))}</a></td><td>${esc(c.old)}</td><td>${esc(c.new)}</td><td>${c.pct.toFixed(1)}%</td><td>${esc(c.year)}</td><td>${esc(c.note)} ${srcA(c)}</td></tr>`).join('\n          ');
+  const biggest = [...SH.cases].sort((a, b) => a.pct - b.pct)[0];
+  const shrink = { slug: 'shrinkflation', flag: '📉', crumb: 'Shrinkflation Tracker', ...CK, disc: false,
+    h1: 'The Chip Shrinkflation Tracker',
+    title: 'Chip Shrinkflation Tracker: Lay\'s, Walkers, Pringles & More, Sourced | World of Chips',
+    desc: `A sourced log of chip and crisp packs that got smaller: ${SH.cases.length} cases from Lay's, Walkers, Pringles, Doritos and others in the UK, US, Germany and the Netherlands, with old and new sizes.`,
+    introDark: 'Same price, fewer crisps. Every case below links to its source.',
+    intro: `Shrinkflation is when a pack gets smaller while the price stays the same or rises. This is a curated log of chip and crisp cases reported by consumer groups and the press, with the old and new size, the year and the source. It lists ${SH.cases.length} cases so far; the change percentages are worked out from the sizes shown. Seen a pack shrink? <a href="/submit-a-flavor/">Tell us</a>.`,
+    sections: [],
+    body: `
+    <section class="cp-section" id="cases">
+      <h2>The Log</h2>
+      <div class="sb-table-wrap">
+      <table class="sb-table">
+        <thead><tr><th scope="col">Product</th><th scope="col">Country</th><th scope="col">Before</th><th scope="col">After</th><th scope="col">Change</th><th scope="col">Year</th><th scope="col">Notes &amp; source</th></tr></thead>
+        <tbody>
+          ${shRows}
+        </tbody>
+      </table>
+      </div>
+      <p class="sb-muted">Pack counts (multipacks) are shown where the source reports bags rather than grams. ShrinkRadar entries link to its Lay&#8217;s page, which cites the original consumer-group or press source shown in brackets.</p>
+    </section>
+    <section class="cp-section" id="background">
+      <h2>The Bigger Picture</h2>
+      <ul class="sb-list">
+        ${SH.background.map((b) => `<li>${esc(b.text)} <span class="sb-muted">Source: <a href="${esc(b.source_url)}" target="_blank" rel="nofollow noopener">${esc(b.source_name)}</a></span></li>`).join('\n        ')}
+      </ul>
+      <p>Comparing prices across countries instead? See the <a href="/pringles-index/">Pringles Index</a>, which compares every country per 100 g.</p>
+    </section>`,
+    faqs: [
+      ['What is shrinkflation?', 'Shrinkflation is when a product gets smaller, or a multipack loses items, while the price stays the same or rises, so you pay more per gram.'],
+      ['Have Lay\'s bags got smaller?', 'Yes, in several markets. For example, Verbraucherzentrale Hamburg recorded German Lay\'s Paprika going from 175 g to 150 g in 2022, and Mouseprint recorded a US Lay\'s bag going from 15.25 oz to 13 oz in 2020 (both via ShrinkRadar).'],
+      ['What is the biggest chip shrinkflation case in the log?', `${biggest.brand} ${biggest.product} (${cname(biggest.country)}, ${biggest.year}), which went from ${biggest.old} to ${biggest.new}, a change of ${biggest.pct.toFixed(1)}%.`],
+    ],
+    sources: [], related: [['pringles-index', '📊 Pringles Index'], ['limited-edition-chips', '📅 Limited-edition drops'], ['united-kingdom', '🇬🇧 United Kingdom']] };
+
+  return [...hubAndRecipe, ...cluster.map((g) => ({ ...CK, ...g })), spice, flavorIndex, ...flavorPages, calendar, quiz, submit, pringlesPage({ esc, ROOT, CK }), shrink].map((g) => ({ ...CK, ...g }));
 }

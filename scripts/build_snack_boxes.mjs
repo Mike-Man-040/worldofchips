@@ -166,6 +166,7 @@ const FAQS = [
 
 // ---------- page ----------
 const indexHtml = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+const siteNav = between(indexHtml, '<!-- SITE-NAV:START', '<!-- SITE-NAV:END -->').text + '<!-- SITE-NAV:END -->';
 const gaSnippet = between(indexHtml, '<!-- Google tag (gtag.js) -->', '<meta charset').text.trim();
 const fontsLink = (indexHtml.match(/<link href="https:\/\/fonts\.googleapis\.com[^>]*>/) || [])[0];
 const footerHtml = between(indexHtml, '<footer>', '</footer>').text + '</footer>';
@@ -310,17 +311,7 @@ ${mlUniversal}
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-logo"><a href="/">🥔 World of Chips</a></div>
-  <div class="nav-links">
-    <a href="/#countries">Countries</a>
-    <a href="/#map-section">Map</a>
-    <a href="/#consumption">Consumption</a>
-    <a href="/news/">News</a>
-    <a href="/snack-boxes/" aria-current="page">Snack Boxes</a>
-    <a href="/#shop">Where to Buy</a>
-  </div>
-</nav>
+${siteNav}
 
 <main>
 <article class="country-page active" id="snack-boxes">
