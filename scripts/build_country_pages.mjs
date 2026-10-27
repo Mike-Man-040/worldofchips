@@ -269,7 +269,7 @@ ${qa.map(([q, a]) => `      <h3>${esc(q)}</h3>\n      <p>${esc(a)}</p>`).join('\
 
 let FAQ_COUNT = 0;
 const PC_SRC = { 'United States': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/'], 'Italy': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/'], 'Germany': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/'], 'South Korea': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-asia-market-overview-2024-3/'], 'Thailand': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-asia-market-overview-2024-3/'], 'United Kingdom': ['Euromonitor via Potato Business, 2017', 'https://www.potatobusiness.com/market/snackex-2017-the-brits-buy-65-of-total-savory-snacks-in-europe/'] };
-const HOME_GUIDES = [['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy'], ['best-chip-gift-boxes', '🎁 Best chip gift boxes'],
+const HOME_GUIDES = [['flavors', '🌍 Chip flavours of the world'], ['spiciest-chips', '🌶️ The chip spice ladder'], ['limited-edition-chips', '📅 Limited-edition drops'], ['which-chip-are-you', '❓ Which country\u2019s chip are you?'], ['make-chips-at-home', '🥔 Make chips at home'],['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy'], ['best-chip-gift-boxes', '🎁 Best chip gift boxes'],
   ['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips'], ['best-mexican-chips-to-buy-online', '🇲🇽 Best Mexican chips'],
   ['best-british-crisps-to-buy-online', '🇬🇧 Best British crisps'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'],
   ['best-international-chip-variety-packs', '🌍 International variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying chips in Europe'],
@@ -487,15 +487,13 @@ const snackLastmod = fs.existsSync(snackPath)
   ? (fs.readFileSync(snackPath, 'utf8').match(/"dateModified":"(\d{4}-\d{2}-\d{2})"/) || [])[1]
   : null;
 if (fs.existsSync(snackPath) && !snackLastmod) throw new Error('snack-boxes/index.html has no dateModified');
-// Buyer's guides are owned by scripts/build_guides.mjs; keep them with their dateModified.
-const GUIDE_SLUGS = ['best-mexican-chips-to-buy-online', 'best-british-crisps-to-buy-online', 'best-japanese-chips', 'where-to-buy-asian-chips-europe', 'best-international-chip-variety-packs', 'spiciest-chips-you-can-buy', 'best-chip-gift-boxes', 'best-korean-chips-to-buy-online'];
-const guideUrls = GUIDE_SLUGS.flatMap((g) => {
-  const gp = path.join(ROOT, g, 'index.html');
-  if (!fs.existsSync(gp)) return [];
-  const lm = (fs.readFileSync(gp, 'utf8').match(/"dateModified":"(\d{4}-\d{2}-\d{2})"/) || [])[1];
-  if (!lm) throw new Error(`${g}/index.html has no dateModified`);
-  return [{ loc: `${SITE}/${g}/`, freq: 'monthly', pri: '0.8', lastmod: lm }];
-});
+// Buyer's guides and the other pages built by build_guides.mjs (flavours, calendar, quiz...) own their
+// sitemap entries; keep every existing entry this script doesn't own, in order, if its page still exists.
+const ownLocs = new Set([`${SITE}/`, `${SITE}/news/`, `${SITE}/snack-boxes/`, ...sorted.map((x) => `${SITE}/${x.slug}/`)]);
+const prevSitemap = fs.existsSync(path.join(ROOT, 'sitemap.xml')) ? fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8') : '';
+const guideUrls = [...prevSitemap.matchAll(/<url>\s*<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>\s*<changefreq>([^<]+)<\/changefreq>\s*<priority>([^<]+)<\/priority>\s*<\/url>/g)]
+  .filter((m) => !ownLocs.has(m[1]) && fs.existsSync(path.join(ROOT, m[1].slice(SITE.length + 1), 'index.html')))
+  .map((m) => ({ loc: m[1], lastmod: m[2], freq: m[3], pri: m[4] }));
 const urls = [
   { loc: `${SITE}/`, freq: 'weekly', pri: '1.0' },
   ...(newsLastmod ? [{ loc: `${SITE}/news/`, freq: 'weekly', pri: '0.7', lastmod: newsLastmod }] : []),
