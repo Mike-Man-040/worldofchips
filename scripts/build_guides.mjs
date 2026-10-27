@@ -329,13 +329,19 @@ const GUIDES = [
   },
   {
     slug: 'best-chip-gift-boxes',
-    checked: '2026-10-26', checkedLabel: '26 October 2026',
+    checked: '2026-10-27', checkedLabel: '27 October 2026',
     flag: '🎁',
     crumb: 'Chip Gift Boxes',
-    h1: 'The Best Chip Gift Boxes and Snack Variety Packs to Send (2026)',
-    title: 'Best Chip Gift Boxes & Snack Variety Packs to Buy Online (2026) | World of Chips',
-    desc: 'Chip gift boxes and variety packs on Amazon.com: Broadway Basketeers gift tower, 40-count care package, Frito-Lay and Wise variety packs, Takis 18-bag mix, Australian Red Rock Deli and British Monster Munch.',
-    introDark: 'Ready-to-gift snack towers, big variety packs and imported multipacks for chip lovers.',
+    h1: 'The Best Chip Gift Boxes and Snack Variety Packs to Send This Christmas (2026)',
+    title: 'Best Chip Gift Boxes & Snack Variety Packs for Christmas 2026 | World of Chips',
+    desc: 'Christmas and holiday chip gift boxes and variety packs on Amazon.com: Broadway Basketeers gift tower, 40-count care package, Frito-Lay and Wise variety packs, Takis 18-bag mix, Australian Red Rock Deli and British Monster Munch.',
+    introDark: 'Ready-to-gift snack towers, big variety packs and imported multipacks for chip lovers, for Christmas, birthdays and care packages.',
+    top: `
+    <section class="cp-section" style="background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:1.1rem 1.2rem">
+      <h2>🎄 Shopping for Christmas 2026?</h2>
+      <p>Our <a href="/christmas-chip-gifts-2026/">Christmas chip gift guide</a> adds Japanese, Korean, British and Mexican chip sets, snack subscription boxes and gifts sorted by budget.</p>
+      <p style="margin-top:.8rem"><a href="/christmas-chip-gifts-2026/" class="buy-btn">See the Christmas gift guide &#8594;</a></p>
+    </section>`,
     intro: 'A chip gift doesn&#8217;t have to be a fruit basket with a token bag of crisps. Below are seven Amazon.com listings we opened on ${LAST_CHECKED_LABEL}, all showing an add-to-cart button. There are two ready-to-gift boxes, three big US variety packs and two imported multipacks for someone who already has every American flavour. Details come from each listing. We don&#8217;t quote prices, because they change often and vary by seller. For monthly subscription boxes from Japan and Korea, see our <a href="/snack-boxes/">snack box comparison</a>.',
     sections: [
       { id: 'picks', h2: 'Gift Boxes &amp; Variety Packs', note: '', items: [
@@ -370,10 +376,119 @@ const GUIDES = [
       ['What is a good gift for someone who loves chips?', 'For a dressed-up present, a ready-to-gift box such as the Broadway Basketeers tower (six stacked boxes with chips, popcorn and cookies) works well. For a pure chip fan, an imported multipack, like Australian Red Rock Deli or British Monster Munch, offers flavours they probably can&#8217;t buy locally.'],
       ['Can I add a gift message on Amazon?', 'The Ultimate Variety Sampler listing says gift wrapping and a message are available at checkout. The Broadway Basketeers tower comes with a gift tag. For other items, check the gift options shown at checkout.'],
       ['Are there chip gift boxes with international flavours?', 'Yes. Imported multipacks such as Red Rock Deli (Australia) and Walkers Monster Munch (UK) are sold on Amazon.com. For a monthly box of Japanese or Korean snacks, see our snack box comparison.'],
+      ['What chip gifts work for Christmas?', 'Any of the boxes here works under the tree. For country-themed sets (Japan, Korea, the UK, Mexico), snack subscription boxes and gifts by budget, see our Christmas 2026 chip gift guide.'],
       ['What is the difference between a gift box and a variety pack?', 'A gift box is packaged to be given, often with mixed sweet and savoury snacks and a tag or message. A variety pack is a bulk box of single-serve chip bags, better value for offices, parties or stocking a pantry, but plainly packaged.'],
     ],
     sources: [],
-    related: [['snack-boxes', '🍱 Snack boxes compared'], ['best-international-chip-variety-packs', '🌍 International variety packs'], ['spiciest-chips-you-can-buy', '🌶️ Spicy chips to buy'], ['united-states', '🇺🇸 United States'], ['australia', '🇦🇺 Australia'], ['united-kingdom', '🇬🇧 United Kingdom']],
+    related: [['christmas-chip-gifts-2026', '🎄 Christmas chip gift guide 2026'], ['snack-boxes', '🍱 Snack boxes compared'], ['best-international-chip-variety-packs', '🌍 International variety packs'], ['spiciest-chips-you-can-buy', '🌶️ Spicy chips to buy'], ['united-states', '🇺🇸 United States'], ['australia', '🇦🇺 Australia'], ['united-kingdom', '🇬🇧 United Kingdom']],
+  },
+  {
+    slug: 'christmas-chip-gifts-2026',
+    checked: '2026-10-27', checkedLabel: '27 October 2026',
+    flag: '🎄',
+    crumb: 'Christmas Chip Gifts 2026',
+    h1: 'Best International Chip Gifts for Christmas 2026',
+    title: 'Best International Chip Gifts for Christmas 2026: Japanese, Korean, British & Mexican Snack Sets | World of Chips',
+    desc: 'Christmas 2026 gift guide for chip lovers: international variety packs, Japanese, Korean, British and Mexican chip sets, snack subscription boxes and budget tiers, with comparison tables and why each one makes a good gift.',
+    introDark: 'Variety packs, country chip sets and snack boxes for the chip lover on your list, sorted by budget.',
+    nlEarly: 'Get the Chip Report before Christmas',
+    intro: 'Chips make a better present than they sound: a bag of Honey Butter Chip or a tin of Takis is something most people can&#8217;t buy at their corner shop, and a snack box turns into a small tasting trip. This guide pulls together the gift-worthy picks from our buying guides: ready-to-gift variety packs, country sets from Japan, Korea, the UK and Mexico, and snack subscription boxes. Every Amazon listing here was opened in October 2026 and showed an add-to-cart button. We only quote a price where we recorded it from the seller&#8217;s own page, with the date; for everything else, <strong>check the current price</strong> on the listing, because gift-season prices move fast.',
+    top: `
+    <section class="cp-section" id="jump" style="background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:1.1rem 1.2rem">
+      <h2>Jump to a Gift</h2>
+      <div class="cp-explore-grid"><a href="#budget" class="cp-explore-link">💸 Gifts by budget</a><a href="#variety" class="cp-explore-link">🎁 Variety packs</a><a href="#japan" class="cp-explore-link">🇯🇵 Japanese set</a><a href="#korea" class="cp-explore-link">🇰🇷 Korean set</a><a href="#uk" class="cp-explore-link">🇬🇧 British set</a><a href="#mexico" class="cp-explore-link">🇲🇽 Mexican set</a><a href="#boxes" class="cp-explore-link">🍱 Snack subscription boxes</a><a href="#newsletter" class="cp-explore-link">✉️ Free Chip Report</a></div>
+    </section>`,
+    sections: [
+      { id: 'variety', h2: '🎁 Variety Packs &amp; Ready-to-Gift Boxes', note: '', items: [
+        ['Broadway Basketeers Towering Food Gift Boxes (6 boxes)', 'A ready-to-gift tower of six stacked boxes with about 4 lb of sweet and savoury snacks, including chips, popcorn, cookies and trail mix. <em>Why it&#8217;s a good gift:</em> the listing says it arrives fully assembled with a gift tag, so it can ship straight to the recipient.', 'dp:B00FBGL0CK'],
+        ['Ultimate Variety Sampler Care Package (40 count)', 'Forty chips, cookies, bars, popcorn and crackers in one box. <em>Why it&#8217;s a good gift:</em> the listing offers gift wrapping and a message at checkout, which suits students and far-away family.', 'dp:B0GGVB8P7F'],
+        ['Red Rock Deli Variety 10 Pack (Australia)', 'Ten bags of Australian Red Rock Deli chips, such as Honey Soy Chicken and Sea Salt &amp; Balsamic Vinegar. <em>Why it&#8217;s a good gift:</em> flavours most US chip fans have never tried.', 'dp:B01L7Z11SQ'],
+        ['Takis Variety Pack (18 &#215; 1 oz)', 'Fuego, Blue Heat, Nitro and Crunchy Fajitas in snack-size bags. <em>Why it&#8217;s a good gift:</em> a heat-level tasting flight for the spice lover; also a strong stocking stuffer.', 'dp:B0FBXZDS3Q'],
+      ] },
+      { id: 'japan', h2: '🇯🇵 Japanese Chip Gift Set', note: '', items: [
+        ['Calbee &amp; Koikeya picks from our Japanese chips guide', 'Japan&#8217;s classics, Calbee Usushio, Norishio and Consomm&#233; Punch plus Koikeya Karamucho, are sold as imports that go in and out of stock. <em>Why it&#8217;s a good gift:</em> build a set of three or four bags for a Japan fan. Our <a href="/best-japanese-chips/">best Japanese chips guide</a> explains each flavour.', amazonSearch('calbee norishio potato chips')],
+      ] },
+      { id: 'korea', h2: '🇰🇷 Korean Chip Gift Set', note: '', items: [
+        ['Haitai Honey Butter Chips (pack of 3)', 'The sweet-and-buttery chip that caused a craze in Korea in 2014. <em>Why it&#8217;s a good gift:</em> the one Korean chip everyone has heard of. $14.50 when we opened the listing on 22 October 2026; check the current price.', 'dp:B01K9A9V50'],
+        ['ORION Turtle Chip Official Gift Box (Choco, 2 packs)', 'The chocolate version of Orion&#8217;s four-layer Turtle Chips, sold as a gift box. <em>Why it&#8217;s a good gift:</em> it already comes in gift packaging.', 'dp:B0BWSKY5FZ'],
+        ['Orion Marine Boy (Gorae-bap) Sharing Box', 'Baked crackers shaped like sea creatures in a sharing box. <em>Why it&#8217;s a good gift:</em> fun for kids and a gentle intro to Korean snacks.', 'dp:B07PZ92784'],
+        ['Nongshim Shrimp Crackers Original (14.1 oz, pack of 2)', 'A baked Korean classic made with ground shrimp. <em>Why it&#8217;s a good gift:</em> a big, shareable bag for a Christmas snack table.', 'dp:B0H7F3D75L'],
+      ] },
+      { id: 'uk', h2: '🇬🇧 British Crisps Gift Set', note: '', items: [
+        ['Walkers MEGA Monster Munch Pickled Onion (6 pack)', 'Six bags of the British pickled-onion corn snack in MEGA size. <em>Why it&#8217;s a good gift:</em> pure nostalgia for British expats.', 'dp:B004ISJK38'],
+        ['Walkers Variety Multipack', 'A multipack of Walkers crisps, the UK&#8217;s best-known brand. <em>Why it&#8217;s a good gift:</em> a taste of Cheese &amp; Onion and Prawn Cocktail for anyone who misses them.', 'dp:B0B8NW4ZLM'],
+        ['Tyrrell&#8217;s Sea Salt &amp; Cider Vinegar', 'Hand-cooked English crisps. <em>Why it&#8217;s a good gift:</em> a posher bag for the Christmas cheese board.', 'dp:B01G2873H6'],
+      ] },
+      { id: 'mexico', h2: '🇲🇽 Mexican Chip Gift Set', note: '', items: [
+        ['Sabritas Chile Limon Mix (30 bags)', 'A box of Sabritas, Mexico&#8217;s Lay&#8217;s, in chilli-and-lime flavours. <em>Why it&#8217;s a good gift:</em> enough bags to share at a holiday party.', 'dp:B0BQZD5QR6'],
+        ['Takis Variety Pack (18 bags)', 'A mixed box of Takis rolled tortilla chips. <em>Why it&#8217;s a good gift:</em> a box of mixed Takis for a spice lover to share.', 'dp:B0DG6345BV'],
+        ['Lay&#8217;s Limon (12.5 oz)', 'Lime-flavoured Lay&#8217;s, a Mexican staple. <em>Why it&#8217;s a good gift:</em> an easy add-on to a Mexican snack set.', 'dp:B083FKKRYY'],
+      ] },
+    ],
+    extra: `
+    <section class="cp-section" id="boxes">
+      <h2>🍱 Snack Subscription Boxes</h2>
+      <p>A subscription box is the gift that keeps arriving. Prices below come from each company&#8217;s own site, as recorded in our <a href="/snack-boxes/">snack box comparison</a> (checked October 2026); promotions and holiday shipping cut-offs change, so confirm at checkout.</p>
+      <div class="sb-table-wrap">
+      <table class="sb-table">
+        <thead><tr><th scope="col">Box</th><th scope="col">Focus</th><th scope="col">Price (per box, from our comparison)</th><th scope="col">Why it&#8217;s a good gift</th><th scope="col"></th></tr></thead>
+        <tbody>
+        <tr><th scope="row">🇯🇵 Bokksu</th><td>Traditional Japanese snacks + tea</td><td>$32.99&#8211;$39.99 monthly</td><td>Feels premium; artisan makers</td><td><a href="https://www.bokksu.com/" target="_blank" rel="nofollow noopener" data-affiliate="bokksu">Visit Bokksu</a></td></tr>
+        <tr><th scope="row">🇯🇵 TokyoTreat</th><td>Modern Japanese snacks</td><td>$32.50&#8211;$37.50 monthly</td><td>Convenience-store favourites and limited flavours</td><td><a href="https://tokyotreat.com/" target="_blank" rel="nofollow noopener" data-affiliate="tokyotreat">Visit TokyoTreat</a></td></tr>
+        <tr><th scope="row">🇯🇵 Japan Candy Box</th><td>Japanese candy &amp; snacks</td><td>$25&#8211;$31 monthly</td><td>Lower-priced Japan box</td><td><a href="https://www.japancandystore.com/" target="_blank" rel="nofollow noopener" data-affiliate="japancandystore">Visit Japan Candy Store</a></td></tr>
+        <tr><th scope="row">🇰🇷 Daebak SnackFever</th><td>Korean snacks</td><td>$40&#8211;$55 per seasonal box</td><td>The Korea pick; four boxes a year</td><td><a href="https://daebak.co/" target="_blank" rel="nofollow noopener" data-affiliate="daebak">Visit Daebak</a></td></tr>
+        <tr><th scope="row">🌍 Universal Yums</th><td>A different country each month</td><td>$18&#8211;$47 monthly</td><td>Variety beyond Asia; US &amp; Canada only</td><td><a href="https://www.universalyums.com/" target="_blank" rel="nofollow noopener" data-affiliate="universalyums">Visit Universal Yums</a></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="margin-top:1rem"><a href="/snack-boxes/" class="buy-btn">Compare all snack boxes &#8594;</a></p>
+    </section>
+
+    <section class="cp-section" id="budget">
+      <h2>💸 Christmas Chip Gifts by Budget</h2>
+      <p>We only sort a gift into a price tier when we have a sourced price for it. Amazon picks without a recorded price are marked <strong>check price</strong>.</p>
+      <div class="sb-table-wrap">
+      <table class="sb-table">
+        <thead><tr><th scope="col">Tier</th><th scope="col">Gift</th><th scope="col">Price (source)</th><th scope="col">Best for</th></tr></thead>
+        <tbody>
+        <tr><th scope="row">Under $20</th><td>Haitai Honey Butter Chips (3)</td><td>$14.50 on Amazon, 22 Oct 2026</td><td>Stocking stuffer, Korea fans</td></tr>
+        <tr><th scope="row">Under $20</th><td>Universal Yums (entry box)</td><td>From $18 a month (company site)</td><td>Families who want a new country each month</td></tr>
+        <tr><th scope="row">Under $40</th><td>Japan Candy Box</td><td>$25&#8211;$31 a month (company site)</td><td>Japanese snacks on a budget</td></tr>
+        <tr><th scope="row">Under $40</th><td>TokyoTreat</td><td>$32.50&#8211;$37.50 a month (company site)</td><td>Modern Japanese snacks</td></tr>
+        <tr><th scope="row">Under $40</th><td>Bokksu</td><td>$32.99&#8211;$39.99 a month (company site)</td><td>A premium-feeling Japan box</td></tr>
+        <tr><th scope="row">Premium</th><td>Daebak SnackFever</td><td>$40&#8211;$55 per seasonal box (company site)</td><td>Korean snack fans</td></tr>
+        <tr><th scope="row">Premium</th><td>Universal Yums (larger boxes)</td><td>Up to $47 a month (company site)</td><td>A bigger monthly world tour</td></tr>
+        <tr><th scope="row">Check price</th><td>Broadway Basketeers tower, 40-count care package, country sets above</td><td>Check price on Amazon</td><td>Ready-to-gift or build-your-own</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="sb-muted">Subscription prices depend on plan length and exclude shipping; see our <a href="/snack-boxes/">snack box comparison</a> for plans and shipping. Amazon prices change often and vary by seller.</p>
+    </section>
+
+    <section class="cp-section" id="compare">
+      <h2>Country Gift Sets Compared</h2>
+      <div class="sb-table-wrap">
+      <table class="sb-table">
+        <thead><tr><th scope="col">Set</th><th scope="col">Star pick</th><th scope="col">Taste</th><th scope="col">Good gift for</th></tr></thead>
+        <tbody>
+        <tr><th scope="row">🇯🇵 Japanese</th><td>Calbee Norishio / Karamucho</td><td>Seaweed-salt, consomm&#233;, spicy</td><td>Anime and Japan fans</td></tr>
+        <tr><th scope="row">🇰🇷 Korean</th><td>Haitai Honey Butter Chip</td><td>Sweet-savoury</td><td>K-pop and K-drama fans</td></tr>
+        <tr><th scope="row">🇬🇧 British</th><td>Monster Munch Pickled Onion</td><td>Tangy, malty, cheesy</td><td>British expats</td></tr>
+        <tr><th scope="row">🇲🇽 Mexican</th><td>Takis / Sabritas Chile Lim&#243;n</td><td>Chilli and lime</td><td>Spice lovers and teens</td></tr>
+        <tr><th scope="row">🎁 Variety</th><td>Broadway Basketeers tower</td><td>Sweet and savoury mix</td><td>Office, in-laws, anyone</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="margin-top:1rem"><a href="/best-chip-gift-boxes/" class="buy-btn">More chip gift boxes &#8594;</a></p>
+    </section>`,
+    faqs: [
+      ['What is a good Christmas gift for someone who loves chips?', 'A country set of chips they can&#8217;t buy locally, such as Korean Honey Butter Chip or British Monster Munch, or a snack subscription box from Japan or Korea. For a ready-to-gift present, the Broadway Basketeers tower arrives assembled with a gift tag.'],
+      ['Which snack subscription box is best as a gift?', 'Bokksu feels the most premium for Japan fans, TokyoTreat suits modern Japanese snacks, Daebak is the Korea pick and Universal Yums sends a different country each month (US and Canada only). See our snack box comparison for plans and shipping.'],
+      ['Are there chip gifts under $20?', 'Yes. Haitai Honey Butter Chips (3 bags) was $14.50 on Amazon when we checked on 22 October 2026, and Universal Yums starts from $18 a month. Prices change, so check before you buy.'],
+      ['When should I order chip gifts for Christmas?', 'Imported snacks and subscription boxes ship from abroad, so order early and check each seller&#8217;s holiday delivery dates at checkout.'],
+    ],
+    sources: [],
+    related: [['best-chip-gift-boxes', '🎁 Chip gift boxes'], ['snack-boxes', '🍱 Snack boxes compared'], ['best-international-chip-variety-packs', '🌍 International variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'], ['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips'], ['best-british-crisps-to-buy-online', '🇬🇧 Best British crisps'], ['best-mexican-chips-to-buy-online', '🇲🇽 Best Mexican chips'], ['spiciest-chips-you-can-buy', '🌶️ Spicy chips to buy']],
   },
   {
     slug: 'best-korean-chips-to-buy-online',
@@ -562,7 +677,7 @@ ${nlForm}
 </aside>`.split('\n').map((l, i) => (i ? indent + (l.startsWith('<aside') || l.startsWith('</aside') ? '' : '  ') + l : l)).join('\n');
 
 // Author box + Person schema on buying guides and the Pringles Index (facts only: name, role, finance background).
-const hasAuthor = (g) => g.slug === 'pringles-index' || /^best-|-buy|^where-to-buy-|^chip-seasoning-powders$/.test(g.slug);
+const hasAuthor = (g) => g.slug === 'pringles-index' || /^best-|-buy|^where-to-buy-|^chip-seasoning-powders$|^christmas-/.test(g.slug);
 const authorBox = `
     <aside class="cp-section" aria-label="About the author" style="background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:1rem 1.2rem">
       <p style="margin:0"><strong style="color:var(--brown);font-family:'Playfair Display',serif">Michael van der Looij, founder of World of Chips</strong></p>
@@ -576,6 +691,9 @@ const moreRow = (slug) => `
       <h2>More to Explore</h2>
       <div class="cp-explore-grid">${MORE.filter(([s]) => s !== slug).map(([s, l]) => `<a href="/${s}/" class="cp-explore-link">${l}</a>`).join('')}</div>
     </nav>
+`;
+const GIFT_BANNER = `
+    <p class="cp-section" style="background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:.9rem 1.1rem;font-size:.95rem">🎄 <strong>Buying for someone?</strong> See our <a href="/christmas-chip-gifts-2026/">Christmas 2026 chip gift guide</a>: country chip sets, snack boxes and gifts by budget.</p>
 `;
 function render(g) {
   const CK = g.checked || LAST_CHECKED, CKL = g.checkedLabel || LAST_CHECKED_LABEL;
@@ -680,7 +798,7 @@ ${siteNav}
 ${g.disc === false ? '' : `    <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>`}
 
     <p class="cp-intro">${intro}</p>
-${sections}${fill(g.body || '')}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
+${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
 
 ${hasAuthor(g) ? authorBox : ''}    <section class="cp-section sb-faq" id="faq">
       <h2>FAQs</h2>
