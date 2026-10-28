@@ -63,7 +63,7 @@ python3 scripts/validate_site.py     # includes a "snack-box page in sync" check
 
 Never guess a figure: if a company doesn't publish it, write "see site".
 Brand links are plain official URLs with `rel="nofollow noopener"` and a `data-affiliate="<brand>"`
-attribute (`bokksu`, `tokyotreat`, `sakuraco`, `japancrate`, `daebak`, `japancandystore`, `universalyums`).
+attribute (`bokksu`, `tokyotreat`, `sakuraco`, `japancrate`, `daebak`, `japancandystore`, `universalyums`, `mexicrate`, `snackcrate`).
 When an affiliate program is approved, swap the `href` in the script (and add `sponsored` to `rel`).
 `build_country_pages.mjs` and `build_news.mjs` both preserve the `/snack-boxes/` sitemap entry.
 

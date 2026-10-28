@@ -150,7 +150,7 @@ const GUIDE_LINKS = {
   'united-kingdom': [['christmas-chip-gifts-2026', '🎄 Christmas chip gift guide 2026'], ['best-british-crisps-to-buy-online', '🇬🇧 Best British crisps to buy online'], ['best-chip-gift-boxes', '🎁 Chip gift boxes (incl. Monster Munch)'], ['where-to-buy-asian-chips-europe', '🇬🇧 Where to buy Takis & imported chips in the UK'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   'united-states': [['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy'], ['best-chip-gift-boxes', '🎁 Best chip gift boxes'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs to buy online'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online']],
   germany: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe']],
-  china: [['best-international-chip-variety-packs', '🌍 Best exotic Asian chip variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online']],
+  china: [['christmas-chip-gifts-2026', '🎄 Christmas chip gift guide 2026'], ['best-international-chip-variety-packs', '🌍 Best exotic Asian chip variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online']],
   france: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe']],
   netherlands: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe']],
   poland: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe']],
@@ -160,6 +160,8 @@ const GUIDE_LINKS = {
   thailand: [['best-international-chip-variety-packs', '🌍 Best exotic Asian chip variety packs']],
   india: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   spain: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
+  brazil: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
+  sweden: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe']],
 };
 // Community finds: moderated visitor submissions from data/community_flavors.json (see README).
 // Entry: { "id": "2026-11-uk-1", "country": "united-kingdom", "city": "Leeds", "flavor": "Chip Shop Curry",
@@ -211,7 +213,7 @@ function guideCallout(slug) {
 // guide links). The 15 fully researched countries get 4 Q&As; the thinner ones get 3 conservative
 // ones (brands, flavours, where to buy) and no history/"what makes it unique" answer.
 const RESEARCHED = new Set(['japan', 'south-korea', 'united-kingdom', 'united-states', 'mexico', 'germany',
-  'france', 'netherlands', 'poland', 'russia', 'argentina', 'egypt', 'thailand', 'india', 'spain', 'china', 'australia', 'italy', 'indonesia', 'canada']);
+  'france', 'netherlands', 'poland', 'russia', 'argentina', 'egypt', 'thailand', 'india', 'spain', 'china', 'australia', 'italy', 'indonesia', 'canada', 'brazil', 'sweden']);
 const listAnd = (a) => (a.length < 2 ? a.join('') : `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}`);
 const sentences = (t) => t.match(/[^.!?]+[.!?]+(?=\s|$)/g)?.map((x) => x.trim()) || [t];
 const words = (t) => t.split(/\s+/).filter(Boolean).length;
@@ -295,7 +297,7 @@ ${qa.map(([q, a]) => `      <h3>${esc(q)}</h3>\n      <p>${esc(a)}</p>`).join('\
 
 let FAQ_COUNT = 0;
 const PC_SRC = { 'United States': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/'], 'Italy': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/'], 'Germany': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-world-market-overview-2024-5/'], 'South Korea': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-asia-market-overview-2024-3/'], 'Thailand': ['IndexBox, 2024', 'https://www.indexbox.io/blog/potato-chips-asia-market-overview-2024-3/'], 'United Kingdom': ['Euromonitor via Potato Business, 2017', 'https://www.potatobusiness.com/market/snackex-2017-the-brits-buy-65-of-total-savory-snacks-in-europe/'] };
-const HOME_GUIDES = [['christmas-chip-gifts-2026', '🎄 Christmas chip gifts 2026'], ['pringles-index', '📊 The Pringles Index'], ['flavors', '🌍 Chip flavours of the world'], ['spiciest-chips', '🌶️ The chip spice ladder'], ['limited-edition-chips', '📅 Limited-edition drops'], ['which-chip-are-you', '❓ Which country\u2019s chip are you?'], ['make-chips-at-home', '🥔 Make chips at home'],['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy'], ['best-chip-gift-boxes', '🎁 Best chip gift boxes'],
+const HOME_GUIDES = [['christmas-chip-gifts-2026', '🎄 Christmas chip gifts 2026'], ['christmas-snack-box-comparison-2026', '🍱 Christmas snack boxes compared'], ['pringles-index', '📊 The Pringles Index'], ['flavors', '🌍 Chip flavours of the world'], ['spiciest-chips', '🌶️ The chip spice ladder'], ['limited-edition-chips', '📅 Limited-edition drops'], ['which-chip-are-you', '❓ Which country\u2019s chip are you?'], ['make-chips-at-home', '🥔 Make chips at home'],['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy'], ['best-chip-gift-boxes', '🎁 Best chip gift boxes'],
   ['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips'], ['best-mexican-chips-to-buy-online', '🇲🇽 Best Mexican chips'],
   ['best-british-crisps-to-buy-online', '🇬🇧 Best British crisps'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'],
   ['best-international-chip-variety-packs', '🌍 International variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying chips in Europe'],
