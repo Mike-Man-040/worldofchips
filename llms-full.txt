@@ -998,7 +998,7 @@ A: BBC Good Food suggests barbecue rub, garlic granules or paprika, tossed with 
 
 URL: https://worldofchips.com/spiciest-chips/
 
-A heat ranking, not a shopping list: eight spicy chips ranked on one ladder, from Cape Cod Sweet & Spicy Jalapeño through Takis Blue Heat to the discontinued Paqui One Chip Challenge, with pepper Scoville figures only where a source exists.
+A heat ranking, not a shopping list: eleven spicy chips ranked by evidence: the pepper each uses, its Scoville range and the maker’s own heat claims, from jalapeño kettle chips through Paqui ghost pepper and Carolina Reaper chips to the discontinued One Chip Challenge.
 
 **Q: What is the spiciest chip ever sold?**
 A: The Paqui One Chip Challenge chip, made with Carolina Reaper (and later Naga Viper) peppers, was marketed as one of the hottest. Paqui withdrew it in September 2023 after a teenager died, so it is no longer sold.
@@ -1006,8 +1006,11 @@ A: The Paqui One Chip Challenge chip, made with Carolina Reaper (and later Naga 
 **Q: Do spicy chips have a Scoville rating?**
 A: Makers don’t publish Scoville ratings for their chips. Scoville figures on this page describe the peppers used, such as the jalapeño or ghost pepper, not the finished chip.
 
+**Q: What is the hottest chip you can still buy?**
+A: Of the chips here, the Red Hot Reaper Chip Challenge (Carolina Reaper and Trinidad Moruga Scorpion) is the hottest on pepper evidence; among regular bags, Paqui Haunted Ghost Pepper. Challenge chips carry real health warnings: keep them away from children.
+
 **Q: Are Takis hotter than Flamin’ Hot chips?**
-A: Takis rates Fuego and Blue Heat as Extreme on its own Heat-O-Meter. We rank them above Ruffles Flamin’ Hot, but that is our editorial judgement, not a lab measurement.
+A: Takis rates Fuego and Blue Heat as Extreme on its own Heat-O-Meter. Neither brand names its pepper or publishes a scale, so ranking Takis above Ruffles Flamin’ Hot is our editorial estimate, not a lab measurement.
 
 ### Chip Flavours of the World: Origins & Where to Buy
 
