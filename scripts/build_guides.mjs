@@ -336,11 +336,13 @@ const GUIDES = [
     title: 'Best Chip Gift Boxes & Snack Variety Packs for Christmas 2026 | World of Chips',
     desc: 'Christmas and holiday chip gift boxes and variety packs on Amazon.com: Broadway Basketeers gift tower, 40-count care package, Frito-Lay and Wise variety packs, Takis 18-bag mix, Australian Red Rock Deli and British Monster Munch.',
     introDark: 'Ready-to-gift snack towers, big variety packs and imported multipacks for chip lovers, for Christmas, birthdays and care packages.',
+    nlTop: true,
     top: `
     <section class="cp-section" style="background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:1.1rem 1.2rem">
       <h2>🎄 Shopping for Christmas 2026?</h2>
       <p>Our <a href="/christmas-chip-gifts-2026/">Christmas chip gift guide</a> adds Japanese, Korean, British and Mexican chip sets, snack subscription boxes and gifts sorted by budget.</p>
-      <p style="margin-top:.8rem"><a href="/christmas-chip-gifts-2026/" class="buy-btn">See the Christmas gift guide &#8594;</a></p>
+      <p>Prefer a box that arrives from abroad? Compare <a href="/christmas-snack-box-comparison-2026/">international Christmas snack boxes</a> (Universal Yums, Bokksu, TokyoTreat, Sakuraco, MexiCrate, SnackCrate).</p>
+      <p style="margin-top:.8rem"><a href="/christmas-chip-gifts-2026/" class="buy-btn">See the Christmas gift guide &#8594;</a> <a href="/christmas-snack-box-comparison-2026/" class="cp-explore-link">🎄 Snack boxes compared</a></p>
     </section>`,
     intro: 'A chip gift doesn&#8217;t have to be a fruit basket with a token bag of crisps. Below are seven Amazon.com listings we opened on ${LAST_CHECKED_LABEL}, all showing an add-to-cart button. There are two ready-to-gift boxes, three big US variety packs and two imported multipacks for someone who already has every American flavour. Details come from each listing. We don&#8217;t quote prices, because they change often and vary by seller. For monthly subscription boxes from Japan and Korea, see our <a href="/snack-boxes/">snack box comparison</a>.',
     sections: [
@@ -380,7 +382,7 @@ const GUIDES = [
       ['What is the difference between a gift box and a variety pack?', 'A gift box is packaged to be given, often with mixed sweet and savoury snacks and a tag or message. A variety pack is a bulk box of single-serve chip bags, better value for offices, parties or stocking a pantry, but plainly packaged.'],
     ],
     sources: [],
-    related: [['christmas-chip-gifts-2026', '🎄 Christmas chip gift guide 2026'], ['snack-boxes', '🍱 Snack boxes compared'], ['best-international-chip-variety-packs', '🌍 International variety packs'], ['spiciest-chips-you-can-buy', '🌶️ Spicy chips to buy'], ['united-states', '🇺🇸 United States'], ['australia', '🇦🇺 Australia'], ['united-kingdom', '🇬🇧 United Kingdom']],
+    related: [['christmas-chip-gifts-2026', '🎄 Christmas chip gift guide 2026'], ['christmas-snack-box-comparison-2026', '🎄 Christmas snack boxes compared'], ['snack-boxes', '🍱 Snack boxes compared'], ['best-international-chip-variety-packs', '🌍 International variety packs'], ['spiciest-chips-you-can-buy', '🌶️ Spicy chips to buy'], ['united-states', '🇺🇸 United States'], ['australia', '🇦🇺 Australia'], ['united-kingdom', '🇬🇧 United Kingdom']],
   },
   {
     slug: 'christmas-chip-gifts-2026',
@@ -391,12 +393,12 @@ const GUIDES = [
     title: 'Best International Chip Gifts for Christmas 2026: Japanese, Korean, British & Mexican Snack Sets | World of Chips',
     desc: 'Christmas 2026 gift guide for chip lovers: international variety packs, Japanese, Korean, British and Mexican chip sets, snack subscription boxes and budget tiers, with comparison tables and why each one makes a good gift.',
     introDark: 'Variety packs, country chip sets and snack boxes for the chip lover on your list, sorted by budget.',
-    nlEarly: 'Get the Chip Report before Christmas',
+    nlTop: true,
     intro: 'Chips make a better present than they sound: a bag of Honey Butter Chip or a tin of Takis is something most people can&#8217;t buy at their corner shop, and a snack box turns into a small tasting trip. This guide pulls together the gift-worthy picks from our buying guides: ready-to-gift variety packs, country sets from Japan, Korea, the UK and Mexico, and snack subscription boxes. Every Amazon listing here was opened in October 2026 and showed an add-to-cart button. We only quote a price where we recorded it from the seller&#8217;s own page, with the date; for everything else, <strong>check the current price</strong> on the listing, because gift-season prices move fast.',
     top: `
     <section class="cp-section" id="jump" style="background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:1.1rem 1.2rem">
       <h2>Jump to a Gift</h2>
-      <div class="cp-explore-grid"><a href="#budget" class="cp-explore-link">💸 Gifts by budget</a><a href="#variety" class="cp-explore-link">🎁 Variety packs</a><a href="#japan" class="cp-explore-link">🇯🇵 Japanese set</a><a href="#korea" class="cp-explore-link">🇰🇷 Korean set</a><a href="#uk" class="cp-explore-link">🇬🇧 British set</a><a href="#mexico" class="cp-explore-link">🇲🇽 Mexican set</a><a href="#boxes" class="cp-explore-link">🍱 Snack subscription boxes</a><a href="#newsletter" class="cp-explore-link">✉️ Free Chip Report</a></div>
+      <div class="cp-explore-grid"><a href="#budget" class="cp-explore-link">💸 Gifts by budget</a><a href="#variety" class="cp-explore-link">🎁 Variety packs</a><a href="#japan" class="cp-explore-link">🇯🇵 Japanese set</a><a href="#korea" class="cp-explore-link">🇰🇷 Korean set</a><a href="#uk" class="cp-explore-link">🇬🇧 British set</a><a href="#mexico" class="cp-explore-link">🇲🇽 Mexican set</a><a href="#boxes" class="cp-explore-link">🍱 Snack subscription boxes</a><a href="/christmas-snack-box-comparison-2026/" class="cp-explore-link">🎄 Christmas snack boxes compared</a><a href="#newsletter" class="cp-explore-link">✉️ Free Chip Report</a></div>
     </section>`,
     sections: [
       { id: 'variety', h2: '🎁 Variety Packs &amp; Ready-to-Gift Boxes', note: '', items: [
@@ -441,7 +443,7 @@ const GUIDES = [
         </tbody>
       </table>
       </div>
-      <p style="margin-top:1rem"><a href="/snack-boxes/" class="buy-btn">Compare all snack boxes &#8594;</a></p>
+      <p style="margin-top:1rem"><a href="/christmas-snack-box-comparison-2026/" class="buy-btn">Christmas snack boxes compared &#8594;</a> <a href="/snack-boxes/" class="cp-explore-link">Asian snack boxes in depth</a></p>
     </section>
 
     <section class="cp-section" id="budget">
@@ -488,7 +490,7 @@ const GUIDES = [
       ['When should I order chip gifts for Christmas?', 'Imported snacks and subscription boxes ship from abroad, so order early and check each seller&#8217;s holiday delivery dates at checkout.'],
     ],
     sources: [],
-    related: [['best-chip-gift-boxes', '🎁 Chip gift boxes'], ['snack-boxes', '🍱 Snack boxes compared'], ['best-international-chip-variety-packs', '🌍 International variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'], ['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips'], ['best-british-crisps-to-buy-online', '🇬🇧 Best British crisps'], ['best-mexican-chips-to-buy-online', '🇲🇽 Best Mexican chips'], ['spiciest-chips-you-can-buy', '🌶️ Spicy chips to buy']],
+    related: [['best-chip-gift-boxes', '🎁 Chip gift boxes'], ['christmas-snack-box-comparison-2026', '🎄 Christmas snack boxes compared'], ['snack-boxes', '🍱 Snack boxes compared'], ['best-international-chip-variety-packs', '🌍 International variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'], ['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips'], ['best-british-crisps-to-buy-online', '🇬🇧 Best British crisps'], ['best-mexican-chips-to-buy-online', '🇲🇽 Best Mexican chips'], ['spiciest-chips-you-can-buy', '🌶️ Spicy chips to buy']],
   },
   {
     slug: 'best-korean-chips-to-buy-online',
@@ -626,6 +628,83 @@ const GUIDES = [
 ];
 
 GUIDES.push(...morePages({ amazonSearch, esc, ROOT }));
+// Christmas snack-box comparison (gift page). Prices/facts from each company's own site; the first four boxes
+// reuse the figures verified for /snack-boxes/ (build_snack_boxes.mjs, checked 2026-10-18); MexiCrate and
+// SnackCrate were read on 2026-10-28. Brand links are plain official URLs (affiliate approvals pending):
+// swap the href and add "sponsored" to rel when a program is approved (search data-affiliate="<brand>").
+{
+  const off = (brand, href, label) => `<a href="${href}" target="_blank" rel="nofollow noopener" data-affiliate="${brand}">${label}</a>`;
+  const U = (t) => `<span title="Not confirmed on the official site" style="color:var(--red);font-weight:700">(unconfirmed)</span>${t ? ' ' + t : ''}`;
+  const rows = [
+    ['🌍', off('universalyums', 'https://www.universalyums.com/', 'Universal Yums'), 'Yum Box $18&#8211;$20 &#183; Yum Yum Box $27&#8211;$31 &#183; Super Yum Box $41&#8211;$47 (per box; lower price = 12-month plan)', 'A different country each month (you can pick your first box&#8217;s country)', '5&#8211;7, 10&#8211;12 or 15&#8211;18 sweet and savoury snacks (Super Yum adds a drink), plus a booklet with trivia and games', 'US and Canada only. Free in the contiguous US; Canada $5/$8/$10 per box by size', '18 Oct 2026'],
+    ['🇯🇵', off('bokksu', 'https://www.bokksu.com/', 'Bokksu'), '$32.99&#8211;$39.99 per box ($39.99 monthly, $32.99 on 12 months)', 'Japan; ships from Japan', '20&#8211;22 traditional snacks and sweets from small makers, plus a tea and a culture guide', 'US $13.99 + $3 import duty; UK, EU, Canada, Australia $15.99 per box. EU buyers may owe duty on delivery', '18 Oct 2026'],
+    ['🇯🇵', off('tokyotreat', 'https://tokyotreat.com/', 'TokyoTreat'), '$32.50&#8211;$37.50 per box ($37.50 monthly, $32.50 on 12 months)', 'Japan; ships from Japan with tracking', '12&#8211;15 full-size modern Japanese snacks: chips, KitKats, gummies, noodles, DIY candy, plus a booklet', '$16.99 per box to the US, UK and most of Europe; 7&#8211;28 days after dispatch', '18 Oct 2026'],
+    ['🇯🇵', off('sakuraco', 'https://sakura.co/', 'Sakuraco'), '$32.50&#8211;$37.50 per box; Premium Tea Pairing +$10/month', 'Japan; TokyoTreat&#8217;s sister box', 'Up to 20 traditional sweets, snacks and teas plus a Japanese home good and a culture guide', 'Same table as TokyoTreat: $16.99 per box', '18 Oct 2026'],
+    ['🇲🇽', off('mexicrate', 'https://www.mexicrate.com/', 'MexiCrate'), 'Peque&#241;a $14.99 &#183; Mediana $29.99 &#183; Grande $39.99 (per box). Whether these renew as a subscription and any plan discounts: ' + U('check site'), 'Mexican candy and snacks, packed and shipped from MexiCrate&#8217;s Southern California office', 'Peque&#241;a 10&#8211;15, Mediana 25+, Grande 35+ rotating Mexican candies and snacks (mostly candy; spicy, tamarind and chamoy flavours)', 'US and Canada only. Free US shipping on orders over $75 (contiguous states); Canada flat $20 under 10 lb, duty/taxes possible over $40 CAD', '28 Oct 2026'],
+    ['🌍', off('snackcrate', 'https://www.snackcrate.com/', 'SnackCrate'), 'Original crate $26 (12 months) / $29 (6 months) per crate; monthly price ' + U('shown as $34.01 or $40 in the sign-up page data') + '. Bigger &#8220;Family&#8221; crate $50&#8211;$54 on longer plans ' + U('monthly price unclear'), 'A new country every month; snacks imported from that country', 'Sweet, salty and savoury full-size snacks, a local drink, a culture guide and an English ingredient guide', 'US, US territories and military bases/embassies only. Shipping fee: ' + U('see site'), '28 Oct 2026'],
+    ['🇰🇷', off('daebak', 'https://daebak.co/', 'Daebak SnackFever'), 'Original $40 &#183; Deluxe $55 per seasonal box (4 a year); 10&#8211;15% off on subscriptions', 'South Korea; ships from Seoul', '8+ (Original) or 12+ (Deluxe) Korean convenience-store snacks: chips, crackers, jellies, sweets', 'Ships to 100+ countries with VAT and duties included; US/Canada $4.99/$9.99', '18 Oct 2026'],
+  ];
+  GUIDES.push({
+    slug: 'christmas-snack-box-comparison-2026', checked: '2026-10-28', checkedLabel: '28 October 2026', flag: '🎄', crumb: 'Christmas Snack Boxes Compared',
+    parent: ['christmas-chip-gifts-2026', 'Christmas Chip Gifts 2026'], nlTop: true,
+    h1: 'Christmas Snack Box Comparison 2026: Universal Yums vs Bokksu vs TokyoTreat vs MexiCrate & More',
+    title: 'Christmas Snack Box Comparison 2026: Universal Yums, Bokksu, TokyoTreat, Sakuraco, MexiCrate, SnackCrate | World of Chips',
+    desc: 'Compare international snack boxes to give this Christmas: Universal Yums, Bokksu, TokyoTreat, Sakuraco, MexiCrate, SnackCrate and Daebak. Price tiers, origin, what is inside and shipping, from each company\u2019s own site.',
+    introDark: 'Seven international snack boxes side by side: price tiers, where they come from, what&#8217;s inside and where they ship.',
+    intro: 'A snack box is an easy Christmas present for someone who already has everything: a parcel of snacks from Japan, Mexico, Korea or a new country every month. The catch is that the boxes differ a lot on price, contents and, above all, where they ship. Universal Yums, MexiCrate and SnackCrate only deliver in North America, while the Japanese and Korean boxes ship worldwide. Every figure below comes from the company&#8217;s own website on the date shown in the table. Anything we could not confirm is marked <span style="color:var(--red);font-weight:700">(unconfirmed)</span>. Prices are in US dollars per box before shipping unless noted, and offers change often, especially around the holidays, so check at checkout.',
+    sections: [],
+    top: `
+    <section class="cp-section" id="quick-picks" style="background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:1.1rem 1.2rem">
+      <h2>🎁 Quick Picks</h2>
+      <ul class="sb-list">
+        <li><strong>Cheapest box:</strong> ${off('mexicrate', 'https://www.mexicrate.com/', 'MexiCrate Peque&#241;a')} at $14.99, or ${off('universalyums', 'https://www.universalyums.com/', 'Universal Yums')} from $18 a box (both US/Canada only).</li>
+        <li><strong>Most premium-feeling gift:</strong> ${off('bokksu', 'https://www.bokksu.com/', 'Bokksu')}: traditional Japanese snacks plus tea.</li>
+        <li><strong>Best for chip lovers:</strong> ${off('tokyotreat', 'https://tokyotreat.com/', 'TokyoTreat')} (a chips and salty treats category) or ${off('daebak', 'https://daebak.co/', 'Daebak')} (chips and crackers in every box).</li>
+        <li><strong>Best for tea drinkers:</strong> ${off('sakuraco', 'https://sakura.co/', 'Sakuraco')}, with a Japanese home good in each box.</li>
+        <li><strong>A new country every month:</strong> Universal Yums or ${off('snackcrate', 'https://www.snackcrate.com/', 'SnackCrate')}.</li>
+        <li><strong>Sending to Europe?</strong> Bokksu, TokyoTreat, Sakuraco and Daebak ship there; Daebak includes VAT and duties.</li>
+      </ul>
+    </section>
+
+    <section class="cp-section" id="comparison">
+      <h2>Snack Box Comparison Table</h2>
+      <div class="sb-table-wrap">
+      <table class="sb-table" style="min-width:900px">
+        <thead><tr><th scope="col">Box</th><th scope="col">Price tiers (USD)</th><th scope="col">Origin</th><th scope="col">What&#8217;s inside</th><th scope="col">Shipping notes</th><th scope="col">Checked</th></tr></thead>
+        <tbody>
+        ${rows.map(([f, n, p, o, c, sh, d]) => `<tr><th scope="row">${f} ${n}</th><td>${p}</td><td>${o}</td><td>${c}</td><td>${sh}</td><td>${d}</td></tr>`).join('\n        ')}
+        </tbody>
+      </table>
+      </div>
+      <p class="sb-muted">Prices are per box before shipping and depend on plan length. Bokksu, TokyoTreat, Sakuraco, Daebak and Universal Yums figures match our <a href="/snack-boxes/">full snack box comparison</a> (checked 18 October 2026). MexiCrate and SnackCrate were checked on 28 October 2026.</p>
+    </section>
+
+    <section class="cp-section" id="gifting">
+      <h2>Ordering a Snack Box as a Christmas Gift</h2>
+      <ul class="sb-list">
+        <li><strong>Check where it ships first.</strong> Universal Yums ships only to the US and Canada, MexiCrate only to the US and Canada, and SnackCrate only within the US (plus US territories and military bases or embassies).</li>
+        <li><strong>Allow time.</strong> TokyoTreat and Sakuraco quote 7&#8211;28 days after dispatch, and Daebak says a first box usually arrives within 15&#8211;20 days. MexiCrate ships US orders within 2 business days, with 2&#8211;7 days in transit. None of the boxes published a guaranteed Christmas delivery cut-off that we could find, so check at checkout.</li>
+        <li><strong>Watch for customs.</strong> Daebak includes VAT and duties. TokyoTreat, Sakuraco and Bokksu warn that EU buyers may owe customs duty on delivery.</li>
+        <li><strong>Gift options.</strong> SnackCrate has a &#8220;Give a gift&#8221; page; for the other boxes, check each site for gift messages and prepaid plans.</li>
+      </ul>
+    </section>
+
+    <section class="cp-section" id="more-gifts">
+      <h2>More Chip Gift Ideas</h2>
+      <p>Want chips rather than a mixed box? See our <a href="/christmas-chip-gifts-2026/">Christmas chip gift guide</a> for country sets and gifts by budget, or <a href="/best-chip-gift-boxes/">chip gift boxes</a> for ready-to-gift towers and variety packs.</p>
+      <p style="margin-top:.8rem"><a href="/christmas-chip-gifts-2026/" class="buy-btn">See the Christmas gift guide &#8594;</a></p>
+    </section>`,
+    faqs: [
+      ['Which snack box is best as a Christmas gift?', 'For a premium-feeling present, Bokksu (traditional Japanese snacks and tea, $32.99&#8211;$39.99 a box). For full-size modern Japanese snacks and chips, TokyoTreat ($32.50&#8211;$37.50). For a cheaper gift in the US or Canada, MexiCrate starts at $14.99 and Universal Yums at $18 a box.'],
+      ['Which snack boxes ship outside North America?', 'Bokksu, TokyoTreat, Sakuraco and Daebak ship internationally, including to Europe. Universal Yums and MexiCrate ship only to the US and Canada, and SnackCrate ships within the US, US territories and to military bases and embassies.'],
+      ['What is the cheapest international snack box?', 'MexiCrate&#8217;s Peque&#241;a box costs $14.99 (10&#8211;15 Mexican candies and snacks). Universal Yums&#8217; smallest Yum Box costs $18&#8211;$20 a box with free shipping in the contiguous US.'],
+      ['Is SnackCrate the same as Universal Yums?', 'No. They are separate companies with a similar idea: a different country every month. SnackCrate says its snacks are imported from the featured country and each crate includes a local drink. Universal Yums ships to the US and Canada, while SnackCrate ships within the US.'],
+      ['Do snack box prices include shipping?', 'Mostly not. Universal Yums ships free in the contiguous US and Daebak&#8217;s shipping fee includes VAT and duties, but Bokksu, TokyoTreat and Sakuraco charge shipping per box. MexiCrate offers free US shipping on orders over $75.'],
+    ],
+    sources: ['https://www.universalyums.com/join', 'https://www.universalyums.com/faq', 'https://www.bokksu.com/pages/faq', 'https://tokyotreat.com/subscribe', 'https://help.tokyotreat.com/hc/en-us/articles/360059099914-Shipping-Information', 'https://sakura.co/subscribe', 'https://daebak.co/products/snackfever', 'https://daebak.co/pages/faq', 'https://www.mexicrate.com/', 'https://www.mexicrate.com/products/pequena-box', 'https://www.mexicrate.com/products/mediana-box', 'https://www.mexicrate.com/products/grande-box', 'https://www.mexicrate.com/policies/shipping-policy', 'https://www.snackcrate.com/', 'https://www.snackcrate.com/signup/step-history', 'https://www.snackcrate.com/help-center/billing-shipping/where-do-you-ship-to/', 'https://www.snackcrate.com/help-center/billing-shipping/when-will-my-snackcrate-ship/'],
+    related: [['christmas-chip-gifts-2026', '🎄 Christmas chip gift guide 2026'], ['best-chip-gift-boxes', '🎁 Chip gift boxes'], ['snack-boxes', '🍱 Asian snack boxes in depth'], ['best-international-chip-variety-packs', '🌍 International variety packs'], ['best-mexican-chips-to-buy-online', '🇲🇽 Best Mexican chips'], ['best-japanese-chips', '🇯🇵 Best Japanese chips']],
+  });
+}
 GUIDES.push({ slug: 'about', flag: '🥔', crumb: 'About', checked: '2026-10-27', checkedLabel: '27 October 2026', disc: false,
   h1: 'About World of Chips',
   title: 'About World of Chips: Who Runs the Site and How It Works | World of Chips',
@@ -692,6 +771,10 @@ const moreRow = (slug) => `
       <div class="cp-explore-grid">${MORE.filter(([s]) => s !== slug).map(([s, l]) => `<a href="/${s}/" class="cp-explore-link">${l}</a>`).join('')}</div>
     </nav>
 `;
+// Prominent inline signup for gift pages (g.nlTop): same MailerLite markup + 8-second fallback, shown right after the intro.
+const giftNewsletter = () => '\n    ' + newsletterBlock('    ').replace('class="nl nl-compact"', 'class="nl nl-compact nl-gift"')
+  .replace('Get the monthly Chip Report', '🎁 Get our Christmas chip gift picks by email')
+  .replace('New and weird chips from around the world, once a month. No spam.', 'New gift ideas, snack-box price changes and the monthly Chip Report. One email a month, no spam.') + '\n';
 const GIFT_BANNER = `
     <p class="cp-section" style="background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:.9rem 1.1rem;font-size:.95rem">🎄 <strong>Buying for someone?</strong> See our <a href="/christmas-chip-gifts-2026/">Christmas 2026 chip gift guide</a>: country chip sets, snack boxes and gifts by budget.</p>
 `;
@@ -777,6 +860,8 @@ ${fontsLink}
 .sb-faq h3{font-size:1rem;color:var(--brown);margin-top:1.2rem}
 .sb-faq p{margin-top:.3rem}
 .cp-section ul.sb-list{margin:.5rem 0 1rem 1.3rem;font-size:.95rem;line-height:1.8}
+.nl-gift{border:2px solid var(--gold);border-top:6px solid var(--gold);box-shadow:0 6px 28px rgba(196,138,32,.14);margin:1.5rem 0 2.5rem}
+.nl-gift h2{font-family:'Playfair Display',serif;color:var(--brown);font-size:1.35rem}
 </style>
 ${mlUniversal}
 </head>
@@ -798,7 +883,7 @@ ${siteNav}
 ${g.disc === false ? '' : `    <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>`}
 
     <p class="cp-intro">${intro}</p>
-${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
+${g.nlTop ? giftNewsletter() : ''}${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
 
 ${hasAuthor(g) ? authorBox : ''}    <section class="cp-section sb-faq" id="faq">
       <h2>FAQs</h2>
@@ -812,7 +897,7 @@ ${g.sources.length ? `
 ` : ''}
 ${g.disc === false ? '' : `    <p class="aff-disc">${DISCLOSURE}</p>
 `}
-${g.nlEarly ? '' : `    ${newsletterBlock('    ')}\n`}${isFeature(g.slug) ? moreRow(g.slug) : ''}
+${g.nlEarly || g.nlTop ? '' : `    ${newsletterBlock('    ')}\n`}${isFeature(g.slug) ? moreRow(g.slug) : ''}
     <nav class="cp-cta" aria-label="More chip guides">
       <h2>More Chip Guides</h2>
       <div class="cp-explore-grid">${g.related.map(([s, l]) => `<a href="/${s}/" class="cp-explore-link">${l}</a>`).join('')}<a href="/news/" class="cp-explore-link">📰 Chip News</a></div>

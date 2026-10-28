@@ -10,7 +10,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://worldofchips.com"
 NEWS_CATEGORIES = {"Industry", "New Flavor", "Safety Recall", "Innovation", "Sustainability", "Investment", "Regional"}
 NEWS_FIELDS = ("id", "date", "title", "summary", "category", "source_name", "source_url")
-AFFILIATE_BRANDS = {"bokksu", "tokyotreat", "sakuraco", "japancrate", "daebak", "japancandystore", "universalyums"}
+AFFILIATE_BRANDS = {"bokksu", "tokyotreat", "sakuraco", "japancrate", "daebak", "japancandystore", "universalyums", "mexicrate", "snackcrate"}
 VOID = {"area","base","br","col","embed","hr","img","input","link","meta","source","track","wbr"}
 
 
@@ -208,7 +208,7 @@ def check_snack_boxes(problems, pages):
         problems.append((r.stderr or r.stdout).strip()[:300])
     p = pages[path]
     seen = {a.get("data-affiliate") for a in p.links if "data-affiliate" in a}
-    missing = AFFILIATE_BRANDS - seen
+    missing = (AFFILIATE_BRANDS - {"mexicrate", "snackcrate"}) - seen  # those two only appear on /christmas-snack-box-comparison-2026/
     if missing:
         problems.append(f"snack-boxes: no data-affiliate link for {sorted(missing)}")
     types = set()

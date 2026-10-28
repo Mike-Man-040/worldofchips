@@ -247,7 +247,7 @@ const card = (b) => `<article class="sb-box" id="${b.id}">
     </article>`;
 
 const chipRank = [...BOXES].filter((b) => b.chipScore >= 2).sort((a, b) => b.chipScore - a.chipScore);
-const otherGuides = [['christmas-chip-gifts-2026', '🎄 Christmas chip gift guide'], ['best-chip-gift-boxes', '🎁 Chip gift boxes'], ['best-international-chip-variety-packs', '🌍 International chip variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying in Europe'], ['japan', '🇯🇵 Japan'], ['south-korea', '🇰🇷 South Korea'], ['china', '🇨🇳 China'], ['thailand', '🇹🇭 Thailand'], ['indonesia', '🇮🇩 Indonesia']];
+const otherGuides = [['christmas-chip-gifts-2026', '🎄 Christmas chip gift guide'], ['christmas-snack-box-comparison-2026', '🎄 Christmas snack boxes compared'], ['best-chip-gift-boxes', '🎁 Chip gift boxes'], ['best-international-chip-variety-packs', '🌍 International chip variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying in Europe'], ['japan', '🇯🇵 Japan'], ['south-korea', '🇰🇷 South Korea'], ['china', '🇨🇳 China'], ['thailand', '🇹🇭 Thailand'], ['indonesia', '🇮🇩 Indonesia']];
 for (const [s] of otherGuides) if (!fs.existsSync(path.join(ROOT, s, 'index.html'))) throw new Error(`missing country page /${s}/`);
 
 const page = `<!DOCTYPE html>
