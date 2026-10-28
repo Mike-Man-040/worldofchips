@@ -234,15 +234,19 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
   ];
 
   // ---------- spice ladder ----------
+  // Evidence tiers: [M] maker names the pepper / heat claim; [P] pepper SHU (Wikipedia/Guinness, pepper not chip); [E] editorial estimate.
   const rungs = [
-    [1, 'Cape Cod Sweet &amp; Spicy Jalape&#241;o', 'Jalape&#241;o with a sweet touch on kettle chips. Jalape&#241;os usually measure 4,000&#8211;8,500 SHU as a pepper (Wikipedia).', 'dp:B0FBYHGB9L'],
-    [2, 'Chip&#8217;s Jalape&#241;o (Barcel)', 'A straight jalape&#241;o-and-salt potato chip, sold by the brand as &#8220;bold, spicy&#8221;.', 'dp:B0GBYDCTXL'],
-    [3, 'Pringles x Hot Ones Los Calientes Rojo', 'Built on the medium-spice jalape&#241;o and habanero Los Calientes Rojo hot sauce. Habaneros are rated 100,000&#8211;350,000 SHU as a pepper (Wikipedia).', 'dp:B0D9YF3CC2'],
-    [4, 'Ruffles Flamin&#8217; Hot', 'Ridged chips with Frito-Lay&#8217;s Flamin&#8217; Hot seasoning. See our <a href="/flavors/flamin-hot/">Flamin&#8217; Hot history</a>.', 'dp:B073BYBQBJ'],
-    [5, 'Takis Fuego', 'Chilli pepper and lime, rated &#8220;Extreme&#8221; on Takis&#8217; own Heat-O-Meter.', 'dp:B0D14XB2HR'],
-    [6, 'Takis Blue Heat', 'Also rated &#8220;Extreme&#8221;; the listing says it &#8220;battles for our hottest snack&#8221;.', 'dp:B0G44XCDZL'],
-    [7, 'Paqui Haunted Ghost Pepper chips', 'Tortilla chips seasoned with ghost pepper (bhut jolokia), measured at roughly 855,000&#8211;1,041,427 SHU as a pepper (Wikipedia). Availability varies, so this links to a search.', 'Paqui Haunted Ghost Pepper tortilla chips'],
-    [8, 'Paqui One Chip Challenge (discontinued)', 'A single Carolina Reaper chip; Guinness certified the Reaper pepper at an average of 1,641,183 SHU in 2013. Paqui pulled the chip from sale in September 2023 after the death of a teenager who had eaten it, so there is no buy link. Don&#8217;t try to recreate it.', ''],
+    [1, 'Cape Cod Sweet &amp; Spicy Jalape&#241;o', 'Kettle chips with jalape&#241;o and a sweet touch.<br><span class="sb-muted"><em>Basis:</em> jalape&#241;o, 4,000&#8211;8,500 SHU as a pepper [P]; sweetness tempers it.</span>', 'dp:B0FBYHGB9L'],
+    [2, 'Chip&#8217;s Jalape&#241;o (Barcel)', 'A straight jalape&#241;o-and-salt potato chip, sold as &#8220;bold, spicy&#8221;.<br><span class="sb-muted"><em>Basis:</em> jalape&#241;o [P], no sweetener [M].</span>', 'dp:B0GBYDCTXL'],
+    [3, 'Ruffles Flamin&#8217; Hot', 'Ridged chips with Frito-Lay&#8217;s Flamin&#8217; Hot seasoning. See our <a href="/flavors/flamin-hot/">Flamin&#8217; Hot history</a>.<br><span class="sb-muted"><em>Basis:</em> no named pepper or heat scale published; placement is an <strong>estimate</strong> [E].</span>', 'dp:B073BYBQBJ'],
+    [4, 'Pringles x Hot Ones Los Calientes Rojo', 'Built on the Los Calientes Rojo hot sauce, described as medium-spice.<br><span class="sb-muted"><em>Basis:</em> jalape&#241;o and habanero (100,000&#8211;350,000 SHU as a pepper) [M][P]; maker calls the sauce medium [M].</span>', 'dp:B0D9YF3CC2'],
+    [5, 'Takis Fuego', 'Rolled tortilla chips with chilli pepper and lime.<br><span class="sb-muted"><em>Basis:</em> rated &#8220;Extreme&#8221; on Takis&#8217; Heat-O-Meter [M]; pepper not named, so position vs. habanero chips is an <strong>estimate</strong> [E].</span>', 'dp:B0D14XB2HR'],
+    [6, 'Takis Blue Heat', 'The blue sibling of Fuego.<br><span class="sb-muted"><em>Basis:</em> also &#8220;Extreme&#8221;; listing says it &#8220;battles for our hottest snack&#8221; [M]. Ranked just above Fuego on that claim [E].</span>', 'dp:B0G44XCDZL'],
+    [7, 'Route 11 Mama Zuma&#8217;s Revenge', 'Kettle chips from Route 11 Potato Chips (Mount Jackson, Virginia): habanero mash on their barbecue seasoning.<br><span class="sb-muted"><em>Basis:</em> habanero powder in the ingredients; Route 11 says it aims to be &#8220;hot enough to satisfy most chileheads&#8221; [M][P].</span>', 'dp:B07C1ZRPG6'],
+    [8, 'Lowcountry Kettle Carolina Reaper', 'Charleston-made kettle potato chips seasoned with Carolina Reaper.<br><span class="sb-muted"><em>Basis:</em> Carolina Reaper pepper [M][P], but this is an eat-the-bag snack chip, so we place it below Paqui&#8217;s ghost-pepper chip [E].</span>', 'dp:B08NXF8DX9'],
+    [9, 'Paqui Haunted Ghost Pepper', 'Tortilla chips with ghost pepper, cayenne and chipotle.<br><span class="sb-muted"><em>Basis:</em> ghost pepper (bhut jolokia), about 855,000&#8211;1,041,427 SHU as a pepper [P]; Paqui calls it the spiciest of its bag lineup [M].</span>', 'Paqui Haunted Ghost Pepper tortilla chips'],
+    [10, 'Red Hot Reaper Chip Challenge', 'A single-chip challenge snack, sold in a box like the old One Chip Challenge.<br><span class="sb-muted"><em>Basis:</em> Carolina Reaper and Trinidad Moruga Scorpion [M]; both peppers top 1,200,000 SHU [P]. Not for children; one per person, as the maker warns.</span>', 'dp:B0CMPCGRN6'],
+    [11, 'Paqui One Chip Challenge (discontinued)', 'A single chip made with Carolina Reaper (later versions added Scorpion or Naga Viper). Paqui pulled it in September 2023 after the death of a teenager who had eaten it, so there is no buy link. Don&#8217;t try to recreate it.<br><span class="sb-muted"><em>Basis:</em> Carolina Reaper, Guinness-certified average of 1,641,183 SHU (2013) [P]; marketed by Paqui as the world&#8217;s hottest chip [M].</span>', ''],
   ];
   const ladderItems = rungs.map(([n, name, note, h]) => {
     const btn = !h ? '' : h.startsWith('dp:') ? `<p><a href="https://www.amazon.com/dp/${h.slice(3)}?tag=worldofchips-20" target="_blank" rel="sponsored nofollow noopener" class="buy-btn">Buy on Amazon &#8594;</a></p>` : `<p>${buy(S(h), `Find ${name} on Amazon &#8594;`)}</p>`;
@@ -251,27 +255,28 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
   const spice = { slug: 'spiciest-chips', flag: '🌶️', crumb: 'Spice Ladder', ...CK,
     h1: 'Spiciest Chips Ranked by Heat: The Chip Spice Ladder',
     title: 'Spiciest Chips Ranked by Heat: Mild to One Chip Challenge | World of Chips',
-    desc: 'A heat ranking, not a shopping list: eight spicy chips ranked on one ladder, from Cape Cod Sweet & Spicy Jalapeño through Takis Blue Heat to the discontinued Paqui One Chip Challenge, with pepper Scoville figures only where a source exists.',
-    introDark: 'A heat ranking in eight rungs, from a gentle jalapeño kettle chip to the Carolina Reaper chip that was pulled from sale.',
-    intro: 'Chip makers don&#8217;t publish Scoville ratings for their chips, so this is an <strong>editorial ranking</strong> of relative heat. It&#8217;s based on the peppers each chip uses and the makers&#8217; own heat claims. Where we quote Scoville heat units (SHU), they describe the <em>pepper</em>, not the finished chip, and come from the cited source. Disagree with the order? Good: tell us via the newsletter. Just want to order something hot? Our buying guide, <a href="/spiciest-chips-you-can-buy/">spicy chips to buy online</a>, lists seven picks with in-stock Amazon pages.',
+    desc: 'A heat ranking, not a shopping list: eleven spicy chips ranked by evidence: the pepper each uses, its Scoville range and the maker\u2019s own heat claims, from jalapeño kettle chips through Paqui ghost pepper and Carolina Reaper chips to the discontinued One Chip Challenge.',
+    introDark: 'A heat ranking in eleven rungs, from a gentle jalapeño kettle chip to the Carolina Reaper chip that was pulled from sale.',
+    intro: 'Chip makers don&#8217;t publish Scoville ratings for their chips, so we rank by evidence, in this order: (1) the hottest pepper the maker names on the pack or listing, using its published Scoville range; (2) the maker&#8217;s own heat claim; (3) only where those run out, our <strong>editorial estimate</strong>, marked [E]. Each rung shows its basis: [M] maker, [P] pepper SHU, [E] estimate. Pepper heat isn&#8217;t chip heat: dose matters, so treat neighbouring rungs as close calls. Where we quote Scoville heat units (SHU), they describe the <em>pepper</em>, not the finished chip, and come from the cited source. Disagree with the order? Good: tell us via the newsletter. Just want to order something hot? Our buying guide, <a href="/spiciest-chips-you-can-buy/">spicy chips to buy online</a>, lists seven picks with in-stock Amazon pages.',
     sections: [],
     body: `
     <section class="cp-section" id="ladder">
       <h2>The Ladder</h2>
-      <p><label for="heat">Show rungs up to heat level <output id="heat-out" for="heat">8</output> of 8</label><br>
-      <input type="range" id="heat" min="1" max="8" value="8" step="1" style="width:100%;max-width:360px;accent-color:var(--gold)"></p>
+      <p><label for="heat">Show rungs up to heat level <output id="heat-out" for="heat">11</output> of 11</label><br>
+      <input type="range" id="heat" min="1" max="11" value="11" step="1" style="width:100%;max-width:360px;accent-color:var(--gold)"></p>
       <ol class="gd-picks" id="ladder-list" style="list-style:none;margin-left:0">
         ${ladderItems}
       </ol>
-      <p class="sb-muted">Ranking: World of Chips editorial, ${'${LAST_CHECKED_LABEL}'}. Pepper Scoville figures: Wikipedia (Jalape&#241;o, Habanero, Bhut jolokia, Carolina Reaper). Heat claims: each product&#8217;s Amazon listing.</p>
+      <p class="sb-muted">Ranking: World of Chips editorial, ${'${LAST_CHECKED_LABEL}'}. Pepper Scoville figures: Wikipedia (Jalape&#241;o, Habanero, Bhut jolokia, Carolina Reaper, Trinidad Moruga Scorpion). Ingredients and heat claims: makers&#8217; sites (rt11.com, Paqui) and each product&#8217;s Amazon listing.</p>
     </section>`,
     script: `(function(){var r=document.getElementById('heat'),o=document.getElementById('heat-out'),li=document.querySelectorAll('#ladder-list li');function u(){o.textContent=r.value;for(var i=0;i<li.length;i++){li[i].style.display=(+li[i].getAttribute('data-heat')<=+r.value)?'':'none';}}r.addEventListener('input',u);u();})();`,
     faqs: [
       ['What is the spiciest chip ever sold?', 'The Paqui One Chip Challenge chip, made with Carolina Reaper (and later Naga Viper) peppers, was marketed as one of the hottest. Paqui withdrew it in September 2023 after a teenager died, so it is no longer sold.'],
       ['Do spicy chips have a Scoville rating?', 'Makers don&#8217;t publish Scoville ratings for their chips. Scoville figures on this page describe the peppers used, such as the jalape&#241;o or ghost pepper, not the finished chip.'],
-      ['Are Takis hotter than Flamin&#8217; Hot chips?', 'Takis rates Fuego and Blue Heat as Extreme on its own Heat-O-Meter. We rank them above Ruffles Flamin&#8217; Hot, but that is our editorial judgement, not a lab measurement.'],
+      ['What is the hottest chip you can still buy?', 'Of the chips here, the Red Hot Reaper Chip Challenge (Carolina Reaper and Trinidad Moruga Scorpion) is the hottest on pepper evidence; among regular bags, Paqui Haunted Ghost Pepper. Challenge chips carry real health warnings: keep them away from children.'],
+      ['Are Takis hotter than Flamin&#8217; Hot chips?', 'Takis rates Fuego and Blue Heat as Extreme on its own Heat-O-Meter. Neither brand names its pepper or publishes a scale, so ranking Takis above Ruffles Flamin&#8217; Hot is our editorial estimate, not a lab measurement.'],
     ],
-    sources: [WP('One_Chip_Challenge'), WP('Carolina_Reaper'), WP('Bhut_jolokia'), WP('Habanero'), WP('Jalape%C3%B1o')],
+    sources: [WP('One_Chip_Challenge'), WP('Carolina_Reaper'), WP('Bhut_jolokia'), WP('Habanero'), WP('Jalape%C3%B1o'), WP('Trinidad_moruga_scorpion')],
     related: [['spiciest-chips-you-can-buy', '🌶️ Spicy chips to buy online'], ['flavors/flamin-hot', '🔥 Flamin\u2019 Hot history'], ['mexico', '🇲🇽 Mexico'], ['which-chip-are-you', '❓ Which country\u2019s chip are you?']] };
 
   // ---------- flavour pages ----------
