@@ -1,13 +1,15 @@
 # World of Chips Pringles Index: build brief (edition 2026-10)
 
+> Updated 29 Oct 2026: corrected US base price source (Walmart regular $2.38 → $1.61/100 g), Hungary pack size (standard 165 g can, 1,699 Ft), removed Colombia (pending verification of pack size and regular price). Pack-size rule: use the market's standard can closest to 165 g at the regular shelf price, not a promo or loyalty price.
+
 This brief goes with the dataset files. It explains what the data is, how the numbers were made, and how the page should present them.
 
 ## Files
 
 | File | What it is |
 |---|---|
-| `pringles_index_2026-10.json` | Main data file for the page. Contains `meta`, `countries` (31 published markets), `backlog` (markets not ready to publish) and `fx_local_per_usd`. |
-| `pringles_index_2026-10.csv` | The same 31 country rows as a flat table, for spreadsheets or a CMS import. |
+| `pringles_index_2026-10.json` | Main data file for the page. Contains `meta`, `countries` (30 published markets), `backlog` (markets not ready to publish) and `fx_local_per_usd`. |
+| `pringles_index_2026-10.csv` | The same 30 country rows as a flat table, for spreadsheets or a CMS import. |
 | `build_index.py` | Script that produced both files. Edit a price or FX rate in it and rerun `python3 build_index.py` to regenerate everything. |
 
 ## What the index measures
@@ -24,7 +26,7 @@ Pringles uses different can sizes by market: 165 g in most of Europe, 147 g in t
 4. **Implied PPP rate** = the exchange rate that would make a 100 g of Pringles cost the same as in the US.
 5. **Currency valuation %** = implied PPP rate ÷ actual rate − 1. Positive means Pringles are pricier than in the US at today's exchange rate (by the Big Mac logic, the currency looks overvalued). Negative means cheaper (looks undervalued).
 
-Exchange rates: ECB euro reference rates of 26 Oct 2026, crossed through EUR/USD 1.1188. Rates the ECB does not publish came from national sources: Colombia TRM (26 Oct), Bank of Russia (23 Oct), Egyptian bank rate (23 Oct), and the fixed UAE dirham peg.
+Exchange rates: ECB euro reference rates of 26 Oct 2026, crossed through EUR/USD 1.1188. Rates the ECB does not publish came from national sources: Bank of Russia (23 Oct), Egyptian bank rate (23 Oct), and the fixed UAE dirham peg.
 
 ## Field definitions
 
@@ -49,15 +51,14 @@ Exchange rates: ECB euro reference rates of 26 Oct 2026, crossed through EUR/USD
 
 ## Headline results
 
-US baseline: **$1.54 per 100 g** (a 147 g can at $2.27 in Walmart).
+US baseline: **$1.61 per 100 g** (a 147.4 g can at Walmart's regular price of $2.38; Target $2.49, Kroger $2.50–2.59).
 
-Most expensive per 100 g: Turkey $3.96, Hungary $3.65, Colombia $3.40, Russia $2.98, Australia $2.88.
+Most expensive per 100 g: Turkey $3.96, Hungary $3.14, Russia $2.98, Australia $2.88, Poland $2.74.
 
 Cheapest per 100 g: France $1.08, India $1.13, China $1.16, Indonesia $1.42, Canada $1.43.
 
 Stories worth pulling out on the page:
-- **Turkey costs about 2.6× the US.** Pringles are imported there and Turkish media treat them as a premium snack.
-- **Colombia ranks third mainly because the peso has strengthened sharply** (the dollar is down roughly 15 to 18% against the peso in 2026). This shows how much exchange rates drive the index.
+- **Turkey costs about 2.5× the US ($3.96–4.20 per 100 g).** Pringles are imported there and Turkish media treat them as a premium snack.
 - **France is the cheapest in the set**, because its can is 195 g at a €1.89 regular price. Verify this in a French store page before using it as a headline.
 - **The UK shows how promotions distort prices.** The regular price is £2.50, but the same can is £1.75 at Morrisons and Iceland and £1.00 at Poundland.
 - **Germany: 2024 shrinkflation.** The can went from 185 g to 165 g at the same €2.49 (Hamburg consumer centre).
@@ -72,14 +73,14 @@ Stories worth pulling out on the page:
 
 ## Suggested page build
 
-1. **Hero stat:** "A can of Pringles costs 2.6× more in Turkey than in the US," with the US baseline under it.
+1. **Hero stat:** "A can of Pringles costs 2.5× more in Turkey than in the US," with the US baseline under it.
 2. **Choropleth map:** reuse the existing D3 world map, coloured by `index_vs_us` (diverging scale centred on 100). Tooltip shows local price, can size, USD per 100 g, retailer.
-3. **Ranked bar chart:** all 31 markets by `usd_per_100g`, US marked as the reference line.
+3. **Ranked bar chart:** all 30 markets by `usd_per_100g`, US marked as the reference line.
 4. **"Over/undervalued" chart:** `currency_valuation_pct` as a diverging bar chart, for the Big Mac Index angle.
 5. **Toggle:** "per 100 g" vs "per can" so readers see why the size normalisation matters.
 6. **Sources table:** country, retailer (linked `source_url`), price, size, date, confidence.
 7. **Methodology section:** a short version of the method above.
-8. **Country page links:** each row links to `/{country-slug}/`. 25 of the 31 markets already have a country guide on the site; Denmark, Switzerland, Czechia, Hungary, the Philippines and the UAE do not. Three site countries are not in the index yet: Argentina, Nigeria and Peru.
+8. **Country page links:** each row links to `/{country-slug}/`. 25 of the 30 markets already have a country guide on the site; Denmark, Switzerland, Czechia, Hungary, the Philippines and the UAE do not. Three site countries are not in the index yet: Argentina, Nigeria and Peru.
 9. **Affiliate hook:** "Pringles are cheapest in France and India. Try international flavours at home" linking to the variety-pack guide.
 10. **Share/embed:** a static PNG of the ranking for journalists and Reddit, plus an embed code. Backlinks are the main point of this page.
 
