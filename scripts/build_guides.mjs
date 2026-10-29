@@ -416,7 +416,7 @@ const GUIDES = [
         ['Orion Marine Boy (Gorae-bap) Sharing Box', 'Baked crackers shaped like sea creatures in a sharing box. <em>Why it&#8217;s a good gift:</em> fun for kids and a gentle intro to Korean snacks.', 'dp:B07PZ92784'],
         ['Nongshim Shrimp Crackers Original (14.1 oz, pack of 2)', 'A baked Korean classic made with ground shrimp. <em>Why it&#8217;s a good gift:</em> a big, shareable bag for a Christmas snack table.', 'dp:B0H7F3D75L'],
       ] },
-      { id: 'uk', h2: '🇬🇧 British Crisps Gift Set', note: '', items: [
+      { id: 'uk', h2: '🇬🇧 British Crisps Gift Set', note: '', lead: '<strong>UK festive crisps 2026:</strong> Tyrrells&#8217; limited-edition Christmas packaging is back on sharing bags of its five top flavours (Sea Salt &amp; Black Pepper, Sea Salt &amp; Cider Vinegar, Lightly Sea Salted, Sweet Chilli &amp; Red Pepper, Mature Cheddar &amp; Chive), per <a href="https://www.talkingretail.com/products-news/crisps-snacks/kp-snacks-rolls-out-festive-packaging-for-tyrrells-26-10-2026/" target="_blank" rel="noopener">Talking Retail, 26 Oct 2026</a>.', items: [
         ['Walkers MEGA Monster Munch Pickled Onion (6 pack)', 'Six bags of the British pickled-onion corn snack in MEGA size. <em>Why it&#8217;s a good gift:</em> pure nostalgia for British expats.', 'dp:B004ISJK38'],
         ['Walkers Variety Multipack', 'A multipack of Walkers crisps, the UK&#8217;s best-known brand. <em>Why it&#8217;s a good gift:</em> a taste of Cheese &amp; Onion and Prawn Cocktail for anyone who misses them.', 'dp:B0B8NW4ZLM'],
         ['Tyrrell&#8217;s Sea Salt &amp; Cider Vinegar', 'Hand-cooked English crisps. <em>Why it&#8217;s a good gift:</em> a posher bag for the Christmas cheese board.', 'dp:B01G2873H6'],
@@ -802,7 +802,8 @@ function render(g) {
   ] };
   const sections = g.sections.map((s) => `
     <section class="cp-section" id="${s.id}">
-      <h2>${s.h2}</h2>
+      <h2>${s.h2}</h2>${s.lead ? `
+      <p>${s.lead}</p>` : ''}
       <ol class="gd-picks">
         ${s.items.map(([n, d, h]) => `<li><strong>${n}</strong><p>${fill(d)}</p><p>${h.startsWith('dp:') ? `<a href="${esc(href(h))}" target="_blank" rel="sponsored nofollow noopener" class="buy-btn">Buy on Amazon &#8594;</a>` : amz(h, `Find ${n} on Amazon &#8594;`)}</p></li>`).join('\n        ')}
       </ol>

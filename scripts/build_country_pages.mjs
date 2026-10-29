@@ -304,15 +304,28 @@ const HOME_GUIDES = [['christmas-chip-gifts-2026', '🎄 Christmas chip gifts 20
   ['snack-boxes', '🍱 Snack boxes compared']];
 const link = (o) => `<a href="/${o.slug}/" class="cp-explore-link">${o.d.flag} ${esc(o.name)}</a>`;
 
+// Hand-written SEO titles/descriptions for pages already ranking on page 1 (GSC, Oct 2026). Facts from each page's own data.
+const SEO = {
+  argentina: ['Argentina Chips: Asado & Jamón Serrano Flavors | World of Chips', "Argentina's chips beyond Lay's: Pehuamar, Krachitos and flavors like Jamón Serrano and Asado. Top brands, unique flavors and where to buy."],
+  poland: ['Polish Chips: Green Onion, Paprika & Crunchips | World of Chips', "Why Poles love Zielona Cebulka (green onion) chips: Lay's, Crunchips and Pringles in Poland, top flavors, unique picks and where to buy."],
+  russia: ['Russian Chips: Crab & Sour Cream Flavors | World of Chips', "Crab and sour cream & herbs chips: Lay's, Московский Картофель and Русская Картошка. Russia's top brands, odd flavors and where to buy."],
+  brazil: ['Brazilian Chips: Ruffles, Churrasco & More | World of Chips', "Churrasco-flavored chips and more: Ruffles, Lay's and Pringles in Brazil, the flavors Brazilians buy, unique picks and where to find them."],
+  peru: ['Peruvian Chips: Ají Amarillo & Limón y Sal | World of Chips', "Ají Amarillo and Limón y Sal chips: Lay's, Pringles and Mr. Chips in Peru. Top brands, Peruvian flavors and where to buy them."],
+  colombia: ['Colombian Chips: Margarita, Super Ricas & More | World of Chips', "Margarita, Super Ricas and De Todito: Colombia's top chip brands, Limón and Chicharrón flavors, fun facts and where to buy."],
+  france: ['French Chips: Poulet Rôti, Bret\'s & Vico | World of Chips', "Roast-chicken chips and goat's cheese & chilli: Lay's, Bret's and Vico in France. Top brands, unique flavors and where to buy."],
+  'south-korea': ['Korean Chips: Honey Butter, Octopus & More | World of Chips', "Honey Butter, Octopus and more: Nongshim, Orion and Calbee chips in South Korea. Top brands, the flavors to try and where to buy."],
+  germany: ['German Chips: Currywurst, Paprika & Lorenz | World of Chips', "Currywurst and Döner chips: Lorenz, Funny-Frisch and Chio in Germany. Why Paprika rules, unique flavors and where to buy."],
+};
 // ---------- 3. page template ----------
 function renderPage(x) {
   const { name, slug, d, c } = x;
   const url = `${SITE}/${slug}/`;
-  const title = `Potato Chips in ${inName(name)}: ${d.topBrands.slice(0, 2).join(', ')} & Top Flavors | World of Chips`;
+  const title = SEO[slug] ? SEO[slug][0] : `Potato Chips in ${inName(name)}: ${d.topBrands.slice(0, 2).join(', ')} & Top Flavors | World of Chips`;
   const desc = truncate(
     `Potato chips in ${inName(name)}: top brands like ${d.topBrands.slice(0, 3).join(', ')}, ` +
     `popular flavors such as ${d.popularFlavors.slice(0, 2).join(' and ')}, unique flavors like ` +
     `${d.uniqueFlavors.slice(0, 2).join(' and ')}, fun facts and where to buy.`, 160);
+  const descFinal = SEO[slug] ? SEO[slug][1] : desc;
   const faq = buildFaq(x);
   FAQ_COUNT += faq.length;
   const ld = {
@@ -356,12 +369,12 @@ ${gaSnippet}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${esc(title)}</title>
-<meta name="description" content="${esc(desc)}">
+<meta name="description" content="${esc(descFinal)}">
 <link rel="canonical" href="${url}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="${url}">
 <meta property="og:title" content="${esc(title)}">
-<meta property="og:description" content="${esc(desc)}">
+<meta property="og:description" content="${esc(descFinal)}">
 <meta property="og:site_name" content="World of Chips">
 <meta property="og:image" content="${SITE}/assets/og/${slug}.png">
 <meta property="og:image:width" content="1200">
@@ -370,7 +383,7 @@ ${gaSnippet}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="${SITE}/assets/og/${slug}.png">
 <meta name="twitter:title" content="${esc(title)}">
-<meta name="twitter:description" content="${esc(desc)}">
+<meta name="twitter:description" content="${esc(descFinal)}">
 <script type="application/ld+json">
 ${jsonLd(ld)}
 </script>
