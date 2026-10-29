@@ -1,5 +1,45 @@
 [
   {
+    "id": "koikeya-pride-potato-kanazawa-hida-2026",
+    "date": "2026-10-26",
+    "title": "Koikeya Puts Kanazawa Sweet Shrimp and Hida Beef Into Its Pride Potato Chips",
+    "summary": "Koikeya has added two regional flavours to its Pride Potato 100% line, made only with Japanese-grown potatoes. One recreates deep-fried Kanazawa sweet shrimp, with packaging designed by local art students; the other evokes charcoal-grilled Hida beef from Gifu. Both reached convenience stores on October 26 and roll out to supermarkets from November 2, with part of sales donated to the two regions.",
+    "category": "New Flavor",
+    "country": "japan",
+    "source_name": "Nissin Foods Group (Koikeya)",
+    "source_url": "https://www.nissin.com/jp/company/news/13959/"
+  },
+  {
+    "id": "calbee-kataage-seafood-dashi-2026",
+    "date": "2026-10-22",
+    "title": "Calbee Fans Pick a Four-Seafood Dashi Flavor for Kataage Potato",
+    "summary": "To mark ten years of its Kataage Potato fan club, Calbee asked members for a celebratory flavour, and a final vote picked a luxury seafood dashi. The thick, kettle-style chips layer sea bream, crab, shrimp and scallop umami, and fans also helped shape the packaging. The limited edition reaches Japanese convenience stores on November 2, with other retailers following from November 9.",
+    "category": "New Flavor",
+    "country": "japan",
+    "source_name": "Calbee",
+    "source_url": "https://www.calbee.co.jp/news/pdf/4291-89196.pdf"
+  },
+  {
+    "id": "j-higgs-loaded-bacon-cheddar-recall-class-ii",
+    "date": "2026-10-21",
+    "title": "FDA Classifies J. Higgs Bacon & Cheddar Chip Recall as Class II",
+    "summary": "The FDA's latest enforcement report lists Saratoga Potato Chips' recall of J. Higgs Loaded Bacon & Cheddar Potato Chips as Class II, meaning a remote risk of serious harm. The 7.75 oz bags contain undeclared soy. About 769 cases were sold at Save A Lot stores in six states, including Florida and Ohio, with best-by dates of December 11 and 18, 2026.",
+    "category": "Safety Recall",
+    "country": "united-states",
+    "source_name": "U.S. FDA (openFDA enforcement report)",
+    "source_url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-0090-2027%22"
+  },
+  {
+    "id": "tyrrells-christmas-packaging-2026",
+    "date": "2026-10-27",
+    "title": "Tyrrells Dresses Its Top Five Crisps for Christmas",
+    "summary": "KP Snacks has brought back limited-edition festive packaging for Tyrrells, its premium crisp brand, across sharing bags of the five best sellers, from Sea Salt & Cider Vinegar to Mature Cheddar & Chive. The company says sharing bags are the largest part of the UK crisps, snacks and nuts market at about £2.1bn, and values Tyrrells at £75.7m, growing 4.3%.",
+    "category": "Regional",
+    "country": "united-kingdom",
+    "source_name": "Asian Trader",
+    "source_url": "https://www.asiantrader.biz/kp-snacks-tyrrells-christmas-makeover"
+  },
+  {
     "id": "lays-holi-lays-holiday-flavors-2026",
     "date": "2026-10-19",
     "title": "Lay’s Serves a Whole Holiday Dinner in Five Limited-Edition Chips",
