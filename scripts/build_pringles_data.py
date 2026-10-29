@@ -116,6 +116,43 @@ BACKLOG = [
   {"iso2":"SG","country":"Singapore","currency":"SGD","local_price":None,"pack_grams":None,"retailer":None,"source_url":None,"reason":"Only multipacks found"},
 ]
 
+
+# ---------- VAT / GST applied to potato crisps (checked 29 Oct 2026) ----------
+# (rate %, status, basis, source). rate None = not confirmed -> no ex-VAT figure.
+# US and CA shelf prices are shown before tax, so ex-tax = shelf (rate 0, basis "pre-tax shelf").
+VAT = {
+ "US": (0, "n/a", "Shelf price excludes state/local sales tax (varies by state; many states exempt groceries)", ""),
+ "CA": (0, "n/a", "Shelf price excludes GST/HST (snack foods incl. potato chips are taxable at 5-15% at the till)", "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/4-3/basic-groceries.html"),
+ "TR": (1, "confirmed", "Reduced: KDV List I (A) item 16, all goods of HS chapter 20", "https://cdn.gib.gov.tr/api/gibportal-file/file/getFileResources?objectKey=arsiv%2Fyardim-kaynaklar%2Fyararli-bilgiler%2Fkdv-oranlari.pdf"),
+ "HU": (27, "confirmed", "Standard rate; crisps not in the 5%/18% lists", "https://nav.gov.hu/ado/adozasi_kerdes/20261.-adozasi-kerdes---a-18-os-afakulcs-ala-tartozo-termekekrol"),
+ "GB": (20, "confirmed", "Standard rate; potato crisps excepted from zero-rating (VAT Notice 701/14)", "https://www.gov.uk/guidance/food-products-and-vat-notice-70114"),
+ "SE": (6, "confirmed", "Reduced food rate (6% from 1 Apr 2026)", "https://skatteverket.se/omoss/pressochmedia/nyheter/2026/nyheter/livsmedelsmomsensankstill6procent.5.70685bee19c85dd5dd0a3f.html"),
+ "IN": (5, "confirmed", "GST 5% since 22 Sep 2025 (Notification 9/2025-Central Tax (Rate))", "https://d23z1tp9il9etb.cloudfront.net/download/gstlaw/09-2025-CTR-eng1758171501.pdf"),
+ "DE": (7, "confirmed", "Reduced food rate (UStG Anlage 2)", "https://www.gesetze-im-internet.de/ustg_1980/anlage_2.html"),
+ "FR": (5.5, "confirmed", "Reduced food rate (CGI art. 278-0 bis; crisps not in the 20% exclusions)", "https://bofip.impots.gouv.fr/bofip/2033-PGP.html/identifiant%3DBOI-TVA-LIQ-30-10-10-20251119"),
+ "ES": (10, "confirmed", "Reduced 10% (processed foods not on the 4% list)", "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/manual-iva-2026/capitulo-04-sujetos-pasivos-repercusion-impositivo/tipo-impositivo/tipo-impositivo-reducido-10-ciento.html"),
+ "NL": (9, "confirmed", "Reduced food rate", "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/tarieven_en_vrijstellingen/goederen_9_btw/voedingsmiddelen/voedingsmiddelen"),
+ "DK": (25, "confirmed", "Single standard rate; no reduced food rate", "https://info.skat.dk/data.aspx?oid=1921136"),
+ "CH": (2.6, "confirmed", "Reduced rate for foodstuffs", "https://www.estv.admin.ch/en/vat-rates-switzerland"),
+ "JP": (8, "confirmed", "Reduced consumption-tax rate for food (excl. alcohol, dining in)", "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6303.htm"),
+ "AU": (10, "confirmed", "Standard GST; potato crisps not GST-free (GST Act Sch. 1 item 15)", "https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/in-detail/your-industry/gst-and-food/taxable-food"),
+ "ID": (11, "confirmed", "PPN 12% on DPP of 11/12 = 11% effective (PMK 131/2024)", "https://www.pajak.go.id/index.php/id/artikel/pmk-1312024-tarif-ppn-sebelas-dua-belas"),
+ "CN": (13, "confirmed", "Standard 13%; 9% covers only primary agricultural products", "https://fgk.chinatax.gov.cn/zcfgk/c102416/c5247431/5247431/files/%E9%80%82%E7%94%A89%E5%A2%9E%E5%80%BC%E7%A8%8E%E7%A8%8E%E7%8E%87%E8%B4%A7%E7%89%A9%E8%8C%83%E5%9B%B4%E6%B3%A8%E9%87%8A.pdf"),
+ "ZA": (15, "confirmed", "Standard rate; crisps not on the zero-rated basic foods list (VAT Act Sch. 2 Part B)", "https://www.sars.gov.za/wp-content/uploads/Legal/Rulings/BGR/LAPD-IntR-R-BGR-2016-06-BGR35-VAT-treatment-of-the-supply-and-importation-of-frozen-potato-products.pdf"),
+ "AE": (5, "confirmed", "Standard rate; food standard-rated", "https://tax.gov.ae/en/faq.aspx?keyword=What+is+the+standard+rate+of+VAT+in+the+UAE%3F"),
+ "TH": (7, "confirmed", "Reduced VAT 7% (statutory 10%); processed food taxable", "https://www.rd.go.th/37821.html"),
+ "PL": (5, "unconfirmed", "Likely 5% if classified CN 2005 20 (23% if CN 21); Pringles classification not confirmed", ""),
+ "CZ": (12, "unconfirmed", "Likely reduced food rate 12% (official source not checked)", ""),
+ "RU": (22, "unconfirmed", "Standard rate rose to 22% on 1 Jan 2026 (FNS); crisps assumed not on the 10% food list", "https://www.nalog.gov.ru/rn25/news/activities_fts/16596495/"),
+ "NZ": (15, "unconfirmed", "Single GST rate 15% (IRD source not opened)", ""),
+ "KR": (10, "unconfirmed", "Standard 10%; processed food taxable (NTS source not opened)", ""),
+ "PH": (12, "unconfirmed", "Standard 12%; processed food taxable (BIR source not opened)", ""),
+ "EG": (14, "unconfirmed", "Standard 14% (ETA source not opened)", ""),
+ "IT": (None, "unconfirmed", "4% (plain potato + oil, Tabella A II n.6) or 10%; rate for Pringles not confirmed", "https://www.agenziaentrate.gov.it/portale/documents/20143/304451/Risoluzione+92+del+01102012_RIS+92e+del+01+10+12.pdf/1dfa8007-417f-dc36-7c61-32435619d0bf"),
+ "MX": (None, "unconfirmed", "IVA 0% vs 16% for botanas not confirmed (IEPS 8% excise also applies to high-calorie snacks)", ""),
+ "BR": (None, "unconfirmed", "ICMS/PIS/Cofins vary by state; no single rate", ""),
+}
+
 def r(x, n=2):
     return None if x is None else round(x, n)
 
@@ -142,6 +179,12 @@ for x in records:
         "currency_valuation_pct": r((implied_ppp / fx - 1) * 100, 1),
         "retrieved": RETRIEVED,
     })
+    rate, st, basis, src = VAT[x["iso2"]]
+    x.update({"vat_rate_pct": rate, "vat_status": st, "vat_basis": basis, "vat_source": src,
+              "usd_per_100g_ex_vat": None if rate is None else r(usd_100g / (1 + rate / 100), 4)})
+for x in records:
+    ev = x["usd_per_100g_ex_vat"]
+    x["index_ex_vat_vs_us"] = None if ev is None else r(ev / base_usd_100g * 100, 1)
 
 records.sort(key=lambda x: -x["usd_per_100g"])
 for i, x in enumerate(records, 1):
@@ -150,7 +193,8 @@ for i, x in enumerate(records, 1):
 OUT_COLS = ["rank_most_expensive","iso2","country","region","currency","local_price","pack_grams",
             "local_price_per_100g","fx_local_per_usd","usd_price_can","usd_per_100g","usd_per_165g_equiv",
             "index_vs_us","implied_ppp_rate","currency_valuation_pct","retailer","price_type",
-            "price_observed","confidence","source_url","notes","fx_source","retrieved"]
+            "price_observed","confidence","source_url","notes","fx_source","retrieved",
+            "vat_rate_pct","vat_status","vat_basis","vat_source","usd_per_100g_ex_vat","index_ex_vat_vs_us"]
 
 with open(os.path.join(OUT, "pringles_index_2026-10.csv"), "w", newline="", encoding="utf-8") as f:
     w = csv.DictWriter(f, fieldnames=OUT_COLS)
@@ -171,6 +215,7 @@ meta = {
     "correction_note": "Updated 29 Oct 2026: corrected US base price source, Hungary pack size, removed Colombia.",
     "removed_note": "Colombia was removed on 29 Oct 2026 pending verification of pack size and regular price.",
     "pack_rule": "Use the market's standard can closest to 165 g, at the regular shelf price (not a promo or loyalty-card price).",
+    "vat_note": "Ex-VAT view: shelf price / (1 + VAT rate on potato crisps). US and Canada shelf prices are already pre-tax, so ex-tax = shelf. Rates checked 29 Oct 2026 against tax-authority sources; unconfirmed rates are flagged and blank rates are left out of the ex-VAT index.",
     "methodology_note": "See docs/PRINGLES_INDEX_BRIEF.md",
     "countries_published": len(records),
 }

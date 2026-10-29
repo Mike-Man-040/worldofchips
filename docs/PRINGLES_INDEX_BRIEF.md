@@ -96,3 +96,6 @@ Use the regional `region` field if you want filters (Europe, Asia, Latin America
 ## Refresh process
 
 Re-run quarterly or twice a year. Keep each edition as its own file (`pringles_index_YYYY-MM.json`) so the page can later show price changes and shrinkflation over time. That time series is a second story on its own.
+
+## Ex-VAT view (added 29 Oct 2026)
+An optional, collapsed "Price excluding VAT / sales tax" section sits below the sources table. Ex-VAT $/100 g = shelf $/100 g ÷ (1 + VAT rate on potato crisps). US prices are before state sales tax (varies by state; many exempt groceries), so US ex-tax = shelf; Canadian shelf prices also exclude GST/HST. The headline index, chart and main table remain on shelf prices. Rates live in `VAT` in `scripts/build_pringles_data.py` and are exported as `vat_rate_pct`, `vat_status`, `vat_basis`, `vat_source`, `usd_per_100g_ex_vat`, `index_ex_vat_vs_us`. IT, MX and BR have no confirmed rate and are left out of the ex-VAT ranking.

@@ -12,6 +12,7 @@
     "correction_note": "Updated 29 Oct 2026: corrected US base price source, Hungary pack size, removed Colombia.",
     "removed_note": "Colombia was removed on 29 Oct 2026 pending verification of pack size and regular price.",
     "pack_rule": "Use the market's standard can closest to 165 g, at the regular shelf price (not a promo or loyalty-card price).",
+    "vat_note": "Ex-VAT view: shelf price / (1 + VAT rate on potato crisps). US and Canada shelf prices are already pre-tax, so ex-tax = shelf. Rates checked 29 Oct 2026 against tax-authority sources; unconfirmed rates are flagged and blank rates are left out of the ex-VAT index.",
     "methodology_note": "See docs/PRINGLES_INDEX_BRIEF.md",
     "countries_published": 30
   },
@@ -39,7 +40,13 @@
       "source_url": "https://www.trendyol.com/pringles/original-sade-165-g-p-36822599",
       "notes": "Checked 29 Oct 2026. Second source: Hepsiburada 345 TL (via Cimri, 27 Oct 2026). Online marketplace prices. Imported (Poland/Belgium); high inflation, price moves fast.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 1,
+      "vat_status": "confirmed",
+      "vat_basis": "Reduced: KDV List I (A) item 16, all goods of HS chapter 20",
+      "vat_source": "https://cdn.gib.gov.tr/api/gibportal-file/file/getFileResources?objectKey=arsiv%2Fyardim-kaynaklar%2Fyararli-bilgiler%2Fkdv-oranlari.pdf",
+      "usd_per_100g_ex_vat": 3.919,
+      "index_ex_vat_vs_us": 242.7
     },
     {
       "rank_most_expensive": 2,
@@ -64,7 +71,13 @@
       "source_url": "https://auchan.hu/shop/pringles-original-natur-snack-165-g.p-579820",
       "notes": "Standard 165 g can, 1,699 Ft at Auchan and Tesco (https://bevasarlas.tesco.hu/shop/hu-HU/products/209563878), checked 29 Oct 2026. A smaller 125 g can also exists (1,499 Ft at Kifli, a higher per-100 g price); not used under the standard-can rule.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 27,
+      "vat_status": "confirmed",
+      "vat_basis": "Standard rate; crisps not in the 5%/18% lists",
+      "vat_source": "https://nav.gov.hu/ado/adozasi_kerdes/20261.-adozasi-kerdes---a-18-os-afakulcs-ala-tartozo-termekekrol",
+      "usd_per_100g_ex_vat": 2.4687,
+      "index_ex_vat_vs_us": 152.9
     },
     {
       "rank_most_expensive": 3,
@@ -89,7 +102,13 @@
       "source_url": "https://vkusvill.ru/goods/chipsy-kartofelnye-pringles-original-165-g-79909/",
       "notes": "",
       "fx_source": "Bank of Russia official rate 2026-10-23 (myfin.by archive)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 22,
+      "vat_status": "unconfirmed",
+      "vat_basis": "Standard rate rose to 22% on 1 Jan 2026 (FNS); crisps assumed not on the 10% food list",
+      "vat_source": "https://www.nalog.gov.ru/rn25/news/activities_fts/16596495/",
+      "usd_per_100g_ex_vat": 2.4433,
+      "index_ex_vat_vs_us": 151.3
     },
     {
       "rank_most_expensive": 4,
@@ -114,7 +133,13 @@
       "source_url": "https://www.coles.com.au/product/pringles-original-salted-stacked-potato-chips-134g-2784047",
       "notes": "$4.10/100g; frequently on special at $4.00 or half price.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 10,
+      "vat_status": "confirmed",
+      "vat_basis": "Standard GST; potato crisps not GST-free (GST Act Sch. 1 item 15)",
+      "vat_source": "https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/in-detail/your-industry/gst-and-food/taxable-food",
+      "usd_per_100g_ex_vat": 2.6211,
+      "index_ex_vat_vs_us": 162.3
     },
     {
       "rank_most_expensive": 5,
@@ -139,7 +164,13 @@
       "source_url": "https://www.kaufland.pl/product/491849545/",
       "notes": "Third-party seller on Kaufland marketplace, not a store shelf price.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 5,
+      "vat_status": "unconfirmed",
+      "vat_basis": "Likely 5% if classified CN 2005 20 (23% if CN 21); Pringles classification not confirmed",
+      "vat_source": "",
+      "usd_per_100g_ex_vat": 2.6117,
+      "index_ex_vat_vs_us": 161.7
     },
     {
       "rank_most_expensive": 6,
@@ -164,7 +195,13 @@
       "source_url": "https://www.rohlik.cz/1294001-pringles-original-potato-chips",
       "notes": "Discounted to CZK 79.90 at time of check.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 12,
+      "vat_status": "unconfirmed",
+      "vat_basis": "Likely reduced food rate 12% (official source not checked)",
+      "vat_source": "",
+      "usd_per_100g_ex_vat": 2.3825,
+      "index_ex_vat_vs_us": 147.6
     },
     {
       "rank_most_expensive": 7,
@@ -189,7 +226,13 @@
       "source_url": "https://www.pricerunner.dk/sp/pringles-chips.html",
       "notes": "Lowest listed price; may be a promo.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 25,
+      "vat_status": "confirmed",
+      "vat_basis": "Single standard rate; no reduced food rate",
+      "vat_source": "https://info.skat.dk/data.aspx?oid=1921136",
+      "usd_per_100g_ex_vat": 2.032,
+      "index_ex_vat_vs_us": 125.8
     },
     {
       "rank_most_expensive": 8,
@@ -214,7 +257,13 @@
       "source_url": "https://www.11st.co.kr/products/1578768215",
       "notes": "Multi-pack prices on Coupang/Kurly work out to roughly ₩1,700-1,900 per can.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 10,
+      "vat_status": "unconfirmed",
+      "vat_basis": "Standard 10%; processed food taxable (NTS source not opened)",
+      "vat_source": "",
+      "usd_per_100g_ex_vat": 2.3011,
+      "index_ex_vat_vs_us": 142.5
     },
     {
       "rank_most_expensive": 9,
@@ -239,7 +288,13 @@
       "source_url": "https://clicks.co.za/pringles_potato-chips-original-165g/p/384733",
       "notes": "Promo 2 for R110 until 23 Nov 2026.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 15,
+      "vat_status": "confirmed",
+      "vat_basis": "Standard rate; crisps not on the zero-rated basic foods list (VAT Act Sch. 2 Part B)",
+      "vat_source": "https://www.sars.gov.za/wp-content/uploads/Legal/Rulings/BGR/LAPD-IntR-R-BGR-2016-06-BGR35-VAT-treatment-of-the-supply-and-importation-of-frozen-potato-products.pdf",
+      "usd_per_100g_ex_vat": 2.1864,
+      "index_ex_vat_vs_us": 135.4
     },
     {
       "rank_most_expensive": 10,
@@ -264,7 +319,13 @@
       "source_url": "https://www.araujo.com.br/pringles",
       "notes": "Marketplace listings (Magalu) range R$10.99-14.90.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": null,
+      "vat_status": "unconfirmed",
+      "vat_basis": "ICMS/PIS/Cofins vary by state; no single rate",
+      "vat_source": "",
+      "usd_per_100g_ex_vat": null,
+      "index_ex_vat_vs_us": null
     },
     {
       "rank_most_expensive": 11,
@@ -289,7 +350,13 @@
       "source_url": "https://www.walmart.com.mx/ip/papas-pringles-sabor-original-134-g/00750100806957",
       "notes": "Soriana sells the 124 g can at the same MXN 54.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": null,
+      "vat_status": "unconfirmed",
+      "vat_basis": "IVA 0% vs 16% for botanas not confirmed (IEPS 8% excise also applies to high-calorie snacks)",
+      "vat_source": "",
+      "usd_per_100g_ex_vat": null,
+      "index_ex_vat_vs_us": null
     },
     {
       "rank_most_expensive": 12,
@@ -314,7 +381,13 @@
       "source_url": "https://www.denner.ch/fr/actions-et-assortiment/pringles-chips-original~p1022736",
       "notes": "CHF 1.78/100g, checked 29 Oct 2026. Lidl CHF 3.29, Müller CHF 3.25, Volg CHF 3.90 for the same 185 g can.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 2.6,
+      "vat_status": "confirmed",
+      "vat_basis": "Reduced rate for foodstuffs",
+      "vat_source": "https://www.estv.admin.ch/en/vat-rates-switzerland",
+      "usd_per_100g_ex_vat": 2.1044,
+      "index_ex_vat_vs_us": 130.3
     },
     {
       "rank_most_expensive": 13,
@@ -339,7 +412,13 @@
       "source_url": "https://gcc.luluhypermarket.com/en-ae/pringles-original-chips-165-g/p/22635",
       "notes": "",
       "fx_source": "UAE dirham fixed USD peg",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 5,
+      "vat_status": "confirmed",
+      "vat_basis": "Standard rate; food standard-rated",
+      "vat_source": "https://tax.gov.ae/en/faq.aspx?keyword=What+is+the+standard+rate+of+VAT+in+the+UAE%3F",
+      "usd_per_100g_ex_vat": 2.0353,
+      "index_ex_vat_vs_us": 126.1
     },
     {
       "rank_most_expensive": 14,
@@ -364,7 +443,13 @@
       "source_url": "https://www.trolley.co.uk/product/pringles-original/XMH650",
       "notes": "Heavily promoted: Morrisons/Iceland £1.75, Poundland £1.00.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 20,
+      "vat_status": "confirmed",
+      "vat_basis": "Standard rate; potato crisps excepted from zero-rating (VAT Notice 701/14)",
+      "vat_source": "https://www.gov.uk/guidance/food-products-and-vat-notice-70114",
+      "usd_per_100g_ex_vat": 1.6853,
+      "index_ex_vat_vs_us": 104.4
     },
     {
       "rank_most_expensive": 15,
@@ -389,7 +474,13 @@
       "source_url": "https://www.ah.nl/producten/product/wi233276",
       "notes": "Normal price €16.30/kg; promo €1.69 at time of check.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 9,
+      "vat_status": "confirmed",
+      "vat_basis": "Reduced food rate",
+      "vat_source": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/tarieven_en_vrijstellingen/goederen_9_btw/voedingsmiddelen/voedingsmiddelen",
+      "usd_per_100g_ex_vat": 1.6734,
+      "index_ex_vat_vs_us": 103.6
     },
     {
       "rank_most_expensive": 16,
@@ -414,7 +505,13 @@
       "source_url": "https://www.jula.se/catalog/hem-och-hushall/dagligvaror/godis/notter/pringles-032787/",
       "notes": "181.21 kr/kg. Jula is a hardware/variety chain.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 6,
+      "vat_status": "confirmed",
+      "vat_basis": "Reduced food rate (6% from 1 Apr 2026)",
+      "vat_source": "https://skatteverket.se/omoss/pressochmedia/nyheter/2026/nyheter/livsmedelsmomsensankstill6procent.5.70685bee19c85dd5dd0a3f.html",
+      "usd_per_100g_ex_vat": 1.7171,
+      "index_ex_vat_vs_us": 106.3
     },
     {
       "rank_most_expensive": 17,
@@ -439,7 +536,13 @@
       "source_url": "https://www.bigc.co.th/product/pringles-potato-chips-original-flavor-102-g.932",
       "notes": "",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 7,
+      "vat_status": "confirmed",
+      "vat_basis": "Reduced VAT 7% (statutory 10%); processed food taxable",
+      "vat_source": "https://www.rd.go.th/37821.html",
+      "usd_per_100g_ex_vat": 1.6805,
+      "index_ex_vat_vs_us": 104.1
     },
     {
       "rank_most_expensive": 18,
@@ -464,7 +567,13 @@
       "source_url": "https://finditapp.es/product/297707/snack-de-patata-pringles-165g-original",
       "notes": "Via Findit price aggregator.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 10,
+      "vat_status": "confirmed",
+      "vat_basis": "Reduced 10% (processed foods not on the 4% list)",
+      "vat_source": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/manual-iva-2026/capitulo-04-sujetos-pasivos-repercusion-impositivo/tipo-impositivo/tipo-impositivo-reducido-10-ciento.html",
+      "usd_per_100g_ex_vat": 1.6335,
+      "index_ex_vat_vs_us": 101.2
     },
     {
       "rank_most_expensive": 19,
@@ -489,7 +598,13 @@
       "source_url": "https://www.paknsave.co.nz/shop/product/5092356_ea_000pns",
       "notes": "$3.13/100g. Pak'nSave is a discount banner.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 15,
+      "vat_status": "unconfirmed",
+      "vat_basis": "Single GST rate 15% (IRD source not opened)",
+      "vat_source": "",
+      "usd_per_100g_ex_vat": 1.5446,
+      "index_ex_vat_vs_us": 95.7
     },
     {
       "rank_most_expensive": 20,
@@ -514,7 +629,13 @@
       "source_url": "https://www.rossmann.de/de/lebensmittel-pringles-original-gesalzene-chips/p/5053990127726",
       "notes": "€15.09/kg. REWE was €2.49 when it cut the can from 185 g to 165 g (2024, vzhh).",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 7,
+      "vat_status": "confirmed",
+      "vat_basis": "Reduced food rate (UStG Anlage 2)",
+      "vat_source": "https://www.gesetze-im-internet.de/ustg_1980/anlage_2.html",
+      "usd_per_100g_ex_vat": 1.5779,
+      "index_ex_vat_vs_us": 97.7
     },
     {
       "rank_most_expensive": 21,
@@ -539,7 +660,13 @@
       "source_url": "https://www.carrefouregypt.com/mafegy/en/c/FEGY1730101",
       "notes": "",
       "fx_source": "Egyptian bank rate 2026-10-23 (banker.news)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 14,
+      "vat_status": "unconfirmed",
+      "vat_basis": "Standard 14% (ETA source not opened)",
+      "vat_source": "",
+      "usd_per_100g_ex_vat": 1.4399,
+      "index_ex_vat_vs_us": 89.2
     },
     {
       "rank_most_expensive": 22,
@@ -564,7 +691,13 @@
       "source_url": "https://www.spesaonline.unes.it/u2/Dispensa-salata/Snack-salati-e-salse/Patatine-e-pop-corn/Pringles-Original-175-g/p/78775",
       "notes": "€14.57/kg; listing currently out of stock, date unverified.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": null,
+      "vat_status": "unconfirmed",
+      "vat_basis": "4% (plain potato + oil, Tabella A II n.6) or 10%; rate for Pringles not confirmed",
+      "vat_source": "https://www.agenziaentrate.gov.it/portale/documents/20143/304451/Risoluzione+92+del+01102012_RIS+92e+del+01+10+12.pdf/1dfa8007-417f-dc36-7c61-32435619d0bf",
+      "usd_per_100g_ex_vat": null,
+      "index_ex_vat_vs_us": null
     },
     {
       "rank_most_expensive": 23,
@@ -589,7 +722,13 @@
       "source_url": "https://www.walmart.com/ip/Pringles-Original-Potato-Crisps-Chips-Lunch-Snacks-5-2-oz-Canister/47217461",
       "notes": "5.2 oz (147.4 g) can. Walmart regular (non-sale) price $2.38, checked 29 Oct 2026 (sale price $2.00 not used). Other regular prices: Target $2.49 (https://www.target.com/p/pringles-original-flavored-potato-crisps-chips-5-2oz/-/A-13053936), Kroger $2.50-2.59 (https://www.kroger.com/p/pringles-original-potato-crisps-chips/0003800013841). US shelf prices exclude sales tax. BASE COUNTRY.",
       "fx_source": "base",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 0,
+      "vat_status": "n/a",
+      "vat_basis": "Shelf price excludes state/local sales tax (varies by state; many states exempt groceries)",
+      "vat_source": "",
+      "usd_per_100g_ex_vat": 1.6147,
+      "index_ex_vat_vs_us": 100.0
     },
     {
       "rank_most_expensive": 24,
@@ -614,7 +753,13 @@
       "source_url": "https://www.pricey.jp/web/articles/2393",
       "notes": "Pringles Japan has no RRP (open pricing). Reported range ¥200-280 for the 105 g M-can; midpoint used.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 8,
+      "vat_status": "confirmed",
+      "vat_basis": "Reduced consumption-tax rate for food (excl. alcohol, dining in)",
+      "vat_source": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6303.htm",
+      "usd_per_100g_ex_vat": 1.3442,
+      "index_ex_vat_vs_us": 83.3
     },
     {
       "rank_most_expensive": 25,
@@ -639,7 +784,13 @@
       "source_url": "https://www.watsons.com.ph/pringles-original-107g/p/BP_10082521",
       "notes": "",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 12,
+      "vat_status": "unconfirmed",
+      "vat_basis": "Standard 12%; processed food taxable (BIR source not opened)",
+      "vat_source": "",
+      "usd_per_100g_ex_vat": 1.2887,
+      "index_ex_vat_vs_us": 79.8
     },
     {
       "rank_most_expensive": 26,
@@ -664,7 +815,13 @@
       "source_url": "https://www.walmart.ca/en/c/brand/pringles",
       "notes": "Walmart.ca listing, $2.01/100g.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 0,
+      "vat_status": "n/a",
+      "vat_basis": "Shelf price excludes GST/HST (snack foods incl. potato chips are taxable at 5-15% at the till)",
+      "vat_source": "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/4-3/basic-groceries.html",
+      "usd_per_100g_ex_vat": 1.4305,
+      "index_ex_vat_vs_us": 88.6
     },
     {
       "rank_most_expensive": 27,
@@ -689,7 +846,13 @@
       "source_url": "https://www.hemat.id/katalog-indomaret/pringles./",
       "notes": "'Harga normal' at KlikIndomaret; promos down to ~Rp19,900.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 11,
+      "vat_status": "confirmed",
+      "vat_basis": "PPN 12% on DPP of 11/12 = 11% effective (PMK 131/2024)",
+      "vat_source": "https://www.pajak.go.id/index.php/id/artikel/pmk-1312024-tarif-ppn-sebelas-dua-belas",
+      "usd_per_100g_ex_vat": 1.2795,
+      "index_ex_vat_vs_us": 79.2
     },
     {
       "rank_most_expensive": 28,
@@ -714,7 +877,13 @@
       "source_url": "https://www.cnpp.cn/focus/233044.html",
       "notes": "From a product ranking page; date not shown.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 13,
+      "vat_status": "confirmed",
+      "vat_basis": "Standard 13%; 9% covers only primary agricultural products",
+      "vat_source": "https://fgk.chinatax.gov.cn/zcfgk/c102416/c5247431/5247431/files/%E9%80%82%E7%94%A89%E5%A2%9E%E5%80%BC%E7%A8%8E%E7%A8%8E%E7%8E%87%E8%B4%A7%E7%89%A9%E8%8C%83%E5%9B%B4%E6%B3%A8%E9%87%8A.pdf",
+      "usd_per_100g_ex_vat": 1.0255,
+      "index_ex_vat_vs_us": 63.5
     },
     {
       "rank_most_expensive": 29,
@@ -739,7 +908,13 @@
       "source_url": "https://www.promocatalogues.fr/offres/pringles/intermarche",
       "notes": "'Prix habituel' from Intermarché 2+1 promos (Jul-Sep 2026: €5.67 for 3). Intermarché, Auchan and Leclerc sell a 195 g can; Carrefour sells 175 g at €2.05-2.09 (Open Prices, 2026), other chains €1.72-2.35 for 175 g.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 5.5,
+      "vat_status": "confirmed",
+      "vat_basis": "Reduced food rate (CGI art. 278-0 bis; crisps not in the 20% exclusions)",
+      "vat_source": "https://bofip.impots.gouv.fr/bofip/2033-PGP.html/identifiant%3DBOI-TVA-LIQ-30-10-10-20251119",
+      "usd_per_100g_ex_vat": 1.0278,
+      "index_ex_vat_vs_us": 63.7
     },
     {
       "rank_most_expensive": 30,
@@ -764,7 +939,13 @@
       "source_url": "https://blinkit.com/prn/pringles-original-potato-chips-crispy-snack/prid/594",
       "notes": "MRP (legal max retail price) for the 107 g can, checked 29 Oct 2026. Blinkit sells at ₹101.",
       "fx_source": "ECB reference rate 2026-10-26 (cross via EUR/USD 1.1188)",
-      "retrieved": "2026-10-27"
+      "retrieved": "2026-10-27",
+      "vat_rate_pct": 5,
+      "vat_status": "confirmed",
+      "vat_basis": "GST 5% since 22 Sep 2025 (Notification 9/2025-Central Tax (Rate))",
+      "vat_source": "https://d23z1tp9il9etb.cloudfront.net/download/gstlaw/09-2025-CTR-eng1758171501.pdf",
+      "usd_per_100g_ex_vat": 1.0286,
+      "index_ex_vat_vs_us": 63.7
     }
   ],
   "backlog": [

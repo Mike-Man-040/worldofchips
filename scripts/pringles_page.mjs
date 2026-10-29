@@ -30,6 +30,20 @@ export default function pringlesPage({ esc, ROOT, CK }) {
   const fxPending = bl.filter((b) => /rate/i.test(b.reason)).map((b) => b.country);
   const excluded = bl.filter((b) => !/rate/i.test(b.reason)).map((b) => `${esc(b.country)} (${esc(b.reason.replace(/\.$/, ''))})`);
   const mapData = Object.fromEntries(C.map((c) => [ISO_NUM[c.iso2], [c.country, c.currency, c.local_price, c.pack_grams, c.usd_per_100g, c.index_vs_us, c.retailer, c.confidence]]));
+  const VX = [...C].sort((a, b) => (b.usd_per_100g_ex_vat ?? -1) - (a.usd_per_100g_ex_vat ?? -1));
+  const vatRows = VX.map((c) => `<tr><th scope="row">${name(c)}</th><td>${c.vat_rate_pct === null ? '&#8212;' : (c.iso2 === 'US' || c.iso2 === 'CA') ? 'pre-tax' : c.vat_rate_pct + '%'}${c.vat_status === 'unconfirmed' ? ' <em>(unconfirmed)</em>' : ''}</td><td>${c.vat_source ? `<a href="${esc(c.vat_source)}" target="_blank" rel="nofollow noopener">${esc(c.vat_basis)}</a>` : esc(c.vat_basis)}</td><td>$${c.usd_per_100g.toFixed(2)}</td><td>${c.usd_per_100g_ex_vat === null ? '&#8212;' : '$' + c.usd_per_100g_ex_vat.toFixed(2)}</td><td>${c.index_ex_vat_vs_us === null ? '&#8212;' : c.index_ex_vat_vs_us.toFixed(0)}</td></tr>`).join('\n            ');
+  const vatBlock = `<details class="cp-details" style="margin-top:1rem;background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.6rem .9rem">
+        <summary style="cursor:pointer;font-weight:700">Price excluding VAT / sales tax</summary>
+        <p class="sb-muted">Optional view. Ex-VAT $/100 g = shelf $/100 g &#247; (1 + VAT rate applied to potato crisps). US prices are shown before state sales tax (which varies by state; many states exempt groceries), so the US ex-tax price equals the shelf price; Canadian shelf prices also exclude GST/HST. Rates checked 29 Oct 2026 against tax-authority sources; <em>unconfirmed</em> rates could not be verified officially, and a dash means no rate was applied.</p>
+        <div class="sb-table-wrap">
+        <table class="sb-table">
+          <thead><tr><th scope="col">Country</th><th scope="col">VAT on crisps</th><th scope="col">Basis (source)</th><th scope="col">Shelf USD / 100 g</th><th scope="col">Ex-VAT USD / 100 g</th><th scope="col">Ex-VAT index (US = 100)</th></tr></thead>
+          <tbody>
+            ${vatRows}
+          </tbody>
+        </table>
+        </div>
+      </details>`;
   const pngUrl = 'https://worldofchips.com/assets/pringles-index-2026-10.png';
   const embed = `<a href="https://worldofchips.com/pringles-index/"><img src="${pngUrl}" alt="The World of Chips Pringles Index, ${M.edition}" width="1200" height="${200 + 34 * C.length + 150}" style="max-width:100%;height:auto"></a>`;
   const body = `
@@ -80,6 +94,7 @@ export default function pringlesPage({ esc, ROOT, CK }) {
         <li>Pack-size rule: ${esc(M.pack_rule)}</li>
         <li>Local price &#247; can weight &#215; 100 = local price per 100 g, converted to USD at the market rate.</li>
         <li>Index vs US = country USD/100 g &#247; US USD/100 g &#215; 100.</li>
+        <li>Ex-VAT view (optional, below the sources table): shelf price &#247; (1 + the VAT/GST rate on potato crisps), so tax differences can be separated from price differences. The headline index stays on shelf prices.</li>
         <li>Implied PPP rate = the rate that would make 100 g cost the same as in the US; valuation = implied rate &#247; actual rate &#8722; 1.</li>
       </ol>
       <p class="sb-muted">One main source per country, one point in time: a snapshot, not a statistical average. FX: ${esc(M.fx_date)}. Prices collected: ${esc(M.prices_collected)}. * Low confidence: a range, marketplace, undated or possibly promotional price. These are shown but can be hidden with the toggle.</p>
@@ -95,6 +110,7 @@ export default function pringlesPage({ esc, ROOT, CK }) {
       </table>
       </div>
       <p class="sb-sources">Not yet included: ${esc(fxPending.join(', '))} (price found, exchange rate still to be sourced); ${excluded.join('; ')}. Prices researched ${esc(M.retrieved)} by World of Chips. Raw data: <a href="/data/pringles_index_2026-10.csv">CSV</a> &#183; <a href="/data/pringles_index_2026-10.json">JSON</a>.</p>
+      ${vatBlock}
     </section>
     <section class="cp-section" id="share">
       <h2>Share or Embed</h2>
