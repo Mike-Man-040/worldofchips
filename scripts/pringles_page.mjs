@@ -4,8 +4,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const ISO_NUM = { TR: '792', HU: '348', CO: '170', RU: '643', AU: '036', PL: '616', CZ: '203', DK: '208', KR: '410', ZA: '710', BR: '076', MX: '484', CH: '756', AE: '784', GB: '826', NL: '528', SE: '752', TH: '764', ES: '724', NZ: '554', DE: '276', EG: '818', IT: '380', US: '840', JP: '392', PH: '608', CA: '124', ID: '360', CN: '156', IN: '356', FR: '250' };
-const SLUG = { TR: 'turkey', CO: 'colombia', RU: 'russia', AU: 'australia', PL: 'poland', KR: 'south-korea', ZA: 'south-africa', BR: 'brazil', MX: 'mexico', GB: 'united-kingdom', NL: 'netherlands', SE: 'sweden', TH: 'thailand', ES: 'spain', NZ: 'new-zealand', DE: 'germany', EG: 'egypt', IT: 'italy', US: 'united-states', JP: 'japan', CA: 'canada', ID: 'indonesia', CN: 'china', IN: 'india', FR: 'france' };
+const ISO_NUM = { TR: '792', HU: '348', RU: '643', AU: '036', PL: '616', CZ: '203', DK: '208', KR: '410', ZA: '710', BR: '076', MX: '484', CH: '756', AE: '784', GB: '826', NL: '528', SE: '752', TH: '764', ES: '724', NZ: '554', DE: '276', EG: '818', IT: '380', US: '840', JP: '392', PH: '608', CA: '124', ID: '360', CN: '156', IN: '356', FR: '250' };
+const SLUG = { TR: 'turkey', RU: 'russia', AU: 'australia', PL: 'poland', KR: 'south-korea', ZA: 'south-africa', BR: 'brazil', MX: 'mexico', GB: 'united-kingdom', NL: 'netherlands', SE: 'sweden', TH: 'thailand', ES: 'spain', NZ: 'new-zealand', DE: 'germany', EG: 'egypt', IT: 'italy', US: 'united-states', JP: 'japan', CA: 'canada', ID: 'indonesia', CN: 'china', IN: 'india', FR: 'france' };
 const PT = { regular: 'regular price', mrp: 'MRP (legal max. retail price)', lowest_listed: 'lowest listed of several shops', marketplace: 'marketplace seller', estimate_midpoint: 'midpoint of a published range' };
 
 export default function pringlesPage({ esc, ROOT, CK }) {
@@ -30,12 +30,26 @@ export default function pringlesPage({ esc, ROOT, CK }) {
   const fxPending = bl.filter((b) => /rate/i.test(b.reason)).map((b) => b.country);
   const excluded = bl.filter((b) => !/rate/i.test(b.reason)).map((b) => `${esc(b.country)} (${esc(b.reason.replace(/\.$/, ''))})`);
   const mapData = Object.fromEntries(C.map((c) => [ISO_NUM[c.iso2], [c.country, c.currency, c.local_price, c.pack_grams, c.usd_per_100g, c.index_vs_us, c.retailer, c.confidence]]));
+  const VX = [...C].sort((a, b) => (b.usd_per_100g_ex_vat ?? -1) - (a.usd_per_100g_ex_vat ?? -1));
+  const vatRows = VX.map((c) => `<tr><th scope="row">${name(c)}</th><td>${c.vat_rate_pct === null ? '&#8212;' : (c.iso2 === 'US' || c.iso2 === 'CA') ? 'pre-tax' : c.vat_rate_pct + '%'}${c.vat_status === 'unconfirmed' ? ' <em>(unconfirmed)</em>' : ''}</td><td>${c.vat_source ? `<a href="${esc(c.vat_source)}" target="_blank" rel="nofollow noopener">${esc(c.vat_basis)}</a>` : esc(c.vat_basis)}</td><td>$${c.usd_per_100g.toFixed(2)}</td><td>${c.usd_per_100g_ex_vat === null ? '&#8212;' : '$' + c.usd_per_100g_ex_vat.toFixed(2)}</td><td>${c.index_ex_vat_vs_us === null ? '&#8212;' : c.index_ex_vat_vs_us.toFixed(0)}</td></tr>`).join('\n            ');
+  const vatBlock = `<details class="cp-details" style="margin-top:1rem;background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.6rem .9rem">
+        <summary style="cursor:pointer;font-weight:700">Price excluding VAT / sales tax</summary>
+        <p class="sb-muted">Optional view. Ex-VAT $/100 g = shelf $/100 g &#247; (1 + VAT rate applied to potato crisps). US prices are shown before state sales tax (which varies by state; many states exempt groceries), so the US ex-tax price equals the shelf price; Canadian shelf prices also exclude GST/HST. Rates checked 29 Oct 2026 against tax-authority sources; <em>unconfirmed</em> rates could not be verified officially, and a dash means no rate was applied.</p>
+        <div class="sb-table-wrap">
+        <table class="sb-table">
+          <thead><tr><th scope="col">Country</th><th scope="col">VAT on crisps</th><th scope="col">Basis (source)</th><th scope="col">Shelf USD / 100 g</th><th scope="col">Ex-VAT USD / 100 g</th><th scope="col">Ex-VAT index (US = 100)</th></tr></thead>
+          <tbody>
+            ${vatRows}
+          </tbody>
+        </table>
+        </div>
+      </details>`;
   const pngUrl = 'https://worldofchips.com/assets/pringles-index-2026-10.png';
-  const embed = `<a href="https://worldofchips.com/pringles-index/"><img src="${pngUrl}" alt="The World of Chips Pringles Index, ${M.edition}" width="1200" height="1404" style="max-width:100%;height:auto"></a>`;
+  const embed = `<a href="https://worldofchips.com/pringles-index/"><img src="${pngUrl}" alt="The World of Chips Pringles Index, ${M.edition}" width="1200" height="${200 + 34 * C.length + 150}" style="max-width:100%;height:auto"></a>`;
   const body = `
     <section class="cp-section" id="headline">
       <h2>A can of Pringles costs ${(top.index_vs_us / 100).toFixed(1)}&#215; more in ${esc(top.country)} than in the US</h2>
-      <p>Per 100 g, Pringles Original costs <strong>$${top.usd_per_100g.toFixed(2)}</strong> in ${esc(top.country)} against a US baseline of <strong>$${base.toFixed(2)}</strong> (a ${C.find((c) => c.iso2 === 'US').pack_grams} g can at $${C.find((c) => c.iso2 === 'US').local_price.toFixed(2)}, Walmart). The cheapest markets in this edition are ${esc(cheap.country)} and ${esc(C[C.length - 2].country)} at about $${cheap.usd_per_100g.toFixed(2)}. ${C.length} markets, prices checked ${esc(M.retrieved)}.</p>
+      <p>Per 100 g, Pringles Original costs <strong>$${top.usd_per_100g.toFixed(2)}</strong> in ${esc(top.country)} against a US baseline of <strong>$${base.toFixed(2)}</strong> (a ${C.find((c) => c.iso2 === 'US').pack_grams} g can at Walmart&#8217;s regular price of $${C.find((c) => c.iso2 === 'US').local_price.toFixed(2)}; Target $2.49, Kroger $2.50&#8211;2.59). The cheapest markets in this edition are ${esc(cheap.country)} and ${esc(C[C.length - 2].country)} at about $${cheap.usd_per_100g.toFixed(2)}. ${C.length} markets, prices checked ${esc(M.retrieved)}.</p>
     </section>
     <section class="cp-section" id="map">
       <h2>The Map</h2>
@@ -65,9 +79,8 @@ export default function pringlesPage({ esc, ROOT, CK }) {
     <section class="cp-section" id="stories">
       <h2>What Stands Out</h2>
       <ul class="sb-list">
-        <li><strong>Turkey:</strong> about ${(top.index_vs_us / 100).toFixed(1)}&#215; the US price per 100 g. Pringles are imported, and prices move fast with inflation.</li>
-        <li><strong>Colombia</strong> ranks high largely because the peso has strengthened in 2026, a reminder of how much exchange rates drive any price index.</li>
-        <li><strong>France and India</strong> are cheapest: France sells a 195 g can at a &#8364;1.89 regular price (taken from a promo leaflet&#8217;s &#8220;prix habituel&#8221;), and India&#8217;s figure is the legal maximum retail price.</li>
+        <li><strong>Turkey</strong> is the most expensive market: about $3.96&#8211;4.20 per 100 g across two retailers (Trendyol 325 TL, Hepsiburada 345 TL), roughly ${(top.index_vs_us / 100).toFixed(1)}&#215; the US price. Pringles are imported, and prices move fast with inflation.</li>
+        <li><strong>India and France</strong> are cheapest, at about $1.08 per 100 g: France sells a 195 g can at a &#8364;1.89 regular price at Intermarch&#233; (taken from a promo leaflet&#8217;s &#8220;prix habituel&#8221;; Carrefour sells a 175 g can at &#8364;2.05&#8211;2.09), and India&#8217;s figure is the legal maximum retail price.</li>
         <li><strong>United Kingdom:</strong> the regular price is &#163;2.50, but the same can is &#163;1.75 at Morrisons and Iceland and &#163;1.00 at Poundland. Promotions matter.</li>
         <li><strong>Germany:</strong> the can shrank from 185 g to 165 g in 2024 at the same &#8364;2.49 (Verbraucherzentrale Hamburg).</li>
       </ul>
@@ -75,13 +88,16 @@ export default function pringlesPage({ esc, ROOT, CK }) {
     </section>
     <section class="cp-section" id="method">
       <h2>Methodology</h2>
+      <p style="background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.6rem .9rem"><strong>${esc(M.correction_note)}</strong> ${esc(M.removed_note)}</p>
       <ol class="sb-list">
         <li>One standard can of Pringles Original at its regular (non-promotional) retail price, including VAT/GST where prices are shown with tax. <strong>US prices exclude sales tax.</strong> We use one main source per country: usually a supermarket or online grocer, but some rows come from a price comparison site, a marketplace listing, a promo leaflet&#8217;s regular price or the legal maximum retail price (India). Each row names its source and price type.</li>
+        <li>Pack-size rule: ${esc(M.pack_rule)}</li>
         <li>Local price &#247; can weight &#215; 100 = local price per 100 g, converted to USD at the market rate.</li>
         <li>Index vs US = country USD/100 g &#247; US USD/100 g &#215; 100.</li>
+        <li>Ex-VAT view (optional, below the sources table): shelf price &#247; (1 + the VAT/GST rate on potato crisps), so tax differences can be separated from price differences. The headline index stays on shelf prices.</li>
         <li>Implied PPP rate = the rate that would make 100 g cost the same as in the US; valuation = implied rate &#247; actual rate &#8722; 1.</li>
       </ol>
-      <p class="sb-muted">One main source per country, one point in time: a snapshot, not a statistical average. FX: ${esc(M.fx_date)}. * Low confidence: a range, marketplace, undated or possibly promotional price. These are shown but can be hidden with the toggle.</p>
+      <p class="sb-muted">One main source per country, one point in time: a snapshot, not a statistical average. FX: ${esc(M.fx_date)}. Prices collected: ${esc(M.prices_collected)}. * Low confidence: a range, marketplace, undated or possibly promotional price. These are shown but can be hidden with the toggle.</p>
     </section>
     <section class="cp-section" id="sources">
       <h2>Prices &amp; Sources</h2>
@@ -94,10 +110,11 @@ export default function pringlesPage({ esc, ROOT, CK }) {
       </table>
       </div>
       <p class="sb-sources">Not yet included: ${esc(fxPending.join(', '))} (price found, exchange rate still to be sourced); ${excluded.join('; ')}. Prices researched ${esc(M.retrieved)} by World of Chips. Raw data: <a href="/data/pringles_index_2026-10.csv">CSV</a> &#183; <a href="/data/pringles_index_2026-10.json">JSON</a>.</p>
+      ${vatBlock}
     </section>
     <section class="cp-section" id="share">
       <h2>Share or Embed</h2>
-      <p><a href="/assets/pringles-index-2026-10.png"><img src="/assets/pringles-index-2026-10.png" alt="Pringles Index ranking chart, ${esc(M.edition)}" width="600" height="702" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:1px solid var(--light-border)"></a></p>
+      <p><a href="/assets/pringles-index-2026-10.png"><img src="/assets/pringles-index-2026-10.png" alt="Pringles Index ranking chart, ${esc(M.edition)}" width="600" height="${(200 + 34 * C.length + 150) / 2}" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:1px solid var(--light-border)"></a></p>
       <p>Journalists and bloggers are welcome to use the chart with a link back to this page. Embed code:</p>
       <pre style="white-space:pre-wrap;word-break:break-all;background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.8rem;font-size:.75rem">${esc(embed)}</pre>
     </section>`;
@@ -124,13 +141,13 @@ svg.selectAll('path').data(f).enter().append('path').attr('d',gp).attr('stroke',
   return { slug: 'pringles-index', flag: '📊', crumb: 'Pringles Index', ...CK, disc: false,
     h1: `The Pringles Index (${M.edition})`,
     title: `The Pringles Index 2026: What a Can of Pringles Costs in ${C.length} Countries | World of Chips`,
-    desc: `A Big Mac Index for chips: the regular price of Pringles Original in ${C.length} countries per 100 g in USD. ${top.country} is the priciest at ${(top.index_vs_us / 100).toFixed(1)}x the US; ${cheap.country} and France are the cheapest. Sources for every price.`,
+    desc: `A Big Mac Index for chips: the regular price of Pringles Original in ${C.length} countries per 100 g in USD. ${top.country} is the priciest (about $3.96–4.20 per 100 g); India and France are the cheapest at about $1.08. Sources for every price.`,
     introDark: `What one can of Pringles Original costs in ${C.length} countries, in US dollars per 100 g.`,
     intro: 'Pringles are sold in almost the same can around the world, which makes them a handy, if crunchy, way to compare prices around the world. Like The Economist&#8217;s Big Mac Index, this is a light-hearted guide to price levels and exchange rates, not a precise measure. Every price below is linked to its source.',
     sections: [], body, scriptSrc: ['https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js'], script, ogImage: '/assets/pringles-index-2026-10.png', ldExtra: [dataset],
     faqs: [
-      [`Where are Pringles most expensive?`, `In this ${M.edition} edition, ${top.country}: $${top.usd_per_100g.toFixed(2)} per 100 g, about ${(top.index_vs_us / 100).toFixed(1)} times the US price of $${base.toFixed(2)} per 100 g.`],
-      ['Where are Pringles cheapest?', `${cheap.country} and ${C[C.length - 2].country}, at about $${cheap.usd_per_100g.toFixed(2)} per 100 g. India&#8217;s figure is the legal maximum retail price, and France&#8217;s 195 g can sells at a €1.89 regular price.`],
+      [`Where are Pringles most expensive?`, `In this ${M.edition} edition, ${top.country}: $${top.usd_per_100g.toFixed(2)} per 100 g, about ${(top.index_vs_us / 100).toFixed(1)} times the US price of $${base.toFixed(2)} per 100 g (a second retailer, Hepsiburada, gives $4.20).`],
+      ['Where are Pringles cheapest?', `${cheap.country} and ${C[C.length - 2].country}, both at about $${cheap.usd_per_100g.toFixed(2)} per 100 g. India&#8217;s figure is the legal maximum retail price, and France&#8217;s 195 g can sells at a €1.89 regular price.`],
       ['Why compare per 100 g instead of per can?', 'Pringles cans differ by market, from about 102 g in parts of Asia to 165 g in most of Europe and 195 g in France, so comparing whole cans would be misleading.'],
       ['How reliable is the Pringles Index?', 'It uses one main source per country at one point in time, a snapshot rather than an average. Low-confidence rows (ranges, marketplace or undated prices) are marked with an asterisk and can be hidden.'],
     ],

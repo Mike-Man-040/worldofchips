@@ -29,7 +29,7 @@ def kicker(slug):
     if slug.startswith("which-chip-are-you-r-"): return "Which country’s chip are you? Take the quiz"
     if slug.startswith("flavors-"): return "Chip flavour guide"
     if slug == "which-chip-are-you": return "Five questions. Ten countries. One chip."
-    if slug == "pringles-index": return "What a can of Pringles costs in 31 countries"
+    if slug == "pringles-index": return "What a can of Pringles costs in 30 countries"
     return None
 
 def draw(slug, title, sub):
