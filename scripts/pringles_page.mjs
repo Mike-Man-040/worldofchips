@@ -8,6 +8,19 @@ const ISO_NUM = { TR: '792', HU: '348', RU: '643', AU: '036', PL: '616', CZ: '20
 const SLUG = { TR: 'turkey', RU: 'russia', AU: 'australia', PL: 'poland', KR: 'south-korea', ZA: 'south-africa', BR: 'brazil', MX: 'mexico', GB: 'united-kingdom', NL: 'netherlands', SE: 'sweden', TH: 'thailand', ES: 'spain', NZ: 'new-zealand', DE: 'germany', EG: 'egypt', IT: 'italy', US: 'united-states', JP: 'japan', CA: 'canada', ID: 'indonesia', CN: 'china', IN: 'india', FR: 'france' };
 const PT = { regular: 'regular price', mrp: 'MRP (legal max. retail price)', lowest_listed: 'lowest listed of several shops', marketplace: 'marketplace seller', estimate_midpoint: 'midpoint of a published range' };
 
+
+// "Featured in" slot. Keep enabled: false until the article is actually live, then fill in
+// outlet, title, url and date and set enabled: true. Nothing renders while it is disabled,
+// and the build refuses to publish it while placeholders are still in place.
+export const FEATURED_IN = {
+  enabled: false,
+  outlet: 'Bakery & Snacks',
+  title: '[ARTICLE_TITLE]',
+  url: '[ARTICLE_URL]',
+  date: '[DATE]',
+};
+const PRESS_EMAIL = 'michaelvdlooij@mail.grokbot.com';
+
 export default function pringlesPage({ esc, ROOT, CK }) {
   const D = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'pringles_index_2026-10.json'), 'utf8'));
   const C = D.countries, M = D.meta, base = M.base_usd_per_100g;
@@ -46,7 +59,44 @@ export default function pringlesPage({ esc, ROOT, CK }) {
       </details>`;
   const pngUrl = 'https://worldofchips.com/assets/pringles-index-2026-10.png';
   const embed = `<a href="https://worldofchips.com/pringles-index/"><img src="${pngUrl}" alt="The World of Chips Pringles Index, ${M.edition}" width="1200" height="${200 + 34 * C.length + 150}" style="max-width:100%;height:auto"></a>`;
-  const body = `
+  const F = FEATURED_IN;
+  if (F.enabled && [F.title, F.url, F.date].some((v) => !v || /^\[.*\]$/.test(v))) throw new Error('pringles: FEATURED_IN is enabled but still has placeholders');
+  const featured = F.enabled ? `
+    <aside class="cp-section" id="featured-in" aria-label="Featured in" style="background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:.9rem 1.1rem;font-size:1.05rem">📰 <strong>Featured in ${esc(F.outlet)}:</strong> <a href="${esc(F.url)}" target="_blank" rel="noopener">${esc(F.title)}</a> <span class="sb-muted">(${esc(F.date)})</span></aside>` : '';
+  const explore = [['christmas-chip-gifts-2026', '🎄 Christmas chip gifts 2026'], ['halloween-chips-2026', '🎃 Halloween chips 2026'], ...C.filter((c) => SLUG[c.iso2]).map((c) => [SLUG[c.iso2], `${esc(c.country)} chips`])];
+  for (const [s] of explore) if (!fs.existsSync(path.join(ROOT, s, 'index.html'))) throw new Error(`pringles: missing /${s}/`);
+  const citation = 'Source: World of Chips Pringles Index, October 2026, worldofchips.com/pringles-index/';
+  const box = 'background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.6rem .9rem';
+  const pre = 'white-space:pre-wrap;word-break:break-all;background:#fff;border:1px solid var(--light-border);border-radius:12px;padding:.8rem;font-size:.75rem';
+  const extra = `
+    <section class="cp-section" id="next-edition">
+      <p style="${box}">📅 <strong>Next edition:</strong> planned for January 2027. We aim to add Singapore (only multipacks were found this time) and Colombia (the pack size couldn&#8217;t be verified).</p>
+    </section>
+    <nav class="cp-section" id="keep-exploring" aria-label="Keep exploring">
+      <h2>Keep Exploring</h2>
+      <div class="cp-explore-grid">${explore.map(([s, l]) => `<a href="/${s}/" class="cp-explore-link">${l}</a>`).join('')}</div>
+    </nav>`;
+  const shareSec = `
+    <section class="cp-section" id="share">
+      <h2>Share or Embed</h2>
+      <p><a href="/assets/pringles-index-2026-10.png"><img src="/assets/pringles-index-2026-10.png" alt="Pringles Index ranking chart, ${esc(M.edition)}" width="600" height="${(200 + 34 * C.length + 150) / 2}" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:1px solid var(--light-border)"></a></p>
+      <p>Journalists and bloggers are welcome to use the chart with a link back to this page.</p>
+      <details class="cp-details" id="press" style="${box}">
+        <summary style="cursor:pointer;font-weight:700">📰 Press &amp; embed kit: downloads, citation, methodology, embed code, contact</summary>
+        <h3>Downloads</h3>
+        <ul class="sb-list"><li><a href="/assets/pringles-index-2026-10.png" download>Chart (PNG)</a></li><li><a href="/data/pringles_index_2026-10.csv" download>Data (CSV)</a></li><li><a href="/data/pringles_index_2026-10.json" download>Data (JSON)</a></li></ul>
+        <h3>Suggested citation</h3>
+        <p><code>${esc(citation)}</code></p>
+        <h3>Methodology in brief</h3>
+        <p>One standard can of Pringles Original per country at its regular (non-promotional) retail price, one main source per country, converted to US dollars per 100 g at market exchange rates (${esc(M.fx_date)}). Index vs US = country USD/100 g &#247; US USD/100 g &#215; 100. US prices exclude sales tax. A snapshot, not a statistical average; low-confidence rows are marked *. <a href="#method">Full methodology</a>.</p>
+        <h3>Embed code</h3>
+        <pre id="piEmbed" style="${pre}">${esc(embed)}</pre>
+        <p><button type="button" class="filter-btn" id="piCopy">Copy embed code</button></p>
+        <h3>Press contact</h3>
+        <p>Michael van der Looij: <a href="mailto:${PRESS_EMAIL}">${PRESS_EMAIL}</a></p>
+      </details>
+    </section>`;
+  const body = `${featured}
     <section class="cp-section" id="headline">
       <h2>A can of Pringles costs ${(top.index_vs_us / 100).toFixed(1)}&#215; more in ${esc(top.country)} than in the US</h2>
       <p>Per 100 g, Pringles Original costs <strong>$${top.usd_per_100g.toFixed(2)}</strong> in ${esc(top.country)} against a US baseline of <strong>$${base.toFixed(2)}</strong> (a ${C.find((c) => c.iso2 === 'US').pack_grams} g can at Walmart&#8217;s regular price of $${C.find((c) => c.iso2 === 'US').local_price.toFixed(2)}; Target $2.49, Kroger $2.50&#8211;2.59). The cheapest markets in this edition are ${esc(cheap.country)} and ${esc(C[C.length - 2].country)} at about $${cheap.usd_per_100g.toFixed(2)}. ${C.length} markets, prices checked ${esc(M.retrieved)}.</p>
@@ -111,12 +161,6 @@ export default function pringlesPage({ esc, ROOT, CK }) {
       </div>
       <p class="sb-sources">Not yet included: ${esc(fxPending.join(', '))} (price found, exchange rate still to be sourced); ${excluded.join('; ')}. Prices researched ${esc(M.retrieved)} by World of Chips. Raw data: <a href="/data/pringles_index_2026-10.csv">CSV</a> &#183; <a href="/data/pringles_index_2026-10.json">JSON</a>.</p>
       ${vatBlock}
-    </section>
-    <section class="cp-section" id="share">
-      <h2>Share or Embed</h2>
-      <p><a href="/assets/pringles-index-2026-10.png"><img src="/assets/pringles-index-2026-10.png" alt="Pringles Index ranking chart, ${esc(M.edition)}" width="600" height="${(200 + 34 * C.length + 150) / 2}" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;border:1px solid var(--light-border)"></a></p>
-      <p>Journalists and bloggers are welcome to use the chart with a link back to this page. Embed code:</p>
-      <pre style="white-space:pre-wrap;word-break:break-all;background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.8rem;font-size:.75rem">${esc(embed)}</pre>
     </section>`;
   const script = `(function(){
 var D=${JSON.stringify(mapData)};
@@ -126,6 +170,7 @@ rows.forEach(function(r){var f=r.querySelector('.bar-fill');f.style.width=f.getA
 [].forEach.call(document.querySelectorAll('#piVal .bar-row'),function(r){r.style.display=(hide&&r.getAttribute('data-low')==='1')?'none':'';});
 note.textContent=metric==='100'?'USD per 100 g: the fair comparison, because can sizes run from 102 g to 195 g.':'USD per local can: cans differ in size (102 g to 195 g), so this ranking is not like-for-like.';}
 [].forEach.call(btns,function(b){b.addEventListener('click',function(){metric=b.getAttribute('data-metric');[].forEach.call(btns,function(x){x.classList.toggle('active',x===b);});render();});});
+var cp=document.getElementById('piCopy');if(cp)cp.addEventListener('click',function(){var t=document.getElementById('piEmbed').textContent;if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){cp.textContent='Copied';});});
 low.addEventListener('click',function(){hide=!hide;low.classList.toggle('active',hide);low.setAttribute('aria-pressed',hide);render();});
 if(!window.d3||!window.topojson)return;
 var svg=d3.select('#piMap'),tip=document.getElementById('piTip'),proj=d3.geoNaturalEarth1().scale(170).translate([480,260]),gp=d3.geoPath(proj);
@@ -144,7 +189,7 @@ svg.selectAll('path').data(f).enter().append('path').attr('d',gp).attr('stroke',
     desc: `A Big Mac Index for chips: the regular price of Pringles Original in ${C.length} countries per 100 g in USD. ${top.country} is the priciest (about $3.96–4.20 per 100 g); India and France are the cheapest at about $1.08. Sources for every price.`,
     introDark: `What one can of Pringles Original costs in ${C.length} countries, in US dollars per 100 g.`,
     intro: 'Pringles are sold in almost the same can around the world, which makes them a handy, if crunchy, way to compare prices around the world. Like The Economist&#8217;s Big Mac Index, this is a light-hearted guide to price levels and exchange rates, not a precise measure. Every price below is linked to its source.',
-    sections: [], body, scriptSrc: ['https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js'], script, ogImage: '/assets/pringles-index-2026-10.png', ldExtra: [dataset],
+    sections: [], body, nlEarly: 'Get the next Pringles Index by email', extra: shareSec + extra, scriptSrc: ['https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js'], script, ogImage: '/assets/pringles-index-2026-10.png', ldExtra: [dataset],
     faqs: [
       [`Where are Pringles most expensive?`, `In this ${M.edition} edition, ${top.country}: $${top.usd_per_100g.toFixed(2)} per 100 g, about ${(top.index_vs_us / 100).toFixed(1)} times the US price of $${base.toFixed(2)} per 100 g (a second retailer, Hepsiburada, gives $4.20).`],
       ['Where are Pringles cheapest?', `${cheap.country} and ${C[C.length - 2].country}, both at about $${cheap.usd_per_100g.toFixed(2)} per 100 g. India&#8217;s figure is the legal maximum retail price, and France&#8217;s 195 g can sells at a €1.89 regular price.`],
