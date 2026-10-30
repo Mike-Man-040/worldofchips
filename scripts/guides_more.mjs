@@ -389,11 +389,63 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
     title: 'Limited-Edition Chip Calendar 2026: New & Seasonal Flavour Drops | World of Chips',
     desc: 'A running calendar of limited-edition and new chip flavours by month and country, from Lay\'s Holi-LAY\'S to KETTLE festive editions and Korean collaborations, each with a source.',
     introDark: 'New and limited-edition chips by month and country, updated weekly from our news desk.',
-    intro: `Each entry links to its source and, where we covered it, to our news story. Dates are on-shelf dates from the source. Where the source only reported a launch, we show &#8220;Reported&#8221; with the article date. The calendar is updated weekly (${drops.length} drops listed; last checked ${CK.checkedLabel}). Know a launch we missed? Reply to the newsletter.`,
+    intro: `🎃 Halloween? See <a href="/halloween-chips-2026/">spooky &amp; limited-edition chips around the world</a>. Each entry links to its source and, where we covered it, to our news story. Dates are on-shelf dates from the source. Where the source only reported a launch, we show &#8220;Reported&#8221; with the article date. The calendar is updated weekly (${drops.length} drops listed; last checked ${CK.checkedLabel}). Know a launch we missed? Reply to the newsletter.`,
     sections: [], body: calBody,
     faqs: [['How often is the limited-edition calendar updated?', 'Weekly, from launches covered by our news desk and from brand press releases and trade press. Every entry carries its source.'], ['What are the Lay\'s holiday flavours for 2026?', 'According to PepsiCo, the Holi-LAY\'S lineup is Cheddar Scalloped-Style Potatoes and Roasted Holiday Turkey (25 October), Maple Bacon (8 November), and chocolate-covered Wavy Milk Chocolate and Dubai-Style Dark Chocolate at select retailers from 1 December.']],
     nlEarly: 'Get the monthly drop calendar', sources: [], related: [['news', '📰 Chip news'], ['flavors', '🌍 Chip flavours'], ['spiciest-chips', '🌶️ Spice ladder']] };
   void lastDrop;
+
+  // ---------- Halloween 2026 feature (spooky picks verified with 2+ sources + seasonal drops from limited_editions.json) ----------
+  const SPOOKY = [
+    { country: 'united-kingdom', brand: 'Takis', product: 'Zombie (limited edition)', when: 'Back since 1 Sep 2026',
+      note: 'Habanero chilli, cucumber and lime rolled tortilla chips, back in the UK for Halloween in 55 g, 100 g (RRP &#163;2.49) and 180 g (RRP &#163;3.49) packs.',
+      src: [['Talking Retail', 'https://www.talkingretail.com/products-news/crisps-snacks/takis-zombie-flavour-returns-for-halloween-01-09-2026/'], ['Better Retailing', 'https://www.betterretailing.com/br/product-news/takis-brings-back-zombie-flavour-for-halloween/'], ['Convenience Store', 'https://www.conveniencestore.co.uk/products/takis-zombie-flavour-comes-back-from-the-dead-for-halloween/723049.article']] },
+    { country: 'united-kingdom', brand: 'Wotsits', product: 'Bag of Bones Really Cheesy (Avengers: Doomsday pack)', when: 'From Sep 2026',
+      note: 'Limited-edition 120 g sharing bag in Doctor Doom-themed packaging, pitched by Walkers as a Halloween party snack. Part of an on-pack promotion running to 31 December 2026.',
+      src: [['Grocery Trader', 'https://grocerytrader.co.uk/walkers-snacks-joins-forces-with-marvel-studios-avengers-doomsday-for-on-pack-promotion/'], ['Convenience Store', 'https://www.conveniencestore.co.uk/products/walkers-offers-tokyo-trips-with-marvel-studios-avengers-on-pack-promo/723692.article']] },
+    { country: 'united-states', brand: 'Cheetos', product: 'Sweet Phantom Heat Puffs', when: 'From 31 Aug 2026',
+      note: 'Limited-time Halloween puffs: cinnamon-sugar notes, then heat, tingling and a subtle fizz inspired by compounds found in Sichuan pepper. 8 oz and 2.5 oz bags.',
+      src: [['PepsiCo', 'https://www.pepsico.com/newsroom/stories/2026/halloween-snacks-drinks-variety-packs-from-pepsico-for-spooky-season'], ['Bakery&amp;Snacks', 'https://www.bakeryandsnacks.com/Article/2026/10/12/halloween-snacks-from-cheetos-hostess-chips-ahoy-and-more/'], ['CStore Decisions', 'https://cstoredecisions.com/sweet-heat-cheese-puff/']] },
+    { country: 'united-states', brand: 'Cheetos', product: 'Bag of Bones (White Cheddar and Cinnamon Sugar)', when: 'Halloween 2026',
+      note: 'Skeleton-shaped seasonal Cheetos, returning in two flavours.',
+      src: [['PepsiCo', 'https://www.pepsico.com/newsroom/stories/2026/halloween-snacks-drinks-variety-packs-from-pepsico-for-spooky-season'], ['Bakery&amp;Snacks', 'https://www.bakeryandsnacks.com/Article/2026/10/12/halloween-snacks-from-cheetos-hostess-chips-ahoy-and-more/']] },
+  ];
+  for (const x of SPOOKY) if (!names[x.country]) throw new Error(`halloween: country ${x.country} not in names`);
+  const seasonal = drops.filter((d) => d.date >= '2026-09-01' && d.date <= '2026-12-31');
+  const card = (x) => `<div class="explore-card" style="cursor:default">
+        <span class="explore-icon">🎃</span><h3>${esc(x.brand)} ${x.product}</h3>
+        <p><strong>${esc(x.when)}</strong> &#183; <a href="/${x.country}/">${esc(names[x.country])}</a></p>
+        <p>${x.note}</p>
+        <p class="sb-muted">Sources: ${x.src.map(([n, u]) => `<a href="${u}" target="_blank" rel="nofollow noopener">${n}</a>`).join(', ')}</p>
+      </div>`;
+  const halloweenBody = `
+    <section class="cp-section" id="spooky">
+      <h2>🎃 Halloween 2026 Chips</h2>
+      <p>Halloween-themed chips and puffs on shelves this season, each confirmed by at least two sources.</p>
+      <div class="explore-grid">
+      ${SPOOKY.map(card).join('\n      ')}
+      </div>
+    </section>
+    <section class="cp-section" id="limited">
+      <h2>📅 Limited Editions Around the World</h2>
+      <p>Other seasonal and limited-edition chips from our <a href="/limited-edition-chips/">drop calendar</a>, September to December 2026. Open a country for the details and sources.</p>
+      ${[...new Set(seasonal.map((d) => d.country))].map((c) => { const inC = seasonal.filter((d) => d.country === c); return `<details style="border:1px solid var(--light-border);border-radius:12px;padding:.7rem 1rem;margin-bottom:.7rem;background:var(--paper)">
+        <summary style="font-weight:700;color:var(--brown);cursor:pointer">${esc(names[c])} (${inC.length})</summary>
+        <ul class="sb-list">
+          ${inC.map((d) => `<li><strong>${esc(d.when)}</strong>: ${esc(d.brand)} ${esc(d.product)}. ${esc(d.note)} <span class="sb-muted">Source: <a href="${esc(d.source_url)}" target="_blank" rel="nofollow noopener">${esc(d.source_name)}</a></span></li>`).join('\n          ')}
+        </ul>
+        <p><a href="/${c}/">More about chips in ${esc(names[c].replace(/^\S+ /, ''))} &#8594;</a></p>
+      </details>`; }).join('\n      ')}
+    </section>`;
+  const halloween = { slug: 'halloween-chips-2026', flag: '🎃', crumb: 'Halloween Chips 2026', ...CK, checked: '2026-10-30', checkedLabel: '30 October 2026', disc: false,
+    h1: 'Spooky &amp; Limited-Edition Chips Around the World',
+    title: 'Halloween Chips 2026: Spooky & Limited-Edition Flavours | World of Chips',
+    desc: 'Halloween 2026 chips: Takis Zombie, Wotsits Bag of Bones, Cheetos Sweet Phantom Heat and Bag of Bones, plus limited-edition drops by country. Every item sourced.',
+    introDark: 'Halloween 2026: the spooky chips on shelves now, plus the limited editions landing around the world.',
+    intro: `Four Halloween picks from the UK and US, then ${seasonal.length} seasonal and limited-edition launches from our drop calendar. Every entry links to its source.`,
+    sections: [], body: halloweenBody,
+    faqs: [['What Halloween chips are out in 2026?', 'In the UK, Takis Zombie (habanero chilli, cucumber and lime) is back, and Wotsits has a limited-edition Bag of Bones Really Cheesy bag. In the US, PepsiCo lists Cheetos Sweet Phantom Heat Puffs and Cheetos Bag of Bones in White Cheddar and Cinnamon Sugar.']],
+    sources: [], related: [['limited-edition-chips', '📅 Limited-edition drops'], ['spiciest-chips', '🌶️ Spice ladder'], ['christmas-chip-gifts-2026', '🎄 Christmas chip gifts 2026']] };
 
   // ---------- quiz ----------
   const Q = [
@@ -522,5 +574,5 @@ var m=location.search.match(/[?&]r=([a-z-]+)/);if(m)show(m[1],false);})();`;
     ],
     sources: [], related: [['pringles-index', '📊 Pringles Index'], ['limited-edition-chips', '📅 Limited-edition drops'], ['united-kingdom', '🇬🇧 United Kingdom']] };
 
-  return [...hubAndRecipe, ...cluster.map((g) => ({ ...CK, ...g })), spice, flavorIndex, ...flavorPages, calendar, quiz, submit, pringlesPage({ esc, ROOT, CK }), shrink].map((g) => ({ ...CK, ...g }));
+  return [...hubAndRecipe, ...cluster.map((g) => ({ ...CK, ...g })), spice, flavorIndex, ...flavorPages, calendar, halloween, quiz, submit, pringlesPage({ esc, ROOT, CK }), shrink].map((g) => ({ ...CK, ...g }));
 }
