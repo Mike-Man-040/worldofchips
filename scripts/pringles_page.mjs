@@ -19,7 +19,7 @@ export const FEATURED_IN = {
   url: '[ARTICLE_URL]',
   date: '[DATE]',
 };
-const PRESS_EMAIL = 'michaelvdlooij@mail.grokbot.com';
+const PRESS_EMAIL = 'michaelvdlooij@gmail.com';
 
 export default function pringlesPage({ esc, ROOT, CK }) {
   const D = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'pringles_index_2026-10.json'), 'utf8'));
