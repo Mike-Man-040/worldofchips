@@ -647,10 +647,10 @@ GUIDES.push(...morePages({ amazonSearch, esc, ROOT }));
 // SnackCrate were read on 2026-10-28. Brand links are plain official URLs (affiliate approvals pending):
 // swap the href and add "sponsored" to rel when a program is approved (search data-affiliate="<brand>").
 {
-  const off = (brand, href, label) => `<a href="${href}" target="_blank" rel="nofollow noopener" data-affiliate="${brand}">${label}</a>`;
+  const off = (brand, href, label) => `<a href="${href}" target="_blank" rel="${href.includes('awin1.com') ? AWIN_REL : 'nofollow noopener'}" data-affiliate="${brand}">${label}</a>`;
   const U = (t) => `<span title="Not confirmed on the official site" style="color:var(--red);font-weight:700">(unconfirmed)</span>${t ? ' ' + t : ''}`;
   const rows = [
-    ['🌍', off('universalyums', 'https://www.universalyums.com/', 'Universal Yums'), 'Yum Box $18&#8211;$20 &#183; Yum Yum Box $27&#8211;$31 &#183; Super Yum Box $41&#8211;$47 (per box; lower price = 12-month plan)', 'A different country each month (you can pick your first box&#8217;s country)', '5&#8211;7, 10&#8211;12 or 15&#8211;18 sweet and savoury snacks (Super Yum adds a drink), plus a booklet with trivia and games', 'US and Canada only. Free in the contiguous US; Canada $5/$8/$10 per box by size', '18 Oct 2026'],
+    ['🌍', off('universalyums', UNIVERSAL_YUMS_AWIN.replace(/&/g, '&amp;'), 'Universal Yums'), 'Yum Box $18&#8211;$20 &#183; Yum Yum Box $27&#8211;$31 &#183; Super Yum Box $41&#8211;$47 (per box; lower price = 12-month plan)', 'A different country each month (you can pick your first box&#8217;s country)', '5&#8211;7, 10&#8211;12 or 15&#8211;18 sweet and savoury snacks (Super Yum adds a drink), plus a booklet with trivia and games', 'US and Canada only. Free in the contiguous US; Canada $5/$8/$10 per box by size', '18 Oct 2026'],
     ['🇯🇵', off('bokksu', 'https://www.bokksu.com/', 'Bokksu'), '$32.99&#8211;$39.99 per box ($39.99 monthly, $32.99 on 12 months)', 'Japan; ships from Japan', '20&#8211;22 traditional snacks and sweets from small makers, plus a tea and a culture guide', 'US $13.99 + $3 import duty; UK, EU, Canada, Australia $15.99 per box. EU buyers may owe duty on delivery', '18 Oct 2026'],
     ['🇯🇵', off('tokyotreat', 'https://tokyotreat.com/', 'TokyoTreat'), '$32.50&#8211;$37.50 per box ($37.50 monthly, $32.50 on 12 months)', 'Japan; ships from Japan with tracking', '12&#8211;15 full-size modern Japanese snacks: chips, KitKats, gummies, noodles, DIY candy, plus a booklet', '$16.99 per box to the US, UK and most of Europe; 7&#8211;28 days after dispatch', '18 Oct 2026'],
     ['🇯🇵', off('sakuraco', 'https://sakura.co/', 'Sakuraco'), '$32.50&#8211;$37.50 per box; Premium Tea Pairing +$10/month', 'Japan; TokyoTreat&#8217;s sister box', 'Up to 20 traditional sweets, snacks and teas plus a Japanese home good and a culture guide', 'Same table as TokyoTreat: $16.99 per box', '18 Oct 2026'],
@@ -671,7 +671,7 @@ GUIDES.push(...morePages({ amazonSearch, esc, ROOT }));
     <section class="cp-section" id="quick-picks" style="background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:1.1rem 1.2rem">
       <h2>🎁 Quick Picks</h2>
       <ul class="sb-list">
-        <li><strong>Cheapest box:</strong> ${off('mexicrate', 'https://www.mexicrate.com/', 'MexiCrate Peque&#241;a')} at $14.99, or ${off('universalyums', 'https://www.universalyums.com/', 'Universal Yums')} from $18 a box (both US/Canada only).</li>
+        <li><strong>Cheapest box:</strong> ${off('mexicrate', 'https://www.mexicrate.com/', 'MexiCrate Peque&#241;a')} at $14.99, or ${off('universalyums', UNIVERSAL_YUMS_AWIN.replace(/&/g, '&amp;'), 'Universal Yums')} from $18 a box (both US/Canada only).</li>
         <li><strong>Most premium-feeling gift:</strong> ${off('bokksu', 'https://www.bokksu.com/', 'Bokksu')}: traditional Japanese snacks plus tea.</li>
         <li><strong>Best for chip lovers:</strong> ${off('tokyotreat', 'https://tokyotreat.com/', 'TokyoTreat')} (a chips and salty treats category) or ${off('daebak', 'https://daebak.co/', 'Daebak')} (chips and crackers in every box).</li>
         <li><strong>Best for tea drinkers:</strong> ${off('sakuraco', 'https://sakura.co/', 'Sakuraco')}, with a Japanese home good in each box.</li>
