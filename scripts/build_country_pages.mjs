@@ -161,6 +161,9 @@ const GUIDE_LINKS = {
   india: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   spain: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   brazil: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
+  turkey: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
+  'south-africa': [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
+  'new-zealand': [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   sweden: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe']],
 };
 // Community finds: moderated visitor submissions from data/community_flavors.json (see README).
@@ -213,7 +216,7 @@ function guideCallout(slug) {
 // guide links). The 15 fully researched countries get 4 Q&As; the thinner ones get 3 conservative
 // ones (brands, flavours, where to buy) and no history/"what makes it unique" answer.
 const RESEARCHED = new Set(['japan', 'south-korea', 'united-kingdom', 'united-states', 'mexico', 'germany',
-  'france', 'netherlands', 'poland', 'russia', 'argentina', 'egypt', 'thailand', 'india', 'spain', 'china', 'australia', 'italy', 'indonesia', 'canada', 'brazil', 'sweden']);
+  'france', 'netherlands', 'poland', 'russia', 'argentina', 'egypt', 'thailand', 'india', 'spain', 'china', 'australia', 'italy', 'indonesia', 'canada', 'brazil', 'sweden', 'turkey', 'south-africa', 'new-zealand']);
 const listAnd = (a) => (a.length < 2 ? a.join('') : `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}`);
 const sentences = (t) => t.match(/[^.!?]+[.!?]+(?=\s|$)/g)?.map((x) => x.trim()) || [t];
 const words = (t) => t.split(/\s+/).filter(Boolean).length;
