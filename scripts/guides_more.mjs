@@ -13,6 +13,7 @@ const BBC_CRISPS = 'https://www.bbc.co.uk/food/crisps';
 const CK = { checked: '2026-10-27', checkedLabel: '27 October 2026' };
 const SEARCH_NOTE = 'Links open an Amazon search for the named model, because single listings change often. Pick a listing sold by the brand or a reputable seller, and check the current model, size and price there.';
 
+import { DEFAULT_AMAZON_TAG } from './affiliate_tags.mjs';
 export default function morePages({ amazonSearch, esc, ROOT }) {
   const S = (q) => amazonSearch(q);
   const buy = (href, label) => `<a href="${esc(href)}" target="_blank" rel="sponsored nofollow noopener">${label}</a>`;
@@ -249,7 +250,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
     [11, 'Paqui One Chip Challenge (discontinued)', 'A single chip made with Carolina Reaper (later versions added Scorpion or Naga Viper). Paqui pulled it in September 2023 after the death of a teenager who had eaten it, so there is no buy link. Don&#8217;t try to recreate it.<br><span class="sb-muted"><em>Basis:</em> Carolina Reaper, Guinness-certified average of 1,641,183 SHU (2013) [P]; marketed by Paqui as the world&#8217;s hottest chip [M].</span>', ''],
   ];
   const ladderItems = rungs.map(([n, name, note, h]) => {
-    const btn = !h ? '' : h.startsWith('dp:') ? `<p><a href="https://www.amazon.com/dp/${h.slice(3)}?tag=worldofchips-20" target="_blank" rel="sponsored nofollow noopener" class="buy-btn">Buy on Amazon &#8594;</a></p>` : `<p>${buy(S(h), `Find ${name} on Amazon &#8594;`)}</p>`;
+    const btn = !h ? '' : h.startsWith('dp:') ? `<p><a href="https://www.amazon.com/dp/${h.slice(3)}?tag=${DEFAULT_AMAZON_TAG}" target="_blank" rel="sponsored nofollow noopener" class="buy-btn">Buy on Amazon &#8594;</a></p>` : `<p>${buy(S(h), `Find ${name} on Amazon &#8594;`)}</p>`;
     return `<li data-heat="${n}"><strong>${n}. ${name}</strong><p>${note}</p>${btn}</li>`;
   }).join('\n        ');
   const spice = { slug: 'spiciest-chips', flag: '🌶️', crumb: 'Spice Ladder', ...CK,
@@ -328,6 +329,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
     title: `${plain(f.n)} Chips: Where They Came From & Where to Buy | World of Chips`,
     desc: `${plain(f.lead.replace(/<[^>]+>/g, ''))} Sourced history, the countries that love it, and where to buy ${plain(f.n).toLowerCase()} chips online.`,
     introDark: f.lead, intro: f.lead, sections: [],
+    shopTop: { href: S(f.buy), title: `Shop ${f.n} Chips on Amazon`, text: `Imported bags go in and out of stock, so this opens an Amazon search for ${f.n.toLowerCase()} chips. Check the pack size and seller.`, label: 'Shop on Amazon' },
     body: `
     <section class="cp-section" id="history">
       <h2>Origin &amp; History</h2>

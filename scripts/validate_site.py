@@ -3,8 +3,11 @@
 
 Usage: python3 scripts/validate_site.py
 """
+import re as _re
 import datetime, glob, json, os, re, subprocess, sys, tempfile, xml.etree.ElementTree as ET
 from html.parser import HTMLParser
+# Allowed Amazon tracking IDs: read from scripts/affiliate_tags.mjs (single source of truth).
+AMAZON_TAGS = set(_re.findall(r"'((?:worldofchips|woc-[a-z]+)-20)'", open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'affiliate_tags.mjs')).read()))
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://worldofchips.com"
@@ -87,7 +90,7 @@ def check(path, problems, form_ids=None):
     if "wordofchipspr" in html:
         problems.append(f"{rel}: legacy affiliate tag found; use tag=worldofchips-20")
     for u in re.findall(r"https?://(?:www\.)?amazon\.com[^\s\"'<>]*", html):
-        if "tag=" not in u or "tag=worldofchips-20" not in u:
+        if "tag=" not in u or not any(f"tag={t}" in u for t in AMAZON_TAGS):
             problems.append(f"{rel}: amazon.com URL without affiliate tag: {u}")
     for typ, body in p.scripts:
         if typ == "application/ld+json":
@@ -113,7 +116,7 @@ def check(path, problems, form_ids=None):
         if "amazon." in href:
             if a.get("target") != "_blank" or not {"sponsored", "noopener"} <= rels:
                 problems.append(f"{rel}: affiliate link missing target/rel: {href}")
-            if "amazon.com" in href and ("tag=" not in href or "tag=worldofchips-20" not in href):
+            if "amazon.com" in href and ("tag=" not in href or not any(f"tag={t}" in href for t in AMAZON_TAGS)):
                 problems.append(f"{rel}: amazon link without affiliate tag: {href}")
         if "data-affiliate" in a:
             # Swappable brand links (e.g. /snack-boxes/): known brand, external, never followed.

@@ -18,6 +18,7 @@
 //         node scripts/build_guides.mjs --check   exit 1 if any output is out of date
 // build_country_pages.mjs, build_news.mjs and build_snack_boxes.mjs preserve these sitemap entries.
 
+import { DEFAULT_AMAZON_TAG, guideSection, retag } from './affiliate_tags.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -30,7 +31,7 @@ const SITE = 'https://worldofchips.com';
 const CHECK = process.argv.includes('--check');
 const LAST_CHECKED = '2026-10-22';
 const LAST_CHECKED_LABEL = '22 October 2026';
-const AMAZON_TAG = 'worldofchips-20';
+const AMAZON_TAG = DEFAULT_AMAZON_TAG; // per-section tags: scripts/affiliate_tags.mjs
 
 // ASIN pages opened on LAST_CHECKED and showing the product in stock on amazon.com.
 const VERIFIED_ASINS = {
@@ -55,6 +56,10 @@ const VERIFIED_ASINS = {
   B0BWSKY5FZ: 'ORION Turtle Chip Official Gift Box (Choco, 2 packs)',
   B0H7F3D75L: 'Nongshim Shrimp Crackers Original 14.1 oz, pack of 2',
   B07PZ92784: 'Orion Baked Marine Boy Sharing Box',
+  // Christmas gift guide premium picks: listings confirmed via untagged web search on 2026-11-02. No prices quoted.
+  B0BGMJVGCR: 'Universal Yums International Snack Box, 40 count',
+  B07BXBQ38C: 'Snackology Elite World Snack Sampler Box, 30+ snacks',
+  B0FR5K8J5W: 'Pop Snax International Mystery Snack Box, 21 count',
   // Already live on the site as country-page shop picks (csm in index.html). Amazon served a captcha on
   // 2026-10-26 so these were NOT re-opened that day; guides using them quote no prices or stock claims.
   B0DG6345BV: 'Takis Variety Pack 18 bags (Mexico shop pick)',
@@ -398,9 +403,16 @@ const GUIDES = [
     top: `
     <section class="cp-section" id="jump" style="background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:1.1rem 1.2rem">
       <h2>Jump to a Gift</h2>
-      <div class="cp-explore-grid"><a href="#budget" class="cp-explore-link">💸 Gifts by budget</a><a href="#variety" class="cp-explore-link">🎁 Variety packs</a><a href="#japan" class="cp-explore-link">🇯🇵 Japanese set</a><a href="#korea" class="cp-explore-link">🇰🇷 Korean set</a><a href="#uk" class="cp-explore-link">🇬🇧 British set</a><a href="#mexico" class="cp-explore-link">🇲🇽 Mexican set</a><a href="#boxes" class="cp-explore-link">🍱 Snack subscription boxes</a><a href="/christmas-snack-box-comparison-2026/" class="cp-explore-link">🎄 Christmas snack boxes compared</a><a href="#newsletter" class="cp-explore-link">✉️ Free Chip Report</a></div>
+      <div class="cp-explore-grid"><a href="#premium" class="cp-explore-link">🎄 Top Amazon gift picks</a><a href="#budget" class="cp-explore-link">💸 Gifts by budget</a><a href="#variety" class="cp-explore-link">🎁 Variety packs</a><a href="#japan" class="cp-explore-link">🇯🇵 Japanese set</a><a href="#korea" class="cp-explore-link">🇰🇷 Korean set</a><a href="#uk" class="cp-explore-link">🇬🇧 British set</a><a href="#mexico" class="cp-explore-link">🇲🇽 Mexican set</a><a href="#boxes" class="cp-explore-link">🍱 Snack subscription boxes</a><a href="/christmas-snack-box-comparison-2026/" class="cp-explore-link">🎄 Christmas snack boxes compared</a><a href="#newsletter" class="cp-explore-link">✉️ Free Chip Report</a></div>
     </section>`,
+    picksFirst: 2,
     sections: [
+      { id: 'premium', h2: '🎄 Top Amazon Gift Picks: Big International Snack Boxes', note: '', lead: 'Bigger, ready-to-gift boxes of snacks from around the world, chips included. We checked that each listing exists on Amazon.com on 2 November 2026; we don&#8217;t quote prices, so <strong>check the current price</strong> on the listing.', items: [
+        ['Universal Yums International Snack Box (40 snacks)', 'Twenty full-size foreign snacks plus a bag of 20 candies, with chips from countries such as Poland, Spain, Greece and Thailand, per the listing. <em>Why it&#8217;s a good gift:</em> a one-off world tour with no subscription to cancel.', 'dp:B0BGMJVGCR'],
+        ['Snackology Elite World Snack Sampler Box (30+ snacks)', 'More than 30 chips, crackers, biscuits and candies from Asia, Europe and Central America. <em>Why it&#8217;s a good gift:</em> a big care package for students or far-away family; the listing notes contents vary.', 'dp:B07BXBQ38C'],
+        ['Pop Snax International Mystery Snack Box (21 items)', 'Twenty international snacks plus one drink, from Japan, Asia and beyond, in a printed gift box with an insert card. <em>Why it&#8217;s a good gift:</em> it arrives looking like a present.', 'dp:B0FR5K8J5W'],
+        ['Japanese snack gift boxes', 'Japanese snack and chip assortments are sold by several importers and stock changes often, so this links to an Amazon search. <em>Why it&#8217;s a good gift:</em> pair it with our <a href="/best-japanese-chips/">Japanese chips guide</a>.', amazonSearch('japanese snack box gift')],
+      ] },
       { id: 'variety', h2: '🎁 Variety Packs &amp; Ready-to-Gift Boxes', note: '', items: [
         ['Broadway Basketeers Towering Food Gift Boxes (6 boxes)', 'A ready-to-gift tower of six stacked boxes with about 4 lb of sweet and savoury snacks, including chips, popcorn, cookies and trail mix. <em>Why it&#8217;s a good gift:</em> the listing says it arrives fully assembled with a gift tag, so it can ship straight to the recipient.', 'dp:B00FBGL0CK'],
         ['Ultimate Variety Sampler Care Package (40 count)', 'Forty chips, cookies, bars, popcorn and crackers in one box. <em>Why it&#8217;s a good gift:</em> the listing offers gift wrapping and a message at checkout, which suits students and far-away family.', 'dp:B0GGVB8P7F'],
@@ -778,6 +790,21 @@ const giftNewsletter = () => '\n    ' + newsletterBlock('    ').replace('class="
 const GIFT_BANNER = `
     <p class="cp-section" style="background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:.9rem 1.1rem;font-size:.95rem">🎄 <strong>Buying for someone?</strong> See our <a href="/christmas-chip-gifts-2026/">Christmas 2026 chip gift guide</a>: country chip sets, snack boxes and gifts by budget.</p>
 `;
+const SHOP_TOP_CSS = `.shop-top{background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:1.3rem 1.4rem;margin:1.2rem 0 1.6rem;text-align:center;box-shadow:0 6px 18px rgba(232,168,56,.18)}
+.shop-top h2{margin-bottom:.4rem}
+.shop-top p{margin:.3rem 0}
+.buy-btn.buy-btn-lg{justify-content:center;min-height:58px;font-size:1.15rem;padding:1rem 2.4rem;margin:.7rem 0 .4rem;box-shadow:0 4px 12px rgba(196,138,32,.35)}
+@media(max-width:600px){.buy-btn.buy-btn-lg{display:flex;width:100%}}
+`;
+// Large above-the-fold Amazon button box (flavour pages): { href, title, text, label }.
+const shopTop = (t) => `
+    <aside class="cp-section shop-top" id="shop-top" aria-labelledby="shop-top-title">
+      <h2 id="shop-top-title">${t.title}</h2>
+      <p>${t.text}</p>
+      <a href="${esc(t.href)}" target="_blank" rel="sponsored nofollow noopener" class="buy-btn buy-btn-lg">🛒 ${t.label || 'Shop on Amazon'} &#8594;</a>
+      <p class="aff-disc">As an Amazon Associate, World of Chips earns from qualifying purchases.</p>
+    </aside>
+`;
 function render(g) {
   const CK = g.checked || LAST_CHECKED, CKL = g.checkedLabel || LAST_CHECKED_LABEL;
   const fill = (t) => t.replace(/\$\{LAST_CHECKED_LABEL\}/g, CKL);
@@ -800,7 +827,7 @@ function render(g) {
     ...(g.ldExtra || []),
     { '@type': 'FAQPage', '@id': `${url}#faq`, mainEntity: g.faqs.map(([q, a]) => ({ '@type': 'Question', name: stripTags(q), acceptedAnswer: { '@type': 'Answer', text: stripTags(a) } })) },
   ] };
-  const sections = g.sections.map((s) => `
+  const secHtml = g.sections.map((s) => `
     <section class="cp-section" id="${s.id}">
       <h2>${s.h2}</h2>${s.lead ? `
       <p>${s.lead}</p>` : ''}
@@ -808,7 +835,8 @@ function render(g) {
         ${s.items.map(([n, d, h]) => `<li><strong>${n}</strong><p>${fill(d)}</p><p>${h.startsWith('dp:') ? `<a href="${esc(href(h))}" target="_blank" rel="sponsored nofollow noopener" class="buy-btn">Buy on Amazon &#8594;</a>` : amz(h, `Find ${n} on Amazon &#8594;`)}</p></li>`).join('\n        ')}
       </ol>
       ${s.note === '' ? '' : '<p class="sb-muted">We link to Amazon searches where single import listings go in and out of stock often; pick a listing that shows as in stock and check the pack size.</p>'}
-    </section>`).join('');
+    </section>`);
+  const early = secHtml.slice(0, g.picksFirst || 0).join(''), sections = secHtml.slice(g.picksFirst || 0).join('');
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -845,7 +873,7 @@ ${fontsLink}
 .cp-intro-dark{color:var(--muted);max-width:640px;margin:1rem auto 0;font-size:.95rem}
 .cp-cta h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--brown);margin-bottom:.6rem}
 .sb-top-disc{margin:0 auto 2rem;padding-top:0;border-top:none}
-.gd-picks{margin:1rem 0 0 1.3rem}
+${g.shopTop || g.picksFirst ? SHOP_TOP_CSS : ''}.gd-picks{margin:1rem 0 0 1.3rem}
 .gd-picks li{background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.9rem 1rem;margin-bottom:.8rem;font-size:.92rem;line-height:1.6}
 .gd-picks strong{color:var(--brown);font-family:'Playfair Display',serif;font-size:1.05rem}
 .gd-picks a,.cp-section a{color:#1A4570}
@@ -884,7 +912,7 @@ ${siteNav}
 ${g.disc === false ? '' : `    <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>`}
 
     <p class="cp-intro">${intro}</p>
-${g.nlTop ? giftNewsletter() : ''}${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
+${g.shopTop ? shopTop(g.shopTop) : ''}${early}${g.nlTop ? giftNewsletter() : ''}${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
 
 ${hasAuthor(g) ? authorBox : ''}    <section class="cp-section sb-faq" id="faq">
       <h2>FAQs</h2>
@@ -971,7 +999,7 @@ const quizPage = (k, [flag, name, blurb]) => {
 `;
 };
 const quizOutputs = quizG ? Object.entries(quizG.quizResults).map(([k, r]) => [path.join(ROOT, 'which-chip-are-you', 'r', k, 'index.html'), quizPage(k, r)]) : [];
-const outputs = [...GUIDES.map((g) => [path.join(ROOT, g.slug, 'index.html'), render(g)]), ...quizOutputs, [sitemapPath, newSitemap]];
+const outputs = [...GUIDES.map((g) => [path.join(ROOT, g.slug, 'index.html'), retag(render(g), guideSection(g.slug))]), ...quizOutputs, [sitemapPath, newSitemap]];
 if (CHECK) {
   const stale = outputs.filter(([p, body]) => !fs.existsSync(p) || fs.readFileSync(p, 'utf8') !== body).map(([p]) => path.relative(ROOT, p));
   if (stale.length) { console.error(`Guide output out of date: ${stale.join(', ')}. Run: node scripts/build_guides.mjs`); process.exit(1); }

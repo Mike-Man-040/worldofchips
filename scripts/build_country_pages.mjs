@@ -17,6 +17,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
+import { retag } from './affiliate_tags.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://worldofchips.com';
@@ -108,14 +109,14 @@ const inName = (n) => (THE.has(n) ? `the ${n}` : n);
 
 function brandTag(b) {
   const url = brandUrls[b];
-  if (url) return `<a href="${esc(url)}" target="_blank" rel="sponsored noopener" style="text-decoration:none">${esc(b)} ↗</a>`;
+  if (url) return `<a href="${esc(retag(url, 'country'))}" target="_blank" rel="sponsored noopener" style="text-decoration:none">${esc(b)} ↗</a>`;
   return esc(b);
 }
 
 function shopLinks(name) {
   const lnks = csm[name] || defaultShop;
   return lnks.map((l) =>
-    `<a href="${esc(l.u)}" target="_blank" rel="sponsored nofollow noopener" style="display:flex;align-items:center;gap:.8rem;padding:.7rem 1rem;background:var(--paper);border:1px solid var(--light-border);border-radius:10px;text-decoration:none;color:var(--ink);transition:all .3s"><div style="flex:1"><div style="font-weight:700;font-size:.88rem">${esc(l.n)}</div><div style="font-size:.72rem;color:var(--muted)">${esc(l.d)}</div></div><span style="color:var(--gold);font-weight:700">Shop &#8594;</span></a>`,
+    `<a href="${esc(retag(l.u, 'country'))}" target="_blank" rel="sponsored nofollow noopener" style="display:flex;align-items:center;gap:.8rem;padding:.7rem 1rem;background:var(--paper);border:1px solid var(--light-border);border-radius:10px;text-decoration:none;color:var(--ink);transition:all .3s"><div style="flex:1"><div style="font-weight:700;font-size:.88rem">${esc(l.n)}</div><div style="font-size:.72rem;color:var(--muted)">${esc(l.d)}</div></div><span style="color:var(--gold);font-weight:700">Shop &#8594;</span></a>`,
   ).join('\n            ');
 }
 
@@ -251,14 +252,16 @@ function buildFaq(x) {
   return qa;
 }
 function buyBox(x) {
-  const picks = (csm[x.name] || defaultShop).slice(0, 3);
-  return `    <aside class="cp-section buy-box" id="buy" aria-labelledby="buy-title">
+  const all = (csm[x.name] || defaultShop).slice(0, 3).map((l) => ({ ...l, u: retag(l.u, 'country') }));
+  const [first, ...rest] = all;
+  return `    <aside class="cp-section buy-box shop-top" id="buy" aria-labelledby="buy-title">
       <h2 id="buy-title">Buy ${esc(inName(x.name))} Chips on Amazon</h2>
-      <p>Our picks to taste ${esc(x.name)}&#8217;s chips at home:</p>
-      <div class="buy-grid">
-        ${picks.map((l) => `<a href="${esc(l.u)}" target="_blank" rel="sponsored nofollow noopener" class="buy-btn">${esc(l.n)} &#8594;</a>`).join('\n        ')}
+      <p>Our top pick to taste ${esc(x.name)}&#8217;s chips at home: <strong>${esc(first.n)}</strong></p>
+      <a href="${esc(first.u)}" target="_blank" rel="sponsored nofollow noopener" class="buy-btn buy-btn-lg">🛒 Shop on Amazon &#8594;</a>
+${rest.length ? `      <div class="buy-grid" style="justify-content:center">
+        ${rest.map((l) => `<a href="${esc(l.u)}" target="_blank" rel="sponsored nofollow noopener" class="buy-btn">${esc(l.n)} &#8594;</a>`).join('\n        ')}
       </div>
-      <p class="aff-disc">As an Amazon Associate, World of Chips earns from qualifying purchases. <a href="#shop">More picks below</a>.</p>
+` : ''}      <p class="aff-disc">As an Amazon Associate, World of Chips earns from qualifying purchases. <a href="#shop">More picks below</a>.</p>
     </aside>
 
 `;
@@ -406,6 +409,11 @@ ${fontsLink}
 .buy-grid{display:flex;flex-wrap:wrap;gap:.6rem;margin:.8rem 0}
 .buy-btn{display:inline-flex;align-items:center;min-height:48px;background:var(--gold);color:#fff;font-weight:700;padding:.8rem 1.5rem;border-radius:999px;text-decoration:none;font-size:.98rem}
 .buy-btn:hover{filter:brightness(1.08)}
+.shop-top{background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:1.3rem 1.4rem;margin:1.2rem 0 1.6rem;text-align:center;box-shadow:0 6px 18px rgba(232,168,56,.18)}
+.shop-top h2{margin-bottom:.4rem}
+.shop-top p{margin:.3rem 0}
+.buy-btn.buy-btn-lg{justify-content:center;min-height:58px;font-size:1.15rem;padding:1rem 2.4rem;margin:.7rem 0 .4rem;box-shadow:0 4px 12px rgba(196,138,32,.35)}
+@media(max-width:600px){.buy-btn.buy-btn-lg{display:flex;width:100%}}
 .cp-faq h3{font-size:1rem;color:var(--brown);margin-top:1.2rem}
 .cp-faq p{margin-top:.3rem}
 .cp-cta h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--brown);margin-bottom:.6rem}
@@ -428,7 +436,7 @@ ${siteNav}
   <div class="cp-body">
     <p class="cp-intro">${esc(c.intro)}</p>
 
-${quickFacts(x)}${buyBox(x)}
+${buyBox(x)}${quickFacts(x)}
     <div class="cp-stats">
 ${d.marketSize ? `      <div class="cp-stat"><div class="val">${esc(d.marketSize)}</div><div class="lbl">Market Size</div></div>\n` : ''}${d.perCapita ? `      <div class="cp-stat"><div class="val">${esc(d.perCapita)}</div><div class="lbl">Per Capita / Year</div></div>\n` : ''}      <div class="cp-stat"><div class="val">${esc(d.avgCost)}</div><div class="lbl">Avg. Bag Price</div></div>
       <div class="cp-stat"><div class="val">${esc(d.growth)}</div><div class="lbl">Annual Growth</div></div>
