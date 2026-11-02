@@ -17,6 +17,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { UNIVERSAL_YUMS_AWIN, AWIN_REL, YUMS_BOX_CSS, yumsBox } from './affiliate_tags.mjs';
 
 process.on('uncaughtException', (e) => { console.error(`build_snack_boxes: ${e.message}`); process.exit(1); });
 
@@ -44,7 +45,7 @@ function between(src, start, end) {
 // Official brand link: plain homepage for now; swap href for the affiliate URL later
 // (and add "sponsored" to rel) by searching for data-affiliate="<brand>".
 const brandLink = (b, label, href) =>
-  `<a href="${esc(href || b.url)}" target="_blank" rel="nofollow noopener" data-affiliate="${b.affiliate}">${label}</a>`;
+  `<a href="${esc(href || b.url)}" target="_blank" rel="${b.rel || 'nofollow noopener'}" data-affiliate="${b.affiliate}">${label}</a>`;
 const srcLink = (u) => `<a href="${esc(u)}" target="_blank" rel="nofollow noopener">${esc(u.replace(/^https?:\/\//, ''))}</a>`;
 const amazon = (q) => `https://www.amazon.com/s?k=${q.trim().split(/\s+/).map(encodeURIComponent).join('+')}&tag=${AMAZON_TAG}`;
 
@@ -117,7 +118,7 @@ const BOXES = [
     sources: ['https://www.japancandystore.com/', 'https://www.japancandybox.com/products/subscribe', 'https://www.japancandybox.com/policies/shipping-policy', 'https://www.japancandystore.com/policies/shipping-policy'],
   },
   {
-    id: 'universalyums', name: 'Universal Yums', affiliate: 'universalyums', url: 'https://www.universalyums.com/', flag: '🌍',
+    id: 'universalyums', name: 'Universal Yums', affiliate: 'universalyums', url: UNIVERSAL_YUMS_AWIN, rel: AWIN_REL, flag: '🌍',
     tagline: 'A different country every month (Japan and South Korea included)',
     focus: 'Rotating countries, sweet + savory', chips: 'Usually (always a sweet &amp; savory mix)', chipScore: 2,
     items: '5&#8211;7, 10&#8211;12 or 15&#8211;18 snacks',
@@ -280,7 +281,7 @@ ${fontsLink}
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
-.nav-logo a{color:inherit;text-decoration:none;display:flex;align-items:center;gap:.5rem}
+${YUMS_BOX_CSS}.nav-logo a{color:inherit;text-decoration:none;display:flex;align-items:center;gap:.5rem}
 .cp-crumbs{font-size:.75rem;color:var(--muted);margin-bottom:1rem}
 .cp-crumbs a{color:var(--gold);text-decoration:none}
 .cp-intro-dark{color:var(--muted);max-width:640px;margin:1rem auto 0;font-size:.95rem}
@@ -330,7 +331,7 @@ ${siteNav}
   </div>
   <div class="cp-body">
     <p class="aff-disc sb-top-disc">As an Amazon Associate, World of Chips earns from qualifying purchases. This doesn&#8217;t affect our editorial content &#8212; we only feature products we genuinely think chip lovers will enjoy.</p>
-
+${yumsBox()}
     <p class="cp-intro">Snack boxes are the easiest way to taste chips, candy and regional treats you won&#8217;t find at home, but they vary a lot. Some send traditional sweets from family makers, some send full-size convenience-store favourites, and one well-known box no longer exists. Below you&#8217;ll find quick picks, a side-by-side table, a section for chip lovers, a full write-up of each box, and FAQs. All prices are in US dollars, per box, before shipping, and were checked in ${LAST_CHECKED_LABEL}. Where a company doesn&#8217;t publish a figure, we say &#8220;see site&#8221; rather than guess.</p>
 
     <section class="cp-section" id="quick-picks">
