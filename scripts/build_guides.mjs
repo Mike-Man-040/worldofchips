@@ -407,7 +407,7 @@ const GUIDES = [
     </section>`,
     picksFirst: 2,
     sections: [
-      { id: 'premium', h2: '🎄 Top Amazon Gift Picks: Big International Snack Boxes', note: '', lead: 'Bigger, ready-to-gift boxes of snacks from around the world, chips included. We checked that each listing exists on Amazon.com on 2 November 2026; we don&#8217;t quote prices, so <strong>check the current price</strong> on the listing.', items: [
+      { id: 'premium', h2: '🎄 Top Amazon Gift Picks: Big International Snack Boxes', note: '', lead: 'Bigger, ready-to-gift boxes of snacks from around the world, chips included. Listings were found on Amazon.com on 2 November 2026; check price and availability on Amazon; we don&#8217;t quote prices, so <strong>check the current price</strong> on the listing.', items: [
         ['Universal Yums International Snack Box (40 snacks)', 'Twenty full-size foreign snacks plus a bag of 20 candies, with chips from countries such as Poland, Spain, Greece and Thailand, per the listing. <em>Why it&#8217;s a good gift:</em> a one-off world tour with no subscription to cancel.', 'dp:B0BGMJVGCR'],
         ['Snackology Elite World Snack Sampler Box (30+ snacks)', 'More than 30 chips, crackers, biscuits and candies from Asia, Europe and Central America. <em>Why it&#8217;s a good gift:</em> a big care package for students or far-away family; the listing notes contents vary.', 'dp:B07BXBQ38C'],
         ['Pop Snax International Mystery Snack Box (21 items)', 'Twenty international snacks plus one drink, from Japan, Asia and beyond, in a printed gift box with an insert card. <em>Why it&#8217;s a good gift:</em> it arrives looking like a present.', 'dp:B0FR5K8J5W'],
