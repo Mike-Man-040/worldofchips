@@ -18,7 +18,7 @@
 //         node scripts/build_guides.mjs --check   exit 1 if any output is out of date
 // build_country_pages.mjs, build_news.mjs and build_snack_boxes.mjs preserve these sitemap entries.
 
-import { DEFAULT_AMAZON_TAG, guideSection, retag } from './affiliate_tags.mjs';
+import { DEFAULT_AMAZON_TAG, guideSection, retag, UNIVERSAL_YUMS_AWIN, AWIN_REL, yumsBox } from './affiliate_tags.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -334,6 +334,7 @@ const GUIDES = [
   },
   {
     slug: 'best-chip-gift-boxes',
+    yumsTop: true,
     checked: '2026-10-27', checkedLabel: '27 October 2026',
     flag: '🎁',
     crumb: 'Chip Gift Boxes',
@@ -391,6 +392,7 @@ const GUIDES = [
   },
   {
     slug: 'christmas-chip-gifts-2026',
+    yumsTop: true,
     checked: '2026-10-27', checkedLabel: '27 October 2026',
     flag: '🎄',
     crumb: 'Christmas Chip Gifts 2026',
@@ -451,7 +453,7 @@ const GUIDES = [
         <tr><th scope="row">🇯🇵 TokyoTreat</th><td>Modern Japanese snacks</td><td>$32.50&#8211;$37.50 monthly</td><td>Convenience-store favourites and limited flavours</td><td><a href="https://tokyotreat.com/" target="_blank" rel="nofollow noopener" data-affiliate="tokyotreat">Visit TokyoTreat</a></td></tr>
         <tr><th scope="row">🇯🇵 Japan Candy Box</th><td>Japanese candy &amp; snacks</td><td>$25&#8211;$31 monthly</td><td>Lower-priced Japan box</td><td><a href="https://www.japancandystore.com/" target="_blank" rel="nofollow noopener" data-affiliate="japancandystore">Visit Japan Candy Store</a></td></tr>
         <tr><th scope="row">🇰🇷 Daebak SnackFever</th><td>Korean snacks</td><td>$40&#8211;$55 per seasonal box</td><td>The Korea pick; four boxes a year</td><td><a href="https://daebak.co/" target="_blank" rel="nofollow noopener" data-affiliate="daebak">Visit Daebak</a></td></tr>
-        <tr><th scope="row">🌍 Universal Yums</th><td>A different country each month</td><td>$18&#8211;$47 monthly</td><td>Variety beyond Asia; US &amp; Canada only</td><td><a href="https://www.universalyums.com/" target="_blank" rel="nofollow noopener" data-affiliate="universalyums">Visit Universal Yums</a></td></tr>
+        <tr><th scope="row">🌍 Universal Yums</th><td>A different country each month</td><td>$18&#8211;$47 monthly</td><td>Variety beyond Asia; US &amp; Canada only</td><td><a href="${UNIVERSAL_YUMS_AWIN.replace(/&/g, '&amp;')}" target="_blank" rel="${AWIN_REL}" data-affiliate="universalyums">Visit Universal Yums</a></td></tr>
         </tbody>
       </table>
       </div>
@@ -873,7 +875,7 @@ ${fontsLink}
 .cp-intro-dark{color:var(--muted);max-width:640px;margin:1rem auto 0;font-size:.95rem}
 .cp-cta h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--brown);margin-bottom:.6rem}
 .sb-top-disc{margin:0 auto 2rem;padding-top:0;border-top:none}
-${g.shopTop || g.picksFirst ? SHOP_TOP_CSS : ''}.gd-picks{margin:1rem 0 0 1.3rem}
+${g.shopTop || g.picksFirst || g.yumsTop ? SHOP_TOP_CSS : ''}.gd-picks{margin:1rem 0 0 1.3rem}
 .gd-picks li{background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.9rem 1rem;margin-bottom:.8rem;font-size:.92rem;line-height:1.6}
 .gd-picks strong{color:var(--brown);font-family:'Playfair Display',serif;font-size:1.05rem}
 .gd-picks a,.cp-section a{color:#1A4570}
@@ -912,7 +914,7 @@ ${siteNav}
 ${g.disc === false ? '' : `    <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>`}
 
     <p class="cp-intro">${intro}</p>
-${g.shopTop ? shopTop(g.shopTop) : ''}${early}${g.nlTop ? giftNewsletter() : ''}${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
+${g.shopTop ? shopTop(g.shopTop) : ''}${g.yumsTop ? yumsBox() : ''}${early}${g.nlTop ? giftNewsletter() : ''}${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
 
 ${hasAuthor(g) ? authorBox : ''}    <section class="cp-section sb-faq" id="faq">
       <h2>FAQs</h2>

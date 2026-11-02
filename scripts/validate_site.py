@@ -118,6 +118,12 @@ def check(path, problems, form_ids=None):
                 problems.append(f"{rel}: affiliate link missing target/rel: {href}")
             if "amazon.com" in href and ("tag=" not in href or not any(f"tag={t}" in href for t in AMAZON_TAGS)):
                 problems.append(f"{rel}: amazon link without affiliate tag: {href}")
+        if "awin1.com" in href:
+            # Awin affiliate links (Universal Yums): must be sponsored, nofollow, noopener, new tab.
+            if a.get("target") != "_blank" or not {"sponsored", "nofollow", "noopener"} <= rels:
+                problems.append(f"{rel}: awin affiliate link missing target/rel sponsored nofollow noopener: {href}")
+            if "awinaffid=3136222" not in href:
+                problems.append(f"{rel}: awin link with unexpected publisher id: {href}")
         if "data-affiliate" in a:
             # Swappable brand links (e.g. /snack-boxes/): known brand, external, never followed.
             if a.get("data-affiliate") not in AFFILIATE_BRANDS:
