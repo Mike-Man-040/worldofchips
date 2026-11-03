@@ -23,6 +23,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import morePages from './guides_more.mjs';
+import { photoFor, photoFigure, ogPhoto, shareRow, PHOTO_CSS_LINK } from './photos.mjs';
 
 process.on('uncaughtException', (e) => { console.error(`build_guides: ${e.message}`); process.exit(1); });
 
@@ -56,7 +57,15 @@ const VERIFIED_ASINS = {
   B0BWSKY5FZ: 'ORION Turtle Chip Official Gift Box (Choco, 2 packs)',
   B0H7F3D75L: 'Nongshim Shrimp Crackers Original 14.1 oz, pack of 2',
   B07PZ92784: 'Orion Baked Marine Boy Sharing Box',
-  // Christmas gift guide premium picks: listings confirmed via untagged web search on 2026-11-02. No prices quoted.
+  // Product pages confirmed via untagged web search on 2026-11-03: the amazon.com listing title matched the
+  // product named on our page. Amazon pages were not fetched by script. No prices quoted for these.
+  B0033VAJMW: 'Calbee Potato Chips Seaweed & Salt (Norishio), 60 g (2026-11-03)',
+  B00BBVWEI8: 'Calbee Potato Chips Consomme Punch, 60 g (2026-11-03)',
+  B00HMX1EZI: 'Koikeya Karamucho Potato Chips Hot Chili, pack of 12 (2026-11-03)',
+  B08186549Q: 'Orion Poca Chip Original, 60 g, pack of 5 (2026-11-03)',
+  B00T6Q3KEM: 'Walkers Cheese & Onion Crisps Multipack 6 x 25 g (2026-11-03)',
+  B09H4HWWHV: 'Glico Pocky 5-flavour variety pack, 10 boxes (2026-11-03)',
+  // Christmas gift guide premium picks: listings confirmed via untagged web search on 2026-11-02 and again on 2026-11-03. No prices quoted.
   B0BGMJVGCR: 'Universal Yums International Snack Box, 40 count',
   B07BXBQ38C: 'Snackology Elite World Snack Sampler Box, 30+ snacks',
   B0FR5K8J5W: 'Pop Snax International Mystery Snack Box, 21 count',
@@ -101,16 +110,16 @@ const GUIDES = [
     flag: '🇯🇵',
     crumb: 'Best Japanese Chips',
     h1: 'The Best Japanese Chips to Buy Online (2026 Guide)',
-    title: 'Best Japanese Chips to Buy Online in 2026: Calbee, Koikeya & More | World of Chips',
+    title: 'Best Japanese Chips to Buy Online (2026) | World of Chips',
     desc: 'The Japanese potato chips worth ordering online: Calbee Usushio, Norishio and Consomm\u00e9 Punch, Koikeya Karamucho and more, with launch dates, what each tastes like and where to buy.',
     introDark: 'The classic bags Japan has been crunching since the 1960s and 70s, which ones to try first, and how to get them delivered without overpaying.',
     intro: 'Japanese chips are thin, light and built around savoury seasonings &#8212; seaweed, consomm&#233;, chilli with an umami backbone &#8212; rather than the vinegar-and-cheese profiles of Europe and the US. Two companies dominate the shelf: <strong>Calbee</strong>, which launched its first potato chip in 1975, and <strong>Koikeya</strong>, which launched its seaweed-salt Norishio chip back in 1962. Below are the bags we think are worth importing, why, and how to buy them sensibly from outside Japan.',
     sections: [
       { id: 'picks', h2: 'Our Picks', items: [
         ['Calbee Potato Chips Usushio (Lightly Salted)', 'Calbee&#8217;s very first potato chip, launched in 1975. Lightly salted and very thin &#8212; the baseline every other Japanese flavour is measured against.', amazonSearch('calbee usushio potato chips')],
-        ['Calbee Potato Chips Norishio (Seaweed Salt)', 'Released in 1976 as the first &#8220;different flavour&#8221; in Calbee&#8217;s potato chip line. Aonori seaweed and salt: the most distinctly Japanese of the classics.', amazonSearch('calbee norishio potato chips')],
-        ['Calbee Consomm&#233; Punch', 'Launched in 1978; &#8220;punch&#8221; was 70s slang for energy. Sold as plain &#8220;Consomm&#233;&#8221; from 1980 to 1992 before the original name returned. A meaty, onion-and-broth flavour with no real Western equivalent.', amazonSearch('calbee consomme punch potato chips')],
-        ['Koikeya Karamucho Hot Chili', 'Koikeya&#8217;s hot-chilli chip, made since 1984. The heat comes layered on a meat-and-vegetable savoury base, so it is spicy but not one-note. Also sold as thin potato sticks.', amazonSearch('koikeya karamucho hot chili potato chips')],
+        ['Calbee Potato Chips Norishio (Seaweed Salt)', 'Released in 1976 as the first &#8220;different flavour&#8221; in Calbee&#8217;s potato chip line. Aonori seaweed and salt: the most distinctly Japanese of the classics.', 'dp:B0033VAJMW'],
+        ['Calbee Consomm&#233; Punch', 'Launched in 1978; &#8220;punch&#8221; was 70s slang for energy. Sold as plain &#8220;Consomm&#233;&#8221; from 1980 to 1992 before the original name returned. A meaty, onion-and-broth flavour with no real Western equivalent.', 'dp:B00BBVWEI8'],
+        ['Koikeya Karamucho Hot Chili', 'Koikeya&#8217;s hot-chilli chip, made since 1984. The heat comes layered on a meat-and-vegetable savoury base, so it is spicy but not one-note. Also sold as thin potato sticks.', 'dp:B00HMX1EZI'],
         ['Koikeya Pride Potato Kami-Norishio', 'Koikeya&#8217;s premium line. Kami-Norishio uses three kinds of seaweed plus chilli pepper and sesame oil &#8212; a richer take on the classic norishio.', amazonSearch('koikeya pride potato')],
         ['Calbee Potato Chips Louisiana', 'Calbee&#8217;s 1983 thick, crinkle-cut chip, made for people who wanted a harder chip for dipping. Harder to find abroad than the thin classics.', amazonSearch('calbee louisiana potato chips')],
       ] },
@@ -146,7 +155,7 @@ const GUIDES = [
     flag: '🇪🇺',
     crumb: 'Where to Buy in Europe',
     h1: 'Where to Buy Takis, Honey Butter Chip and Other Imported Chips in Europe',
-    title: 'Where to Buy Takis & Honey Butter Chip in Europe (2026) | World of Chips',
+    title: 'Buy Takis & Honey Butter Chip in Europe | World of Chips',
     desc: 'Which UK supermarkets stock Takis, which EU online shops sell Haitai Honey Butter Chip and at what price, and how to get Japanese and Korean chips delivered in Europe. Checked October 2026.',
     introDark: 'Real stockists and real prices, checked on the shops&#8217; own pages, for the viral chips Europeans keep asking about.',
     intro: 'Social media made Takis and Korea&#8217;s Honey Butter Chip famous far beyond their home markets, but finding them in a European shop is still hit-and-miss. This guide lists where they are actually sold, what they cost when we checked on ${LAST_CHECKED_LABEL}, and what to know about ordering from abroad. Prices change often, so treat them as a guide and confirm at checkout.',
@@ -204,14 +213,141 @@ const GUIDES = [
       ['Do I pay customs on snacks ordered from the US or Asia?', 'Possibly. The EU dropped its duty exemption for parcels under &#8364;150 on 1 July 2026, so duty and VAT may be due on delivery. Ordering from a shop that ships from within the EU avoids this.'],
     ],
     sources: [],
-    related: [['south-korea', '🇰🇷 South Korea chip guide'], ['mexico', '🇲🇽 Mexico'], ['united-kingdom', '🇬🇧 United Kingdom'], ['best-international-chip-variety-packs', '🌍 International variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'], ['snack-boxes', '🍱 Snack boxes compared']],
+    related: [['where-to-buy-takis-europe', '🌶️ Takis in Sweden, NL & Germany'], ['where-to-buy-honey-butter-chip-europe', '🍯 Honey Butter Chip in Sweden, NL & Germany'], ['south-korea', '🇰🇷 South Korea chip guide'], ['mexico', '🇲🇽 Mexico'], ['united-kingdom', '🇬🇧 United Kingdom'], ['best-international-chip-variety-packs', '🌍 International variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'], ['snack-boxes', '🍱 Snack boxes compared']],
+  },
+  {
+    slug: 'where-to-buy-takis-europe',
+    checked: '2026-11-03', checkedLabel: '3 November 2026',
+    bol: [{ n: 'Takis', q: 'takis' }, { n: 'Takis Fuego', q: 'takis fuego' }, { n: 'Takis Blue Heat', q: 'takis blue heat' }],
+    flag: '🌶️',
+    crumb: 'Where to Buy Takis',
+    h1: 'Where to Buy Takis in Sweden, the Netherlands and Germany',
+    title: 'Where to Buy Takis in Sweden, NL & Germany | World of Chips',
+    desc: 'Shops that stock Takis in Sweden, the Netherlands and Germany: Albert Heijn, Jumbo and PLUS, REWE and EDEKA, and Swedish online candy shops, with prices checked November 2026.',
+    introDark: 'Real stockists, checked on the shops&#8217; own pages and price trackers, for the rolled tortilla chips everyone keeps asking about.',
+    intro: 'Takis, the rolled tortilla chips made by Grupo Bimbo&#8217;s Barcel, are now a regular supermarket item in the Netherlands and Germany, while in Sweden you mostly buy them from online candy and snack shops. Below are the shops we found listing Takis when we checked on ${LAST_CHECKED_LABEL}, with the prices they showed. Stock and prices change, so confirm in the shop. For the UK, see our <a href="/where-to-buy-asian-chips-europe/">Europe buying guide</a>.',
+    sections: [],
+    extra: `
+    <section class="cp-section" id="netherlands">
+      <h2>🇳🇱 Takis in the Netherlands</h2>
+      <p>The big Dutch supermarkets sell Takis in 100 g bags. The Albert Heijn product page names the supplier as Barcel Espa&#241;a and says the bags are made in Spain or the UK.</p>
+      <div class="sb-table-wrap">
+      <table class="sb-table">
+        <thead><tr><th scope="col">Shop</th><th scope="col">Type</th><th scope="col">Flavours listed</th><th scope="col">Price (100 g)</th></tr></thead>
+        <tbody>
+        <tr><th scope="row">${ext('https://www.ah.nl/producten/merk/takis', 'Albert Heijn')}</th><td>Supermarket</td><td>Fuego</td><td>&#8364;2.99</td></tr>
+        <tr><th scope="row">${ext('https://www.jumbo.com/producten/takis/', 'Jumbo')}</th><td>Supermarket</td><td>Fuego, Blue Heat, Intense Nacho, Volcano</td><td>&#8364;2.99</td></tr>
+        <tr><th scope="row">PLUS</th><td>Supermarket</td><td>Fuego</td><td>&#8364;2.99 (per ingredientenlijst.nl)</td></tr>
+        <tr><th scope="row">${ext('https://www.spar.nl/takis-fuego-9232777/', 'SPAR')}</th><td>Supermarket</td><td>Fuego</td><td>&#8364;3.49</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>Shopping online in the Netherlands or Belgium? The bol.com box above opens a bol.com search for Takis, so check the seller, pack size and price there.</p>
+      <p class="sb-sources">Sources: ${['https://www.ah.nl/producten/product/wi579880/takis-fuego', 'https://www.jumbo.com/producten/takis/', 'https://ingredientenlijst.nl/en/product/579880', 'https://www.spar.nl/takis-fuego-9232777/'].map(srcLink).join(', ')}</p>
+    </section>
+
+    <section class="cp-section" id="germany">
+      <h2>🇩🇪 Takis in Germany</h2>
+      <p>In Germany Takis Fuego is sold as &#8220;Takis Fuego Extreme 100g&#8221;. REWE lists it in its online shop, and shoppers on the price tracker Supermarktcheck have reported it at REWE, EDEKA and Globus for &#8364;2.99. The deal tracker Aktionspreis.de gives &#8364;2.99 as the recommended retail price, with promotions as low as &#8364;1.99 in recent months.</p>
+      <ul class="sb-list">
+        <li><strong>${ext('https://www.rewe.de/shop/p/takis-fuego-extreme-100g/9019559', 'REWE')}</strong>: Takis Fuego Extreme 100 g, in the online shop and in stores.</li>
+        <li><strong>EDEKA</strong> and <strong>Globus</strong>: reported at &#8364;2.99 by Supermarktcheck users; range varies by store.</li>
+      </ul>
+      <p class="sb-sources">Sources: ${['https://www.rewe.de/shop/p/takis-fuego-extreme-100g/9019559', 'https://www.supermarktcheck.de/product/455196-takis-fuego-extreme-100g', 'https://www.aktionspreis.de/sorte/takis-fuego-100g-angebote'].map(srcLink).join(', ')}</p>
+    </section>
+
+    <section class="cp-section" id="sweden">
+      <h2>🇸🇪 Takis in Sweden</h2>
+      <p>We did not find Takis in the online range of the Swedish grocery chain Hemk&#246;p when we checked, so in Sweden the reliable route is online candy and snack shops. These listed Takis on ${LAST_CHECKED_LABEL}:</p>
+      <div class="sb-table-wrap">
+      <table class="sb-table">
+        <thead><tr><th scope="col">Shop</th><th scope="col">Type</th><th scope="col">Listed</th><th scope="col">Price</th></tr></thead>
+        <tbody>
+        <tr><th scope="row">${ext('https://www.cooperscandy.com/takis-fuego-100g-2', 'Coopers Candy')}</th><td>Online candy shop</td><td>Takis Fuego 100 g, shown in stock</td><td>34.93 kr</td></tr>
+        <tr><th scope="row">${ext('https://godisjatten.se/product/takis-fuego/', 'Godisj&#228;tten')}</th><td>Candy shop, also online</td><td>Takis Fuego</td><td>39 kr</td></tr>
+        <tr><th scope="row">${ext('https://www.delitea.se/takis', 'Delitea')}</th><td>Online food shop</td><td>Fuego 100 g, Blue Heat 130 g, Dragon Sweet Chili 100 g</td><td>39&#8211;46 kr</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>The price comparison site Prisjakt also lists Takis Fuego 100 g from 39 kr.</p>
+      <p class="sb-sources">Sources: ${['https://www.cooperscandy.com/takis-fuego-100g-2', 'https://godisjatten.se/product/takis-fuego/', 'https://www.delitea.se/takis', 'https://www.prisjakt.nu/produkt.php?p=13053750'].map(srcLink).join(', ')}</p>
+    </section>
+
+    <section class="cp-section" id="amazon">
+      <h2>Takis on Amazon</h2>
+      <p>Amazon.com (the US store) has bigger packs and flavours that are hard to find in Europe, such as the ${amz(amazonDp('B0FBXZDS3Q'), '18-bag Takis variety pack')} and ${amz(amazonDp('B09FYHFZGS'), 'Takis Fuego potato chip crisps')}. Check at checkout whether the item ships to your country and what import fees apply; since 1 July 2026 EU parcels from outside the EU may be charged customs duty.</p>
+    </section>`,
+    faqs: [
+      ['Can you buy Takis in the Netherlands?', 'Yes. Albert Heijn, Jumbo and PLUS listed Takis Fuego 100 g at &#8364;2.99 when we checked on 3 November 2026, and Jumbo also listed Blue Heat, Intense Nacho and Volcano. SPAR listed Fuego at &#8364;3.49.'],
+      ['Where can I buy Takis in Germany?', 'REWE sells Takis Fuego Extreme 100 g, and price-tracker users have reported it at EDEKA and Globus for &#8364;2.99. Promotions sometimes bring it down to about &#8364;1.99.'],
+      ['Are Takis sold in Swedish supermarkets?', 'We did not find them in the online range of Hemk&#246;p when we checked. Online candy shops such as Coopers Candy, Godisj&#228;tten and Delitea listed Takis Fuego for about 35&#8211;43 kr per 100 g bag.'],
+    ],
+    sources: [],
+    related: [['where-to-buy-honey-butter-chip-europe', '🍯 Where to buy Honey Butter Chip'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying imported chips in Europe'], ['best-mexican-chips-to-buy-online', '🇲🇽 Best Mexican chips'], ['spiciest-chips', '🌶️ Spice ladder'], ['netherlands', '🇳🇱 Netherlands'], ['germany', '🇩🇪 Germany'], ['sweden', '🇸🇪 Sweden'], ['mexico', '🇲🇽 Mexico']],
+  },
+  {
+    slug: 'where-to-buy-honey-butter-chip-europe',
+    checked: '2026-11-03', checkedLabel: '3 November 2026',
+    bol: [{ n: 'Honey Butter Chip', q: 'honey butter chips' }, { n: 'Korean snacks', q: 'koreaanse snacks' }],
+    flag: '🍯',
+    crumb: 'Where to Buy Honey Butter Chip',
+    h1: 'Where to Buy Honey Butter Chip in Sweden, the Netherlands and Germany',
+    title: 'Where to Buy Honey Butter Chip in SE, NL & DE | World of Chips',
+    desc: 'Where to buy Haitai Honey Butter Chip in the Netherlands, Germany and Sweden: Asian grocers and online shops such as Tjin&#8217;s Toko, Nanuko, MAOMAO and K-shop, with prices checked November 2026.',
+    introDark: 'Asian grocers and online shops that actually list Korea&#8217;s sweet-and-buttery chip, checked on their own pages.',
+    intro: 'Haitai&#8217;s Honey Butter Chip, the honey-and-butter potato chip that became a Korean craze in 2014, is not a supermarket item in Sweden, the Netherlands or Germany. You find it at Asian grocers and Korean online shops, usually in the 60 g bag. Below are the shops we found listing it when we checked on ${LAST_CHECKED_LABEL}. Prices include VAT; shipping is extra.',
+    sections: [],
+    extra: `
+    <section class="cp-section" id="netherlands">
+      <h2>🇳🇱 Honey Butter Chip in the Netherlands</h2>
+      <ul class="sb-list">
+        <li><strong>${ext('https://www.tjinstoko.eu/en/haitai-honey-butter-chips-60g.html', 'Tjin&#8217;s Toko')}</strong> (Asian grocery and webshop, Eerste van der Helststraat 64, Amsterdam): Haitai Honey Butter Chips 60 g, &#8364;3.20, shown in stock.</li>
+        <li><strong>${ext('https://amazingoriental.com/product/91637/', 'Amazing Oriental')}</strong> (Asian supermarket chain): lists Haitai Honey Butter Chips 60 g in its range; the price is not shown online, so check your local store.</li>
+      </ul>
+      <p>The Dutch importer Asia Express Food (Kampen) lists the chip in its wholesale range, which is why it turns up at tokos around the country. Shopping online in the Netherlands or Belgium? The bol.com box above opens a bol.com search; we couldn&#8217;t confirm a bol.com listing, so check what&#8217;s there.</p>
+      <p class="sb-sources">Sources: ${['https://www.tjinstoko.eu/en/haitai-honey-butter-chips-60g.html', 'https://amazingoriental.com/product/91637/', 'https://order.asiaexpressfood.nl/en/assortiment/sweets-snacks/crisps-crackers/honing-boter-chips-898.html'].map(srcLink).join(', ')}</p>
+    </section>
+
+    <section class="cp-section" id="germany">
+      <h2>🇩🇪 Honey Butter Chip in Germany</h2>
+      <div class="sb-table-wrap">
+      <table class="sb-table">
+        <thead><tr><th scope="col">Shop</th><th scope="col">Type</th><th scope="col">Price (60 g)</th><th scope="col">Notes</th></tr></thead>
+        <tbody>
+        <tr><th scope="row">${ext('https://www.nanuko.de/en/p/haitai-honey-butter-chip-60g', 'Nanuko')}</th><td>Asian online shop</td><td>&#8364;2.79</td><td>Delivers across the EU, no minimum order</td></tr>
+        <tr><th scope="row">${ext('https://k-shop.eu/en/susswaren/12673-haitai-honey-butter-chip-60gbbd-11062023-8801019606540.html', 'K-shop')}</th><td>Korean grocery, store in Frankfurt am Main</td><td>&#8364;2.95</td><td>Ships to Germany and other EU countries</td></tr>
+        <tr><th scope="row">${ext('https://mao-mao.de/en/products/haitai-honigbutter-kartoffelchips-60g', 'MAOMAO')}</th><td>Asian online shop</td><td>&#8364;3.49</td><td>Listed as in stock</td></tr>
+        <tr><th scope="row">${ext('https://www.worldofsweets.de/Haitai-Honey-Butter-Chip-60g.333554.html', 'World of Sweets')}</th><td>Online sweet shop</td><td>&#8364;3.49</td><td>Quoted delivery 2&#8211;4 days</td></tr>
+        <tr><th scope="row">${ext('https://www.y-mart.de/de/kategorie/suesses-knabbereien/haitai-honey-butter-chip.8801019606540-1339699693.html', 'y-mart')}</th><td>Asian online shop</td><td>See site</td><td>Listed in its snacks range</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="sb-sources">Sources: the shop pages linked above, checked on ${LAST_CHECKED_LABEL}.</p>
+    </section>
+
+    <section class="cp-section" id="sweden">
+      <h2>🇸🇪 Honey Butter Chip in Sweden</h2>
+      <p>We could not confirm a Swedish shop selling Haitai Honey Butter Chip when we checked. The simplest option is an EU shop that delivers to Sweden, so there is no customs to pay: <strong>${ext('https://www.nanuko.de/en/p/haitai-honey-butter-chip-60g', 'Nanuko')}</strong> (&#8364;2.79, delivers across the EU) or <strong>${ext('https://k-shop.eu/en/susswaren/12673-haitai-honey-butter-chip-60gbbd-11062023-8801019606540.html', 'K-shop')}</strong> (&#8364;2.95, ships to EU countries). Shipping is charged on top, so it pays to order several bags or other Korean snacks at once. Asian supermarkets in Swedish cities may carry it too; ask in store.</p>
+    </section>
+
+    <section class="cp-section" id="amazon">
+      <h2>Honey Butter Chip on Amazon</h2>
+      <p>On Amazon.com (the US store) the ${amz(amazonDp('B01K9A9V50'), 'Haitai Honey Butter Chips 3-pack')} was $14.50 and in stock on 22 October 2026. It ships from the US, so check delivery to your country and import fees at checkout; since 1 July 2026 EU parcels from outside the EU may be charged customs duty.</p>
+    </section>`,
+    faqs: [
+      ['Can you buy Honey Butter Chip in the Netherlands?', 'Yes, at Asian grocers. Tjin&#8217;s Toko in Amsterdam listed the 60 g bag at &#8364;3.20 when we checked on 3 November 2026, and the Amazing Oriental chain lists it in its range.'],
+      ['Where can I buy Honey Butter Chip in Germany?', 'Online Asian shops such as Nanuko (&#8364;2.79), K-shop (&#8364;2.95, with a store in Frankfurt), MAOMAO and World of Sweets (&#8364;3.49 each) listed the 60 g bag on 3 November 2026.'],
+      ['Is Honey Butter Chip sold in Sweden?', 'We could not confirm a Swedish stockist. German shops such as Nanuko and K-shop deliver to Sweden from inside the EU, so no customs duty applies.'],
+    ],
+    sources: [],
+    related: [['where-to-buy-takis-europe', '🌶️ Where to buy Takis'], ['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips'], ['south-korea', '🇰🇷 South Korea'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying imported chips in Europe'], ['snack-boxes', '🍱 Snack boxes compared'], ['netherlands', '🇳🇱 Netherlands'], ['germany', '🇩🇪 Germany'], ['sweden', '🇸🇪 Sweden']],
   },
   {
     slug: 'best-international-chip-variety-packs',
     flag: '🌍',
     crumb: 'International Chip Variety Packs',
     h1: 'Best Place to Buy International-Flavor Potato Chips Online: Variety Packs & Samplers (2026)',
-    title: 'Best International Chip Variety Packs & Where to Buy World Chips Online (2026) | World of Chips',
+    title: 'International Chip Variety Packs (2026) | World of Chips',
     desc: 'Where to buy international-flavor potato chips online in 2026: Amazon exotic chip variety packs vs. subscription snack boxes, verified prices, and how to avoid stale or overpriced bundles.',
     introDark: 'How to order exotic Asian Lay&#8217;s, Japanese Calbee, Korean Honey Butter, British Walkers and European paprika chips online &#8212; comparing Amazon sampler packs, snack boxes and specialist grocers.',
     intro: 'Looking for the <strong>best place to buy international-flavor potato chips online</strong>? Whether you want Chinese Lay&#8217;s in Cucumber or Sichuan Hot Pot, Japanese Calbee Norishio, Korean Honey Butter Chips, Mexican Sabritas or German paprika crisps, you have three main routes: <strong>one-off variety packs on Amazon</strong>, <strong>monthly or seasonal snack boxes</strong>, and <strong>regional online grocers</strong>. Below we compare the best international chip variety packs to buy on Amazon right now, break down how they stack up against subscription boxes (with prices checked in October 2026), and share what to check before you order so you don&#8217;t get crushed or short-dated bags.',
@@ -290,7 +426,7 @@ const GUIDES = [
     flag: '🌶️',
     crumb: 'Spicy Chips to Buy',
     h1: 'Hot Chips to Buy Online: 7 Spicy Picks on Amazon (2026)',
-    title: 'Spicy Chips to Buy Online (2026): 7 Hot Picks on Amazon | World of Chips',
+    title: 'Spicy Chips to Buy Online: 7 Hot Picks (2026) | World of Chips',
     desc: 'A shopping list, not a heat ranking: seven spicy chips you can order on Amazon.com, from Takis Fuego and Blue Heat (rated Extreme on the Takis Heat-O-Meter) to Pringles Hot Ones Los Calientes and Cape Cod Sweet & Spicy Jalape\u00f1o.',
     introDark: 'A buying guide: seven hot chips you can actually order online, with the heat claims each maker puts on its own listing.',
     intro: 'Spicy chips are one of the fastest ways to taste how different countries do heat: Mexico&#8217;s chilli-and-lime, American hot-sauce flavours and jalape&#241;o kettle chips. Below are seven spicy chips with Amazon.com product pages that we opened on ${LAST_CHECKED_LABEL} and that showed an add-to-cart button. We don&#8217;t rank them on a Scoville scale, because no maker publishes one for its chips. Instead we quote how each brand describes its own heat. We don&#8217;t quote prices either, because they change often and vary by seller. Want to know which chip is actually hottest? See our <a href="/spiciest-chips/">Chip Spice Ladder</a>, which ranks heat from mild to the discontinued One Chip Challenge.',
@@ -341,7 +477,7 @@ const GUIDES = [
     flag: '🎁',
     crumb: 'Chip Gift Boxes',
     h1: 'The Best Chip Gift Boxes and Snack Variety Packs to Send This Christmas (2026)',
-    title: 'Best Chip Gift Boxes & Snack Variety Packs for Christmas 2026 | World of Chips',
+    title: 'Best Chip Gift Boxes for Christmas 2026 | World of Chips',
     desc: 'Christmas and holiday chip gift boxes and variety packs on Amazon.com: Broadway Basketeers gift tower, 40-count care package, Frito-Lay and Wise variety packs, Takis 18-bag mix, Australian Red Rock Deli and British Monster Munch.',
     introDark: 'Ready-to-gift snack towers, big variety packs and imported multipacks for chip lovers, for Christmas, birthdays and care packages.',
     nlTop: true,
@@ -396,15 +532,15 @@ const GUIDES = [
     slug: 'christmas-chip-gifts-2026',
     bol: [{ n: 'Snack gift boxes', q: 'snack cadeaupakket' }, { n: 'Japanese snacks', q: 'japanse snacks' }, { n: 'Korean snacks', q: 'koreaanse snacks' }, { n: 'Takis', q: 'takis' }],
     yumsTop: true,
-    checked: '2026-10-27', checkedLabel: '27 October 2026',
+    checked: '2026-11-03', checkedLabel: '3 November 2026', checkedVerb: 'Updated',
     flag: '🎄',
     crumb: 'Christmas Chip Gifts 2026',
     h1: 'Best International Chip Gifts for Christmas 2026',
-    title: 'Best International Chip Gifts for Christmas 2026: Japanese, Korean, British & Mexican Snack Sets | World of Chips',
+    title: 'Christmas Chip Gifts 2026: Best Snack Sets | World of Chips',
     desc: 'Christmas 2026 gift guide for chip lovers: international variety packs, Japanese, Korean, British and Mexican chip sets, snack subscription boxes and budget tiers, with comparison tables and why each one makes a good gift.',
     introDark: 'Variety packs, country chip sets and snack boxes for the chip lover on your list, sorted by budget.',
     nlTop: true,
-    intro: 'Chips make a better present than they sound: a bag of Honey Butter Chip or a tin of Takis is something most people can&#8217;t buy at their corner shop, and a snack box turns into a small tasting trip. This guide pulls together the gift-worthy picks from our buying guides: ready-to-gift variety packs, country sets from Japan, Korea, the UK and Mexico, and snack subscription boxes. Every Amazon listing here was opened in October 2026 and showed an add-to-cart button. We only quote a price where we recorded it from the seller&#8217;s own page, with the date; for everything else, <strong>check the current price</strong> on the listing, because gift-season prices move fast.',
+    intro: 'Chips make a better present than they sound: a bag of Honey Butter Chip or a tin of Takis is something most people can&#8217;t buy at their corner shop, and a snack box turns into a small tasting trip. This guide pulls together the gift-worthy picks from our buying guides: ready-to-gift variety packs, country sets from Japan, Korea, the UK and Mexico, and snack subscription boxes. Most Amazon listings here were opened in October 2026 and showed an add-to-cart button; the big snack boxes at the top and the Calbee pick were re-confirmed on 3 November 2026. We only quote a price where we recorded it from the seller&#8217;s own page, with the date; for everything else, <strong>check the current price</strong> on the listing, because gift-season prices move fast.',
     top: `
     <section class="cp-section" id="jump" style="background:var(--paper);border:2px solid var(--gold);border-radius:14px;padding:1.1rem 1.2rem">
       <h2>Jump to a Gift</h2>
@@ -412,7 +548,7 @@ const GUIDES = [
     </section>`,
     picksFirst: 2,
     sections: [
-      { id: 'premium', h2: '🎄 Top Amazon Gift Picks: Big International Snack Boxes', note: '', lead: 'Bigger, ready-to-gift boxes of snacks from around the world, chips included. Listings were found on Amazon.com on 2 November 2026; check price and availability on Amazon; we don&#8217;t quote prices, so <strong>check the current price</strong> on the listing.', items: [
+      { id: 'premium', h2: '🎄 Top Amazon Gift Picks: Big International Snack Boxes', note: '', lead: 'Bigger, ready-to-gift boxes of snacks from around the world, chips included. Listings were found on Amazon.com on 2 November 2026 and re-confirmed on 3 November 2026. We don&#8217;t quote prices, so <strong>check the current price</strong> on the listing.', items: [
         ['Universal Yums International Snack Box (40 snacks)', 'Twenty full-size foreign snacks plus a bag of 20 candies, with chips from countries such as Poland, Spain, Greece and Thailand, per the listing. <em>Why it&#8217;s a good gift:</em> a one-off world tour with no subscription to cancel.', 'dp:B0BGMJVGCR'],
         ['Snackology Elite World Snack Sampler Box (30+ snacks)', 'More than 30 chips, crackers, biscuits and candies from Asia, Europe and Central America. <em>Why it&#8217;s a good gift:</em> a big care package for students or far-away family; the listing notes contents vary.', 'dp:B07BXBQ38C'],
         ['Pop Snax International Mystery Snack Box (21 items)', 'Twenty international snacks plus one drink, from Japan, Asia and beyond, in a printed gift box with an insert card. <em>Why it&#8217;s a good gift:</em> it arrives looking like a present.', 'dp:B0FR5K8J5W'],
@@ -425,7 +561,7 @@ const GUIDES = [
         ['Takis Variety Pack (18 &#215; 1 oz)', 'Fuego, Blue Heat, Nitro and Crunchy Fajitas in snack-size bags. <em>Why it&#8217;s a good gift:</em> a heat-level tasting flight for the spice lover; also a strong stocking stuffer.', 'dp:B0FBXZDS3Q'],
       ] },
       { id: 'japan', h2: '🇯🇵 Japanese Chip Gift Set', note: '', items: [
-        ['Calbee &amp; Koikeya picks from our Japanese chips guide', 'Japan&#8217;s classics, Calbee Usushio, Norishio and Consomm&#233; Punch plus Koikeya Karamucho, are sold as imports that go in and out of stock. <em>Why it&#8217;s a good gift:</em> build a set of three or four bags for a Japan fan. Our <a href="/best-japanese-chips/">best Japanese chips guide</a> explains each flavour.', amazonSearch('calbee norishio potato chips')],
+        ['Calbee &amp; Koikeya picks from our Japanese chips guide', 'Japan&#8217;s classics, Calbee Usushio, Norishio and Consomm&#233; Punch plus Koikeya Karamucho, are sold as imports that go in and out of stock. <em>Why it&#8217;s a good gift:</em> build a set of three or four bags for a Japan fan. Our <a href="/best-japanese-chips/">best Japanese chips guide</a> explains each flavour. The button opens Calbee Norishio (60 g).', 'dp:B0033VAJMW'],
       ] },
       { id: 'korea', h2: '🇰🇷 Korean Chip Gift Set', note: '', items: [
         ['Haitai Honey Butter Chips (pack of 3)', 'The sweet-and-buttery chip that caused a craze in Korea in 2014. <em>Why it&#8217;s a good gift:</em> the one Korean chip everyone has heard of. $14.50 when we opened the listing on 22 October 2026; check the current price.', 'dp:B01K9A9V50'],
@@ -516,7 +652,7 @@ const GUIDES = [
     flag: '🇰🇷',
     crumb: 'Best Korean Chips',
     h1: 'The Best Korean Chips and Snacks to Buy Online (2026)',
-    title: 'Best Korean Chips to Buy Online in 2026: Honey Butter Chip, Turtle Chips & More | World of Chips',
+    title: 'Best Korean Chips to Buy Online (2026) | World of Chips',
     desc: 'Korean chips you can order on Amazon.com: Haitai Honey Butter Chips, Orion Turtle Chips (sweet corn and choco), Nongshim Shrimp Crackers and Orion Marine Boy, with what each tastes like.',
     introDark: 'Korea&#8217;s cult chips and crackers that you can order from the US Amazon store.',
     intro: 'Korean convenience-store snacks lean sweet-savoury: honey and butter on a potato chip, corn soup on a four-layer chip, real shrimp on a baked cracker. Below are five Korean snacks with Amazon.com product pages that we opened on ${LAST_CHECKED_LABEL}, all showing an add-to-cart button. Descriptions come from each listing. We don&#8217;t quote prices, because import listings change often. For the history of Korean chips, see our <a href="/south-korea/">South Korea chip guide</a>.',
@@ -560,7 +696,7 @@ const GUIDES = [
     flag: '🇲🇽',
     crumb: 'Best Mexican Chips',
     h1: 'The Best Mexican Chips to Buy Online (2026)',
-    title: 'Best Mexican Chips to Buy Online (2026): Takis, Sabritas & Barcel | World of Chips',
+    title: 'Best Mexican Chips: Takis, Sabritas & Barcel | World of Chips',
     desc: 'Mexican chips you can order on Amazon.com: Takis Fuego and variety packs, Sabritas Chile Limón, Lay\u2019s Limón and Barcel Chip\u2019s Jalapeño. Chilli, lime and the brands behind them.',
     introDark: 'Chilli, lime and the two snack giants behind them: Sabritas and Barcel.',
     intro: 'Mexican snacking runs on lime, salt, chamoy, tamarind and chile. Two companies dominate. <strong>Sabritas</strong> began in Mexico City in 1943 and joined PepsiCo in 1966. <strong>Barcel</strong>, Grupo Bimbo&#8217;s snack arm, began in 1977 and makes Chip&#8217;s potato chips and Takis. Takis were invented in 1999, and the purple-bag Fuego arrived in 2006. Below are seven Amazon.com listings, all already featured on our site: four on the <a href="/mexico/">Mexico page</a> and three in our <a href="/spiciest-chips-you-can-buy/">spicy chips buying guide</a>. We don&#8217;t quote prices, because they change often.',
@@ -606,7 +742,7 @@ const GUIDES = [
     flag: '🇬🇧',
     crumb: 'Best British Crisps',
     h1: 'The Best British Crisps to Buy Online (2026)',
-    title: 'Best British Crisps to Buy Online (2026): Walkers, Tyrrell\u2019s & Monster Munch | World of Chips',
+    title: 'Best British Crisps to Buy Online (2026) | World of Chips',
     desc: 'British crisps you can order on Amazon.com: Walkers multipacks, Cheese & Onion and Salt & Shake, Tyrrell\u2019s Sea Salt & Cider Vinegar and Walkers MEGA Monster Munch, with the history behind them.',
     introDark: 'Walkers&#8217; big three, hand-cooked Tyrrell&#8217;s and a pickled-onion classic, delivered.',
     intro: 'Britain gave the world the flavoured crisp. In 1954 Ireland&#8217;s Tayto created cheese &amp; onion, and Walkers launched its own Cheese &amp; Onion the same year. Walkers was founded in Leicester in 1948 and is now Britain&#8217;s largest crisp maker. Its Salt &amp; Shake revives the old Smith&#8217;s idea of a twist of salt in the bag. Below are five crisps you can order from Amazon.com. Four link to listings already featured on our site; Cheese &amp; Onion links to an Amazon search. We don&#8217;t quote prices, because they change often. More history is in our <a href="/united-kingdom/">UK chip guide</a>.',
@@ -666,7 +802,7 @@ GUIDES.push(...morePages({ amazonSearch, esc, ROOT }));
     slug: 'christmas-snack-box-comparison-2026', checked: '2026-10-28', checkedLabel: '28 October 2026', flag: '🎄', crumb: 'Christmas Snack Boxes Compared',
     parent: ['christmas-chip-gifts-2026', 'Christmas Chip Gifts 2026'], nlTop: true,
     h1: 'Christmas Snack Box Comparison 2026: Universal Yums vs Bokksu vs TokyoTreat vs MexiCrate & More',
-    title: 'Christmas Snack Box Comparison 2026: Universal Yums, Bokksu, TokyoTreat, Sakuraco, MexiCrate, SnackCrate | World of Chips',
+    title: 'Christmas Snack Box Comparison 2026 | World of Chips',
     desc: 'Compare international snack boxes to give this Christmas: Universal Yums, Bokksu, TokyoTreat, Sakuraco, MexiCrate, SnackCrate and Daebak. Price tiers, origin, what is inside and shipping, from each company\u2019s own site.',
     introDark: 'Seven international snack boxes side by side: price tiers, where they come from, what&#8217;s inside and where they ship.',
     intro: 'A snack box is an easy Christmas present for someone who already has everything: a parcel of snacks from Japan, Mexico, Korea or a new country every month. The catch is that the boxes differ a lot on price, contents and, above all, where they ship. Universal Yums, MexiCrate and SnackCrate only deliver in North America, while the Japanese and Korean boxes ship worldwide. Every figure below comes from the company&#8217;s own website on the date shown in the table. Anything we could not confirm is marked <span style="color:var(--red);font-weight:700">(unconfirmed)</span>. Prices are in US dollars per box before shipping unless noted, and offers change often, especially around the holidays, so check at checkout.',
@@ -725,7 +861,7 @@ GUIDES.push(...morePages({ amazonSearch, esc, ROOT }));
 }
 GUIDES.push({ slug: 'about', flag: '🥔', crumb: 'About', checked: '2026-10-27', checkedLabel: '27 October 2026', disc: false,
   h1: 'About World of Chips',
-  title: 'About World of Chips: Who Runs the Site and How It Works | World of Chips',
+  title: 'About World of Chips: Who Runs the Site',
   desc: 'World of Chips is a guide to potato chips around the world, founded by Michael van der Looij. How we research, source and fund the site.',
   introDark: 'A guide to potato chips around the world: brands, flavours, prices and where to buy them.',
   intro: 'World of Chips covers potato chips (crisps, not fries) country by country: the brands people actually buy, the flavours that only exist in one place, and where to get them online.',
@@ -816,7 +952,10 @@ function render(g) {
   const fill = (t) => t.replace(/\$\{LAST_CHECKED_LABEL\}/g, CKL);
   const href = (h) => (h.startsWith('dp:') ? amazonDp(h.slice(3)) : h);
   const url = `${SITE}/${g.slug}/`;
-  const ogImg = `/assets/og/${g.slug.replace(/\//g, '-')}.png`;
+  const ogP = ogPhoto(g.slug);
+  const ogImg = ogP ? ogP.src : `/assets/og/${g.slug.replace(/\//g, '-')}.png`;
+  const ogAlt = ogP ? ogP.alt : g.title;
+  const photo = photoFor(g.slug);
   for (const [s] of g.related) if (!fs.existsSync(path.join(ROOT, s, 'index.html')) && !GUIDES.some((x) => x.slug === s)) throw new Error(`missing page /${s}/`);
   const intro = fill(g.intro);
   const ld = { '@context': 'https://schema.org', '@graph': [
@@ -860,7 +999,7 @@ ${gaSnippet}
 <meta property="og:image" content="${SITE}${ogImg}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="${esc(g.title)}">
+<meta property="og:image:alt" content="${esc(ogAlt)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="${SITE}${ogImg}">
 <meta name="twitter:title" content="${esc(g.title)}">
@@ -872,6 +1011,7 @@ ${fontsLink}
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="stylesheet" href="/assets/site.css">
+${PHOTO_CSS_LINK}
 <style>
 .nav-logo a{color:inherit;text-decoration:none;display:flex;align-items:center;gap:.5rem}
 .cp-crumbs{font-size:.75rem;color:var(--muted);margin-bottom:1rem}
@@ -911,14 +1051,14 @@ ${siteNav}
     <nav class="cp-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › ${g.parent ? `<a href="/${g.parent[0]}/">${esc(g.parent[1])}</a> › ` : ''}<span>${esc(g.crumb)}</span></nav>
     <span class="cp-flag">${g.flag}</span>
     <h1 class="cp-title">${esc(g.h1)}</h1>
-    <span class="cp-region">Last checked ${CKL}</span>
+    <span class="cp-region">${g.checkedVerb || 'Last checked'} ${CKL}</span>
     <p class="cp-intro-dark">${g.introDark}</p>
   </div>
   <div class="cp-body">
 ${g.disc === false ? '' : `    <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>`}
 
     <p class="cp-intro">${intro}</p>
-${g.shopTop ? shopTop(g.shopTop) : ''}${g.yumsTop ? yumsBox() : ''}${g.daebakTop ? daebakBox() : ''}${early}${g.nlTop ? giftNewsletter() : ''}${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.bol ? bolBox(g.bol) : ''}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
+${photo ? photoFigure(photo, { eager: true }) : ''}${g.shopTop ? shopTop(g.shopTop) : ''}${g.yumsTop ? yumsBox() : ''}${g.daebakTop ? daebakBox() : ''}${early}${g.nlTop ? giftNewsletter() : ''}${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.bol ? bolBox(g.bol) : ''}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
 
 ${hasAuthor(g) ? authorBox : ''}    <section class="cp-section sb-faq" id="faq">
       <h2>FAQs</h2>
@@ -933,7 +1073,7 @@ ${g.sources.length ? `
 ${g.disc === false ? '' : `    <p class="aff-disc">${DISCLOSURE}</p>
 `}
 ${g.nlEarly || g.nlTop ? '' : `    ${newsletterBlock('    ')}\n`}${isFeature(g.slug) ? moreRow(g.slug) : ''}
-    <nav class="cp-cta" aria-label="More chip guides">
+${shareRow(url, g.title)}    <nav class="cp-cta" aria-label="More chip guides">
       <h2>More Chip Guides</h2>
       <div class="cp-explore-grid">${g.related.map(([s, l]) => `<a href="/${s}/" class="cp-explore-link">${l}</a>`).join('')}<a href="/news/" class="cp-explore-link">📰 Chip News</a></div>
       <p style="margin-top:2rem"><a href="/" class="cp-explore-link">🌍 Back to the Global Chip Map</a></p>
@@ -1005,7 +1145,10 @@ const quizPage = (k, [flag, name, blurb]) => {
 `;
 };
 const quizOutputs = quizG ? Object.entries(quizG.quizResults).map(([k, r]) => [path.join(ROOT, 'which-chip-are-you', 'r', k, 'index.html'), quizPage(k, r)]) : [];
-const outputs = [...GUIDES.map((g) => [path.join(ROOT, g.slug, 'index.html'), retag(render(g), guideSection(g.slug))]), ...quizOutputs, [sitemapPath, newSitemap]];
+// /pringles-index/ is frozen: its page is maintained separately and must not be rewritten by template
+// changes here (shared nav/footer, photos, share links), so it is excluded from the outputs.
+const FROZEN = new Set(['pringles-index']);
+const outputs = [...GUIDES.filter((g) => !FROZEN.has(g.slug)).map((g) => [path.join(ROOT, g.slug, 'index.html'), retag(render(g), guideSection(g.slug))]), ...quizOutputs, [sitemapPath, newSitemap]];
 if (CHECK) {
   const stale = outputs.filter(([p, body]) => !fs.existsSync(p) || fs.readFileSync(p, 'utf8') !== body).map(([p]) => path.relative(ROOT, p));
   if (stale.length) { console.error(`Guide output out of date: ${stale.join(', ')}. Run: node scripts/build_guides.mjs`); process.exit(1); }

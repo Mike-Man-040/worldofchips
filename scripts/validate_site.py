@@ -4,7 +4,7 @@
 Usage: python3 scripts/validate_site.py
 """
 import re as _re
-import datetime, glob, json, os, re, subprocess, sys, tempfile, xml.etree.ElementTree as ET
+import datetime, glob, html, json, os, re, subprocess, sys, tempfile, xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 # Allowed Amazon tracking IDs: read from scripts/affiliate_tags.mjs (single source of truth).
 AMAZON_TAGS = set(_re.findall(r"'((?:worldofchips|woc-[a-z]+)-20)'", open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'affiliate_tags.mjs')).read()))
@@ -255,6 +255,30 @@ def check_snack_boxes(problems, pages):
         problems.append("index.html: no link to /snack-boxes/")
 
 
+def check_photos(problems, pages):
+    """Photos: local licensed files only (no Amazon/retailer image hosts), alt text, lazy loading below the fold,
+    a credit caption, and titles of about 60 characters. /pringles-index/ is frozen and skipped."""
+    for path, p in pages.items():
+        rel = os.path.relpath(path, ROOT)
+        if rel.startswith("pringles-index"):
+            continue
+        h = open(path, encoding="utf-8").read()
+        if re.search(r'<img[^>]+src="https?://[^"]*(media-amazon|images-amazon|ssl-images-amazon|bol\.com|walmartimages|target\.scene7)', h):
+            problems.append(f"{rel}: retailer-hosted product image")
+        for img in re.findall(r"<img\b[^>]*>", h):
+            if 'alt="' not in img or 'alt=""' in img:
+                problems.append(f"{rel}: <img> without alt text")
+            m = re.search(r'src="(/assets/photos/[^"]+)"', img)
+            if m and not os.path.isfile(os.path.join(ROOT, m.group(1).lstrip("/"))):
+                problems.append(f"{rel}: missing photo file {m.group(1)}")
+        for fig in re.findall(r'<figure class="woc-photo">.*?</figure>', h, re.S):
+            if "commons.wikimedia.org" not in fig or "<figcaption>" not in fig:
+                problems.append(f"{rel}: photo without a Wikimedia Commons credit caption")
+        title = html.unescape(p.title.strip())
+        if len(title) > 65:
+            problems.append(f"{rel}: <title> is {len(title)} characters (keep to about 60)")
+
+
 def check_ai_search(problems, pages):
     """llms.txt / llms-full.txt, IndexNow key, AI crawler robots rules, country FAQPage JSON-LD."""
     for f in ("llms.txt", "llms-full.txt"):
@@ -332,6 +356,7 @@ def main():
             problems.append(f"{os.path.relpath(path, ROOT)}: missing og:image")
         elif not os.path.isfile(os.path.join(ROOT, m.group(1).lstrip("/"))):
             problems.append(f"{os.path.relpath(path, ROOT)}: og:image file missing {m.group(1)} (run scripts/build_og_images.py)")
+    check_photos(problems, pages)
     if len(form_ids) > 1:
         problems.append(f"newsletter: pages use different MailerLite form ids {sorted(form_ids)}")
     titles = [p.title for p in pages.values()]

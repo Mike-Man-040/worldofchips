@@ -24,7 +24,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
   const cluster = [
     { slug: 'best-mandoline-slicers-for-chips', flag: '🔪', crumb: 'Mandoline Slicers', parent: ['make-chips-at-home', 'Make Chips at Home'],
       h1: 'Best Mandoline Slicers for Homemade Chips',
-      title: 'Best Mandoline Slicers for Homemade Potato Chips (2026) | World of Chips',
+      title: 'Best Mandoline Slicers for Chips (2026) | World of Chips',
       desc: 'Five well-known mandoline slicers for cutting paper-thin potato slices for homemade chips and crisps, from OXO and Benriner to KitchenAid, plus a pair of cut-resistant gloves.',
       introDark: 'Thin, even slices are the single biggest factor in crisp homemade chips.',
       intro: 'Recipe writers agree on the tool: the mandoline. Food52&#8217;s homemade potato chip recipe slices at a 1.3&#160;mm setting, and BBC Food recommends a mandoline &#8220;to get the thinnest possible slices&#8221;. Below are five widely sold mandolines plus cut-resistant gloves. We don&#8217;t quote prices or blade specs, because they change between model years and sellers; check the listing.',
@@ -54,7 +54,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
 
     { slug: 'best-deep-fryers-for-chips', flag: '🍳', crumb: 'Deep Fryers', parent: ['make-chips-at-home', 'Make Chips at Home'],
       h1: 'Best Deep Fryers for Homemade Chips',
-      title: 'Best Deep Fryers for Homemade Potato Chips & Crisps (2026) | World of Chips',
+      title: 'Best Deep Fryers for Chips (2026) | World of Chips',
       desc: 'Five well-known home deep fryers for frying homemade potato chips at a steady 180°C/350°F, from T-fal and Cuisinart to the Presto FryDaddy, with safety tips.',
       introDark: 'A thermostat-controlled fryer keeps the oil at the 180°C (350°F) that chip recipes call for.',
       intro: 'Classic chip recipes fry thin slices in small batches at around 180&#160;&#176;C (350&#160;&#176;F). That is the temperature in Food52&#8217;s homemade potato chip recipe and BBC Good Food&#8217;s deep-fried matchstick chips. An electric deep fryer with a thermostat makes that easier to hold than a pan on the hob. Below are five widely sold fryers. We don&#8217;t quote capacities or prices, which differ by model and region.',
@@ -83,7 +83,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
 
     { slug: 'best-air-fryers-for-chips', flag: '💨', crumb: 'Air Fryers', parent: ['make-chips-at-home', 'Make Chips at Home'],
       h1: 'Best Air Fryers for Homemade Chips',
-      title: 'Best Air Fryers for Homemade Potato Chips & Crisps (2026) | World of Chips',
+      title: 'Best Air Fryers for Chips (2026) | World of Chips',
       desc: 'Five popular air fryers for making lower-oil homemade potato crisps, from Ninja and COSORI to Instant and Philips, with BBC Good Food\'s air-fryer crisp method.',
       introDark: 'Lower-oil crisps: thin slices, a little oil, a hot basket and a shake halfway through.',
       intro: 'BBC Good Food&#8217;s air-fryer crisps soak mandoline-thin slices in ice-cold water for 15 minutes and dry them thoroughly. The slices are tossed with a little oil and seasoning, then cooked at 210&#160;&#176;C for 12 to 15 minutes, with a shake halfway. Basket size matters most here, because the slices need to sit in a single layer. Below are five widely sold air fryers. We don&#8217;t quote capacities or prices; check the listing.',
@@ -112,7 +112,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
 
     { slug: 'chip-seasoning-powders', flag: '🧂', crumb: 'Chip Seasonings', parent: ['make-chips-at-home', 'Make Chips at Home'],
       h1: 'Chip Seasoning Powders for Homemade Crisps',
-      title: 'Chip Seasoning Powders: How to Flavour Homemade Crisps (2026) | World of Chips',
+      title: 'Chip Seasoning Powders for Homemade Crisps | World of Chips',
       desc: 'Six seasonings you can buy to flavour homemade potato chips, including Tajín, Old Bay, ranch seasoning, smoked paprika, salt & vinegar powder and popcorn seasonings, plus when to add them.',
       introDark: 'Season while the chips are still warm, so the powder sticks.',
       intro: 'Factory chips are seasoned in a tumbling drum straight after frying. At home, the equivalent is to toss warm chips in a bowl with the seasoning; BBC Food says to season crisps while they&#8217;re still warm. BBC Good Food&#8217;s air-fryer recipe suggests barbecue rub, garlic granules or paprika. Below are six widely sold seasonings that work on chips. Each one links to an Amazon search; check the ingredients and pack size on the listing.',
@@ -148,7 +148,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
   const hubAndRecipe = [
     { slug: 'make-chips-at-home', flag: '🥔', crumb: 'Make Chips at Home', disc: true,
       h1: 'Make Chips at Home: Tools, Seasonings & Recipe',
-      title: 'How to Make Potato Chips at Home: Tools, Seasonings & Recipe | World of Chips',
+      title: 'How to Make Potato Chips at Home | World of Chips',
       desc: 'Everything you need to make potato chips and crisps at home: a step-by-step recipe, plus guides to mandoline slicers, deep fryers, air fryers and chip seasonings.',
       introDark: 'From potato to crisp in four steps: slice, rinse, dry, fry. Here&#8217;s the kit and the method.',
       intro: 'Homemade chips need very little: a way to slice potatoes paper-thin, a way to cook them hot and fast, and something to season them with. Start with the recipe, then use the guides below to choose your kit.',
@@ -196,7 +196,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
     { slug: 'homemade-crisps-recipe', flag: '📌', crumb: 'Homemade Crisps Recipe', parent: ['make-chips-at-home', 'Make Chips at Home'],
       ogImage: '/assets/pins/homemade-crisps-pin.png', ldExtra: [recipeLd],
       h1: 'Homemade Potato Crisps Recipe (Fried or Air-Fried)',
-      title: 'Homemade Potato Crisps Recipe: Fried or Air Fryer | World of Chips',
+      title: 'Homemade Crisps Recipe: Fried or Air Fryer | World of Chips',
       desc: 'A simple homemade potato crisps (chips) recipe: slice thin, rinse, dry, then deep-fry at 180°C or air-fry at 210°C and season while warm. Pin-friendly step-by-step.',
       introDark: 'Four steps, two cooking methods, one very crunchy snack.',
       intro: 'This method follows two tested sources: Food52&#8217;s homemade potato chips (deep-fried) and BBC Good Food&#8217;s air-fryer crisps. We&#8217;ve condensed them into one card and credited both below.',
@@ -255,7 +255,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
   }).join('\n        ');
   const spice = { slug: 'spiciest-chips', flag: '🌶️', crumb: 'Spice Ladder', ...CK,
     h1: 'Spiciest Chips Ranked by Heat: The Chip Spice Ladder',
-    title: 'Spiciest Chips Ranked by Heat: Mild to One Chip Challenge | World of Chips',
+    title: 'Spiciest Chips Ranked by Heat | World of Chips',
     desc: 'A heat ranking, not a shopping list: eleven spicy chips ranked by evidence: the pepper each uses, its Scoville range and the maker\u2019s own heat claims, from jalapeño kettle chips through Paqui ghost pepper and Carolina Reaper chips to the discontinued One Chip Challenge.',
     introDark: 'A heat ranking in eleven rungs, from a gentle jalapeño kettle chip to the Carolina Reaper chip that was pulled from sale.',
     intro: 'Chip makers don&#8217;t publish Scoville ratings for their chips, so we rank by evidence, in this order: (1) the hottest pepper the maker names on the pack or listing, using its published Scoville range; (2) the maker&#8217;s own heat claim; (3) only where those run out, our <strong>editorial estimate</strong>, marked [E]. Each rung shows its basis: [M] maker, [P] pepper SHU, [E] estimate. Pepper heat isn&#8217;t chip heat: dose matters, so treat neighbouring rungs as close calls. Where we quote Scoville heat units (SHU), they describe the <em>pepper</em>, not the finished chip, and come from the cited source. Disagree with the order? Good: tell us via the newsletter. Just want to order something hot? Our buying guide, <a href="/spiciest-chips-you-can-buy/">spicy chips to buy online</a>, lists seven picks with in-stock Amazon pages.',
@@ -326,7 +326,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
   const plain = (s) => s.replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n)).replace(/&amp;/g, '&');
   const flavorPages = F.map((f) => ({ slug: `flavors/${f.s}`, flag: f.flag, crumb: plain(f.n), parent: ['flavors', 'Flavours'], ...CK,
     h1: `${plain(f.n)} Chips: Origin, History & Where to Buy`,
-    title: `${plain(f.n)} Chips: Where They Came From & Where to Buy | World of Chips`,
+    title: [`${plain(f.n)} Chips: Origins & Where to Buy | World of Chips`, `${plain(f.n)} Chips: Where to Buy | World of Chips`].find((t) => t.length <= 62) || `${plain(f.n)} Chips | World of Chips`,
     desc: `${plain(f.lead.replace(/<[^>]+>/g, ''))} Sourced history, the countries that love it, and where to buy ${plain(f.n).toLowerCase()} chips online.`,
     introDark: f.lead, intro: f.lead, sections: [],
     shopTop: { href: S(f.buy), title: `Shop ${f.n} Chips on Amazon`, text: `Imported bags go in and out of stock, so this opens an Amazon search for ${f.n.toLowerCase()} chips. Check the pack size and seller.`, label: 'Shop on Amazon' },
@@ -354,7 +354,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
   }));
   const flavorIndex = { slug: 'flavors', flag: '🌍', crumb: 'Flavours', ...CK,
     h1: 'Chip Flavours of the World',
-    title: 'Chip Flavours of the World: Origins & Where to Buy | World of Chips',
+    title: 'Chip Flavours of the World & Where to Buy | World of Chips',
     desc: 'One page per classic chip flavour, from prawn cocktail and ketchup to nori, paprika and Flamin\' Hot, with sourced origin stories and where to buy them.',
     introDark: 'The stories behind the flavours in our ticker, with sources.',
     intro: 'Every country has a flavour it can&#8217;t live without. Each page below covers where a flavour came from (with sources, and no invented dates), the countries that love it most, and where to buy it.',
@@ -388,7 +388,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
   const lastDrop = drops.map((d) => d.date).filter((d) => d <= CK.checked).sort().pop();
   const calendar = { slug: 'limited-edition-chips', flag: '📅', crumb: 'Limited-Edition Drops', ...CK, disc: false,
     h1: 'Limited-Edition Chip Drop Calendar',
-    title: 'Limited-Edition Chip Calendar 2026: New & Seasonal Flavour Drops | World of Chips',
+    title: 'Limited-Edition Chip Calendar 2026 | World of Chips',
     desc: 'A running calendar of limited-edition and new chip flavours by month and country, from Lay\'s Holi-LAY\'S to KETTLE festive editions and Korean collaborations, each with a source.',
     introDark: 'New and limited-edition chips by month and country, updated weekly from our news desk.',
     intro: `🎃 Halloween? See <a href="/halloween-chips-2026/">spooky &amp; limited-edition chips around the world</a>. Each entry links to its source and, where we covered it, to our news story. Dates are on-shelf dates from the source. Where the source only reported a launch, we show &#8220;Reported&#8221; with the article date. The calendar is updated weekly (${drops.length} drops listed; last checked ${CK.checkedLabel}). Know a launch we missed? Reply to the newsletter.`,
@@ -441,7 +441,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
     </section>`;
   const halloween = { slug: 'halloween-chips-2026', flag: '🎃', crumb: 'Halloween Chips 2026', ...CK, checked: '2026-10-30', checkedLabel: '30 October 2026', disc: false,
     h1: 'Spooky &amp; Limited-Edition Chips Around the World',
-    title: 'Halloween Chips 2026: Spooky & Limited-Edition Flavours | World of Chips',
+    title: 'Halloween Chips 2026: Spooky Flavours | World of Chips',
     desc: 'Halloween 2026 chips: Takis Zombie, Wotsits Bag of Bones, Cheetos Sweet Phantom Heat and Bag of Bones, plus limited-edition drops by country. Every item sourced.',
     introDark: 'Halloween 2026: the spooky chips on shelves now, plus the limited editions landing around the world.',
     intro: `Four Halloween picks from the UK and US, then ${seasonal.length} seasonal and limited-edition launches from our drop calendar. Every entry links to its source.`,
@@ -526,7 +526,7 @@ var m=location.search.match(/[?&]r=([a-z-]+)/);if(m)show(m[1],false);})();`;
     </section>`;
   const submit = { slug: 'submit-a-flavor', flag: '📸', crumb: 'Add Your Local Flavour', ...CK, disc: false,
     h1: 'Add Your Local Flavour to the Map',
-    title: 'Add Your Local Chip Flavour to the World of Chips Map | World of Chips',
+    title: 'Add Your Local Chip Flavour to Our Map | World of Chips',
     desc: 'Spotted a local chip flavour we are missing? Send us a photo and a few details. Approved finds appear on the Global Chip Map and the country page, credited to you.',
     introDark: 'Found a chip flavour we haven&#8217;t covered? Snap the bag and tell us about it.',
     intro: 'Every approved submission gets a &#8220;Community finds&#8221; spot on the <a href="/#map-section">Global Chip Map</a> and on its country page, credited to the name or handle you choose. We check each entry by hand, so it can take a few days to appear.',
@@ -544,7 +544,7 @@ var m=location.search.match(/[?&]r=([a-z-]+)/);if(m)show(m[1],false);})();`;
   const biggest = [...SH.cases].sort((a, b) => a.pct - b.pct)[0];
   const shrink = { slug: 'shrinkflation', flag: '📉', crumb: 'Shrinkflation Tracker', ...CK, disc: false,
     h1: 'The Chip Shrinkflation Tracker',
-    title: 'Chip Shrinkflation Tracker: Lay\'s, Walkers, Pringles & More, Sourced | World of Chips',
+    title: 'Chip Shrinkflation Tracker | World of Chips',
     desc: `A sourced log of chip and crisp packs that got smaller: ${SH.cases.length} cases from Lay's, Walkers, Pringles, Doritos and others in the UK, US, Germany and the Netherlands, with old and new sizes.`,
     introDark: 'Same price, fewer crisps. Every case below links to its source.',
     intro: `Shrinkflation is when a pack gets smaller while the price stays the same or rises. This is a curated log of chip and crisp cases reported by consumer groups and the press, with the old and new size, the year and the source. It lists ${SH.cases.length} cases so far; the change percentages are worked out from the sizes shown. Seen a pack shrink? <a href="/submit-a-flavor/">Tell us</a>.`,

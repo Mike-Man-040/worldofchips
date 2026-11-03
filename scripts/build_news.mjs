@@ -139,7 +139,7 @@ ${nlForm}
 </aside>`.split('\n').map((l, i) => (i ? indent + (l.startsWith('<aside') || l.startsWith('</aside') ? '' : '  ') + l : l)).join('\n');
 
 const url = `${SITE}/news/`;
-const title = 'Potato Chip News: New Flavors, Recalls & Industry Moves | World of Chips';
+const title = 'Potato Chip News: New Flavors & Recalls | World of Chips';
 const desc = `Potato chip and crisps news from around the world, updated weekly: new flavor launches, food-safety recalls, industry deals and regional snack trends. Updated ${fmtDate(LATEST)}.`;
 const ld = {
   '@context': 'https://schema.org',

@@ -55,6 +55,7 @@ for p in sorted(glob.glob(os.path.join(ROOT, "**", "index.html"), recursive=True
     rel = os.path.relpath(os.path.dirname(p), ROOT)
     if rel.startswith(("node_modules", ".")) and rel != ".": continue
     slug = "home" if rel == "." else rel.replace(os.sep, "-")
+    if slug == "pringles-index": continue  # frozen page: keep its existing share image untouched
     src = open(p, encoding="utf-8").read()
     m = re.search(r"<h1[^>]*>(.*?)</h1>", src, re.S)
     if not m: continue
