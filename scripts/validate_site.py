@@ -14,7 +14,7 @@ SITE = "https://worldofchips.com"
 NEWS_CATEGORIES = {"Industry", "New Flavor", "Safety Recall", "Innovation", "Sustainability", "Investment", "Regional"}
 NEWS_FIELDS = ("id", "date", "title", "summary", "category", "source_name", "source_url")
 # Pages whose daebak.co links must use our referral (sca_ref) link.
-DAEBAK_PAGES = {"south-korea", "best-korean-chips-to-buy-online", "snack-boxes"}
+DAEBAK_PAGES = {"south-korea", "best-korean-chips-to-buy-online", "snack-boxes", "christmas-chip-gifts-2026", "christmas-snack-box-comparison-2026"}
 AFFILIATE_BRANDS = {"bokksu", "tokyotreat", "sakuraco", "japancrate", "daebak", "japancandystore", "universalyums", "mexicrate", "snackcrate"}
 VOID = {"area","base","br","col","embed","hr","img","input","link","meta","source","track","wbr"}
 
