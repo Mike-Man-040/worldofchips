@@ -17,7 +17,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
-import { retag, daebakBox } from './affiliate_tags.mjs';
+import { retag, daebakBox, bolBox } from './affiliate_tags.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://worldofchips.com';
@@ -436,7 +436,7 @@ ${siteNav}
   <div class="cp-body">
     <p class="cp-intro">${esc(c.intro)}</p>
 
-${slug === 'south-korea' ? daebakBox() : ''}${buyBox(x)}${quickFacts(x)}
+${slug === 'south-korea' ? daebakBox() : ''}${buyBox(x)}${x.slug === 'netherlands' ? bolBox([{ n: 'Shop chips', q: 'chips' }, { n: 'Pringles', q: 'pringles' }, { n: "Lay's", q: 'lays chips' }, { n: 'Paprika chips', q: 'paprika chips' }]) + '\n' : ''}${quickFacts(x)}
     <div class="cp-stats">
 ${d.marketSize ? `      <div class="cp-stat"><div class="val">${esc(d.marketSize)}</div><div class="lbl">Market Size</div></div>\n` : ''}${d.perCapita ? `      <div class="cp-stat"><div class="val">${esc(d.perCapita)}</div><div class="lbl">Per Capita / Year</div></div>\n` : ''}      <div class="cp-stat"><div class="val">${esc(d.avgCost)}</div><div class="lbl">Avg. Bag Price</div></div>
       <div class="cp-stat"><div class="val">${esc(d.growth)}</div><div class="lbl">Annual Growth</div></div>

@@ -15,7 +15,7 @@ NEWS_CATEGORIES = {"Industry", "New Flavor", "Safety Recall", "Innovation", "Sus
 NEWS_FIELDS = ("id", "date", "title", "summary", "category", "source_name", "source_url")
 # Pages whose daebak.co links must use our referral (sca_ref) link.
 DAEBAK_PAGES = {"south-korea", "best-korean-chips-to-buy-online", "snack-boxes", "christmas-chip-gifts-2026", "christmas-snack-box-comparison-2026"}
-AFFILIATE_BRANDS = {"bokksu", "tokyotreat", "sakuraco", "japancrate", "daebak", "japancandystore", "universalyums", "mexicrate", "snackcrate"}
+AFFILIATE_BRANDS = {"bokksu", "tokyotreat", "sakuraco", "japancrate", "daebak", "japancandystore", "universalyums", "mexicrate", "snackcrate", "bol"}
 VOID = {"area","base","br","col","embed","hr","img","input","link","meta","source","track","wbr"}
 
 
@@ -134,6 +134,12 @@ def check(path, problems, form_ids=None):
                 problems.append(f"{rel}: daebak link with unexpected sca_ref: {href}")
         if rel.split("/")[0] in DAEBAK_PAGES and a.get("data-affiliate") == "daebak" and "sca_ref=12575992." not in href:
             problems.append(f"{rel}: daebak affiliate link missing sca_ref param: {href}")
+        if "partner.bol.com" in href:
+            # bol.com affiliate deeplinks (NL/BE): site id 1555738, search URLs only, sponsored nofollow.
+            if a.get("target") != "_blank" or not {"sponsored", "nofollow", "noopener"} <= rels:
+                problems.append(f"{rel}: bol affiliate link missing target/rel sponsored nofollow noopener: {href}")
+            if not href.startswith("https://partner.bol.com/click/click?p=2&t=url&s=1555738&f=TXL&url=https%3A%2F%2Fwww.bol.com%2F"):
+                problems.append(f"{rel}: bol link with unexpected format or site id: {href}")
         if "data-affiliate" in a:
             # Swappable brand links (e.g. /snack-boxes/): known brand, external, never followed.
             if a.get("data-affiliate") not in AFFILIATE_BRANDS:

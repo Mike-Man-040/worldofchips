@@ -17,7 +17,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { UNIVERSAL_YUMS_AWIN, AWIN_REL, YUMS_BOX_CSS, yumsBox, DAEBAK_LINK, DAEBAK_REL } from './affiliate_tags.mjs';
+import { UNIVERSAL_YUMS_AWIN, AWIN_REL, YUMS_BOX_CSS, yumsBox, DAEBAK_LINK, DAEBAK_REL, bolBox } from './affiliate_tags.mjs';
 
 process.on('uncaughtException', (e) => { console.error(`build_snack_boxes: ${e.message}`); process.exit(1); });
 
@@ -397,7 +397,7 @@ ${yumsBox()}
       </div>
       <p class="aff-disc">As an Amazon Associate, World of Chips earns from qualifying purchases. This doesn&#8217;t affect our editorial content &#8212; we only feature products we genuinely think chip lovers will enjoy.</p>
     </section>
-
+${bolBox([{ n: 'Japanese snacks', q: 'japanse snacks' }, { n: 'Korean snacks', q: 'koreaanse snacks' }, { n: 'Takis', q: 'takis' }, { n: 'Pringles', q: 'pringles' }])}
     <section class="cp-section sb-faq" id="faq">
       <h2>Snack Box FAQs</h2>
       ${FAQS.map(([q, a]) => `<h3>${esc(q)}</h3>\n      <p>${a}</p>`).join('\n      ')}

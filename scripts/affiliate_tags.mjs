@@ -59,3 +59,31 @@ ${indent}  <a href="${UNIVERSAL_YUMS_AWIN.replace(/&/g, '&amp;')}" target="_blan
 ${indent}  <p class="aff-disc">Affiliate link: World of Chips may earn a commission if you subscribe, at no extra cost to you.</p>
 ${indent}</aside>
 `;
+
+// bol.com affiliate programme (Site ID 1555738), for readers in the Netherlands & Belgium.
+// Deeplink format per affiliate.bol.com/nl/handleiding/handleiding-productlink/ (checked 3 Nov 2026):
+// https://partner.bol.com/click/click?p=2&t=url&s=<SiteID>&f=TXL&url=<encoded bol URL>&name=<name>
+// Only link to real bol.com search/category URLs (no invented product IDs).
+export const BOL_SITE_ID = '1555738';
+export const BOL_TAG = BOL_SITE_ID;
+export const BOL_REL = 'sponsored nofollow noopener';
+export const bolSearchUrl = (q) => `https://www.bol.com/nl/nl/s/?searchtext=${encodeURIComponent(q)}`;
+export const bolLink = (bolUrl, name) =>
+  `https://partner.bol.com/click/click?p=2&t=url&s=${BOL_SITE_ID}&f=TXL&url=${encodeURIComponent(bolUrl)}&name=${encodeURIComponent(name)}`;
+// Box styled like the "Shop on Amazon" box (.shop-top/.buy-btn); placed beside/below Amazon.
+// links: [{ n: 'Label', q: 'search text' }]
+export const bolBox = (links, indent = '    ') => {
+  const a = (l, cls) => `<a href="${bolLink(bolSearchUrl(l.q), l.id || l.n).replace(/&/g, '&amp;')}" target="_blank" rel="${BOL_REL}" class="${cls}" data-affiliate="bol">${l.n} &#8594;</a>`;
+  const [first, ...rest] = links;
+  return `
+${indent}<aside class="cp-section shop-top bol-box" id="bol" aria-labelledby="bol-title">
+${indent}  <h2 id="bol-title">🇳🇱🇧🇪 For readers in the Netherlands &amp; Belgium</h2>
+${indent}  <p>Shopping from the Netherlands or Belgium? bol.com delivers these to NL and BE addresses. Links open a bol.com search, so check what&#8217;s in stock and the current price there.</p>
+${indent}  ${a({ ...first, id: first.n, n: `🛒 ${first.n} on bol.com` }, 'buy-btn buy-btn-lg')}
+${rest.length ? `${indent}  <div class="buy-grid" style="display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center">
+${indent}    ${rest.map((l) => a(l, 'buy-btn')).join(`\n${indent}    `)}
+${indent}  </div>
+` : ''}${indent}  <p class="aff-disc">Affiliate links: World of Chips may earn a commission from bol.com purchases, at no extra cost to you.</p>
+${indent}</aside>
+`;
+};

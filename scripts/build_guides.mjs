@@ -18,7 +18,7 @@
 //         node scripts/build_guides.mjs --check   exit 1 if any output is out of date
 // build_country_pages.mjs, build_news.mjs and build_snack_boxes.mjs preserve these sitemap entries.
 
-import { DEFAULT_AMAZON_TAG, guideSection, retag, UNIVERSAL_YUMS_AWIN, AWIN_REL, yumsBox, daebakBox, DAEBAK_LINK, DAEBAK_REL } from './affiliate_tags.mjs';
+import { DEFAULT_AMAZON_TAG, guideSection, retag, UNIVERSAL_YUMS_AWIN, AWIN_REL, yumsBox, daebakBox, DAEBAK_LINK, DAEBAK_REL, bolBox } from './affiliate_tags.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -142,6 +142,7 @@ const GUIDES = [
   },
   {
     slug: 'where-to-buy-asian-chips-europe',
+    bol: [{ n: 'Takis', q: 'takis' }, { n: 'Japanese snacks', q: 'japanse snacks' }, { n: 'Korean snacks', q: 'koreaanse snacks' }, { n: 'Pringles', q: 'pringles' }],
     flag: '🇪🇺',
     crumb: 'Where to Buy in Europe',
     h1: 'Where to Buy Takis, Honey Butter Chip and Other Imported Chips in Europe',
@@ -334,6 +335,7 @@ const GUIDES = [
   },
   {
     slug: 'best-chip-gift-boxes',
+    bol: [{ n: 'Snack gift boxes', q: 'snack cadeaupakket' }, { n: 'Chips multipacks', q: 'chips multipack' }, { n: 'Takis', q: 'takis' }],
     yumsTop: true,
     checked: '2026-10-27', checkedLabel: '27 October 2026',
     flag: '🎁',
@@ -392,6 +394,7 @@ const GUIDES = [
   },
   {
     slug: 'christmas-chip-gifts-2026',
+    bol: [{ n: 'Snack gift boxes', q: 'snack cadeaupakket' }, { n: 'Japanese snacks', q: 'japanse snacks' }, { n: 'Korean snacks', q: 'koreaanse snacks' }, { n: 'Takis', q: 'takis' }],
     yumsTop: true,
     checked: '2026-10-27', checkedLabel: '27 October 2026',
     flag: '🎄',
@@ -876,7 +879,7 @@ ${fontsLink}
 .cp-intro-dark{color:var(--muted);max-width:640px;margin:1rem auto 0;font-size:.95rem}
 .cp-cta h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--brown);margin-bottom:.6rem}
 .sb-top-disc{margin:0 auto 2rem;padding-top:0;border-top:none}
-${g.shopTop || g.picksFirst || g.yumsTop || g.daebakTop ? SHOP_TOP_CSS : ''}.gd-picks{margin:1rem 0 0 1.3rem}
+${g.shopTop || g.picksFirst || g.yumsTop || g.daebakTop || g.bol ? SHOP_TOP_CSS : ''}.gd-picks{margin:1rem 0 0 1.3rem}
 .gd-picks li{background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.9rem 1rem;margin-bottom:.8rem;font-size:.92rem;line-height:1.6}
 .gd-picks strong{color:var(--brown);font-family:'Playfair Display',serif;font-size:1.05rem}
 .gd-picks a,.cp-section a{color:#1A4570}
@@ -915,7 +918,7 @@ ${siteNav}
 ${g.disc === false ? '' : `    <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>`}
 
     <p class="cp-intro">${intro}</p>
-${g.shopTop ? shopTop(g.shopTop) : ''}${g.yumsTop ? yumsBox() : ''}${g.daebakTop ? daebakBox() : ''}${early}${g.nlTop ? giftNewsletter() : ''}${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
+${g.shopTop ? shopTop(g.shopTop) : ''}${g.yumsTop ? yumsBox() : ''}${g.daebakTop ? daebakBox() : ''}${early}${g.nlTop ? giftNewsletter() : ''}${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.bol ? bolBox(g.bol) : ''}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
 
 ${hasAuthor(g) ? authorBox : ''}    <section class="cp-section sb-faq" id="faq">
       <h2>FAQs</h2>
