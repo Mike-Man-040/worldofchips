@@ -17,7 +17,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { UNIVERSAL_YUMS_AWIN, AWIN_REL, YUMS_BOX_CSS, yumsBox } from './affiliate_tags.mjs';
+import { UNIVERSAL_YUMS_AWIN, AWIN_REL, YUMS_BOX_CSS, yumsBox, DAEBAK_LINK, DAEBAK_REL } from './affiliate_tags.mjs';
 
 process.on('uncaughtException', (e) => { console.error(`build_snack_boxes: ${e.message}`); process.exit(1); });
 
@@ -91,7 +91,7 @@ const BOXES = [
     sources: ['https://sakura.co/', 'https://sakura.co/subscribe', 'https://help.tokyotreat.com/hc/en-us/articles/360059107554-What-do-I-get-in-my-Sakuraco-box', 'https://help.tokyotreat.com/hc/en-us/articles/360059099914-Shipping-Information'],
   },
   {
-    id: 'daebak', name: 'Daebak SnackFever', affiliate: 'daebak', url: 'https://daebak.co/', flag: '🇰🇷',
+    id: 'daebak', name: 'Daebak SnackFever', affiliate: 'daebak', url: DAEBAK_LINK, rel: DAEBAK_REL, flag: '🇰🇷',
     tagline: 'Korean convenience-store snacks, shipped from Seoul each season',
     focus: 'Korean snacks: chips, jellies, sweets', chips: 'Yes (chips &amp; crackers in every box)', chipScore: 3,
     items: '8+ (Original) or 12+ (Deluxe) snacks',

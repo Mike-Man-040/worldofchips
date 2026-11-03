@@ -13,6 +13,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://worldofchips.com"
 NEWS_CATEGORIES = {"Industry", "New Flavor", "Safety Recall", "Innovation", "Sustainability", "Investment", "Regional"}
 NEWS_FIELDS = ("id", "date", "title", "summary", "category", "source_name", "source_url")
+# Pages whose daebak.co links must use our referral (sca_ref) link.
+DAEBAK_PAGES = {"south-korea", "best-korean-chips-to-buy-online", "snack-boxes"}
 AFFILIATE_BRANDS = {"bokksu", "tokyotreat", "sakuraco", "japancrate", "daebak", "japancandystore", "universalyums", "mexicrate", "snackcrate"}
 VOID = {"area","base","br","col","embed","hr","img","input","link","meta","source","track","wbr"}
 
@@ -124,6 +126,14 @@ def check(path, problems, form_ids=None):
                 problems.append(f"{rel}: awin affiliate link missing target/rel sponsored nofollow noopener: {href}")
             if "awinaffid=3136222" not in href:
                 problems.append(f"{rel}: awin link with unexpected publisher id: {href}")
+        if "daebak.co" in href and "sca_ref=" in href:
+            # Daebak referral links: must carry our sca_ref, be sponsored, nofollow, noopener, new tab.
+            if a.get("target") != "_blank" or not {"sponsored", "nofollow", "noopener"} <= rels:
+                problems.append(f"{rel}: daebak affiliate link missing target/rel sponsored nofollow noopener: {href}")
+            if "sca_ref=12575992." not in href:
+                problems.append(f"{rel}: daebak link with unexpected sca_ref: {href}")
+        if rel.split("/")[0] in DAEBAK_PAGES and a.get("data-affiliate") == "daebak" and "sca_ref=12575992." not in href:
+            problems.append(f"{rel}: daebak affiliate link missing sca_ref param: {href}")
         if "data-affiliate" in a:
             # Swappable brand links (e.g. /snack-boxes/): known brand, external, never followed.
             if a.get("data-affiliate") not in AFFILIATE_BRANDS:
