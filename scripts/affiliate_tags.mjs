@@ -23,6 +23,20 @@ export const retag = (html, section) => (section
   ? html.replace(/(amazon\.com\/[^\s"'<>]*?[?&](?:amp;)?tag=)worldofchips-20/g, `$1${tagFor(section)}`)
   : html);
 
+// Daebak (daebak.co) referral programme: 10% commission on Korean snack boxes.
+// Copy is limited to: Korean snack subscription box, ships internationally from daebak.co.
+export const DAEBAK_LINK = 'https://daebak.co?sca_ref=12575992.ZFUvl8WKOqs2QeWy';
+export const DAEBAK_REL = 'sponsored nofollow noopener';
+// Box styled like the "Shop on Amazon" / Universal Yums boxes (.shop-top/.buy-btn-lg); place ABOVE Amazon picks.
+export const daebakBox = (indent = '    ') => `
+${indent}<aside class="cp-section shop-top daebak-top" id="daebak" aria-labelledby="daebak-top-title">
+${indent}  <h2 id="daebak-top-title">🇰🇷 Korean snack box: Daebak</h2>
+${indent}  <p>Daebak is a Korean snack subscription box that ships internationally from daebak.co.</p>
+${indent}  <a href="${DAEBAK_LINK}" target="_blank" rel="${DAEBAK_REL}" class="buy-btn buy-btn-lg" data-affiliate="daebak">🇰🇷 Get the Daebak box &#8594;</a>
+${indent}  <p class="aff-disc">Affiliate link: World of Chips may earn a commission if you subscribe, at no extra cost to you.</p>
+${indent}</aside>
+`;
+
 // Universal Yums via Awin (advertiser 90729, publisher 3136222): $10 per new subscription,
 // 30-day cookie, US programme. Use this instead of plain universalyums.com links.
 export const UNIVERSAL_YUMS_AWIN = 'https://www.awin1.com/cread.php?awinmid=90729&awinaffid=3136222&ued=https%3A%2F%2Fwww.universalyums.com%2F';

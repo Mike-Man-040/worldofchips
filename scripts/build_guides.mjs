@@ -18,7 +18,7 @@
 //         node scripts/build_guides.mjs --check   exit 1 if any output is out of date
 // build_country_pages.mjs, build_news.mjs and build_snack_boxes.mjs preserve these sitemap entries.
 
-import { DEFAULT_AMAZON_TAG, guideSection, retag, UNIVERSAL_YUMS_AWIN, AWIN_REL, yumsBox, bolBox } from './affiliate_tags.mjs';
+import { DEFAULT_AMAZON_TAG, guideSection, retag, UNIVERSAL_YUMS_AWIN, AWIN_REL, yumsBox, daebakBox, DAEBAK_LINK, DAEBAK_REL, bolBox } from './affiliate_tags.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -455,7 +455,7 @@ const GUIDES = [
         <tr><th scope="row">🇯🇵 Bokksu</th><td>Traditional Japanese snacks + tea</td><td>$32.99&#8211;$39.99 monthly</td><td>Feels premium; artisan makers</td><td><a href="https://www.bokksu.com/" target="_blank" rel="nofollow noopener" data-affiliate="bokksu">Visit Bokksu</a></td></tr>
         <tr><th scope="row">🇯🇵 TokyoTreat</th><td>Modern Japanese snacks</td><td>$32.50&#8211;$37.50 monthly</td><td>Convenience-store favourites and limited flavours</td><td><a href="https://tokyotreat.com/" target="_blank" rel="nofollow noopener" data-affiliate="tokyotreat">Visit TokyoTreat</a></td></tr>
         <tr><th scope="row">🇯🇵 Japan Candy Box</th><td>Japanese candy &amp; snacks</td><td>$25&#8211;$31 monthly</td><td>Lower-priced Japan box</td><td><a href="https://www.japancandystore.com/" target="_blank" rel="nofollow noopener" data-affiliate="japancandystore">Visit Japan Candy Store</a></td></tr>
-        <tr><th scope="row">🇰🇷 Daebak SnackFever</th><td>Korean snacks</td><td>$40&#8211;$55 per seasonal box</td><td>The Korea pick; four boxes a year</td><td><a href="https://daebak.co/" target="_blank" rel="nofollow noopener" data-affiliate="daebak">Visit Daebak</a></td></tr>
+        <tr><th scope="row">🇰🇷 Daebak SnackFever</th><td>Korean snacks</td><td>$40&#8211;$55 per seasonal box</td><td>The Korea pick; four boxes a year</td><td><a href="${DAEBAK_LINK}" target="_blank" rel="${DAEBAK_REL}" data-affiliate="daebak">Visit Daebak</a></td></tr>
         <tr><th scope="row">🌍 Universal Yums</th><td>A different country each month</td><td>$18&#8211;$47 monthly</td><td>Variety beyond Asia; US &amp; Canada only</td><td><a href="${UNIVERSAL_YUMS_AWIN.replace(/&/g, '&amp;')}" target="_blank" rel="${AWIN_REL}" data-affiliate="universalyums">Visit Universal Yums</a></td></tr>
         </tbody>
       </table>
@@ -511,6 +511,7 @@ const GUIDES = [
   },
   {
     slug: 'best-korean-chips-to-buy-online',
+    daebakTop: true,
     checked: '2026-10-26', checkedLabel: '26 October 2026',
     flag: '🇰🇷',
     crumb: 'Best Korean Chips',
@@ -650,7 +651,7 @@ GUIDES.push(...morePages({ amazonSearch, esc, ROOT }));
 // SnackCrate were read on 2026-10-28. Brand links are plain official URLs (affiliate approvals pending):
 // swap the href and add "sponsored" to rel when a program is approved (search data-affiliate="<brand>").
 {
-  const off = (brand, href, label) => `<a href="${href}" target="_blank" rel="${href.includes('awin1.com') ? AWIN_REL : 'nofollow noopener'}" data-affiliate="${brand}">${label}</a>`;
+  const off = (brand, href, label) => `<a href="${href}" target="_blank" rel="${href.includes('awin1.com') || href === DAEBAK_LINK ? AWIN_REL : 'nofollow noopener'}" data-affiliate="${brand}">${label}</a>`;
   const U = (t) => `<span title="Not confirmed on the official site" style="color:var(--red);font-weight:700">(unconfirmed)</span>${t ? ' ' + t : ''}`;
   const rows = [
     ['🌍', off('universalyums', UNIVERSAL_YUMS_AWIN.replace(/&/g, '&amp;'), 'Universal Yums'), 'Yum Box $18&#8211;$20 &#183; Yum Yum Box $27&#8211;$31 &#183; Super Yum Box $41&#8211;$47 (per box; lower price = 12-month plan)', 'A different country each month (you can pick your first box&#8217;s country)', '5&#8211;7, 10&#8211;12 or 15&#8211;18 sweet and savoury snacks (Super Yum adds a drink), plus a booklet with trivia and games', 'US and Canada only. Free in the contiguous US; Canada $5/$8/$10 per box by size', '18 Oct 2026'],
@@ -659,7 +660,7 @@ GUIDES.push(...morePages({ amazonSearch, esc, ROOT }));
     ['🇯🇵', off('sakuraco', 'https://sakura.co/', 'Sakuraco'), '$32.50&#8211;$37.50 per box; Premium Tea Pairing +$10/month', 'Japan; TokyoTreat&#8217;s sister box', 'Up to 20 traditional sweets, snacks and teas plus a Japanese home good and a culture guide', 'Same table as TokyoTreat: $16.99 per box', '18 Oct 2026'],
     ['🇲🇽', off('mexicrate', 'https://www.mexicrate.com/', 'MexiCrate'), 'Peque&#241;a $14.99 &#183; Mediana $29.99 &#183; Grande $39.99 (per box). Whether these renew as a subscription and any plan discounts: ' + U('check site'), 'Mexican candy and snacks, packed and shipped from MexiCrate&#8217;s Southern California office', 'Peque&#241;a 10&#8211;15, Mediana 25+, Grande 35+ rotating Mexican candies and snacks (mostly candy; spicy, tamarind and chamoy flavours)', 'US and Canada only. Free US shipping on orders over $75 (contiguous states); Canada flat $20 under 10 lb, duty/taxes possible over $40 CAD', '28 Oct 2026'],
     ['🌍', off('snackcrate', 'https://www.snackcrate.com/', 'SnackCrate'), 'Original crate $26 (12 months) / $29 (6 months) per crate; monthly price ' + U('shown as $34.01 or $40 in the sign-up page data') + '. Bigger &#8220;Family&#8221; crate $50&#8211;$54 on longer plans ' + U('monthly price unclear'), 'A new country every month; snacks imported from that country', 'Sweet, salty and savoury full-size snacks, a local drink, a culture guide and an English ingredient guide', 'US, US territories and military bases/embassies only. Shipping fee: ' + U('see site'), '28 Oct 2026'],
-    ['🇰🇷', off('daebak', 'https://daebak.co/', 'Daebak SnackFever'), 'Original $40 &#183; Deluxe $55 per seasonal box (4 a year); 10&#8211;15% off on subscriptions', 'South Korea; ships from Seoul', '8+ (Original) or 12+ (Deluxe) Korean convenience-store snacks: chips, crackers, jellies, sweets', 'Ships to 100+ countries with VAT and duties included; US/Canada $4.99/$9.99', '18 Oct 2026'],
+    ['🇰🇷', off('daebak', DAEBAK_LINK, 'Daebak SnackFever'), 'Original $40 &#183; Deluxe $55 per seasonal box (4 a year); 10&#8211;15% off on subscriptions', 'South Korea; ships from Seoul', '8+ (Original) or 12+ (Deluxe) Korean convenience-store snacks: chips, crackers, jellies, sweets', 'Ships to 100+ countries with VAT and duties included; US/Canada $4.99/$9.99', '18 Oct 2026'],
   ];
   GUIDES.push({
     slug: 'christmas-snack-box-comparison-2026', checked: '2026-10-28', checkedLabel: '28 October 2026', flag: '🎄', crumb: 'Christmas Snack Boxes Compared',
@@ -676,7 +677,7 @@ GUIDES.push(...morePages({ amazonSearch, esc, ROOT }));
       <ul class="sb-list">
         <li><strong>Cheapest box:</strong> ${off('mexicrate', 'https://www.mexicrate.com/', 'MexiCrate Peque&#241;a')} at $14.99, or ${off('universalyums', UNIVERSAL_YUMS_AWIN.replace(/&/g, '&amp;'), 'Universal Yums')} from $18 a box (both US/Canada only).</li>
         <li><strong>Most premium-feeling gift:</strong> ${off('bokksu', 'https://www.bokksu.com/', 'Bokksu')}: traditional Japanese snacks plus tea.</li>
-        <li><strong>Best for chip lovers:</strong> ${off('tokyotreat', 'https://tokyotreat.com/', 'TokyoTreat')} (a chips and salty treats category) or ${off('daebak', 'https://daebak.co/', 'Daebak')} (chips and crackers in every box).</li>
+        <li><strong>Best for chip lovers:</strong> ${off('tokyotreat', 'https://tokyotreat.com/', 'TokyoTreat')} (a chips and salty treats category) or ${off('daebak', DAEBAK_LINK, 'Daebak')} (chips and crackers in every box).</li>
         <li><strong>Best for tea drinkers:</strong> ${off('sakuraco', 'https://sakura.co/', 'Sakuraco')}, with a Japanese home good in each box.</li>
         <li><strong>A new country every month:</strong> Universal Yums or ${off('snackcrate', 'https://www.snackcrate.com/', 'SnackCrate')}.</li>
         <li><strong>Sending to Europe?</strong> Bokksu, TokyoTreat, Sakuraco and Daebak ship there; Daebak includes VAT and duties.</li>
@@ -878,7 +879,7 @@ ${fontsLink}
 .cp-intro-dark{color:var(--muted);max-width:640px;margin:1rem auto 0;font-size:.95rem}
 .cp-cta h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--brown);margin-bottom:.6rem}
 .sb-top-disc{margin:0 auto 2rem;padding-top:0;border-top:none}
-${g.shopTop || g.picksFirst || g.yumsTop || g.bol ? SHOP_TOP_CSS : ''}.gd-picks{margin:1rem 0 0 1.3rem}
+${g.shopTop || g.picksFirst || g.yumsTop || g.daebakTop || g.bol ? SHOP_TOP_CSS : ''}.gd-picks{margin:1rem 0 0 1.3rem}
 .gd-picks li{background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.9rem 1rem;margin-bottom:.8rem;font-size:.92rem;line-height:1.6}
 .gd-picks strong{color:var(--brown);font-family:'Playfair Display',serif;font-size:1.05rem}
 .gd-picks a,.cp-section a{color:#1A4570}
@@ -917,7 +918,7 @@ ${siteNav}
 ${g.disc === false ? '' : `    <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>`}
 
     <p class="cp-intro">${intro}</p>
-${g.shopTop ? shopTop(g.shopTop) : ''}${g.yumsTop ? yumsBox() : ''}${early}${g.nlTop ? giftNewsletter() : ''}${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.bol ? bolBox(g.bol) : ''}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
+${g.shopTop ? shopTop(g.shopTop) : ''}${g.yumsTop ? yumsBox() : ''}${g.daebakTop ? daebakBox() : ''}${early}${g.nlTop ? giftNewsletter() : ''}${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.bol ? bolBox(g.bol) : ''}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
 
 ${hasAuthor(g) ? authorBox : ''}    <section class="cp-section sb-faq" id="faq">
       <h2>FAQs</h2>
