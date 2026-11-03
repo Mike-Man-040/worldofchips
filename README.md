@@ -126,3 +126,14 @@ Moderation steps:
 4. Rebuild and validate: `node scripts/build_country_pages.mjs && node scripts/build_llms.mjs && python3 scripts/validate_site.py`.
    Entries appear in "Community Finds" on the country page and the 6 newest appear under the homepage map.
 5. Commit, then open a PR and merge it.
+
+## Photos, share links and social links
+
+Photos come only from Wikimedia Commons (CC0, public domain, CC BY, CC BY-SA) and are listed with author,
+licence and file page in `scripts/photos.mjs` (`PHOTOS` + `PAGE_PHOTO`). Each figure prints its credit in a caption.
+Files live in `assets/photos/` as `<key>-480.webp`, `<key>-960.webp` (lazy-loaded, `srcset`) and `og-<key>.jpg`
+(1200x630, used as og:image on that page). Never use Amazon or other retailer product images.
+`assets/extras.css` styles photos, the plain share links (Pinterest, X, Facebook, WhatsApp, copy link; no scripts)
+and the footer social links (Pinterest, Reddit u/WorldOfChips).
+
+`/pringles-index/` is frozen: `build_guides.mjs` does not rewrite it and `build_og_images.py` skips its share image.

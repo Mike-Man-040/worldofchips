@@ -18,6 +18,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { retag, daebakBox, bolBox } from './affiliate_tags.mjs';
+import { PAGE_PHOTO, photoFor, photoFigure, ogPhoto, shareRow, PHOTO_CSS_LINK } from './photos.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://worldofchips.com';
@@ -146,14 +147,14 @@ function snackBoxCallout(slug) {
 // Cross-link the buyer's guides (built by build_guides.mjs).
 const GUIDE_LINKS = {
   japan: [['christmas-chip-gifts-2026', '🎄 Christmas chip gift guide 2026'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Asian chips in Europe']],
-  'south-korea': [['christmas-chip-gifts-2026', '🎄 Christmas chip gift guide 2026'], ['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips to buy online'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Honey Butter Chip in Europe'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online']],
-  mexico: [['christmas-chip-gifts-2026', '🎄 Christmas chip gift guide 2026'], ['best-mexican-chips-to-buy-online', '🇲🇽 Best Mexican chips to buy online'], ['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy (Takis & more)'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Takis in the UK & Europe'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
+  'south-korea': [['christmas-chip-gifts-2026', '🎄 Christmas chip gift guide 2026'], ['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips to buy online'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Honey Butter Chip in Europe'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online'], ['where-to-buy-honey-butter-chip-europe', '🍯 Where to buy Honey Butter Chip in Sweden, NL & Germany']],
+  mexico: [['christmas-chip-gifts-2026', '🎄 Christmas chip gift guide 2026'], ['best-mexican-chips-to-buy-online', '🇲🇽 Best Mexican chips to buy online'], ['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy (Takis & more)'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy Takis in the UK & Europe'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-takis-europe', '🌶️ Where to buy Takis in Sweden, NL & Germany']],
   'united-kingdom': [['christmas-chip-gifts-2026', '🎄 Christmas chip gift guide 2026'], ['best-british-crisps-to-buy-online', '🇬🇧 Best British crisps to buy online'], ['best-chip-gift-boxes', '🎁 Chip gift boxes (incl. Monster Munch)'], ['where-to-buy-asian-chips-europe', '🇬🇧 Where to buy Takis & imported chips in the UK'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   'united-states': [['spiciest-chips-you-can-buy', '🌶️ Spiciest chips you can buy'], ['best-chip-gift-boxes', '🎁 Best chip gift boxes'], ['best-international-chip-variety-packs', '🌍 Best international chip variety packs to buy online'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online']],
-  germany: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe']],
+  germany: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe'], ['where-to-buy-takis-europe', '🌶️ Where to buy Takis in Sweden, NL & Germany'], ['where-to-buy-honey-butter-chip-europe', '🍯 Where to buy Honey Butter Chip in Sweden, NL & Germany']],
   china: [['christmas-chip-gifts-2026', '🎄 Christmas chip gift guide 2026'], ['best-international-chip-variety-packs', '🌍 Best exotic Asian chip variety packs'], ['best-japanese-chips', '🇯🇵 Best Japanese chips to buy online']],
   france: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe']],
-  netherlands: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe']],
+  netherlands: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe'], ['where-to-buy-takis-europe', '🌶️ Where to buy Takis in Sweden, NL & Germany'], ['where-to-buy-honey-butter-chip-europe', '🍯 Where to buy Honey Butter Chip in Sweden, NL & Germany']],
   poland: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe']],
   russia: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   argentina: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
@@ -165,7 +166,7 @@ const GUIDE_LINKS = {
   turkey: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   'south-africa': [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   'new-zealand': [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
-  sweden: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe']],
+  sweden: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe'], ['where-to-buy-takis-europe', '🌶️ Where to buy Takis in Sweden, NL & Germany'], ['where-to-buy-honey-butter-chip-europe', '🍯 Where to buy Honey Butter Chip in Sweden, NL & Germany']],
 };
 // Community finds: moderated visitor submissions from data/community_flavors.json (see README).
 // Entry: { "id": "2026-11-uk-1", "country": "united-kingdom", "city": "Leeds", "flavor": "Chip Shop Curry",
@@ -307,7 +308,8 @@ const HOME_GUIDES = [['halloween-chips-2026', '🎃 Halloween chips 2026'], ['ch
   ['best-korean-chips-to-buy-online', '🇰🇷 Best Korean chips'], ['best-mexican-chips-to-buy-online', '🇲🇽 Best Mexican chips'],
   ['best-british-crisps-to-buy-online', '🇬🇧 Best British crisps'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'],
   ['best-international-chip-variety-packs', '🌍 International variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying chips in Europe'],
-  ['snack-boxes', '🍱 Snack boxes compared']];
+  ['snack-boxes', '🍱 Snack boxes compared'],
+  ['where-to-buy-takis-europe', '🌶️ Where to buy Takis (SE, NL, DE)'], ['where-to-buy-honey-butter-chip-europe', '🍯 Where to buy Honey Butter Chip (SE, NL, DE)']];
 const link = (o) => `<a href="/${o.slug}/" class="cp-explore-link">${o.d.flag} ${esc(o.name)}</a>`;
 
 // Hand-written SEO titles/descriptions for pages already ranking on page 1 (GSC, Oct 2026). Facts from each page's own data.
@@ -326,12 +328,19 @@ const SEO = {
 function renderPage(x) {
   const { name, slug, d, c } = x;
   const url = `${SITE}/${slug}/`;
-  const title = SEO[slug] ? SEO[slug][0] : `Potato Chips in ${inName(name)}: ${d.topBrands.slice(0, 2).join(', ')} & Top Flavors | World of Chips`;
+  // Keep <title> to about 60 characters: the first candidate that fits, else the shortest.
+  const titleOpts = [`Potato Chips in ${inName(name)}: ${d.topBrands.slice(0, 2).join(', ')} & Top Flavors | World of Chips`,
+    `Potato Chips in ${inName(name)}: ${d.topBrands[0]} & Top Flavors | World of Chips`,
+    `Potato Chips in ${inName(name)}: Brands & Flavors | World of Chips`,
+    `${name} Chips: Top Brands & Flavors | World of Chips`];
+  const title = SEO[slug] ? SEO[slug][0] : (titleOpts.find((t) => t.length <= 62) || titleOpts[titleOpts.length - 1]);
   const desc = truncate(
     `Potato chips in ${inName(name)}: top brands like ${d.topBrands.slice(0, 3).join(', ')}, ` +
     `popular flavors such as ${d.popularFlavors.slice(0, 2).join(' and ')}, unique flavors like ` +
     `${d.uniqueFlavors.slice(0, 2).join(' and ')}, fun facts and where to buy.`, 160);
   const descFinal = SEO[slug] ? SEO[slug][1] : desc;
+  const ogP = ogPhoto(slug), photo = photoFor(slug);
+  const ogImg = ogP ? ogP.src : `/assets/og/${slug}.png`;
   const faq = buildFaq(x);
   FAQ_COUNT += faq.length;
   const ld = {
@@ -382,12 +391,12 @@ ${gaSnippet}
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(descFinal)}">
 <meta property="og:site_name" content="World of Chips">
-<meta property="og:image" content="${SITE}/assets/og/${slug}.png">
+<meta property="og:image" content="${SITE}${ogImg}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="${esc(title)}">
+<meta property="og:image:alt" content="${esc(ogP ? ogP.alt : title)}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="${SITE}/assets/og/${slug}.png">
+<meta name="twitter:image" content="${SITE}${ogImg}">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(descFinal)}">
 <script type="application/ld+json">
@@ -397,6 +406,7 @@ ${fontsLink}
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="stylesheet" href="/assets/site.css">
+${PHOTO_CSS_LINK}
 <style>
 .nav-logo a{color:inherit;text-decoration:none;display:flex;align-items:center;gap:.5rem}
 .cp-crumbs{font-size:.75rem;color:var(--muted);margin-bottom:1rem}
@@ -435,7 +445,7 @@ ${siteNav}
   </div>
   <div class="cp-body">
     <p class="cp-intro">${esc(c.intro)}</p>
-
+${photo ? photoFigure(photo, { eager: true }) : ''}
 ${slug === 'south-korea' ? daebakBox() : ''}${buyBox(x)}${x.slug === 'netherlands' ? bolBox([{ n: 'Shop chips', q: 'chips' }, { n: 'Pringles', q: 'pringles' }, { n: "Lay's", q: 'lays chips' }, { n: 'Paprika chips', q: 'paprika chips' }]) + '\n' : ''}${quickFacts(x)}
     <div class="cp-stats">
 ${d.marketSize ? `      <div class="cp-stat"><div class="val">${esc(d.marketSize)}</div><div class="lbl">Market Size</div></div>\n` : ''}${d.perCapita ? `      <div class="cp-stat"><div class="val">${esc(d.perCapita)}</div><div class="lbl">Per Capita / Year</div></div>\n` : ''}      <div class="cp-stat"><div class="val">${esc(d.avgCost)}</div><div class="lbl">Avg. Bag Price</div></div>
@@ -492,7 +502,7 @@ ${faqSection(x, faq)}${snackBoxCallout(slug)}${guideCallout(slug)}${communitySec
     </section>
 
     ${newsletterBlock('    ')}
-
+${shareRow(url, title)}
     <nav class="cp-cta" aria-label="More country guides">
       <h2>More Chip Guides</h2>
       <div class="cp-explore-grid">${related.map(link).join('')}</div>
@@ -579,9 +589,10 @@ indexHtml = replaceRegion(indexHtml, 'COUNTRY-LINKS',
   <div class="section-eyebrow">Country Guides</div>
   <h2 class="section-title">Explore Chips by Country</h2>
   <p class="section-sub">Brands, flavors, snacking culture and shop picks for every country we cover.</p>
-  <div class="cp-explore-grid">
+${photoFigure(PAGE_PHOTO[''], { indent: '  ' })}  <div class="cp-explore-grid">
     ${sorted.map(link).join('\n    ')}
   </div>
+${shareRow(`${SITE}/`, 'Potato Chips Around the World | World of Chips', '  ')}
   <h3 class="section-sub" style="margin-top:2.5rem;font-weight:700">Buying Guides</h3>
   <div class="cp-explore-grid">
     ${HOME_GUIDES.map(([s, l]) => `<a href="/${s}/" class="cp-explore-link">${l}</a>`).join('\n    ')}

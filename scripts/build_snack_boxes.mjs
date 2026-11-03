@@ -17,6 +17,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { photoFigure, ogPhoto, shareRow, PHOTO_CSS_LINK } from './photos.mjs';
 import { UNIVERSAL_YUMS_AWIN, AWIN_REL, YUMS_BOX_CSS, yumsBox, DAEBAK_LINK, DAEBAK_REL, bolBox } from './affiliate_tags.mjs';
 
 process.on('uncaughtException', (e) => { console.error(`build_snack_boxes: ${e.message}`); process.exit(1); });
@@ -139,11 +140,12 @@ const JAPAN_CRATE = {
 };
 
 const AMAZON = [
-  { n: 'Calbee Japanese potato chips', d: 'Japan&#8217;s biggest chip brand: Nori Shio, Consommé Punch and more.', q: 'calbee potato chips' },
-  { n: 'Koikeya Karamucho hot chili chips', d: 'Koikeya&#8217;s cult spicy chips from Japan.', q: 'koikeya karamucho' },
-  { n: 'Haitai Honey Butter Chips', d: 'The sweet-salty Korean chip that sparked a craze.', q: 'haitai honey butter chips' },
-  { n: 'Nongshim Shrimp Crackers', d: 'Korea&#8217;s classic savory shrimp snack.', q: 'nongshim shrimp crackers' },
-  { n: 'Glico Pocky variety pack', d: 'For when you want something sweet between the chips.', q: 'pocky variety pack' },
+  // asin: amazon.com product page whose title matched this product (untagged web search, 2026-11-03; no prices quoted).
+  { n: 'Calbee Norishio (seaweed salt) potato chips, 60 g', d: 'Japan&#8217;s biggest chip brand; Norishio is one of its 1970s classics.', q: 'calbee potato chips', asin: 'B0033VAJMW' },
+  { n: 'Koikeya Karamucho Hot Chili, pack of 12', d: 'Koikeya&#8217;s cult spicy chips from Japan.', q: 'koikeya karamucho', asin: 'B00HMX1EZI' },
+  { n: 'Haitai Honey Butter Chips, pack of 3', d: 'The sweet-salty Korean chip that sparked a craze.', q: 'haitai honey butter chips', asin: 'B01K9A9V50' },
+  { n: 'Nongshim Shrimp Crackers, 14.1 oz, pack of 2', d: 'Korea&#8217;s classic savory shrimp snack.', q: 'nongshim shrimp crackers', asin: 'B0H7F3D75L' },
+  { n: 'Glico Pocky 5-flavour variety pack (10 boxes)', d: 'For when you want something sweet between the chips.', q: 'pocky variety pack', asin: 'B09H4HWWHV' },
 ];
 
 const FAQS = [
@@ -189,7 +191,7 @@ ${nlForm}
 
 const url = `${SITE}/snack-boxes/`;
 const h1 = 'Best Asian Snack Boxes in 2026: Bokksu vs TokyoTreat vs Sakuraco vs Daebak (and more)';
-const title = 'Best Asian Snack Boxes 2026: Bokksu vs TokyoTreat vs Daebak & More | World of Chips';
+const title = 'Asian Snack Boxes 2026: Bokksu vs TokyoTreat | World of Chips';
 const desc = 'Bokksu vs TokyoTreat vs Sakuraco vs Daebak vs Japan Candy Box vs Universal Yums: verified 2026 prices, what\u2019s inside, shipping to Europe, and the best box for chip lovers.';
 
 const ld = {
@@ -265,12 +267,12 @@ ${gaSnippet}
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:site_name" content="World of Chips">
-<meta property="og:image" content="${SITE}/assets/og/snack-boxes.png">
+<meta property="og:image" content="${SITE}${ogPhoto('snack-boxes').src}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="${esc(title)}">
+<meta property="og:image:alt" content="${esc(ogPhoto('snack-boxes').alt)}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="${SITE}/assets/og/snack-boxes.png">
+<meta name="twitter:image" content="${SITE}${ogPhoto('snack-boxes').src}">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(desc)}">
 <script type="application/ld+json">
@@ -280,6 +282,7 @@ ${fontsLink}
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="stylesheet" href="/assets/site.css">
+${PHOTO_CSS_LINK}
 <style>
 ${YUMS_BOX_CSS}.nav-logo a{color:inherit;text-decoration:none;display:flex;align-items:center;gap:.5rem}
 .cp-crumbs{font-size:.75rem;color:var(--muted);margin-bottom:1rem}
@@ -334,7 +337,7 @@ ${siteNav}
 ${yumsBox()}
     <p class="cp-intro">Snack boxes are the easiest way to taste chips, candy and regional treats you won&#8217;t find at home, but they vary a lot. Some send traditional sweets from family makers, some send full-size convenience-store favourites, and one well-known box no longer exists. Below you&#8217;ll find quick picks, a side-by-side table, a section for chip lovers, a full write-up of each box, and FAQs. All prices are in US dollars, per box, before shipping, and were checked in ${LAST_CHECKED_LABEL}. Where a company doesn&#8217;t publish a figure, we say &#8220;see site&#8221; rather than guess.</p>
 
-    <section class="cp-section" id="quick-picks">
+${photoFigure('japanese-snacks', { eager: true })}    <section class="cp-section" id="quick-picks">
       <h2>Quick Picks</h2>
       <ul class="sb-picks">
         <li><strong>Best traditional box</strong>${brandLink(byId.bokksu, 'Bokksu')}: 20&#8211;22 artisan snacks + tea, $32.99&#8211;$39.99</li>
@@ -393,7 +396,7 @@ ${yumsBox()}
       <h2>Prefer Single Snacks? Buy on Amazon</h2>
       <p>Not ready for a subscription? Pick up the chips you actually want:</p>
       <div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.8rem">
-        ${AMAZON.map((l) => `<a href="${esc(amazon(l.q))}" target="_blank" rel="sponsored nofollow noopener" style="display:flex;align-items:center;gap:.8rem;padding:.7rem 1rem;background:var(--paper);border:1px solid var(--light-border);border-radius:10px;text-decoration:none;color:var(--ink);transition:all .3s"><div style="flex:1"><div style="font-weight:700;font-size:.88rem">${l.n}</div><div style="font-size:.72rem;color:var(--muted)">${l.d}</div></div><span style="color:var(--gold);font-weight:700">Shop &#8594;</span></a>`).join('\n        ')}
+        ${AMAZON.map((l) => `<a href="${esc(l.asin ? `https://www.amazon.com/dp/${l.asin}?tag=${AMAZON_TAG}` : amazon(l.q))}" target="_blank" rel="sponsored nofollow noopener" style="display:flex;align-items:center;gap:.8rem;padding:.7rem 1rem;background:var(--paper);border:1px solid var(--light-border);border-radius:10px;text-decoration:none;color:var(--ink);transition:all .3s"><div style="flex:1"><div style="font-weight:700;font-size:.88rem">${l.n}</div><div style="font-size:.72rem;color:var(--muted)">${l.d}</div></div><span style="color:var(--gold);font-weight:700">Shop &#8594;</span></a>`).join('\n        ')}
       </div>
       <p class="aff-disc">As an Amazon Associate, World of Chips earns from qualifying purchases. This doesn&#8217;t affect our editorial content &#8212; we only feature products we genuinely think chip lovers will enjoy.</p>
     </section>
@@ -409,7 +412,7 @@ ${bolBox([{ n: 'Japanese snacks', q: 'japanse snacks' }, { n: 'Korean snacks', q
     </section>
 
     ${newsletterBlock('    ')}
-
+${shareRow(`${SITE}/snack-boxes/`, title)}
     <nav class="cp-cta" aria-label="More chip guides">
       <h2>More Chip Guides</h2>
       <div class="cp-explore-grid">${otherGuides.map(([s, l]) => `<a href="/${s}/" class="cp-explore-link">${l}</a>`).join('')}<a href="/news/" class="cp-explore-link">📰 Chip News</a></div>
