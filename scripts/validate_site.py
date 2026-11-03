@@ -13,7 +13,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://worldofchips.com"
 NEWS_CATEGORIES = {"Industry", "New Flavor", "Safety Recall", "Innovation", "Sustainability", "Investment", "Regional"}
 NEWS_FIELDS = ("id", "date", "title", "summary", "category", "source_name", "source_url")
-AFFILIATE_BRANDS = {"bokksu", "tokyotreat", "sakuraco", "japancrate", "daebak", "japancandystore", "universalyums", "mexicrate", "snackcrate"}
+AFFILIATE_BRANDS = {"bokksu", "tokyotreat", "sakuraco", "japancrate", "daebak", "japancandystore", "universalyums", "mexicrate", "snackcrate", "bol"}
 VOID = {"area","base","br","col","embed","hr","img","input","link","meta","source","track","wbr"}
 
 
@@ -124,6 +124,12 @@ def check(path, problems, form_ids=None):
                 problems.append(f"{rel}: awin affiliate link missing target/rel sponsored nofollow noopener: {href}")
             if "awinaffid=3136222" not in href:
                 problems.append(f"{rel}: awin link with unexpected publisher id: {href}")
+        if "partner.bol.com" in href:
+            # bol.com affiliate deeplinks (NL/BE): site id 1555738, search URLs only, sponsored nofollow.
+            if a.get("target") != "_blank" or not {"sponsored", "nofollow", "noopener"} <= rels:
+                problems.append(f"{rel}: bol affiliate link missing target/rel sponsored nofollow noopener: {href}")
+            if not href.startswith("https://partner.bol.com/click/click?p=2&t=url&s=1555738&f=TXL&url=https%3A%2F%2Fwww.bol.com%2F"):
+                problems.append(f"{rel}: bol link with unexpected format or site id: {href}")
         if "data-affiliate" in a:
             # Swappable brand links (e.g. /snack-boxes/): known brand, external, never followed.
             if a.get("data-affiliate") not in AFFILIATE_BRANDS:
