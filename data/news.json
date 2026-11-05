@@ -1,5 +1,64 @@
 [
   {
+    "id": "koikeya-yumeikoro-rock-salt-onion-consomme-2026",
+    "date": "2026-11-05",
+    "title": "Koikeya Brings Back Yumeikoro Chips With Rock Salt and Onion Consommé",
+    "summary": "Koikeya is again turning Hokkaido’s Yumeikoro potato, a Kitami-bred successor to Danshaku certified as a Hokkaido superior variety, into limited chips. Rock Salt and Onion Consommé (Hokkaido onions) go on sale at noon on November 5 only through the Koikeya online shop, in 70 g six-packs at ¥1,684 and a tasting set at ¥3,198, capped at about 10,000 sets after last year’s sell-out.",
+    "category": "New Flavor",
+    "country": "japan",
+    "source_name": "Nissin Foods Group (Koikeya)",
+    "source_url": "https://www.nissin.com/jp/company/news/13985/"
+  },
+  {
+    "id": "tayto-lentil-chips-salt-vinegar-2026",
+    "date": "2026-11-03",
+    "title": "Tayto Adds Salt & Vinegar to Its Lentil Chips Line",
+    "summary": "Irish crisp maker Tayto is rolling out Salt & Vinegar Lentil Chips nationwide this November. The lentil-based snack aims for a lighter crunch than potato crisps while keeping a sharp vinegar bite, and lands in 100 g sharing bags at an RRP of €3.15 across supermarket and convenience shelves.",
+    "category": "New Flavor",
+    "source_name": "LMFM",
+    "source_url": "https://www.lmfm.ie/news/entertainment/tayto-unveils-a-brand-new-tangy-lentil-chips-flavour/"
+  },
+  {
+    "id": "walkers-variety-sharing-box-gluten-recall-fsa",
+    "date": "2026-10-30",
+    "title": "FSA Allergy Alert: Walkers Variety Sharing Box Misses Wheat on Outer Pack",
+    "summary": "The UK Food Standards Agency says PepsiCo is recalling Walkers Variety Snacks Sharing Box batch 107543 (655 g, best before 21 November 2026) because the Monster Munch Giants Roast Beef pack inside contains wheat that is not declared on the outer box. Anyone with a wheat or gluten allergy, or coeliac disease, should not eat it and can seek a refund via PepsiCo’s Walkers care line.",
+    "category": "Safety Recall",
+    "country": "united-kingdom",
+    "source_name": "UK Food Standards Agency",
+    "source_url": "https://alerts.food.gov.uk/article/6962/PepsiCo-recalls-Walkers-Variety-Snacks-Sharing-Box-because-of-undeclared-wheat-gluten-on-the-outer-box"
+  },
+  {
+    "id": "utz-ceo-friedman-exit-lindeman-intersnack-8k",
+    "date": "2026-10-30",
+    "title": "Utz CEO Friedman to Exit as Intersnack Take-Private Closes; Lindeman Offered Role",
+    "summary": "In an October 30 Form 8-K, Utz Brands said CEO Howard Friedman will leave employment and the board after the planned Intersnack take-private closes, expected around November 30 and not due to any disagreement. Parent and continuing stockholders have offered director B. John Lindeman the post-closing CEO role at Company LLC, with a contemplated start the same day, ahead of the November 13 shareholder vote.",
+    "category": "Industry",
+    "country": "united-states",
+    "source_name": "U.S. SEC (Utz Brands Form 8-K)",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/1739566/000119312526441801/d237502d8k.htm"
+  },
+  {
+    "id": "pringles-personalised-tubes-christmas-uk-2026",
+    "date": "2026-10-28",
+    "title": "Pringles Rolls Out Personalised Tubes and Brings Back Christmas Flavours in the UK",
+    "summary": "Pringles has launched its first personalised tubes in the UK and Ireland for festive gifting, printing popular given names plus playful labels such as Mum, Dad and G.O.A.T. on Original, Salt & Vinegar, Texas BBQ and Sour Cream & Onion. The brand is also returning last year’s Pigs in Blankets flavour and Baked Cheese Garlic & Herbs for the holiday season.",
+    "category": "Regional",
+    "country": "united-kingdom",
+    "source_name": "Retail Times",
+    "source_url": "https://retailtimes.co.uk/merry-crispmas-pringles-gets-personal-with-personalised-tubes-for-christmas/"
+  },
+  {
+    "id": "pringles-italian-lasagna-japan-2026",
+    "date": "2026-10-27",
+    "title": "Pringles Serves Italian Lasagna Flavour Across Japan",
+    "summary": "Japan Kellogg (now under Mars after the Kellanova deal) is launching Pringles Italian Lasagna, a 45 g tube with tomato-sauce and rich cheese notes aimed at winter gatherings. Convenience stores and other retailers nationwide begin selling it on November 2; the cans are made in Malaysia, with packaging in Italy’s green, white and red and Mr. P sporting heart-shaped eyes.",
+    "category": "New Flavor",
+    "country": "japan",
+    "source_name": "PR Times (Japan Kellogg)",
+    "source_url": "https://prtimes.jp/main/html/rd/p/000000119.000012584.html"
+  },
+  {
     "id": "koikeya-pride-potato-kanazawa-hida-2026",
     "date": "2026-10-26",
     "title": "Koikeya Puts Kanazawa Sweet Shrimp and Hida Beef Into Its Pride Potato Chips",
