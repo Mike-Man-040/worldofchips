@@ -13,11 +13,11 @@ const PT = { regular: 'regular price', mrp: 'MRP (legal max. retail price)', low
 // outlet, title, url and date and set enabled: true. Nothing renders while it is disabled,
 // and the build refuses to publish it while placeholders are still in place.
 export const FEATURED_IN = {
-  enabled: false,
+  enabled: true,
   outlet: 'Bakery & Snacks',
-  title: '[ARTICLE_TITLE]',
-  url: '[ARTICLE_URL]',
-  date: '[DATE]',
+  title: 'Pringles prices: Who’s paying through the tube?',
+  url: 'https://www.bakeryandsnacks.com/Article/2026/11/06/pringles-index-why-snack-prices-vary-across-30-markets/',
+  date: '6 November 2026',
 };
 const PRESS_EMAIL = 'michaelvdlooij@gmail.com';
 
