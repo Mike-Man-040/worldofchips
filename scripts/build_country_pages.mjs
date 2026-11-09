@@ -166,6 +166,9 @@ const GUIDE_LINKS = {
   turkey: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   'south-africa': [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   'new-zealand': [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
+  colombia: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
+  peru: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
+  nigeria: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   sweden: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe'], ['where-to-buy-takis-europe', '🌶️ Where to buy Takis in Sweden, NL & Germany'], ['where-to-buy-honey-butter-chip-europe', '🍯 Where to buy Honey Butter Chip in Sweden, NL & Germany']],
 };
 // Community finds: moderated visitor submissions from data/community_flavors.json (see README).
@@ -218,7 +221,7 @@ function guideCallout(slug) {
 // guide links). The 15 fully researched countries get 4 Q&As; the thinner ones get 3 conservative
 // ones (brands, flavours, where to buy) and no history/"what makes it unique" answer.
 const RESEARCHED = new Set(['japan', 'south-korea', 'united-kingdom', 'united-states', 'mexico', 'germany',
-  'france', 'netherlands', 'poland', 'russia', 'argentina', 'egypt', 'thailand', 'india', 'spain', 'china', 'australia', 'italy', 'indonesia', 'canada', 'brazil', 'sweden', 'turkey', 'south-africa', 'new-zealand']);
+  'france', 'netherlands', 'poland', 'russia', 'argentina', 'egypt', 'thailand', 'india', 'spain', 'china', 'australia', 'italy', 'indonesia', 'canada', 'brazil', 'sweden', 'turkey', 'south-africa', 'new-zealand', 'colombia', 'peru', 'nigeria']);
 const listAnd = (a) => (a.length < 2 ? a.join('') : `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}`);
 const sentences = (t) => t.match(/[^.!?]+[.!?]+(?=\s|$)/g)?.map((x) => x.trim()) || [t];
 const words = (t) => t.split(/\s+/).filter(Boolean).length;
@@ -318,8 +321,8 @@ const SEO = {
   poland: ['Polish Chips: Green Onion, Paprika & Crunchips | World of Chips', "Why Poles love Zielona Cebulka (green onion) chips: Lay's, Crunchips and Pringles in Poland, top flavors, unique picks and where to buy."],
   russia: ['Russian Chips: Crab & Sour Cream Flavors | World of Chips', "Crab and sour cream & herbs chips: Lay's, Московский Картофель and Русская Картошка. Russia's top brands, odd flavors and where to buy."],
   brazil: ['Brazilian Chips: Ruffles, Churrasco & More | World of Chips', "Churrasco-flavored chips and more: Ruffles, Lay's and Pringles in Brazil, the flavors Brazilians buy, unique picks and where to find them."],
-  peru: ['Peruvian Chips: Ají Amarillo & Limón y Sal | World of Chips', "Ají Amarillo and Limón y Sal chips: Lay's, Pringles and Mr. Chips in Peru. Top brands, Peruvian flavors and where to buy them."],
-  colombia: ['Colombian Chips: Margarita, Super Ricas & More | World of Chips', "Margarita, Super Ricas and De Todito: Colombia's top chip brands, Limón and Chicharrón flavors, fun facts and where to buy."],
+  peru: ['Peruvian Chips: Inka Chips, Lay\'s & More | World of Chips', "Native-potato Inka Chips, Lay's and Karinto chifles: Peru's top chip brands, flavours, history and where to buy them."],
+  colombia: ['Colombian Chips: Margarita, Súper Ricas & More | World of Chips', "Margarita, Súper Ricas and Yupi: Colombia's top chip brands, chicken and lime flavours, Todo Rico mixes and where to buy them."],
   france: ['French Chips: Poulet Rôti, Bret\'s & Vico | World of Chips', "Roast-chicken chips and goat's cheese & chilli: Lay's, Bret's and Vico in France. Top brands, unique flavors and where to buy."],
   'south-korea': ['Korean Chips: Honey Butter, Octopus & More | World of Chips', "Honey Butter, Octopus and more: Nongshim, Orion and Calbee chips in South Korea. Top brands, the flavors to try and where to buy."],
   germany: ['German Chips: Currywurst, Paprika & Lorenz | World of Chips', "Currywurst and Döner chips: Lorenz, Funny-Frisch and Chio in Germany. Why Paprika rules, unique flavors and where to buy."],
