@@ -258,7 +258,7 @@ function buildFaq(x) {
 const SNACK_LEAD = new Set(['thailand', 'argentina', 'spain', 'canada', 'germany', 'new-zealand', 'netherlands', 'france', 'turkey', 'brazil']);
 function snackLead(slug) {
   if (!SNACK_LEAD.has(slug)) return '';
-  return snackBoxLead({ shipsToCanada: slug === 'canada' });
+  return snackBoxLead({ shipsToCanada: slug === 'canada', tone: slug === 'canada' ? 'canada' : 'country' });
 }
 function buyBox(x) {
   const all = (csm[x.name] || defaultShop).slice(0, 3).map((l) => ({ ...l, u: retag(l.u, 'country') }));

@@ -1062,7 +1062,7 @@ ${siteNav}
 ${g.disc === false ? '' : `    <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>`}
 
     <p class="cp-intro">${intro}</p>
-${photo ? photoFigure(photo, { eager: true }) : ''}${g.snackLead ? snackBoxLead() : ''}${g.shopTop ? shopTop(g.shopTop) : ''}${g.yumsTop ? yumsBox() : ''}${g.daebakTop ? daebakBox() : ''}${early}${g.nlTop ? giftNewsletter() : ''}${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.bol ? bolBox(g.bol) : ''}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
+${photo ? photoFigure(photo, { eager: true }) : ''}${g.snackLead ? snackBoxLead({ tone: 'spice' }) : ''}${g.shopTop ? shopTop(g.shopTop) : ''}${g.yumsTop ? yumsBox() : ''}${g.daebakTop ? daebakBox() : ''}${early}${g.nlTop ? giftNewsletter() : ''}${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.bol ? bolBox(g.bol) : ''}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
 
 ${hasAuthor(g) ? authorBox : ''}    <section class="cp-section sb-faq" id="faq">
       <h2>FAQs</h2>
