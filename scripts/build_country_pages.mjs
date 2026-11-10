@@ -17,7 +17,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
-import { retag, daebakBox, bolBox } from './affiliate_tags.mjs';
+import { retag, daebakBox, bolBox, snackBoxLead } from './affiliate_tags.mjs';
 import { PAGE_PHOTO, photoFor, photoFigure, ogPhoto, shareRow, PHOTO_CSS_LINK } from './photos.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -252,6 +252,14 @@ function buildFaq(x) {
     'As an Amazon Associate, World of Chips earns from qualifying purchases.']);
   return qa;
 }
+// High-traffic country pages: snack-box affiliate before any Amazon pick.
+// None of these countries is a documented Universal Yums "first box" (that list is Japan and
+// South Korea only). Canada is tailored because Universal Yums ships there.
+const SNACK_LEAD = new Set(['thailand', 'argentina', 'spain', 'canada', 'germany', 'new-zealand', 'netherlands', 'france', 'turkey', 'brazil']);
+function snackLead(slug) {
+  if (!SNACK_LEAD.has(slug)) return '';
+  return snackBoxLead({ shipsToCanada: slug === 'canada' });
+}
 function buyBox(x) {
   const all = (csm[x.name] || defaultShop).slice(0, 3).map((l) => ({ ...l, u: retag(l.u, 'country') }));
   const [first, ...rest] = all;
@@ -423,7 +431,10 @@ ${PHOTO_CSS_LINK}
 .shop-top h2{margin-bottom:.4rem}
 .shop-top p{margin:.3rem 0}
 .buy-btn.buy-btn-lg{justify-content:center;min-height:58px;font-size:1.15rem;padding:1rem 2.4rem;margin:.7rem 0 .4rem;box-shadow:0 4px 12px rgba(196,138,32,.35)}
-@media(max-width:600px){.buy-btn.buy-btn-lg{display:flex;width:100%}}
+@media(max-width:600px){.buy-btn.buy-btn-lg{display:flex;width:100%}}${SNACK_LEAD.has(slug) ? `
+.snack-more{margin:.7rem auto 0;max-width:34rem;text-align:left}
+.snack-more summary{cursor:pointer;font-weight:700;color:var(--brown)}
+.snack-more .buy-btn{margin-top:.35rem}` : ''}
 .cp-faq h3{font-size:1rem;color:var(--brown);margin-top:1.2rem}
 .cp-faq p{margin-top:.3rem}
 .cp-cta h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--brown);margin-bottom:.6rem}
@@ -446,7 +457,7 @@ ${siteNav}
   <div class="cp-body">
     <p class="cp-intro">${esc(c.intro)}</p>
 ${photo ? photoFigure(photo, { eager: true }) : ''}
-${slug === 'south-korea' ? daebakBox() : ''}${buyBox(x)}${x.slug === 'netherlands' ? bolBox([{ n: 'Shop chips', q: 'chips' }, { n: 'Pringles', q: 'pringles' }, { n: "Lay's", q: 'lays chips' }, { n: 'Paprika chips', q: 'paprika chips' }]) + '\n' : ''}${quickFacts(x)}
+${slug === 'south-korea' ? daebakBox() : ''}${snackLead(slug)}${buyBox(x)}${x.slug === 'netherlands' ? bolBox([{ n: 'Shop chips', q: 'chips' }, { n: 'Pringles', q: 'pringles' }, { n: "Lay's", q: 'lays chips' }, { n: 'Paprika chips', q: 'paprika chips' }]) + '\n' : ''}${quickFacts(x)}
     <div class="cp-stats">
 ${d.marketSize ? `      <div class="cp-stat"><div class="val">${esc(d.marketSize)}</div><div class="lbl">Market Size</div></div>\n` : ''}${d.perCapita ? `      <div class="cp-stat"><div class="val">${esc(d.perCapita)}</div><div class="lbl">Per Capita / Year</div></div>\n` : ''}      <div class="cp-stat"><div class="val">${esc(d.avgCost)}</div><div class="lbl">Avg. Bag Price</div></div>
       <div class="cp-stat"><div class="val">${esc(d.growth)}</div><div class="lbl">Annual Growth</div></div>

@@ -18,7 +18,7 @@
 //         node scripts/build_guides.mjs --check   exit 1 if any output is out of date
 // build_country_pages.mjs, build_news.mjs and build_snack_boxes.mjs preserve these sitemap entries.
 
-import { DEFAULT_AMAZON_TAG, guideSection, retag, UNIVERSAL_YUMS_AWIN, AWIN_REL, yumsBox, daebakBox, DAEBAK_LINK, DAEBAK_REL, bolBox } from './affiliate_tags.mjs';
+import { DEFAULT_AMAZON_TAG, guideSection, retag, UNIVERSAL_YUMS_AWIN, AWIN_REL, yumsBox, daebakBox, snackBoxLead, DAEBAK_LINK, DAEBAK_REL, bolBox } from './affiliate_tags.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -422,6 +422,7 @@ const GUIDES = [
   },
   {
     slug: 'spiciest-chips-you-can-buy',
+    snackLead: true,
     checked: '2026-10-26', checkedLabel: '26 October 2026',
     flag: '🌶️',
     crumb: 'Spicy Chips to Buy',
@@ -1019,7 +1020,10 @@ ${PHOTO_CSS_LINK}
 .cp-intro-dark{color:var(--muted);max-width:640px;margin:1rem auto 0;font-size:.95rem}
 .cp-cta h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--brown);margin-bottom:.6rem}
 .sb-top-disc{margin:0 auto 2rem;padding-top:0;border-top:none}
-${g.shopTop || g.picksFirst || g.yumsTop || g.daebakTop || g.bol ? SHOP_TOP_CSS : ''}.gd-picks{margin:1rem 0 0 1.3rem}
+${g.shopTop || g.picksFirst || g.yumsTop || g.daebakTop || g.snackLead || g.bol ? SHOP_TOP_CSS : ''}${g.snackLead ? `.snack-more{margin:.7rem auto 0;max-width:34rem;text-align:left}
+.snack-more summary{cursor:pointer;font-weight:700;color:var(--brown)}
+.snack-more .buy-btn{margin-top:.35rem}
+` : ''}.gd-picks{margin:1rem 0 0 1.3rem}
 .gd-picks li{background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.9rem 1rem;margin-bottom:.8rem;font-size:.92rem;line-height:1.6}
 .gd-picks strong{color:var(--brown);font-family:'Playfair Display',serif;font-size:1.05rem}
 .gd-picks a,.cp-section a{color:#1A4570}
@@ -1058,7 +1062,7 @@ ${siteNav}
 ${g.disc === false ? '' : `    <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>`}
 
     <p class="cp-intro">${intro}</p>
-${photo ? photoFigure(photo, { eager: true }) : ''}${g.shopTop ? shopTop(g.shopTop) : ''}${g.yumsTop ? yumsBox() : ''}${g.daebakTop ? daebakBox() : ''}${early}${g.nlTop ? giftNewsletter() : ''}${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.bol ? bolBox(g.bol) : ''}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
+${photo ? photoFigure(photo, { eager: true }) : ''}${g.snackLead ? snackBoxLead() : ''}${g.shopTop ? shopTop(g.shopTop) : ''}${g.yumsTop ? yumsBox() : ''}${g.daebakTop ? daebakBox() : ''}${early}${g.nlTop ? giftNewsletter() : ''}${/^(best-|where-to-buy-|spiciest-chips-you-can-buy$)/.test(g.slug) && g.slug !== 'best-chip-gift-boxes' && !/fryer|mandoline/.test(g.slug) ? GIFT_BANNER : ''}${fill(g.top || '')}${sections}${fill(g.body || '')}${g.bol ? bolBox(g.bol) : ''}${g.nlEarly ? '\n    ' + newsletterBlock('    ').replace('Get the monthly Chip Report', g.nlEarly) + '\n' : ''}${fill(g.extra || '')}
 
 ${hasAuthor(g) ? authorBox : ''}    <section class="cp-section sb-faq" id="faq">
       <h2>FAQs</h2>

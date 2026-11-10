@@ -149,8 +149,9 @@ h1.hero-tagline{font-weight:700;letter-spacing:.01em}
   padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px;
 }
 .nav-logo{font-family:'Playfair Display',serif;color:var(--gold);font-size:1.2rem;font-weight:700;display:flex;align-items:center;gap:.5rem}
-.hero-buy{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.6rem;margin:1.2rem auto 1.6rem;max-width:760px}
-.hero-buy-label{color:var(--cream);font-weight:600;font-size:.9rem}
+.hero-buy{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.55rem .6rem;margin:1.2rem auto 1.6rem;max-width:760px}
+.hero-buy-panel{background:rgba(26,17,8,.55);border:1px solid rgba(232,168,56,.28);border-radius:16px;padding:.95rem 1rem .75rem;backdrop-filter:blur(12px)}
+.hero-buy-label{flex-basis:100%;color:var(--cream);font-weight:600;font-size:.9rem}
 .hero-buy-btn{background:var(--gold);color:#fff;font-weight:700;padding:.8rem 1.5rem;border-radius:999px;text-decoration:none;font-size:.98rem;min-height:48px;display:inline-flex;align-items:center}
 .hero-buy-btn:hover{filter:brightness(1.08)}
 .hero-buy-more{color:var(--gold);font-weight:600;font-size:.85rem}
