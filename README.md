@@ -62,9 +62,11 @@ python3 scripts/validate_site.py     # includes a "snack-box page in sync" check
 ```
 
 Never guess a figure: if a company doesn't publish it, write "see site".
-Brand links are plain official URLs with `rel="nofollow noopener"` and a `data-affiliate="<brand>"`
-attribute (`bokksu`, `tokyotreat`, `sakuraco`, `japancrate`, `daebak`, `japancandystore`, `universalyums`, `mexicrate`, `snackcrate`).
-When an affiliate program is approved, swap the `href` in the script (and add `sponsored` to `rel`).
+Most brand links are plain official URLs with `rel="nofollow noopener"` and a `data-affiliate="<brand>"`
+attribute (`bokksu`, `tokyotreat`, `sakuraco`, `japancrate`, `japancandystore`, `mexicrate`, `snackcrate`).
+Universal Yums uses the Awin link in `scripts/affiliate_tags.mjs` (`rel` includes `sponsored`).
+Daebak uses the `sca_ref` link in the same file (`rel` includes `sponsored`).
+When another program is approved, swap that brand's `href` and add `sponsored` to `rel`.
 `build_country_pages.mjs` and `build_news.mjs` both preserve the `/snack-boxes/` sitemap entry.
 
 ## Buyer's guides (`/best-japanese-chips/`, `/where-to-buy-asian-chips-europe/`, `/best-international-chip-variety-packs/`)

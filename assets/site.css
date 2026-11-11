@@ -152,7 +152,7 @@ h1.hero-tagline{font-weight:700;letter-spacing:.01em}
 .hero-buy{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.55rem .6rem;margin:1.2rem auto 1.6rem;max-width:760px}
 .hero-buy-panel{background:rgba(26,17,8,.62);border:1px solid rgba(232,168,56,.42);border-radius:18px;padding:1.05rem 1.05rem .8rem;backdrop-filter:blur(12px);box-shadow:0 12px 28px rgba(0,0,0,.22),inset 0 1px 0 rgba(245,215,142,.16)}
 .hero-buy-label{flex-basis:100%;color:var(--cream);font-weight:600;font-size:.9rem}
-.hero-buy-panel>.hero-buy-label:first-child{font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--gold-light);letter-spacing:.01em}
+.hero-buy-kicker{font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--gold-light);letter-spacing:.01em}
 .hero-buy-btn{background:var(--gold);color:#fff;font-weight:700;padding:.8rem 1.5rem;border-radius:999px;text-decoration:none;font-size:.98rem;min-height:48px;display:inline-flex;align-items:center}
 .hero-buy-btn:hover{filter:brightness(1.08)}
 .hero-buy-yums{background:linear-gradient(180deg,#F8D78A 0%,#E8A838 46%,#D4922A 100%);color:#1A1108;font-weight:700;font-size:1rem;padding:.85rem 1.45rem;border-radius:999px;box-shadow:0 4px 12px rgba(196,138,32,.4);transition:transform .18s ease,box-shadow .18s ease}
