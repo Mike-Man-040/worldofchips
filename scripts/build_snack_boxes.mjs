@@ -43,8 +43,9 @@ function between(src, start, end) {
   if (b < 0) throw new Error(`End marker not found after ${start}: ${end}`);
   return { a, b, text: src.slice(a, b) };
 }
-// Official brand link: plain homepage for now; swap href for the affiliate URL later
-// (and add "sponsored" to rel) by searching for data-affiliate="<brand>".
+// Official brand link. Universal Yums (Awin) and Daebak (sca_ref) are already affiliate links
+// (rel includes "sponsored"). Other brands stay plain until a program is approved:
+// swap that href and add "sponsored" to rel by searching for data-affiliate="<brand>".
 const brandLink = (b, label, href) =>
   `<a href="${esc(href || b.url)}" target="_blank" rel="${b.rel || 'nofollow noopener'}" data-affiliate="${b.affiliate}">${label}</a>`;
 const srcLink = (u) => `<a href="${esc(u)}" target="_blank" rel="nofollow noopener">${esc(u.replace(/^https?:\/\//, ''))}</a>`;
@@ -335,7 +336,7 @@ ${siteNav}
   <div class="cp-body">
     <p class="aff-disc sb-top-disc">As an Amazon Associate, World of Chips earns from qualifying purchases. This doesn&#8217;t affect our editorial content &#8212; we only feature products we genuinely think chip lovers will enjoy.</p>
 ${yumsBox()}
-    <p class="cp-intro">Snack boxes are the easiest way to taste chips, candy and regional treats you won&#8217;t find at home, but they vary a lot. Some send traditional sweets from family makers, some send full-size convenience-store favourites, and one well-known box no longer exists. Below you&#8217;ll find quick picks, a side-by-side table, a section for chip lovers, a full write-up of each box, and FAQs. All prices are in US dollars, per box, before shipping, and were checked in ${LAST_CHECKED_LABEL}. Where a company doesn&#8217;t publish a figure, we say &#8220;see site&#8221; rather than guess.</p>
+    <p class="cp-intro">Does someone you love treat potato chips like a food group? Our <a href="/christmas-chip-gifts-2026/">Christmas chip gift guide</a> sorts US occasions: Secret Santa, a stocking stuffer, or a subscription that keeps arriving after Christmas. Snack boxes are the easiest way to taste chips, candy and regional treats you won&#8217;t find at home, but they vary a lot. Some send traditional sweets from family makers, some send full-size convenience-store favourites, and one well-known box no longer exists. Below you&#8217;ll find quick picks, a side-by-side table, a section for chip lovers, a full write-up of each box, and FAQs. All prices are in US dollars, per box, before shipping, and were checked in ${LAST_CHECKED_LABEL}. Where a company doesn&#8217;t publish a figure, we say &#8220;see site&#8221; rather than guess.</p>
 
 ${photoFigure('japanese-snacks', { eager: true })}    <section class="cp-section" id="quick-picks">
       <h2>Quick Picks</h2>
@@ -408,7 +409,7 @@ ${bolBox([{ n: 'Japanese snacks', q: 'japanse snacks' }, { n: 'Korean snacks', q
 
     <section class="cp-section" id="method">
       <h2>How We Checked</h2>
-      <p>Every price, plan, item count and shipping rule on this page was read from the company&#8217;s own website or help center in ${LAST_CHECKED_LABEL}. The sources are listed under each box. Prices, shipping fees and customs rules change often, and promotions come and go, so always confirm the total at checkout. We haven&#8217;t been paid by any of these companies, and the snack-box links on this page are plain links to their official sites.</p>
+      <p>Every price, plan, item count and shipping rule on this page was read from the company&#8217;s own website or help center in ${LAST_CHECKED_LABEL}. The sources are listed under each box. Prices, shipping fees and customs rules change often, and promotions come and go, so always confirm the total at checkout. Universal Yums and Daebak links on this page are affiliate links: World of Chips may earn a commission if you subscribe, at no extra cost to you. The other snack-box links are plain links to each company&#8217;s own site. That doesn&#8217;t change which boxes we include.</p>
     </section>
 
     ${newsletterBlock('    ')}
