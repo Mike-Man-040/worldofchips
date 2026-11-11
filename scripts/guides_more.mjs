@@ -253,7 +253,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
     const btn = !h ? '' : h.startsWith('dp:') ? `<p><a href="https://www.amazon.com/dp/${h.slice(3)}?tag=${DEFAULT_AMAZON_TAG}" target="_blank" rel="sponsored nofollow noopener" class="buy-btn">Buy on Amazon &#8594;</a></p>` : `<p>${buy(S(h), `Find ${name} on Amazon &#8594;`)}</p>`;
     return `<li data-heat="${n}"><strong>${n}. ${name}</strong><p>${note}</p>${btn}</li>`;
   }).join('\n        ');
-  const spice = { slug: 'spiciest-chips', flag: '🌶️', crumb: 'Spice Ladder', ...CK,
+  const spice = { slug: 'spiciest-chips', flag: '🌶️', crumb: 'Spice Ladder', snackLead: true, ...CK,
     h1: 'Spiciest Chips Ranked by Heat: The Chip Spice Ladder',
     title: 'Spiciest Chips Ranked by Heat | World of Chips',
     desc: 'A heat ranking, not a shopping list: eleven spicy chips ranked by evidence: the pepper each uses, its Scoville range and the maker\u2019s own heat claims, from jalapeño kettle chips through Paqui ghost pepper and Carolina Reaper chips to the discontinued One Chip Challenge.',

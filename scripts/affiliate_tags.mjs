@@ -60,6 +60,37 @@ ${indent}  <p class="aff-disc">Affiliate link: World of Chips may earn a commiss
 ${indent}</aside>
 `;
 
+// Short snack-box lead for high-traffic pages. Place ABOVE Amazon. Facts are only those already
+// in yumsBox / daebakBox (checked on the company sites). No country is named as a featured
+// Universal Yums box unless that claim already exists; Canada is the shipping exception.
+// Daebak stays in an expandable section so the visible CTA stays the higher-value Yums link.
+export const snackBoxLead = ({ shipsToCanada = false, tone = 'country', indent = '    ' } = {}) => {
+  const ship = shipsToCanada
+    ? 'It ships to Canada and the US, with free shipping in the contiguous US.'
+    : 'It ships to the US and Canada only, with free shipping in the contiguous US.';
+  const heading = tone === 'canada'
+    ? 'A snack box that ships to Canada'
+    : tone === 'spice'
+      ? 'A box of snacks from around the world'
+      : 'Taste snacks from another country at home';
+  const yumsLabel = tone === 'spice' ? 'See what Universal Yums sends' : 'Open a Universal Yums box';
+  const summary = tone === 'spice' ? 'Or a Korean box, shipped internationally' : 'Prefer a Korean snack box?';
+  return `
+${indent}<aside class="cp-section shop-top yums-top" id="snack-box" aria-labelledby="snack-box-title">
+${indent}  <h2 id="snack-box-title">${heading}</h2>
+${indent}  <p>Universal Yums sends sweet and savory snacks from a different country each month, plus a booklet with trivia and games. ${ship}</p>
+${indent}  <a href="${UNIVERSAL_YUMS_AWIN.replace(/&/g, '&amp;')}" target="_blank" rel="${AWIN_REL}" class="buy-btn buy-btn-lg snack-yums" data-affiliate="universalyums">🌍 ${yumsLabel} &#8594;</a>
+${indent}  <p><a href="/snack-boxes/" class="cp-explore-link snack-compare">See the boxes side by side &#8594;</a></p>
+${indent}  <details class="snack-more">
+${indent}    <summary>${summary}</summary>
+${indent}    <p>Daebak is a Korean snack subscription box that ships internationally from daebak.co.</p>
+${indent}    <p><a href="${DAEBAK_LINK}" target="_blank" rel="${DAEBAK_REL}" class="buy-btn snack-daebak" data-affiliate="daebak">🇰🇷 See the Daebak box &#8594;</a></p>
+${indent}  </details>
+${indent}  <p class="aff-disc" style="border:none;padding-top:.35rem;margin:.45rem auto 0">Affiliate links: World of Chips may earn a commission if you subscribe, at no extra cost to you.</p>
+${indent}</aside>
+`;
+};
+
 // bol.com affiliate programme (Site ID 1555738), for readers in the Netherlands & Belgium.
 // Deeplink format per affiliate.bol.com/nl/handleiding/handleiding-productlink/ (checked 3 Nov 2026):
 // https://partner.bol.com/click/click?p=2&t=url&s=<SiteID>&f=TXL&url=<encoded bol URL>&name=<name>
