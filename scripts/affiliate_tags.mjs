@@ -79,12 +79,12 @@ export const snackBoxLead = ({ shipsToCanada = false, tone = 'country', indent =
 ${indent}<aside class="cp-section shop-top yums-top" id="snack-box" aria-labelledby="snack-box-title">
 ${indent}  <h2 id="snack-box-title">${heading}</h2>
 ${indent}  <p>Universal Yums sends sweet and savory snacks from a different country each month, plus a booklet with trivia and games. ${ship}</p>
-${indent}  <a href="${UNIVERSAL_YUMS_AWIN.replace(/&/g, '&amp;')}" target="_blank" rel="${AWIN_REL}" class="buy-btn buy-btn-lg" data-affiliate="universalyums">🌍 ${yumsLabel} &#8594;</a>
-${indent}  <p><a href="/snack-boxes/" class="cp-explore-link">See the boxes side by side &#8594;</a></p>
+${indent}  <a href="${UNIVERSAL_YUMS_AWIN.replace(/&/g, '&amp;')}" target="_blank" rel="${AWIN_REL}" class="buy-btn buy-btn-lg snack-yums" data-affiliate="universalyums">🌍 ${yumsLabel} &#8594;</a>
+${indent}  <p><a href="/snack-boxes/" class="cp-explore-link snack-compare">See the boxes side by side &#8594;</a></p>
 ${indent}  <details class="snack-more">
 ${indent}    <summary>${summary}</summary>
 ${indent}    <p>Daebak is a Korean snack subscription box that ships internationally from daebak.co.</p>
-${indent}    <p><a href="${DAEBAK_LINK}" target="_blank" rel="${DAEBAK_REL}" class="buy-btn" data-affiliate="daebak">🇰🇷 See the Daebak box &#8594;</a></p>
+${indent}    <p><a href="${DAEBAK_LINK}" target="_blank" rel="${DAEBAK_REL}" class="buy-btn snack-daebak" data-affiliate="daebak">🇰🇷 See the Daebak box &#8594;</a></p>
 ${indent}  </details>
 ${indent}  <p class="aff-disc" style="border:none;padding-top:.35rem;margin:.45rem auto 0">Affiliate links: World of Chips may earn a commission if you subscribe, at no extra cost to you.</p>
 ${indent}</aside>

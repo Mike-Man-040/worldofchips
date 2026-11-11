@@ -194,12 +194,32 @@ h1.hero-tagline{font-weight:700;letter-spacing:.01em}
 }
 .nav-logo{font-family:'Playfair Display',serif;color:var(--gold);font-size:1.2rem;font-weight:700;display:flex;align-items:center;gap:.5rem}
 .hero-buy{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.55rem .6rem;margin:1.2rem auto 1.6rem;max-width:760px}
-.hero-buy-panel{background:rgba(26,17,8,.55);border:1px solid rgba(232,168,56,.28);border-radius:16px;padding:.95rem 1rem .75rem;backdrop-filter:blur(12px)}
+.hero-buy-panel{background:rgba(26,17,8,.62);border:1px solid rgba(232,168,56,.42);border-radius:18px;padding:1.05rem 1.05rem .8rem;backdrop-filter:blur(12px);box-shadow:0 12px 28px rgba(0,0,0,.22),inset 0 1px 0 rgba(245,215,142,.16)}
 .hero-buy-label{flex-basis:100%;color:var(--cream);font-weight:600;font-size:.9rem}
+.hero-buy-panel>.hero-buy-label:first-child{font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--gold-light);letter-spacing:.01em}
 .hero-buy-btn{background:var(--gold);color:#fff;font-weight:700;padding:.8rem 1.5rem;border-radius:999px;text-decoration:none;font-size:.98rem;min-height:48px;display:inline-flex;align-items:center}
 .hero-buy-btn:hover{filter:brightness(1.08)}
+.hero-buy-yums{background:linear-gradient(180deg,#F8D78A 0%,#E8A838 46%,#D4922A 100%);color:#1A1108;font-weight:700;font-size:1rem;padding:.85rem 1.45rem;border-radius:999px;box-shadow:0 4px 12px rgba(196,138,32,.4);transition:transform .18s ease,box-shadow .18s ease}
+.hero-buy-yums:hover{filter:none;transform:translateY(-2px);box-shadow:0 8px 16px rgba(196,138,32,.45)}
+.hero-buy-soft{background:#3A2A18;color:#FFF8EC;font-weight:600;font-size:.95rem;padding:.75rem 1.25rem;border:1.5px solid rgba(245,215,142,.6);border-radius:999px;box-shadow:none;transition:transform .18s ease,background .18s ease}
+.hero-buy-soft:hover{filter:none;background:#4A3520;transform:translateY(-1px)}
 .hero-buy-more{color:var(--gold);font-weight:600;font-size:.85rem}
+.hero-buy-compare{color:#F5D78E;font-weight:600;font-size:.9rem;text-decoration:underline;text-underline-offset:.22em;text-decoration-thickness:1px}
+.hero-buy-compare:hover{color:#FFF8EC}
+.hero-buy-yums:focus-visible,.hero-buy-soft:focus-visible,.hero-buy-compare:focus-visible{outline:2px solid #F5D78E;outline-offset:3px}
 .hero-buy-disc{flex-basis:100%;text-align:center;color:var(--cream);opacity:.6;font-size:.68rem;margin:0}
+.shop-top.yums-top{background:linear-gradient(180deg,#FFF9F0 0%,#F7EDD4 100%);border:1px solid #E4C98A;border-radius:18px;box-shadow:0 8px 22px rgba(196,138,32,.14)}
+.shop-top.yums-top h2{border-bottom:2px solid rgba(196,138,32,.4);padding-bottom:.35rem;margin-bottom:.55rem}
+.shop-top.yums-top>p:first-of-type{color:#3D2B0F;font-size:.98rem;line-height:1.55;max-width:38rem;margin-left:auto;margin-right:auto}
+.yums-top a.snack-yums{background:linear-gradient(180deg,#F8D78A 0%,#E8A838 46%,#D4922A 100%);color:#1A1108;font-weight:700;border-radius:999px;box-shadow:0 4px 14px rgba(196,138,32,.32);transition:transform .18s ease,box-shadow .18s ease}
+.yums-top a.snack-yums:hover{filter:none;transform:translateY(-2px);box-shadow:0 8px 18px rgba(196,138,32,.4)}
+.yums-top a.snack-daebak{background:#FFF8EC;color:#3D2B0F;font-weight:600;font-size:.95rem;border:1.5px solid #C48A20;border-radius:999px;box-shadow:none;padding:.7rem 1.25rem;transition:transform .18s ease,background .18s ease}
+.yums-top a.snack-daebak:hover{filter:none;background:#FFF1D6;transform:translateY(-1px)}
+.yums-top a.snack-compare{display:inline-flex;background:transparent;border:none;border-radius:0;color:#3D2B0F;font-weight:600;font-size:.95rem;padding:.15rem 0;min-height:0;text-decoration:underline;text-underline-offset:.22em;text-decoration-thickness:1px}
+.yums-top a.snack-compare:hover{background:transparent;border:none;color:#1A1108}
+.yums-top .snack-more summary{font-weight:600;color:#3D2B0F}
+.yums-top a.snack-yums:focus-visible,.yums-top a.snack-daebak:focus-visible,.yums-top a.snack-compare:focus-visible{outline:2px solid #1A1108;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.hero-buy-yums,.hero-buy-soft,.yums-top a.snack-yums,.yums-top a.snack-daebak{transition:none}.hero-buy-yums:hover,.hero-buy-soft:hover,.yums-top a.snack-yums:hover,.yums-top a.snack-daebak:hover{transform:none}}
 .nav-links{display:flex;gap:2rem}
 .nav-links a{color:var(--cream);text-decoration:none;font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;opacity:.6;transition:all .3s;padding:.2rem 0;border-bottom:2px solid transparent}
 .nav-links a:hover{opacity:1;color:var(--gold);border-bottom-color:var(--gold)}
@@ -528,9 +548,9 @@ footer .copy{font-size:.65rem;margin-top:1.5rem;opacity:.4}
 
     <div class="hero-buy hero-buy-panel" aria-label="Snack boxes, then chip packs">
       <span class="hero-buy-label">A box of snacks from around the world:</span>
-      <a href="https://www.awin1.com/cread.php?awinmid=90729&amp;awinaffid=3136222&amp;ued=https%3A%2F%2Fwww.universalyums.com%2F" target="_blank" rel="sponsored nofollow noopener" class="hero-buy-btn" data-affiliate="universalyums">Universal Yums: a new country &#8594;</a>
-      <a href="https://daebak.co?sca_ref=12575992.ZFUvl8WKOqs2QeWy" target="_blank" rel="sponsored nofollow noopener" class="hero-buy-btn" data-affiliate="daebak">Daebak: Korean snacks &#8594;</a>
-      <a href="/snack-boxes/" class="hero-buy-more" style="flex-basis:100%">See the boxes side by side</a>
+      <a href="https://www.awin1.com/cread.php?awinmid=90729&amp;awinaffid=3136222&amp;ued=https%3A%2F%2Fwww.universalyums.com%2F" target="_blank" rel="sponsored nofollow noopener" class="hero-buy-btn hero-buy-yums" data-affiliate="universalyums">Universal Yums: a new country &#8594;</a>
+      <a href="https://daebak.co?sca_ref=12575992.ZFUvl8WKOqs2QeWy" target="_blank" rel="sponsored nofollow noopener" class="hero-buy-btn hero-buy-soft" data-affiliate="daebak">Daebak: Korean snacks &#8594;</a>
+      <a href="/snack-boxes/" class="hero-buy-more hero-buy-compare" style="flex-basis:100%">See the boxes side by side</a>
       <span class="hero-buy-label">Or try a pack at home:</span>
       <a href="https://www.amazon.com/dp/B07179XBP9?tag=worldofchips-20" target="_blank" rel="sponsored nofollow noopener" class="hero-buy-btn">Lay&#8217;s 40-bag variety pack &#8594;</a>
       <a href="https://www.amazon.com/dp/B0DG6345BV?tag=worldofchips-20" target="_blank" rel="sponsored nofollow noopener" class="hero-buy-btn">Takis variety pack &#8594;</a>
