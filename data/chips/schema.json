@@ -1,0 +1,155 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://worldofchips.com/data/chips/schema.json",
+  "title": "World of Chips product record",
+  "description": "One record in data/chips/records.json. completeness is not stored here; scripts/build_chip_db.mjs computes it. See docs/chip-db.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "slug", "brand_slug", "title", "description",
+    "barcodes", "brand", "parent_company", "name_local", "name_en",
+    "type", "flavour_family", "heat_level", "countries_sold", "equivalents",
+    "pack_sizes_g", "price_per_100g", "status", "ingredients_text", "image",
+    "where_to_buy", "sources"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$", "description": "Stable key. Never reused, even after a product is discontinued." },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$", "description": "URL segment under the brand. The pair brand_slug + slug is never reused." },
+    "brand_slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "title": { "type": "string", "maxLength": 65, "description": "Unique <title>, about 60 characters, ending with | World of Chips." },
+    "description": { "type": "string", "minLength": 40, "maxLength": 200, "description": "Unique meta description in our own words." },
+    "barcodes": { "type": "array", "items": { "type": "string", "pattern": "^[0-9]{8,14}$" } },
+    "brand": { "type": "string", "minLength": 1 },
+    "parent_company": { "type": ["string", "null"] },
+    "name_local": { "type": "string", "minLength": 1 },
+    "name_en": { "type": "string", "minLength": 1 },
+    "type": { "type": "string", "enum": ["potato-chip", "stacked", "kettle", "ridged", "tortilla"] },
+    "flavour_family": {
+      "type": ["string", "null"],
+      "enum": [
+        "prawn-cocktail", "ketchup", "salt-and-vinegar", "sour-cream-and-onion",
+        "paprika", "nori-seaweed", "bbq", "dill-pickle", "flamin-hot", "cheese-and-onion",
+        null
+      ]
+    },
+    "heat_level": { "type": ["integer", "null"], "minimum": 1, "maximum": 11 },
+    "countries_sold": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["country", "source", "checked"],
+        "properties": {
+          "country": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "source": { "type": "string", "format": "uri" },
+          "checked": { "type": "string", "format": "date" }
+        }
+      }
+    },
+    "equivalents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "region", "note", "source", "checked"],
+        "properties": {
+          "id": { "type": ["string", "null"], "description": "Record id when the other product is in this database. Null when we only know the other brand name." },
+          "name": { "type": "string" },
+          "region": { "type": "string" },
+          "note": { "type": "string" },
+          "source": { "type": "string", "format": "uri" },
+          "checked": { "type": "string", "format": "date" }
+        }
+      }
+    },
+    "pack_sizes_g": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["country", "grams", "source", "checked"],
+        "properties": {
+          "country": { "type": "string" },
+          "grams": { "type": "number", "exclusiveMinimum": 0 },
+          "source": { "type": "string", "format": "uri" },
+          "checked": { "type": "string", "format": "date" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "price_per_100g": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["country", "amount", "currency", "source", "checked"],
+      "properties": {
+        "country": { "type": "string" },
+        "amount": { "type": "number", "exclusiveMinimum": 0 },
+        "currency": { "type": "string", "minLength": 3, "maxLength": 3 },
+        "source": { "type": "string", "format": "uri" },
+        "checked": { "type": "string", "format": "date" }
+      },
+      "description": "Optional. Only with a retailer source and date. Never a Pringles Index figure."
+    },
+    "status": { "type": "string", "enum": ["current", "limited", "discontinued", "unknown"] },
+    "ingredients_text": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["text", "source", "checked"],
+      "properties": {
+        "text": { "type": "string", "minLength": 1 },
+        "lang": { "type": "string" },
+        "source": { "type": "string", "format": "uri" },
+        "checked": { "type": "string", "format": "date" },
+        "note": { "type": "string" }
+      }
+    },
+    "image": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "width", "height", "alt", "licence", "licence_url", "credit", "source"],
+      "properties": {
+        "file": { "type": "string", "description": "Key for /assets/photos/<file>-960.webp, <file>-480.webp and og-<file>.jpg." },
+        "width": { "type": "integer" },
+        "height": { "type": "integer" },
+        "alt": { "type": "string", "minLength": 1 },
+        "licence": { "type": "string" },
+        "licence_url": { "type": "string", "format": "uri" },
+        "credit": { "type": "string" },
+        "source": { "type": "string", "format": "uri" }
+      }
+    },
+    "where_to_buy": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["country", "channels", "amazon_query"],
+        "properties": {
+          "country": { "type": "string" },
+          "channels": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["universal-yums", "daebak", "bol", "amazon"] },
+            "minItems": 1
+          },
+          "amazon_query": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["field", "url", "checked"],
+        "properties": {
+          "field": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "checked": { "type": "string", "format": "date" },
+          "note": { "type": "string" }
+        }
+      }
+    }
+  }
+}
