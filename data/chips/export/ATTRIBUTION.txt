@@ -1,0 +1,13 @@
+World of Chips chip database (phase 0 preview)
+License: Open Database License (ODbL) 1.0
+https://opendatacommons.org/licenses/odbl/1-0/
+
+Contains information from Open Food Facts (https://world.openfoodfacts.org), which is made available under the Open Database License. Photographs are not part of this database; each image.licence applies to that file only.
+
+You may share and adapt this database if you attribute Open Food Facts and World of Chips, keep the database under the ODbL (share-alike), and do not treat a photograph's licence as a trademark licence. Product names and pack designs are trademarks of their owners.
+
+Photographs live in assets/photos/ and stay under the licence named in image_licence. CC BY and CC BY-SA photographs also require a credit and, for BY-SA, share-alike on the adapted photograph.
+
+price_per_100g is empty in this preview. Do not fill it from the Pringles Index.
+
+Proposed rule for a later public site: a product page with completeness below 60 stays noindex.

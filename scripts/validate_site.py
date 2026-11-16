@@ -337,11 +337,103 @@ def check_ai_search(problems, pages):
                 problems.append(f"{slug}: FAQ question not visible on page: {q['name']}")
 
 
+# Frozen Pringles Index files. A deliberate Index edit has to update these hashes in the same change.
+PRINGLES_SHA256 = {
+    "pringles-index/index.html": "0a95d6733ea046c222a348f8adcaf60fb6de61ab3b2aaa7376f31a64302d9427",
+    "data/pringles_index_2026-10.json": "0f40693d8f8122400b5d2728cb44890eeb6504b29a7bf372cdefb92b34f07dd0",
+    "data/pringles_index_2026-10.csv": "50d080aad9a5f74b003d263deb7e18de2bf506270d5f2eb0e2faa1d16fc95916",
+    "assets/og/pringles-index.png": "6c7b2e0c0f05d3004b23647643b707db4f7b13b2e47e40fb743da1c25c094970",
+    "assets/pringles-index-2026-10.png": "c784739fa8c6bc0ecf06814ea490a7e1b3eabee77193611a4e4e0eaf0bf82194",
+}
+DIETARY_RE = re.compile(r"(?i)\b(vegan|vegetarians?|halal|kosher|gluten[\s-]?free|dairy[\s-]?free|lactose[\s-]?free|nut[\s-]?free|sugar[\s-]?free|fat[\s-]?free|non[\s-]?gmo|organic|keto|paleo)\b")
+CHIP_PREVIEW = os.path.join("chips", "_preview")
+
+
+def is_chip_preview(path):
+    rel = os.path.relpath(path, ROOT)
+    return rel == os.path.join(CHIP_PREVIEW, "index.html") or rel.startswith(CHIP_PREVIEW + os.sep)
+
+
+def check_pringles_untouched(problems):
+    import hashlib
+    for rel, want in PRINGLES_SHA256.items():
+        p = os.path.join(ROOT, rel)
+        if not os.path.isfile(p):
+            problems.append(f"pringles-index: missing frozen file {rel}")
+            continue
+        got = hashlib.sha256(open(p, "rb").read()).hexdigest()
+        if got != want:
+            problems.append(f"pringles-index: {rel} changed (sha256 {got[:12]}). The Index stays untouched.")
+
+
+def check_chip_db(problems):
+    """Preview chip pages: sourced, credited, no dietary claims, valid affiliate tags, noindex, off sitemap and nav."""
+    r = subprocess.run(["node", os.path.join(ROOT, "scripts", "build_chip_db.mjs"), "--check"], capture_output=True, text=True)
+    if r.returncode:
+        problems.append((r.stderr or r.stdout).strip()[:400])
+    preview_root = os.path.join(ROOT, CHIP_PREVIEW)
+    pages = sorted(glob.glob(os.path.join(preview_root, "**", "index.html"), recursive=True))
+    if len(pages) < 10:
+        problems.append(f"chip-db: expected preview pages, found {len(pages)}")
+        return
+    home = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+    nav = home.split("<!-- SITE-NAV:START", 1)[1].split("<!-- SITE-NAV:END -->", 1)[0]
+    if 'href="/chips/' in nav or 'href="/chips"' in nav:
+        problems.append("chip-db: site nav links to /chips/; preview must stay out of the menu")
+    sm = open(os.path.join(ROOT, "sitemap.xml"), encoding="utf-8").read()
+    if "/chips/" in sm:
+        problems.append("chip-db: sitemap contains a /chips/ URL")
+    robots = open(os.path.join(ROOT, "robots.txt"), encoding="utf-8").read()
+    if "Disallow: /chips/_preview/" not in robots:
+        problems.append("chip-db: robots.txt does not disallow /chips/_preview/")
+    titles = []
+    for path in pages:
+        rel = os.path.relpath(path, ROOT)
+        html = open(path, encoding="utf-8").read()
+        if 'content="noindex' not in html:
+            problems.append(f"{rel}: preview page must be noindex")
+        check(path, problems, set())
+        titles.append(re.search(r"<title>(.*?)</title>", html, re.S).group(1) if re.search(r"<title>", html) else "")
+        visible = re.sub(r'<blockquote class="chip-ingredients">[\s\S]*?</blockquote>', " ", html)
+        for m in DIETARY_RE.finditer(visible):
+            window = visible[max(0, m.start() - 80):m.end() + 40]
+            if re.search(r"labelled as|labeled as", window, re.I) and re.search(r"\d{4}", window):
+                continue
+            problems.append(f"{rel}: dietary claim {m.group(0)!r} (quote a certification as labelled as, with a date)")
+        if rel.count(os.sep) >= 3 and "/brands/" not in rel.replace("\\", "/"):
+            if "Check the pack; recipes change." not in html:
+                problems.append(f"{rel}: missing pack-check line")
+            if 'class="chip-ingredients"' not in html and "No ingredient text is recorded" not in html:
+                problems.append(f"{rel}: missing ingredients")
+            if 'id="sources"' not in html or "checked" not in html.lower():
+                problems.append(f"{rel}: missing sources")
+            figs = re.findall(r'<figure class="woc-photo">.*?</figure>', html, re.S)
+            if not figs or any("commons.wikimedia.org" not in f or "<figcaption>" not in f for f in figs):
+                problems.append(f"{rel}: photo needs a Wikimedia Commons credit")
+            if "aggregateRating" in html or '"review"' in html or '"ratingValue"' in html:
+                problems.append(f"{rel}: Product structured data must not include ratings")
+            if '"@type":"Product"' not in html.replace(" ", "") and '"@type": "Product"' not in html:
+                problems.append(f"{rel}: missing Product structured data")
+            if "BreadcrumbList" not in html:
+                problems.append(f"{rel}: missing breadcrumb markup")
+    if len(set(titles)) != len(titles):
+        problems.append("chip-db: duplicate preview titles")
+    export = os.path.join(ROOT, "data", "chips", "export", "chips.json")
+    if os.path.isfile(export):
+        blob = open(export, encoding="utf-8").read()
+        if "ODbL" not in blob or "Open Food Facts" not in blob:
+            problems.append("chip-db: export is missing the ODbL / Open Food Facts attribution")
+    else:
+        problems.append("chip-db: data/chips/export/chips.json is missing")
+
+
 def main():
     problems = []
     pages, form_ids = {}, set()
     share_stub = lambda q: os.sep + os.path.join("which-chip-are-you", "r") + os.sep in q
     for path in [os.path.join(ROOT, "index.html")] + [q for q in sorted(glob.glob(os.path.join(ROOT, "**", "index.html"), recursive=True)) if os.path.dirname(q) != ROOT]:
+        if is_chip_preview(path):
+            continue
         if share_stub(path):
             # Quiz-result share pages: meta tags for social previews, then a redirect to the quiz. noindex, not in sitemap.
             h = open(path, encoding="utf-8").read(); k = os.path.basename(os.path.dirname(path))
@@ -382,6 +474,8 @@ def main():
     r = subprocess.run(["node", os.path.join(ROOT, "scripts", "build_guides.mjs"), "--check"], capture_output=True, text=True)
     if r.returncode:
         problems.append((r.stderr or r.stdout).strip()[:300])
+    check_pringles_untouched(problems)
+    check_chip_db(problems)
     n_ld = sum(1 for p in pages.values() for t, _ in p.scripts if t == "application/ld+json")
     n_country = sum(1 for path in pages if 'class="cp-facts"' in open(path, encoding="utf-8").read())
     print(f"Checked {n_ld} JSON-LD blocks, {n_country} country pages with Quick Facts + FAQPage, llms.txt, robots.txt, IndexNow key.")

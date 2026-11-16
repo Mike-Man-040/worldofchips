@@ -1,39 +1,51 @@
 User-agent: *
 Allow: /
 Disallow: /cdn-cgi/
+Disallow: /chips/_preview/
 
 # AI search and assistant crawlers: explicitly welcome.
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /chips/_preview/
 
 User-agent: GPTBot
 Allow: /
+Disallow: /chips/_preview/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /chips/_preview/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /chips/_preview/
 
 User-agent: Perplexity-User
 Allow: /
+Disallow: /chips/_preview/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /chips/_preview/
 
 User-agent: Claude-SearchBot
 Allow: /
+Disallow: /chips/_preview/
 
 User-agent: Claude-User
 Allow: /
+Disallow: /chips/_preview/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /chips/_preview/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /chips/_preview/
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /chips/_preview/
 
 Sitemap: https://worldofchips.com/sitemap.xml

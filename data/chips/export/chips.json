@@ -1,0 +1,1294 @@
+{
+  "name": "World of Chips chip database (phase 0 preview)",
+  "license": "ODbL-1.0",
+  "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "attribution": "Contains information from Open Food Facts (https://world.openfoodfacts.org), which is made available under the Open Database License. Photographs are not part of this database; each image.licence applies to that file only.",
+  "noindex_below": 60,
+  "preview": true,
+  "products": [
+    {
+      "id": "calbee-usushio",
+      "slug": "usushio",
+      "brand_slug": "calbee",
+      "title": "Calbee Usushio Potato Chips | World of Chips",
+      "description": "Calbee Potato Chips in lightly salted usushio flavour, from a Japanese barcode and a bag photographed in October 2026. The ingredient field is copied as exported, including a leading fragment.",
+      "barcodes": [
+        "4901330504250"
+      ],
+      "brand": "Calbee",
+      "parent_company": "Calbee, Inc.",
+      "name_local": "ポテトチップス うすしお味",
+      "name_en": "Potato Chips, lightly salted",
+      "type": "potato-chip",
+      "flavour_family": null,
+      "heat_level": null,
+      "countries_sold": [
+        {
+          "country": "japan",
+          "source": "https://world-en.openfoodfacts.org/product/4901330504250",
+          "checked": "2026-11-16"
+        }
+      ],
+      "equivalents": [],
+      "pack_sizes_g": [
+        {
+          "country": "japan",
+          "grams": 60,
+          "source": "https://world-en.openfoodfacts.org/product/4901330504250",
+          "checked": "2026-11-16",
+          "note": "quantity on this barcode is 60 g."
+        }
+      ],
+      "price_per_100g": null,
+      "status": "current",
+      "ingredients_text": {
+        "text": "ないようご注意ください。 ポテトチップス 称 じゃがいも (国産又はアメリカ)、植物 油、食塩、デキストリン / 調味料(アミ ノ酸等)",
+        "lang": "ja",
+        "source": "https://world-en.openfoodfacts.org/product/4901330504250",
+        "checked": "2026-11-16",
+        "note": "Copied from the 16 Nov 2026 nightly CSV. The field starts with a fragment that is not an ingredient line. It was not trimmed."
+      },
+      "image": {
+        "file": "calbee-usushio",
+        "width": 960,
+        "height": 1280,
+        "alt": "A silver bag of Calbee potato chips, lightly salted (usushio)",
+        "licence": "CC0",
+        "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "credit": "Saimmx",
+        "source": "https://commons.wikimedia.org/wiki/File:20261012_002921_Calbee_Potatoes_Usushio.jpg"
+      },
+      "where_to_buy": [
+        {
+          "country": "japan",
+          "channels": [
+            "amazon"
+          ],
+          "amazon_query": "Calbee usushio potato chips"
+        }
+      ],
+      "sources": [
+        {
+          "field": "parent_company",
+          "url": "https://en.wikipedia.org/wiki/Calbee",
+          "checked": "2026-11-16",
+          "note": "Calbee, Inc. is the Japanese snack company. No parent above Calbee is stated in the intro checked on this date."
+        },
+        {
+          "field": "name_en",
+          "url": "https://world-en.openfoodfacts.org/product/4901330504588",
+          "checked": "2026-11-16",
+          "note": "A separate Calbee barcode in the same export is named Big Bag lightly salted potato chips. That English wording is a contributor's name, used here only as the gloss for うすしお. Its ingredient text is not the one quoted."
+        },
+        {
+          "field": "name_local",
+          "url": "https://world-en.openfoodfacts.org/product/4901330504250",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "countries_sold",
+          "url": "https://world-en.openfoodfacts.org/product/4901330504250",
+          "checked": "2026-11-16",
+          "note": "countries on this barcode include Japan."
+        },
+        {
+          "field": "status",
+          "url": "https://commons.wikimedia.org/wiki/File:20261012_002921_Calbee_Potatoes_Usushio.jpg",
+          "checked": "2026-11-16",
+          "note": "The file name dates the photograph 12 October 2026, and the bag is a current Calbee usushio pack. Status is current on that basis."
+        },
+        {
+          "field": "ingredients_text",
+          "url": "https://world-en.openfoodfacts.org/product/4901330504250",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "image",
+          "url": "https://commons.wikimedia.org/wiki/File:20261012_002921_Calbee_Potatoes_Usushio.jpg",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "flavour_family",
+          "url": "https://worldofchips.com/flavors/",
+          "checked": "2026-11-16",
+          "note": "Lightly salted is not one of the ten flavour pages. Nori / seaweed is a different Calbee flavour."
+        },
+        {
+          "field": "equivalents",
+          "url": "https://en.wikipedia.org/wiki/Calbee",
+          "checked": "2026-11-16",
+          "note": "No source checked on this date names another brand's bag as the same product."
+        },
+        {
+          "field": "where_to_buy",
+          "url": "https://www.universalyums.com/",
+          "checked": "2026-11-02",
+          "note": "Universal Yums ships to the US and Canada only (company site, already recorded 2 Nov 2026). No approved snack-box programme in affiliate_tags.mjs ships a Japanese box to Japan. Amazon is a search link only."
+        }
+      ],
+      "completeness": 84,
+      "noindex": true,
+      "noindex_reason": "phase 0 preview"
+    },
+    {
+      "id": "doritos-nacho-cheese",
+      "slug": "nacho-cheese",
+      "brand_slug": "doritos",
+      "title": "Doritos Nacho Cheese Chips | World of Chips",
+      "description": "Doritos Nacho Cheese is Frito-Lay's tortilla chip, launched in the US in 1972. It is not in the potato-crisps slice of the 16 Nov 2026 export, so ingredients are blank.",
+      "barcodes": [],
+      "brand": "Doritos",
+      "parent_company": "PepsiCo",
+      "name_local": "Nacho Cheese",
+      "name_en": "Nacho Cheese",
+      "type": "tortilla",
+      "flavour_family": null,
+      "heat_level": null,
+      "countries_sold": [
+        {
+          "country": "united-states",
+          "source": "https://en.wikipedia.org/wiki/Doritos",
+          "checked": "2026-11-16"
+        }
+      ],
+      "equivalents": [],
+      "pack_sizes_g": [],
+      "price_per_100g": null,
+      "status": "unknown",
+      "ingredients_text": null,
+      "image": {
+        "file": "doritos-nacho-cheese",
+        "width": 960,
+        "height": 720,
+        "alt": "A pile of Nacho Cheese Doritos tortilla chips on a white cloth",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "credit": "Famartin",
+        "source": "https://commons.wikimedia.org/wiki/File:2019-02-07_13_45_24_Nacho_Cheese_Doritos_in_the_Franklin_Farm_section_of_Oak_Hill,_Fairfax_County,_Virginia.jpg"
+      },
+      "where_to_buy": [
+        {
+          "country": "united-states",
+          "channels": [
+            "universal-yums",
+            "amazon"
+          ],
+          "amazon_query": "Doritos Nacho Cheese"
+        }
+      ],
+      "sources": [
+        {
+          "field": "parent_company",
+          "url": "https://en.wikipedia.org/wiki/Doritos",
+          "checked": "2026-11-16",
+          "note": "Doritos is a flavored tortilla chip produced by Frito-Lay, a wholly owned subsidiary of PepsiCo."
+        },
+        {
+          "field": "type",
+          "url": "https://en.wikipedia.org/wiki/Doritos",
+          "checked": "2026-11-16",
+          "note": "Tortilla chip, not a potato crisp. Nacho cheese followed the original toasted-corn chip and taco, in 1972."
+        },
+        {
+          "field": "countries_sold",
+          "url": "https://en.wikipedia.org/wiki/Doritos",
+          "checked": "2026-11-16",
+          "note": "The article calls Doritos an American brand and says it became the first nationally available tortilla chip in the United States in 1966. The photograph's file title places a Nacho Cheese bag in Virginia."
+        },
+        {
+          "field": "countries_sold",
+          "url": "https://commons.wikimedia.org/wiki/File:2019-02-07_13_45_24_Nacho_Cheese_Doritos_in_the_Franklin_Farm_section_of_Oak_Hill,_Fairfax_County,_Virginia.jpg",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "ingredients_text",
+          "url": "https://static.openfoodfacts.org/data/en.openfoodfacts.org.products.csv.gz",
+          "checked": "2026-11-16",
+          "note": "No Doritos Nacho Cheese row (as distinct from Flamin' Hot Nacho or White Cheddar Nacho) is in the en:potato-crisps slice. Ingredients are left blank rather than taken from a different flavour."
+        },
+        {
+          "field": "image",
+          "url": "https://commons.wikimedia.org/wiki/File:2019-02-07_13_45_24_Nacho_Cheese_Doritos_in_the_Franklin_Farm_section_of_Oak_Hill,_Fairfax_County,_Virginia.jpg",
+          "checked": "2026-11-16",
+          "note": "The file title says Nacho Cheese Doritos. The photograph shows the chips, not the bag."
+        },
+        {
+          "field": "equivalents",
+          "url": "https://en.wikipedia.org/wiki/Doritos",
+          "checked": "2026-11-16",
+          "note": "The intro says flavours differ by region. It does not name another brand as this same product."
+        },
+        {
+          "field": "status",
+          "url": "https://en.wikipedia.org/wiki/Doritos",
+          "checked": "2026-11-16",
+          "note": "Status is unknown. The article is in the present tense about the brand, which is not a shelf check of this flavour."
+        },
+        {
+          "field": "flavour_family",
+          "url": "https://worldofchips.com/flavors/",
+          "checked": "2026-11-16",
+          "note": "Nacho cheese is not the cheese-and-onion flavour page."
+        },
+        {
+          "field": "heat_level",
+          "url": "https://worldofchips.com/spiciest-chips/",
+          "checked": "2026-11-16",
+          "note": "Nacho Cheese is not a rung on the spice ladder, so heat_level is null."
+        }
+      ],
+      "completeness": 60,
+      "noindex": true,
+      "noindex_reason": "phase 0 preview"
+    },
+    {
+      "id": "haitai-honey-butter-chip",
+      "slug": "honey-butter-chip",
+      "brand_slug": "haitai",
+      "title": "Haitai Honey Butter Chip | World of Chips",
+      "description": "Haitai Calbee's Honey Butter Chip, first sold in South Korea in August 2014. The ingredient line is from a Haitai barcode tagged United States in Open Food Facts.",
+      "barcodes": [
+        "8801019608940"
+      ],
+      "brand": "Haitai",
+      "parent_company": "Haitai Calbee",
+      "name_local": "허니버터칩",
+      "name_en": "Honey Butter Chips",
+      "type": "potato-chip",
+      "flavour_family": null,
+      "heat_level": null,
+      "countries_sold": [
+        {
+          "country": "south-korea",
+          "source": "https://en.wikipedia.org/wiki/Honey_Butter_Chips",
+          "checked": "2026-11-16"
+        },
+        {
+          "country": "united-states",
+          "source": "https://world-en.openfoodfacts.org/product/8801019608940",
+          "checked": "2026-11-16"
+        }
+      ],
+      "equivalents": [
+        {
+          "id": null,
+          "name": "Happiness Butter Potato Chips",
+          "region": "Japan",
+          "note": "The article gives the Japanese name ポテトチップスしあわせバター and says Calbee sold a honey-butter chip in Japan in 2012 for a limited period. It is not given its own record here.",
+          "source": "https://en.wikipedia.org/wiki/Honey_Butter_Chips",
+          "checked": "2026-11-16"
+        }
+      ],
+      "pack_sizes_g": [
+        {
+          "country": "united-states",
+          "grams": 120,
+          "source": "https://world-en.openfoodfacts.org/product/8801019608940",
+          "checked": "2026-11-16",
+          "note": "quantity on this barcode is 120 g. The export tags the barcode United States, not South Korea, so the grams are listed under the United States."
+        }
+      ],
+      "price_per_100g": null,
+      "status": "current",
+      "ingredients_text": {
+        "text": "POTATO, PALM OIL(PALM OIL, D-TOCOPHEROLS), HONEY BUTTER TASTE SEASONING(CRYSTALLINE FRUCTOSÉ, SUGAR, SALT, SKÍM MILK POWDER, BUTTER MIXTURE POWDER, YEAST EXTRACT POWDER, HYDROLYZED SOYBEAN PROTEIN, WHEY POWDER, SILICON DIOXIDE, SOY SAUCE POWDER, POTASSIUM CHLORIDE, NATURAL & ARTIFICIAL FLAVORS, MASKING AGENT(WHEY POWDER, BUTTER, VITAMIN E), LACTIC ACID, PARSLEY FLAKE, ACACIA HÒNEY POWDER, DISODIUM 5' RIBONÚCLEOTIDE, BUTTER, CITRIC ACID, MALIC ACID, SUCRALOSE, GLUCOSE)",
+        "lang": "en",
+        "source": "https://world-en.openfoodfacts.org/product/8801019608940",
+        "checked": "2026-11-16",
+        "note": "Copied from the 16 Nov 2026 nightly CSV, including accented characters as stored. Brand on the record is Haitai and the product name is Honey Butter Chips."
+      },
+      "image": {
+        "file": "honey-butter-chip",
+        "width": 960,
+        "height": 640,
+        "alt": "An open bag of Haitai Honey Butter Chip with the chips spilling out",
+        "licence": "CC BY 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+        "credit": "수원알림이 *라프*",
+        "source": "https://commons.wikimedia.org/wiki/File:%ED%95%B4%ED%83%9C%EC%A0%9C%EA%B3%BC_%ED%97%88%EB%8B%88%EB%B2%84%ED%84%B0%EC%B9%A9_1.jpg"
+      },
+      "where_to_buy": [
+        {
+          "country": "south-korea",
+          "channels": [
+            "daebak",
+            "amazon"
+          ],
+          "amazon_query": "Haitai Honey Butter Chip"
+        },
+        {
+          "country": "united-states",
+          "channels": [
+            "universal-yums",
+            "amazon"
+          ],
+          "amazon_query": "Haitai Honey Butter Chip"
+        }
+      ],
+      "sources": [
+        {
+          "field": "parent_company",
+          "url": "https://en.wikipedia.org/wiki/Honey_Butter_Chips",
+          "checked": "2026-11-16",
+          "note": "Manufactured by Haitai Calbee, a joint effort of Haitai and Calbee, and sold in South Korea. First available August 2014."
+        },
+        {
+          "field": "name_local",
+          "url": "https://en.wikipedia.org/wiki/Honey_Butter_Chips",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "status",
+          "url": "https://en.wikipedia.org/wiki/Honey_Butter_Chips",
+          "checked": "2026-11-16",
+          "note": "The article describes Honey Butter Chips in the present tense as a brand sold in South Korea."
+        },
+        {
+          "field": "countries_sold",
+          "url": "https://en.wikipedia.org/wiki/Honey_Butter_Chips",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "countries_sold",
+          "url": "https://world-en.openfoodfacts.org/product/8801019608940",
+          "checked": "2026-11-16",
+          "note": "This barcode is tagged en:united-states in the export. It is not tagged South Korea, so the Korea row uses the Wikipedia article, not this barcode."
+        },
+        {
+          "field": "ingredients_text",
+          "url": "https://world-en.openfoodfacts.org/product/8801019608940",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "image",
+          "url": "https://commons.wikimedia.org/wiki/File:%ED%95%B4%ED%83%9C%EC%A0%9C%EA%B3%BC_%ED%97%88%EB%8B%88%EB%B2%84%ED%84%B0%EC%B9%A9_1.jpg",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "equivalents",
+          "url": "https://en.wikipedia.org/wiki/Honey_Butter_Chips",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "flavour_family",
+          "url": "https://worldofchips.com/flavors/",
+          "checked": "2026-11-16",
+          "note": "Honey butter is not one of the ten flavour pages."
+        }
+      ],
+      "completeness": 94,
+      "noindex": true,
+      "noindex_reason": "phase 0 preview"
+    },
+    {
+      "id": "lays-cheese-onion",
+      "slug": "cheese-onion",
+      "brand_slug": "lays",
+      "title": "Lay's Cheese Onion Crisps, NL | World of Chips",
+      "description": "Lay's Cheese Onion cases were photographed in a Rotterdam Jumbo in 2022, and one Netherlands barcode in Open Food Facts is 335 g. The Dutch ingredient line is copied as stored.",
+      "barcodes": [
+        "8710398508232"
+      ],
+      "brand": "Lay's",
+      "parent_company": "PepsiCo",
+      "name_local": "Cheese Onion",
+      "name_en": "Cheese Onion",
+      "type": "potato-chip",
+      "flavour_family": "cheese-and-onion",
+      "heat_level": null,
+      "countries_sold": [
+        {
+          "country": "netherlands",
+          "source": "https://commons.wikimedia.org/wiki/File:Patatje_Joppie_and_Cheese_Onion_Lay%27s_boxes_(Jumbo),_Nesselande,_Rotterdam_(2022)_01.jpg",
+          "checked": "2026-11-16"
+        }
+      ],
+      "equivalents": [
+        {
+          "id": null,
+          "name": "Smith's",
+          "region": "Benelux, until 2001",
+          "note": "The Smith's article says the Smith's brand is no longer used in Benelux and was replaced by Lay's in 2001. That is a brand change, not a statement that this Cheese Onion bag matches an older Smith's recipe.",
+          "source": "https://en.wikipedia.org/wiki/Smiths_(snack_foods)",
+          "checked": "2026-11-16"
+        }
+      ],
+      "pack_sizes_g": [
+        {
+          "country": "netherlands",
+          "grams": 300,
+          "source": "https://commons.wikimedia.org/wiki/File:Patatje_Joppie_and_Cheese_Onion_Lay%27s_boxes_(Jumbo),_Nesselande,_Rotterdam_(2022)_01.jpg",
+          "checked": "2026-11-16",
+          "note": "The Cheese Onion shipping case in the photograph is printed 12 x 300g. The file name dates the photo to 2022."
+        },
+        {
+          "country": "netherlands",
+          "grams": 335,
+          "source": "https://world-en.openfoodfacts.org/product/8710398508232",
+          "checked": "2026-11-16",
+          "note": "quantity on this barcode is 335 g. It is a different size from the 300 g case in the 2022 photograph."
+        }
+      ],
+      "price_per_100g": null,
+      "status": "unknown",
+      "ingredients_text": {
+        "text": "aardappelen, plantaardige oliën (zonnebloem, koolzaad, maïs, in wisselende hoeveelheden), kaas - en uismaak [uipoeder, weipoeder (van melk), suiker, aroma (bevat knoflookpoeder, kaaspoeder (van melk)), kaliumchloride, kleurstoffen (paprika-extract, curcumine)], zout.",
+        "lang": "nl",
+        "source": "https://world-en.openfoodfacts.org/product/8710398508232",
+        "checked": "2026-11-16",
+        "note": "Copied from the 16 Nov 2026 nightly CSV, including spellings as stored. The record's countries_tags is en:netherlands and it was last modified in the export on 2026-01-24."
+      },
+      "image": {
+        "file": "lays-cheese-onion-nl",
+        "width": 960,
+        "height": 1706,
+        "alt": "Shipping cases of Lay's Cheese Onion and Patatje Joppie crisps stacked in a Jumbo supermarket in Rotterdam",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "credit": "Donald Trung Quoc Don",
+        "source": "https://commons.wikimedia.org/wiki/File:Patatje_Joppie_and_Cheese_Onion_Lay%27s_boxes_(Jumbo),_Nesselande,_Rotterdam_(2022)_01.jpg"
+      },
+      "where_to_buy": [
+        {
+          "country": "netherlands",
+          "channels": [
+            "bol",
+            "amazon"
+          ],
+          "amazon_query": "Lay's Cheese Onion chips"
+        }
+      ],
+      "sources": [
+        {
+          "field": "parent_company",
+          "url": "https://en.wikipedia.org/wiki/Lay%27s",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "countries_sold",
+          "url": "https://commons.wikimedia.org/wiki/File:Patatje_Joppie_and_Cheese_Onion_Lay%27s_boxes_(Jumbo),_Nesselande,_Rotterdam_(2022)_01.jpg",
+          "checked": "2026-11-16",
+          "note": "The photograph shows Lay's Cheese Onion cases in a Jumbo supermarket in Nesselande, Rotterdam. The same barcode is tagged Netherlands in Open Food Facts."
+        },
+        {
+          "field": "countries_sold",
+          "url": "https://world-en.openfoodfacts.org/product/8710398508232",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "name_local",
+          "url": "https://commons.wikimedia.org/wiki/File:Patatje_Joppie_and_Cheese_Onion_Lay%27s_boxes_(Jumbo),_Nesselande,_Rotterdam_(2022)_01.jpg",
+          "checked": "2026-11-16",
+          "note": "The case is printed Cheese Onion, not Cheese & Onion."
+        },
+        {
+          "field": "ingredients_text",
+          "url": "https://world-en.openfoodfacts.org/product/8710398508232",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "image",
+          "url": "https://commons.wikimedia.org/wiki/File:Patatje_Joppie_and_Cheese_Onion_Lay%27s_boxes_(Jumbo),_Nesselande,_Rotterdam_(2022)_01.jpg",
+          "checked": "2026-11-16",
+          "note": "The same stack includes Patatje Joppie cases. That flavour has no separate record in this preview."
+        },
+        {
+          "field": "equivalents",
+          "url": "https://en.wikipedia.org/wiki/Smiths_(snack_foods)",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "status",
+          "url": "https://world-en.openfoodfacts.org/product/8710398508232",
+          "checked": "2026-11-16",
+          "note": "The photograph is from 2022 and the export does not say the bag is on shelf today, so status is unknown."
+        },
+        {
+          "field": "where_to_buy",
+          "url": "https://www.universalyums.com/",
+          "checked": "2026-11-02",
+          "note": "Universal Yums ships to the US and Canada only, from the company site as already recorded on 2 Nov 2026. It is not offered for the Netherlands. bol.com is the partner link for NL and BE."
+        }
+      ],
+      "completeness": 100,
+      "noindex": true,
+      "noindex_reason": "phase 0 preview"
+    },
+    {
+      "id": "lays-classic",
+      "slug": "classic",
+      "brand_slug": "lays",
+      "title": "Lay's Classic Potato Chips | World of Chips",
+      "description": "Lay's Classic is the plain potato chip Frito-Lay sells under the Lay's name in the United States. Barcode, pack size and ingredients are from Open Food Facts.",
+      "barcodes": [
+        "0028400310413"
+      ],
+      "brand": "Lay's",
+      "parent_company": "PepsiCo",
+      "name_local": "Classic",
+      "name_en": "Classic",
+      "type": "potato-chip",
+      "flavour_family": null,
+      "heat_level": null,
+      "countries_sold": [
+        {
+          "country": "united-states",
+          "source": "https://world-en.openfoodfacts.org/product/0028400310413",
+          "checked": "2026-11-16"
+        }
+      ],
+      "equivalents": [
+        {
+          "id": null,
+          "name": "Walkers",
+          "region": "United Kingdom and Ireland",
+          "note": "The Lay's article says PepsiCo uses the Walkers name in the UK and Ireland instead of Lay's. That is a brand name, not a shared ingredient list with this barcode.",
+          "source": "https://en.wikipedia.org/wiki/Lay%27s",
+          "checked": "2026-11-16"
+        },
+        {
+          "id": null,
+          "name": "Smith's",
+          "region": "Australia",
+          "note": "The same article names Smith's as the brand PepsiCo uses in Australia. Not a claim that an Australian bag matches this ingredient list.",
+          "source": "https://en.wikipedia.org/wiki/Lay%27s",
+          "checked": "2026-11-16"
+        },
+        {
+          "id": null,
+          "name": "Sabritas",
+          "region": "Mexico",
+          "note": "The Sabritas article calls Sabritas the Mexican name of Lay's, and compares that to Walkers in the UK and Ireland. This brisket bag in our preview is a different flavour.",
+          "source": "https://en.wikipedia.org/wiki/Sabritas",
+          "checked": "2026-11-16"
+        }
+      ],
+      "pack_sizes_g": [
+        {
+          "country": "united-states",
+          "grams": 368.5,
+          "source": "https://world-en.openfoodfacts.org/product/0028400310413",
+          "checked": "2026-11-16",
+          "note": "The export's quantity field reads 13 OZ Bag (368.5g). The gram figure is the one printed there."
+        }
+      ],
+      "price_per_100g": null,
+      "status": "unknown",
+      "ingredients_text": {
+        "text": "potatoes, vegetable oil (canola oil, corn oil, soybean oil, sunflower oil), salt.",
+        "lang": "en",
+        "source": "https://world-en.openfoodfacts.org/product/0028400310413",
+        "checked": "2026-11-16",
+        "note": "Copied from ingredients_text in the Open Food Facts nightly CSV (Last-Modified Mon, 16 Nov 2026 10:13:19 GMT). The record was last modified in that export on 2026-03-31."
+      },
+      "image": {
+        "file": "lays-classic",
+        "width": 960,
+        "height": 720,
+        "alt": "A pile of Lay's Classic potato chips on a grey counter",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "credit": "Famartin",
+        "source": "https://commons.wikimedia.org/wiki/File:2019-04-01_23_16_02_Lay%27s_Classic_Potato_Chips_in_the_Dulles_section_of_Sterling,_Loudoun_County,_Virginia.jpg"
+      },
+      "where_to_buy": [
+        {
+          "country": "united-states",
+          "channels": [
+            "universal-yums",
+            "amazon"
+          ],
+          "amazon_query": "Lay's Classic potato chips"
+        }
+      ],
+      "sources": [
+        {
+          "field": "parent_company",
+          "url": "https://en.wikipedia.org/wiki/Lay%27s",
+          "checked": "2026-11-16",
+          "note": "Frito-Lay has been a wholly owned subsidiary of PepsiCo since the merger with Pepsi in 1965."
+        },
+        {
+          "field": "type",
+          "url": "https://en.wikipedia.org/wiki/Lay%27s",
+          "checked": "2026-11-16",
+          "note": "The article describes Lay's as a brand of potato chips."
+        },
+        {
+          "field": "countries_sold",
+          "url": "https://world-en.openfoodfacts.org/product/0028400310413",
+          "checked": "2026-11-16",
+          "note": "countries_tags on this barcode is en:united-states. The Lay's article also says Frito-Lay uses the Lay's name in the United States and Canada; this barcode is not tagged Canada, so Canada is not listed."
+        },
+        {
+          "field": "barcodes",
+          "url": "https://world-en.openfoodfacts.org/product/0028400310413",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "pack_sizes_g",
+          "url": "https://world-en.openfoodfacts.org/product/0028400310413",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "ingredients_text",
+          "url": "https://world-en.openfoodfacts.org/product/0028400310413",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "image",
+          "url": "https://commons.wikimedia.org/wiki/File:2019-04-01_23_16_02_Lay%27s_Classic_Potato_Chips_in_the_Dulles_section_of_Sterling,_Loudoun_County,_Virginia.jpg",
+          "checked": "2026-11-16",
+          "note": "The file title identifies the chips as Lay's Classic. The photograph shows the chips, not the bag."
+        },
+        {
+          "field": "status",
+          "url": "https://world-en.openfoodfacts.org/product/0028400310413",
+          "checked": "2026-11-16",
+          "note": "A record in the export is not treated as proof the bag is on shelf today, so status is unknown."
+        },
+        {
+          "field": "flavour_family",
+          "url": "https://worldofchips.com/flavors/",
+          "checked": "2026-11-16",
+          "note": "Plain salted is not one of the ten flavour pages, so flavour_family is null."
+        },
+        {
+          "field": "equivalents",
+          "url": "https://en.wikipedia.org/wiki/Lay%27s",
+          "checked": "2026-11-16"
+        }
+      ],
+      "completeness": 94,
+      "noindex": true,
+      "noindex_reason": "phase 0 preview"
+    },
+    {
+      "id": "pringles-original",
+      "slug": "original",
+      "brand_slug": "pringles",
+      "title": "Pringles Original Stacked Chips | World of Chips",
+      "description": "Pringles Original is the stacked potato crisp. This record does not copy any price from the Pringles Index. Ingredients are from one Open Food Facts barcode.",
+      "barcodes": [
+        "0038000169663"
+      ],
+      "brand": "Pringles",
+      "parent_company": "Mars",
+      "name_local": "Original",
+      "name_en": "Original",
+      "type": "stacked",
+      "flavour_family": null,
+      "heat_level": null,
+      "countries_sold": [
+        {
+          "country": "united-states",
+          "source": "https://world-en.openfoodfacts.org/product/0038000169663",
+          "checked": "2026-11-16"
+        },
+        {
+          "country": "bolivia",
+          "source": "https://world-en.openfoodfacts.org/product/0038000169663",
+          "checked": "2026-11-16"
+        }
+      ],
+      "equivalents": [],
+      "pack_sizes_g": [
+        {
+          "country": "united-states",
+          "grams": 194,
+          "source": "https://world-en.openfoodfacts.org/product/0038000169663",
+          "checked": "2026-11-16",
+          "note": "quantity reads 6.8 oz (194 g). The gram figure is the one in that field. The barcode is also tagged Bolivia; the export does not give a separate Bolivian weight."
+        }
+      ],
+      "price_per_100g": null,
+      "status": "unknown",
+      "ingredients_text": {
+        "text": "DRIED POTATOES, VEGETABLE OIL (CORN OIL, COTTONSEED OIL, HIGH OLEIC SOYBEAN OIL, SUNFLOWER OIL), DEGERMINATED YELLOW CORN FLOUR, CORNSTARCH, RICE FLOUR, MALTODEXTRIN, MONO - AND DIGLYCERIDES, SALT, WHEAT STARCH.",
+        "lang": "en",
+        "source": "https://world-en.openfoodfacts.org/product/0038000169663",
+        "checked": "2026-11-16",
+        "note": "Copied from the 16 Nov 2026 nightly CSV. Product name on the row is Original. brand_owner on the same row is The Kellogg Company, which disagrees with the Wikipedia ownership sentence below."
+      },
+      "image": {
+        "file": "pringles-original",
+        "width": 960,
+        "height": 720,
+        "alt": "Several saddle-shaped Original Pringles stacked in an arc",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "credit": "Famartin",
+        "source": "https://commons.wikimedia.org/wiki/File:2020-09-06_16_12_54_Several_Original_Pringles_in_the_Franklin_Farm_section_of_Oak_Hill,_Fairfax_County,_Virginia.jpg"
+      },
+      "where_to_buy": [
+        {
+          "country": "united-states",
+          "channels": [
+            "universal-yums",
+            "amazon"
+          ],
+          "amazon_query": "Pringles Original"
+        }
+      ],
+      "sources": [
+        {
+          "field": "type",
+          "url": "https://en.wikipedia.org/wiki/Pringles",
+          "checked": "2026-11-16",
+          "note": "The article calls Pringles a stackable potato-based chip and says the dough is fried and stacked in a can. It also says they are technically an extruded snack."
+        },
+        {
+          "field": "parent_company",
+          "url": "https://en.wikipedia.org/wiki/Pringles",
+          "checked": "2026-11-16",
+          "note": "Checked text: the brand was sold in 2012 to Kellanova, which in 2024 was purchased by Mars Inc. This record follows that sentence."
+        },
+        {
+          "field": "parent_company",
+          "url": "https://world-en.openfoodfacts.org/product/0038000169663",
+          "checked": "2026-11-16",
+          "note": "The same barcode's brand_owner field still says The Kellogg Company (row last modified 2026-09-03). Both statements are shown. Neither figure is a Pringles Index price."
+        },
+        {
+          "field": "price_per_100g",
+          "url": "https://worldofchips.com/pringles-index/",
+          "checked": "2026-11-16",
+          "note": "The Index is a separate page and is not a source for this record. price_per_100g is null. No Index number is copied here."
+        },
+        {
+          "field": "ingredients_text",
+          "url": "https://world-en.openfoodfacts.org/product/0038000169663",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "countries_sold",
+          "url": "https://world-en.openfoodfacts.org/product/0038000169663",
+          "checked": "2026-11-16",
+          "note": "countries_tags is en:bolivia,en:united-states."
+        },
+        {
+          "field": "image",
+          "url": "https://commons.wikimedia.org/wiki/File:2020-09-06_16_12_54_Several_Original_Pringles_in_the_Franklin_Farm_section_of_Oak_Hill,_Fairfax_County,_Virginia.jpg",
+          "checked": "2026-11-16",
+          "note": "The file title says Several Original Pringles. The photograph shows the chips, not the can."
+        },
+        {
+          "field": "equivalents",
+          "url": "https://en.wikipedia.org/wiki/Lay%27s",
+          "checked": "2026-11-16",
+          "note": "The Lay's article calls Lay's Stax a stackable chip introduced as a competitor to Pringles, so Stax is not listed as the same product."
+        },
+        {
+          "field": "status",
+          "url": "https://world-en.openfoodfacts.org/product/0038000169663",
+          "checked": "2026-11-16",
+          "note": "Status is unknown. The article describes the brand in the present tense but this record does not treat that as a shelf check of this can."
+        }
+      ],
+      "completeness": 84,
+      "noindex": true,
+      "noindex_reason": "phase 0 preview"
+    },
+    {
+      "id": "ruffles-original",
+      "slug": "original",
+      "brand_slug": "ruffles",
+      "title": "Ruffles Original Ridged Chips | World of Chips",
+      "description": "Ruffles Original is Frito-Lay's ridged potato chip. The ingredient line is from one US barcode, and a second barcode in the same export gives a 28.3 g pack.",
+      "barcodes": [
+        "0028400516686",
+        "0028400090148"
+      ],
+      "brand": "Ruffles",
+      "parent_company": "PepsiCo",
+      "name_local": "Original",
+      "name_en": "Original",
+      "type": "ridged",
+      "flavour_family": null,
+      "heat_level": null,
+      "countries_sold": [
+        {
+          "country": "united-states",
+          "source": "https://world-en.openfoodfacts.org/product/0028400516686",
+          "checked": "2026-11-16"
+        }
+      ],
+      "equivalents": [
+        {
+          "id": null,
+          "name": "Walkers Max",
+          "region": "United Kingdom and Ireland",
+          "note": "The Ruffles article says the brand is known as Walkers Max, Walkers Max Double Crunch or Walkers Max Strong in the UK and Ireland.",
+          "source": "https://en.wikipedia.org/wiki/Ruffles_(potato_chips)",
+          "checked": "2026-11-16"
+        },
+        {
+          "id": null,
+          "name": "Lay's Max",
+          "region": "Some countries",
+          "note": "The same article says Ruffles is known as Lay's Maxx or Lay's Max in some countries. It does not name those countries in the intro.",
+          "source": "https://en.wikipedia.org/wiki/Ruffles_(potato_chips)",
+          "checked": "2026-11-16"
+        },
+        {
+          "id": null,
+          "name": "Lay's Ondas",
+          "region": "Peru",
+          "note": "The same article names Lay's Ondas for Peru.",
+          "source": "https://en.wikipedia.org/wiki/Ruffles_(potato_chips)",
+          "checked": "2026-11-16"
+        }
+      ],
+      "pack_sizes_g": [
+        {
+          "country": "united-states",
+          "grams": 28.3,
+          "source": "https://world-en.openfoodfacts.org/product/0028400090148",
+          "checked": "2026-11-16",
+          "note": "quantity on barcode 0028400090148 is 28.3 g. Barcode 0028400516686 has quantity 8.5 with no unit, so that figure is not converted and not listed."
+        }
+      ],
+      "price_per_100g": null,
+      "status": "unknown",
+      "ingredients_text": {
+        "text": "POTATOES, VEGETABLE OIL (CANOLA, CORN, SOYBEAN, AND/OR SUNFLOWER OIL), AND SALT.",
+        "lang": "en",
+        "source": "https://world-en.openfoodfacts.org/product/0028400516686",
+        "checked": "2026-11-16",
+        "note": "Copied from barcode 0028400516686 in the 16 Nov 2026 nightly CSV. The product name on that row is Original Ruffles."
+      },
+      "image": {
+        "file": "ruffles-original",
+        "width": 960,
+        "height": 720,
+        "alt": "A close-up of ridged golden Ruffles potato chips",
+        "licence": "Public domain",
+        "licence_url": "https://commons.wikimedia.org/wiki/Help:Public_domain",
+        "credit": "Doggo19292",
+        "source": "https://commons.wikimedia.org/wiki/File:Original_Ruffles_Chips.jpg"
+      },
+      "where_to_buy": [
+        {
+          "country": "united-states",
+          "channels": [
+            "universal-yums",
+            "amazon"
+          ],
+          "amazon_query": "Ruffles Original potato chips"
+        }
+      ],
+      "sources": [
+        {
+          "field": "type",
+          "url": "https://en.wikipedia.org/wiki/Ruffles_(potato_chips)",
+          "checked": "2026-11-16",
+          "note": "The article calls Ruffles a brand of crinkle-cut potato chips. This record uses type ridged for that."
+        },
+        {
+          "field": "parent_company",
+          "url": "https://en.wikipedia.org/wiki/Ruffles_(potato_chips)",
+          "checked": "2026-11-16",
+          "note": "The Frito Company acquired Ruffles in 1958. Frito merged with H.W. Lay & Co. in 1961 to form Frito-Lay."
+        },
+        {
+          "field": "parent_company",
+          "url": "https://en.wikipedia.org/wiki/Lay%27s",
+          "checked": "2026-11-16",
+          "note": "Frito-Lay has been wholly owned by PepsiCo since 1965."
+        },
+        {
+          "field": "equivalents",
+          "url": "https://en.wikipedia.org/wiki/Ruffles_(potato_chips)",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "ingredients_text",
+          "url": "https://world-en.openfoodfacts.org/product/0028400516686",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "pack_sizes_g",
+          "url": "https://world-en.openfoodfacts.org/product/0028400090148",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "countries_sold",
+          "url": "https://world-en.openfoodfacts.org/product/0028400516686",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "image",
+          "url": "https://commons.wikimedia.org/wiki/File:Original_Ruffles_Chips.jpg",
+          "checked": "2026-11-16",
+          "note": "The file title is Original Ruffles Chips. The photograph shows the chips, not the bag."
+        },
+        {
+          "field": "status",
+          "url": "https://world-en.openfoodfacts.org/product/0028400516686",
+          "checked": "2026-11-16",
+          "note": "Status is unknown because the export does not say this bag is on shelf today."
+        },
+        {
+          "field": "flavour_family",
+          "url": "https://worldofchips.com/flavors/",
+          "checked": "2026-11-16",
+          "note": "Original is not one of the ten flavour pages."
+        }
+      ],
+      "completeness": 94,
+      "noindex": true,
+      "noindex_reason": "phase 0 preview"
+    },
+    {
+      "id": "sabritas-brisket-americano",
+      "slug": "brisket-americano",
+      "brand_slug": "sabritas",
+      "title": "Sabritas Brisket Americano Chips | World of Chips",
+      "description": "A Sabritas bag printed Brisket Americano. Sabritas is PepsiCo's Mexican chip brand. No matching row was in the potato-crisps slice of the 16 Nov 2026 export, so ingredients are blank.",
+      "barcodes": [],
+      "brand": "Sabritas",
+      "parent_company": "PepsiCo",
+      "name_local": "Brisket Americano",
+      "name_en": "American Brisket",
+      "type": "potato-chip",
+      "flavour_family": null,
+      "heat_level": null,
+      "countries_sold": [
+        {
+          "country": "mexico",
+          "source": "https://en.wikipedia.org/wiki/Sabritas",
+          "checked": "2026-11-16"
+        }
+      ],
+      "equivalents": [],
+      "pack_sizes_g": [],
+      "price_per_100g": null,
+      "status": "unknown",
+      "ingredients_text": null,
+      "image": {
+        "file": "sabritas-brisket-americano",
+        "width": 960,
+        "height": 1280,
+        "alt": "A bag of Sabritas American Brisket potato chips",
+        "licence": "CC0",
+        "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "credit": "Koffermejia",
+        "source": "https://commons.wikimedia.org/wiki/File:Brisket_american_sabritas.jpg"
+      },
+      "where_to_buy": [
+        {
+          "country": "mexico",
+          "channels": [
+            "amazon"
+          ],
+          "amazon_query": "Sabritas Brisket Americano"
+        }
+      ],
+      "sources": [
+        {
+          "field": "parent_company",
+          "url": "https://en.wikipedia.org/wiki/Sabritas",
+          "checked": "2026-11-16",
+          "note": "Sabritas is a Mexican snack company owned by PepsiCo. The article says Sabritas is the Mexican name of Lay's."
+        },
+        {
+          "field": "name_local",
+          "url": "https://commons.wikimedia.org/wiki/File:Brisket_american_sabritas.jpg",
+          "checked": "2026-11-16",
+          "note": "The bag is printed sabor Brisket Americano under the Sabritas logo. Marketing lines on the bag are not repeated as claims."
+        },
+        {
+          "field": "countries_sold",
+          "url": "https://en.wikipedia.org/wiki/Sabritas",
+          "checked": "2026-11-16",
+          "note": "Listed as Mexico because Sabritas is the Mexican brand. The photograph's file page does not name a city."
+        },
+        {
+          "field": "ingredients_text",
+          "url": "https://static.openfoodfacts.org/data/en.openfoodfacts.org.products.csv.gz",
+          "checked": "2026-11-16",
+          "note": "No Sabritas row whose name contains Brisket is in the en:potato-crisps rows of the 16 Nov 2026 nightly CSV. Ingredients are left blank."
+        },
+        {
+          "field": "barcodes",
+          "url": "https://static.openfoodfacts.org/data/en.openfoodfacts.org.products.csv.gz",
+          "checked": "2026-11-16",
+          "note": "No barcode was tied to this bag in that slice of the export."
+        },
+        {
+          "field": "image",
+          "url": "https://commons.wikimedia.org/wiki/File:Brisket_american_sabritas.jpg",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "equivalents",
+          "url": "https://en.wikipedia.org/wiki/Sabritas",
+          "checked": "2026-11-16",
+          "note": "Sabritas is the Mexican name of Lay's, but no source checked here names a Lay's brisket bag as the same product. Equivalents is empty on purpose."
+        },
+        {
+          "field": "status",
+          "url": "https://commons.wikimedia.org/wiki/File:Brisket_american_sabritas.jpg",
+          "checked": "2026-11-16",
+          "note": "The bag exists in the photograph. That is not a 2026 shelf check, so status is unknown."
+        },
+        {
+          "field": "where_to_buy",
+          "url": "https://www.universalyums.com/",
+          "checked": "2026-11-02",
+          "note": "Universal Yums ships to the US and Canada only (company site, already recorded 2 Nov 2026), so it is not offered for Mexico. MexiCrate is not an approved affiliate on this site, so it is not linked."
+        },
+        {
+          "field": "flavour_family",
+          "url": "https://worldofchips.com/flavors/",
+          "checked": "2026-11-16",
+          "note": "American brisket is not one of the ten flavour pages, and it is not filed under BBQ without a source that says so."
+        }
+      ],
+      "completeness": 60,
+      "noindex": true,
+      "noindex_reason": "phase 0 preview"
+    },
+    {
+      "id": "takis-fuego",
+      "slug": "fuego",
+      "brand_slug": "takis",
+      "title": "Takis Fuego Rolled Chips | World of Chips",
+      "description": "Takis Fuego is the chili-lime rolled tortilla chip from Barcel, rung 5 on the World of Chips spice ladder. The potato-crisp export did not contain this tortilla chip's ingredients.",
+      "barcodes": [],
+      "brand": "Takis",
+      "parent_company": "Grupo Bimbo",
+      "name_local": "Fuego",
+      "name_en": "Fuego",
+      "type": "tortilla",
+      "flavour_family": null,
+      "heat_level": 5,
+      "countries_sold": [
+        {
+          "country": "mexico",
+          "source": "https://en.wikipedia.org/wiki/Takis",
+          "checked": "2026-11-16"
+        },
+        {
+          "country": "united-states",
+          "source": "https://commons.wikimedia.org/wiki/File:Takis.jpg",
+          "checked": "2026-11-16"
+        }
+      ],
+      "equivalents": [],
+      "pack_sizes_g": [],
+      "price_per_100g": null,
+      "status": "current",
+      "ingredients_text": null,
+      "image": {
+        "file": "takis",
+        "width": 960,
+        "height": 1280,
+        "alt": "A pallet of family-size Takis Fuego boxes",
+        "licence": "CC BY-SA 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "credit": "knucklebone55",
+        "source": "https://commons.wikimedia.org/wiki/File:Takis.jpg"
+      },
+      "where_to_buy": [
+        {
+          "country": "mexico",
+          "channels": [
+            "amazon"
+          ],
+          "amazon_query": "Takis Fuego"
+        },
+        {
+          "country": "united-states",
+          "channels": [
+            "universal-yums",
+            "amazon"
+          ],
+          "amazon_query": "Takis Fuego"
+        }
+      ],
+      "sources": [
+        {
+          "field": "parent_company",
+          "url": "https://en.wikipedia.org/wiki/Takis",
+          "checked": "2026-11-16",
+          "note": "Takis is produced by Barcel, a subsidiary of Grupo Bimbo. First sold in Mexico in 1999 as Taquis, renamed Takis in 2004."
+        },
+        {
+          "field": "type",
+          "url": "https://en.wikipedia.org/wiki/Takis",
+          "checked": "2026-11-16",
+          "note": "Rolled tortilla chips. Fuego is the chili-lime flavour, in purple bags, introduced in 2006, and the article calls it the best-selling flavour."
+        },
+        {
+          "field": "heat_level",
+          "url": "https://worldofchips.com/spiciest-chips/",
+          "checked": "2026-11-16",
+          "note": "Rung 5 of the existing spice ladder is Takis Fuego. The rung is not a Scoville number for the chip."
+        },
+        {
+          "field": "status",
+          "url": "https://en.wikipedia.org/wiki/Takis",
+          "checked": "2026-11-16",
+          "note": "The article describes Fuego in the present tense as the best-selling flavour."
+        },
+        {
+          "field": "countries_sold",
+          "url": "https://en.wikipedia.org/wiki/Takis",
+          "checked": "2026-11-16",
+          "note": "Mexico: the brand was first sold there. The US introduction in the article is 2001 for the snack, which is before Fuego (2006)."
+        },
+        {
+          "field": "countries_sold",
+          "url": "https://commons.wikimedia.org/wiki/File:Takis.jpg",
+          "checked": "2026-11-16",
+          "note": "The photograph shows family-size Fuego cases with English text, which is why the United States is listed for this flavour and not only for the brand."
+        },
+        {
+          "field": "ingredients_text",
+          "url": "https://static.openfoodfacts.org/data/en.openfoodfacts.org.products.csv.gz",
+          "checked": "2026-11-16",
+          "note": "The only Fuego row in the en:potato-crisps slice is Takis Kettlez Fuego, a different product. Its ingredients are not used here."
+        },
+        {
+          "field": "pack_sizes_g",
+          "url": "https://commons.wikimedia.org/wiki/File:Takis.jpg",
+          "checked": "2026-11-16",
+          "note": "The shipping wrap in the photograph is marked 24.7 oz. That figure is not converted and not stored as grams."
+        },
+        {
+          "field": "image",
+          "url": "https://commons.wikimedia.org/wiki/File:Takis.jpg",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "equivalents",
+          "url": "https://en.wikipedia.org/wiki/Takis",
+          "checked": "2026-11-16",
+          "note": "No other brand is named as the same product."
+        },
+        {
+          "field": "flavour_family",
+          "url": "https://worldofchips.com/flavors/",
+          "checked": "2026-11-16",
+          "note": "Fuego is not the Flamin' Hot flavour page. Heat is recorded only as the spice-ladder rung."
+        }
+      ],
+      "completeness": 60,
+      "noindex": true,
+      "noindex_reason": "phase 0 preview"
+    },
+    {
+      "id": "walkers-salt-and-vinegar",
+      "slug": "salt-and-vinegar",
+      "brand_slug": "walkers",
+      "title": "Walkers Salt & Vinegar Crisps | World of Chips",
+      "description": "Walkers Salt & Vinegar is one of the brand's main crisp flavours, introduced in 1967. The ingredient line below is the Open Food Facts text for one UK barcode.",
+      "barcodes": [
+        "5000328016832"
+      ],
+      "brand": "Walkers",
+      "parent_company": "PepsiCo",
+      "name_local": "Salt and Vinegar",
+      "name_en": "Salt & Vinegar",
+      "type": "potato-chip",
+      "flavour_family": "salt-and-vinegar",
+      "heat_level": null,
+      "countries_sold": [
+        {
+          "country": "united-kingdom",
+          "source": "https://world-en.openfoodfacts.org/product/5000328016832",
+          "checked": "2026-11-16"
+        }
+      ],
+      "equivalents": [
+        {
+          "id": "lays-classic",
+          "name": "Lay's",
+          "region": "United States",
+          "note": "PepsiCo uses Lay's in the United States and Walkers in the UK and Ireland. Salt & Vinegar is not the same flavour as Lay's Classic, so the link is the brand, not this recipe.",
+          "source": "https://en.wikipedia.org/wiki/Lay%27s",
+          "checked": "2026-11-16"
+        }
+      ],
+      "pack_sizes_g": [],
+      "price_per_100g": null,
+      "status": "current",
+      "ingredients_text": {
+        "text": "Potatoes, Vegetable Oil (Sunflower, Rapeseed, in varying proportions), Salt and Vinegar Seasoning [Flavouring, Salt, Acids (Citric Acid, Malic Acid), Yeast Extract, Potassium Chloride], Antioxidants (Rosemary Extract, Ascorbic Acid, Tocopherol Rich Extract, Citric Acid). Allergy Advice May Contain: Milk, Wheat, Gluten, Barley, Soya, Celery. Mustard",
+        "lang": "en",
+        "source": "https://world-en.openfoodfacts.org/product/5000328016832",
+        "checked": "2026-11-16",
+        "note": "Copied from ingredients_text in the 16 Nov 2026 nightly CSV, including the allergy line stored in that field. The quantity field on this barcode is empty, so no pack size is listed."
+      },
+      "image": {
+        "file": "walkers-salt-vinegar",
+        "width": 960,
+        "height": 640,
+        "alt": "An open packet of Walkers Salt & Vinegar crisps",
+        "licence": "CC BY-SA 2.5",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/2.5/",
+        "credit": "Gerolsteiner91",
+        "source": "https://commons.wikimedia.org/wiki/File:Salt-and-Vinegar.JPG"
+      },
+      "where_to_buy": [
+        {
+          "country": "united-kingdom",
+          "channels": [
+            "amazon"
+          ],
+          "amazon_query": "Walkers Salt and Vinegar crisps"
+        }
+      ],
+      "sources": [
+        {
+          "field": "parent_company",
+          "url": "https://en.wikipedia.org/wiki/Walkers_(snack_foods)",
+          "checked": "2026-11-16",
+          "note": "Walkers has been owned by PepsiCo since 1989."
+        },
+        {
+          "field": "status",
+          "url": "https://en.wikipedia.org/wiki/Walkers_(snack_foods)",
+          "checked": "2026-11-16",
+          "note": "The article says Walkers sells crisps and names Salt and Vinegar, introduced in 1967, as one of the main flavours, in the present tense."
+        },
+        {
+          "field": "countries_sold",
+          "url": "https://world-en.openfoodfacts.org/product/5000328016832",
+          "checked": "2026-11-16",
+          "note": "countries_tags is en:united-kingdom. The company article says Walkers operates in Great Britain and Ireland; this barcode is not tagged Ireland, so Ireland is not listed."
+        },
+        {
+          "field": "flavour_family",
+          "url": "https://en.wikipedia.org/wiki/Walkers_(snack_foods)",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "ingredients_text",
+          "url": "https://world-en.openfoodfacts.org/product/5000328016832",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "image",
+          "url": "https://commons.wikimedia.org/wiki/File:Salt-and-Vinegar.JPG",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "equivalents",
+          "url": "https://en.wikipedia.org/wiki/Lay%27s",
+          "checked": "2026-11-16"
+        },
+        {
+          "field": "where_to_buy",
+          "url": "https://www.universalyums.com/",
+          "checked": "2026-11-02",
+          "note": "Ship-to (US and Canada only) is the fact already recorded from universalyums.com on 2 Nov 2026 in scripts/affiliate_tags.mjs. That page was not re-opened on 16 Nov 2026. Amazon on this record is a search link, not a stock check."
+        }
+      ],
+      "completeness": 94,
+      "noindex": true,
+      "noindex_reason": "phase 0 preview"
+    }
+  ]
+}
