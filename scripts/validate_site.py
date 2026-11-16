@@ -354,6 +354,15 @@ def is_chip_preview(path):
     return rel == os.path.join(CHIP_PREVIEW, "index.html") or rel.startswith(CHIP_PREVIEW + os.sep)
 
 
+def is_chip_page(path):
+    """Published chip database pages, brand hubs, and the preview tree. They use sitemap-chips.xml."""
+    if is_chip_preview(path):
+        return True
+    rel = os.path.relpath(path, ROOT)
+    top = rel.split(os.sep, 1)[0]
+    return top in ("chips", "brands")
+
+
 def check_pringles_untouched(problems):
     import hashlib
     for rel, want in PRINGLES_SHA256.items():
@@ -367,78 +376,64 @@ def check_pringles_untouched(problems):
 
 
 def check_chip_db(problems):
-    """Preview chip pages: sourced, credited, no dietary claims, valid affiliate tags, noindex, off sitemap and nav."""
+    """Published chip pages: sourced, credited, no unquoted dietary claims, valid affiliate tags.
+    A product page is indexable only at completeness >= 60 with ingredients. Korean rows stay noindex
+    and out of the ODbL export. Indexable URLs live in sitemap-chips.xml, not sitemap.xml."""
     r = subprocess.run(["node", os.path.join(ROOT, "scripts", "build_chip_db.mjs"), "--check"], capture_output=True, text=True)
     if r.returncode:
         problems.append((r.stderr or r.stdout).strip()[:400])
     preview_root = os.path.join(ROOT, CHIP_PREVIEW)
-    pages = sorted(glob.glob(os.path.join(preview_root, "**", "index.html"), recursive=True))
-    if len(pages) < 10:
-        problems.append(f"chip-db: expected preview pages, found {len(pages)}")
-        return
+    aisle = os.path.join(preview_root, "aisle")
+    if os.path.isdir(preview_root):
+        for path in glob.glob(os.path.join(preview_root, "**", "index.html"), recursive=True):
+            if os.path.commonpath([os.path.abspath(path), aisle]) == aisle:
+                continue
+            problems.append(f"chip-db: preview page should have moved out of /chips/_preview/: {os.path.relpath(path, ROOT)}")
     home = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
     nav = home.split("<!-- SITE-NAV:START", 1)[1].split("<!-- SITE-NAV:END -->", 1)[0]
-    if 'href="/chips/' in nav or 'href="/chips"' in nav:
-        problems.append("chip-db: site nav links to /chips/; preview must stay out of the menu")
+    if "/chips/_preview" in nav:
+        problems.append("chip-db: site nav links to the chip preview")
     sm = open(os.path.join(ROOT, "sitemap.xml"), encoding="utf-8").read()
-    if "/chips/" in sm:
-        problems.append("chip-db: sitemap contains a /chips/ URL")
+    if "/chips/" in sm or "/brands/" in sm:
+        problems.append("chip-db: sitemap.xml must not list /chips/ or /brands/ URLs")
     robots = open(os.path.join(ROOT, "robots.txt"), encoding="utf-8").read()
     if "Disallow: /chips/_preview/" not in robots:
         problems.append("chip-db: robots.txt does not disallow /chips/_preview/")
-    titles = []
-    for path in pages:
-        rel = os.path.relpath(path, ROOT)
-        html = open(path, encoding="utf-8").read()
-        if 'content="noindex' not in html:
-            problems.append(f"{rel}: preview page must be noindex")
-        check(path, problems, set())
-        titles.append(re.search(r"<title>(.*?)</title>", html, re.S).group(1) if re.search(r"<title>", html) else "")
-        visible = re.sub(r"<script\b[\s\S]*?</script>", " ", html)
-        visible = re.sub(r'<blockquote class="chip-ingredients">[\s\S]*?</blockquote>', " ", visible)
-        visible = re.sub(r'<span class="chip-source-text">[\s\S]*?</span>', " ", visible)
-        for m in DIETARY_RE.finditer(visible):
-            window = visible[max(0, m.start() - 80):m.end() + 40]
-            if re.search(r"labelled as|labeled as", window, re.I) and re.search(r"\d{4}", window):
-                continue
-            problems.append(f"{rel}: dietary claim {m.group(0)!r} (quote a certification as labelled as, with a date)")
-        if rel.count(os.sep) >= 3 and "/brands/" not in rel.replace("\\", "/"):
-            if "Check the pack; recipes change." not in html:
-                problems.append(f"{rel}: missing pack-check line")
-            if 'class="chip-ingredients"' not in html and "No ingredient text is recorded" not in html:
-                problems.append(f"{rel}: missing ingredients")
-            if 'id="sources"' not in html or "checked" not in html.lower():
-                problems.append(f"{rel}: missing sources")
-            figs = re.findall(r'<figure class="woc-photo(?:\s[^"]*)?"[\s\S]*?</figure>', html)
-            if 'data-photo="placeholder"' in html:
-                if "No product photograph is available." not in html:
-                    problems.append(f"{rel}: placeholder must say that no product photograph is available")
-                if any("commons.wikimedia.org" in f for f in figs if 'data-photo="placeholder"' in f):
-                    problems.append(f"{rel}: placeholder must not claim a Wikimedia Commons photograph")
-            elif not figs or any("commons.wikimedia.org" not in f or "<figcaption>" not in f for f in figs):
-                problems.append(f"{rel}: photo needs a Wikimedia Commons credit")
-            if "aggregateRating" in html or '"review"' in html or '"ratingValue"' in html:
-                problems.append(f"{rel}: Product structured data must not include ratings")
-            if '"@type":"Product"' not in html.replace(" ", "") and '"@type": "Product"' not in html:
-                problems.append(f"{rel}: missing Product structured data")
-            if "BreadcrumbList" not in html:
-                problems.append(f"{rel}: missing breadcrumb markup")
-    if len(set(titles)) != len(titles):
-        problems.append("chip-db: duplicate preview titles")
+    if f"Sitemap: {SITE}/sitemap-chips.xml" not in robots:
+        problems.append("chip-db: robots.txt does not list sitemap-chips.xml")
     export = os.path.join(ROOT, "data", "chips", "export", "chips.json")
-    if not os.path.isfile(export):
-        problems.append("chip-db: data/chips/export/chips.json is missing")
-        return
+    off_path = os.path.join(ROOT, "data", "chips", "off.json")
+    mfds_path = os.path.join(ROOT, "data", "chips", "mfds-kr.json")
+    for required in (export, off_path, mfds_path, os.path.join(ROOT, "sitemap-chips.xml"), os.path.join(ROOT, "chips", "index.html"), os.path.join(ROOT, "chips", "search-index.json")):
+        if not os.path.isfile(required):
+            problems.append(f"chip-db: missing {os.path.relpath(required, ROOT)}")
+            return
     blob = open(export, encoding="utf-8").read()
     if "ODbL" not in blob or "Open Food Facts" not in blob:
         problems.append("chip-db: export is missing the ODbL / Open Food Facts attribution")
     try:
         data = json.loads(blob)
+        off = json.load(open(off_path, encoding="utf-8"))
+        base = json.load(open(os.path.join(ROOT, "data", "chips", "records.json"), encoding="utf-8"))
+        mfds = json.load(open(mfds_path, encoding="utf-8"))
+        search = json.load(open(os.path.join(ROOT, "chips", "search-index.json"), encoding="utf-8"))
     except ValueError as e:
-        problems.append(f"chip-db: chips.json does not parse: {e}")
+        problems.append(f"chip-db: JSON does not parse: {e}")
         return
-    if data.get("preview") is not True or data.get("index_min") != 60:
-        problems.append("chip-db: export must stay a preview and keep index_min 60")
+    if data.get("preview") is not False or data.get("index_min") != 60:
+        problems.append("chip-db: export must be the published database and keep index_min 60")
+    unstated = "unstated (government data, used with attribution)"
+    if unstated in blob or unstated in open(os.path.join(ROOT, "data", "chips", "export", "chips.csv"), encoding="utf-8").read():
+        problems.append("chip-db: ODbL JSON or CSV contains a record marked with an unstated licence")
+    export_ids = {p.get("id") for p in data.get("products") or []}
+    csv_ids = set()
+    for line in open(os.path.join(ROOT, "data", "chips", "export", "chips.csv"), encoding="utf-8").read().splitlines()[1:]:
+        csv_ids.add(line.split(",", 1)[0].strip('"'))
+    open_ids = {r.get("id") for r in list(base) + list(off) if r.get("source_licence") != unstated}
+    if export_ids != open_ids or csv_ids != open_ids:
+        problems.append(f"chip-db: ODbL JSON/CSV must contain the open records and nothing else (export {len(export_ids)}, csv {len(csv_ids)}, open {len(open_ids)})")
+    by_id = {p.get("id"): p for p in data.get("products") or []}
+    indexable_products = []
     for p in data.get("products") or []:
         ing = p.get("ingredients_text")
         has_ing = isinstance(ing, dict) and str(ing.get("text") or "").strip() != ""
@@ -448,79 +443,146 @@ def check_chip_db(problems):
             problems.append(f"chip-db: {pid} ingredients_present does not match ingredients_text")
         if p.get("public_indexable") is not expect:
             problems.append(f"chip-db: {pid} public_indexable must be true only when completeness is 60 or more and ingredients_text is present")
-        if p.get("noindex") is not True:
-            problems.append(f"chip-db: {pid} preview export must stay noindex")
-        page = os.path.join(ROOT, CHIP_PREVIEW, p.get("brand_slug", ""), p.get("slug", ""), "index.html")
+        if p.get("noindex") is expect:
+            problems.append(f"chip-db: {pid} noindex must be the opposite of public_indexable")
+        page = os.path.join(ROOT, "chips", p.get("brand_slug", ""), p.get("slug", ""), "index.html")
         if not os.path.isfile(page):
-            problems.append(f"chip-db: missing preview page for {pid}")
+            problems.append(f"chip-db: missing page for {pid}")
             continue
-        html = open(page, encoding="utf-8").read()
-        if "Recipes may differ." not in html:
-            problems.append(f"chip-db: {pid} equivalents section must say recipes may differ")
-        if expect and "would be indexable" not in html:
-            problems.append(f"chip-db: {pid} should say a public page would be indexable")
-        if not expect and "would stay noindex" not in html:
-            problems.append(f"chip-db: {pid} should say the public page would stay noindex")
-    unstated = "unstated (government data, used with attribution)"
-    credit = "Source: Ministry of Food and Drug Safety (식품의약품안전처), processed food nutrient database"
-    mfds_url = "https://various.foodsafetykorea.go.kr/nutrient/general/down/list.do"
-    mfds_path = os.path.join(ROOT, "data", "chips", "mfds-kr.json")
-    if not os.path.isfile(mfds_path):
-        problems.append("chip-db: data/chips/mfds-kr.json is missing")
-        return
-    try:
-        mfds = json.load(open(mfds_path, encoding="utf-8"))
-        base = json.load(open(os.path.join(ROOT, "data", "chips", "records.json"), encoding="utf-8"))
-    except ValueError as e:
-        problems.append(f"chip-db: records do not parse: {e}")
-        return
-    if not isinstance(mfds, list) or not mfds:
-        problems.append("chip-db: mfds-kr.json must be a non-empty array")
-        return
-    csv_path = os.path.join(ROOT, "data", "chips", "export", "chips.csv")
-    csv_text = open(csv_path, encoding="utf-8").read() if os.path.isfile(csv_path) else ""
-    if unstated in blob or unstated in csv_text:
-        problems.append("chip-db: ODbL JSON or CSV contains a record marked with an unstated licence")
-    export_ids = {p.get("id") for p in data.get("products") or []}
-    csv_ids = set()
-    if csv_text:
-        for line in csv_text.splitlines()[1:]:
-            csv_ids.add(line.split(",", 1)[0].strip('"'))
-    open_ids = {r.get("id") for r in base if r.get("source_licence") != unstated}
-    if export_ids != open_ids or csv_ids != open_ids:
-        problems.append("chip-db: ODbL JSON/CSV must contain the open records and nothing else")
-    korea = open(os.path.join(ROOT, "south-korea", "index.html"), encoding="utf-8").read()
-    if "/chips/" in korea:
-        problems.append("chip-db: south-korea page must not link the new chip records yet")
-    for r in mfds:
-        pid = r.get("id", "?")
-        if r.get("source_licence") != unstated:
-            problems.append(f"chip-db: {pid} must use the unstated government-data licence")
-        if pid in export_ids or pid in csv_ids:
-            problems.append(f"chip-db: {pid} must be excluded from the ODbL JSON and CSV")
-        if r.get("ingredients_text"):
-            problems.append(f"chip-db: {pid} has no ingredient list, so it cannot be indexed")
-        if not (r.get("image") or {}).get("placeholder"):
-            problems.append(f"chip-db: {pid} must use the photo placeholder")
-        cited = r.get("sources") or []
-        if not cited or any(s.get("url") != mfds_url or s.get("checked") != "2026-11-16" for s in cited):
-            problems.append(f"chip-db: {pid} must cite the Ministry URL checked 2026-11-16")
-        page = os.path.join(ROOT, CHIP_PREVIEW, r.get("brand_slug", ""), r.get("slug", ""), "index.html")
+        if expect:
+            indexable_products.append(p)
+    indexable_brands = set()
+    for p in indexable_products:
+        indexable_brands.add(p.get("brand_slug"))
+    chip_sm = ET.parse(os.path.join(ROOT, "sitemap-chips.xml")).getroot()
+    ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+    locs = {e.text for e in chip_sm.findall("s:url/s:loc", ns)}
+    expected_locs = {f"{SITE}/chips/"}
+    expected_locs |= {f"{SITE}/brands/{slug}/" for slug in indexable_brands}
+    expected_locs |= {f"{SITE}/chips/{p.get('brand_slug')}/{p.get('slug')}/" for p in indexable_products}
+    if locs != expected_locs:
+        extra, missing = locs - expected_locs, expected_locs - locs
+        problems.append(f"chip-db: sitemap-chips.xml mismatch extra {len(extra)} missing {len(missing)}")
+    if len(search) != len(base) + len(off) + len(mfds):
+        problems.append(f"chip-db: search index has {len(search)} rows, records have {len(base) + len(off) + len(mfds)}")
+    pages = [os.path.join(ROOT, "chips", "index.html")]
+    pages += sorted(glob.glob(os.path.join(ROOT, "brands", "*", "index.html")))
+    pages += sorted(glob.glob(os.path.join(ROOT, "chips", "*", "*", "index.html")))
+    pages = [q for q in pages if not is_chip_preview(q)]
+    titles = []
+    form_ids = set()
+    for path in pages:
+        rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
+        html = open(path, encoding="utf-8").read()
+        check(path, problems, form_ids)
+        titles.append(re.search(r"<title>(.*?)</title>", html, re.S).group(1) if "<title>" in html else "")
+        visible = re.sub(r"<script\b[\s\S]*?</script>", " ", html)
+        visible = re.sub(r'<blockquote class="chip-ingredients">[\s\S]*?</blockquote>', " ", visible)
+        visible = re.sub(r'<span class="chip-source-text">[\s\S]*?</span>', " ", visible)
+        for m in DIETARY_RE.finditer(visible):
+            window = visible[max(0, m.start() - 80):m.end() + 40]
+            if re.search(r"labelled as|labeled as", window, re.I) and re.search(r"\d{4}", window):
+                continue
+            problems.append(f"{rel}: dietary claim {m.group(0)!r} (quote a certification as labelled as, with a date)")
+        is_product = rel.startswith("chips/") and rel.count("/") >= 3 and "/brands/" not in rel
+        if is_product:
+            if "Check the pack; recipes change." not in html:
+                problems.append(f"{rel}: missing pack-check line")
+            if 'class="chip-ingredients"' not in html and "No ingredient text is recorded" not in html:
+                problems.append(f"{rel}: missing ingredients")
+            if 'id="sources"' not in html or "checked" not in html.lower():
+                problems.append(f"{rel}: missing sources")
+            if "Recipes may differ." not in html:
+                problems.append(f"{rel}: equivalents section must say recipes may differ")
+            figs = re.findall(r'<figure class="woc-photo(?:\s[^"]*)?"[\s\S]*?</figure>', html)
+            if 'data-photo="placeholder"' in html:
+                if "No product photograph is available." not in html:
+                    problems.append(f"{rel}: placeholder must say that no product photograph is available")
+                if any("commons.wikimedia.org" in f for f in figs if 'data-photo="placeholder"' in f):
+                    problems.append(f"{rel}: placeholder must not claim a Wikimedia Commons photograph")
+            elif 'data-photo="openfoodfacts"' in html:
+                if not figs or any("openfoodfacts.org" not in f or "CC BY-SA" not in f or "<figcaption>" not in f for f in figs):
+                    problems.append(f"{rel}: Open Food Facts photo needs a CC BY-SA credit")
+            elif not figs or any("commons.wikimedia.org" not in f or "<figcaption>" not in f for f in figs):
+                problems.append(f"{rel}: photo needs a Wikimedia Commons credit")
+            if "aggregateRating" in html or '"review"' in html or '"ratingValue"' in html:
+                problems.append(f"{rel}: Product structured data must not include ratings")
+            if '"@type":"Product"' not in html.replace(" ", "") and '"@type": "Product"' not in html:
+                problems.append(f"{rel}: missing Product structured data")
+            if "BreadcrumbList" not in html:
+                problems.append(f"{rel}: missing breadcrumb markup")
+            for img in re.findall(r"<img\b[^>]*>", html):
+                if 'alt="' not in img or 'alt=""' in img:
+                    problems.append(f"{rel}: <img> without alt text")
+                m = re.search(r'src="(/assets/photos/[^"]+)"', img)
+                if m and not os.path.isfile(os.path.join(ROOT, m.group(1).lstrip("/"))):
+                    problems.append(f"{rel}: missing photo file {m.group(1)}")
+    if len(form_ids) > 1:
+        problems.append(f"chip-db: pages use different MailerLite form ids {sorted(form_ids)}")
+    if len(set(titles)) != len(titles):
+        problems.append("chip-db: duplicate titles")
+    index_html = open(os.path.join(ROOT, "chips", "index.html"), encoding="utf-8").read()
+    if 'content="noindex' in index_html:
+        problems.append("chips/index.html: the database index should be indexable")
+    if "Check the pack; recipes change." not in index_html:
+        problems.append("chips/index.html: missing pack-check line")
+    for p in data.get("products") or []:
+        pid = p.get("id", "?")
+        page = os.path.join(ROOT, "chips", p.get("brand_slug", ""), p.get("slug", ""), "index.html")
         if not os.path.isfile(page):
-            problems.append(f"chip-db: missing preview page for {pid}")
             continue
         html = open(page, encoding="utf-8").read()
         rel = os.path.relpath(page, ROOT)
-        if 'content="noindex' not in html:
-            problems.append(f"{rel}: Ministry page must be noindex")
+        expect = p.get("public_indexable") is True and p.get("noindex") is False
+        if expect:
+            if 'content="noindex' in html or "This page is indexable" not in html:
+                problems.append(f"{rel}: indexable product page must say so and omit noindex")
+        else:
+            if 'content="noindex' not in html or "This page is noindex" not in html:
+                problems.append(f"{rel}: {pid} must be noindex")
+    for slug in indexable_brands:
+        page = os.path.join(ROOT, "brands", slug, "index.html")
+        if not os.path.isfile(page):
+            problems.append(f"chip-db: missing brand page /brands/{slug}/")
+            continue
+        html = open(page, encoding="utf-8").read()
+        if 'content="noindex' in html:
+            problems.append(f"brands/{slug}/index.html: brand with an indexable product must be indexable")
+    credit = "Source: Ministry of Food and Drug Safety (식품의약품안전처), processed food nutrient database"
+    mfds_url = "https://various.foodsafetykorea.go.kr/nutrient/general/down/list.do"
+    korea = open(os.path.join(ROOT, "south-korea", "index.html"), encoding="utf-8").read()
+    if "/chips/" in korea:
+        problems.append("chip-db: south-korea country guide must not link the chip records")
+    for row in mfds:
+        pid = row.get("id", "?")
+        if row.get("source_licence") != unstated:
+            problems.append(f"chip-db: {pid} must use the unstated government-data licence")
+        if pid in export_ids or pid in csv_ids:
+            problems.append(f"chip-db: {pid} must be excluded from the ODbL JSON and CSV")
+        if row.get("ingredients_text"):
+            problems.append(f"chip-db: {pid} has no ingredient list, so it cannot be indexed")
+        if not (row.get("image") or {}).get("placeholder"):
+            problems.append(f"chip-db: {pid} must use the photo placeholder")
+        cited = row.get("sources") or []
+        if not cited or any(s.get("url") != mfds_url or s.get("checked") != "2026-11-16" for s in cited):
+            problems.append(f"chip-db: {pid} must cite the Ministry URL checked 2026-11-16")
+        page = os.path.join(ROOT, "chips", row.get("brand_slug", ""), row.get("slug", ""), "index.html")
+        if not os.path.isfile(page):
+            problems.append(f"chip-db: missing published page for {pid}")
+            continue
+        html = open(page, encoding="utf-8").read()
+        rel = os.path.relpath(page, ROOT)
+        if 'content="noindex' not in html or "This page is noindex" not in html:
+            problems.append(f"{rel}: Ministry page must stay noindex")
         if credit not in html:
             problems.append(f"{rel}: missing Ministry source credit")
         if mfds_url not in html or "16 November 2026" not in html:
             problems.append(f"{rel}: Ministry page must show the source URL and the 16 November 2026 check")
-        if "would stay noindex" not in html:
-            problems.append(f"{rel}: no ingredient text, so the page must stay noindex")
-        if f"{SITE}/chips/{r.get('brand_slug')}/" in html:
-            problems.append(f"{rel}: Ministry page must not be published at /chips/ yet")
+        canon = f"{SITE}/chips/{row.get('brand_slug')}/{row.get('slug')}/"
+        if canon not in html:
+            problems.append(f"{rel}: Ministry page must be published at {canon}")
+        if f"{SITE}/chips/_preview/" in html:
+            problems.append(f"{rel}: Ministry page still points at the preview")
 
 
 def main():
@@ -528,7 +590,7 @@ def main():
     pages, form_ids = {}, set()
     share_stub = lambda q: os.sep + os.path.join("which-chip-are-you", "r") + os.sep in q
     for path in [os.path.join(ROOT, "index.html")] + [q for q in sorted(glob.glob(os.path.join(ROOT, "**", "index.html"), recursive=True)) if os.path.dirname(q) != ROOT]:
-        if is_chip_preview(path):
+        if is_chip_page(path):
             continue
         if share_stub(path):
             # Quiz-result share pages: meta tags for social previews, then a redirect to the quiz. noindex, not in sitemap.

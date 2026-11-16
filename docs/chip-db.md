@@ -1,23 +1,21 @@
 # Chip database schema
 
-Phase 0 stores records in `data/chips/records.json` and validates their shape with `data/chips/schema.json`. `node scripts/build_chip_db.mjs` (Node 16+, no npm) writes the preview and the open-data files. It does not edit the sitemap, the nav, flavour pages, country guides, or anything under `/pringles-index/`.
+Records live in `data/chips/records.json` (the curated set), `data/chips/off.json` (the Open Food Facts import), and `data/chips/mfds-kr.json` (Korean nutrient rows). `data/chips/schema.json` is the shape. `node scripts/build_chip_db.mjs` (Node 16+, no npm) writes the public pages, `sitemap-chips.xml`, and the open-data files. It does not edit `sitemap.xml`, the nav, flavour pages, country guides, or anything under `/pringles-index/`. It leaves `/chips/_preview/aisle/` alone.
 
 ```sh
+python3 scripts/import_off.py /path/to/en.openfoodfacts.org.products.csv.gz
 node scripts/build_chip_db.mjs
+node scripts/build_llms.mjs
 python3 scripts/validate_site.py
 ```
 
-`--publish` exits with an error. Publishing is not built yet.
-
 ## URLs
 
-Approved public paths, not generated in this phase:
-
-- `/chips/` search index
+- `/chips/` search index, from `/chips/search-index.json`
 - `/chips/<brand>/<product>/` one product
 - `/brands/<brand>/` brand hub
 
-Phase 0 writes the same shape under `/chips/_preview/`, including brand hubs at `/chips/_preview/brands/<brand>/`. Every preview page is `noindex, nofollow`, omitted from `sitemap.xml` and from the nav, and disallowed in `robots.txt`.
+Indexable product and brand URLs are listed in `sitemap-chips.xml`, not in `sitemap.xml`. `/chips/_preview/` stays disallowed in `robots.txt`. The aisle preview under `/chips/_preview/aisle/` is not part of this build.
 
 `id` is the stable key. `brand_slug` + `slug` is the path. Neither is reused. A discontinued product stays in the file with `status: "discontinued"`. Do not delete it to free the slug.
 
@@ -39,7 +37,7 @@ Phase 0 writes the same shape under `/chips/_preview/`, including brand hubs at 
 | `price_per_100g` | Null, or `{country, amount, currency, source, checked}`. The source has to be a retailer. A Pringles Index URL is rejected. The preview leaves this null. |
 | `status` | `current`, `limited`, `discontinued`, `unknown`. Unknown when the source does not say it is on shelf now. |
 | `ingredients_text` | Verbatim, plus source and date. Null when we do not have a text. Not edited for spelling. |
-| `image` | File key, pixel size, alt, licence, licence URL, credit, Commons file page. Files are `assets/photos/<file>-960.webp`, `-480.webp`, and `og-<file>.jpg`. |
+| `image` | File key, pixel size, alt, licence, licence URL, credit, and a source page. Wikimedia files are `assets/photos/<file>-960.webp`, `-480.webp`, and `og-<file>.jpg`. Open Food Facts files are a local `<file>-480.webp` under CC BY-SA 3.0. |
 | `where_to_buy` | Per country. Channels are `universal-yums` (US and Canada only), `daebak` (ships internationally; used for South Korea), `bol` (Netherlands and Belgium), and `amazon`. Amazon uses the existing guides tag `woc-guides-20`. Partner links render above the Amazon search. A box link is not a claim that the box contains the bag. |
 | `sources` | `{field, url, checked}` for every non-trivial field, with an optional note. |
 
@@ -67,14 +65,14 @@ The builder scores 0–100. Heat and price are not scored: null is the right val
 | Credited image | 6 |
 | A where-to-buy row | 4 |
 
-**Indexing rule, approved 16 November 2026.** A public product page is indexable only when completeness is **60 or more** and `ingredients_text` is present. Otherwise it is noindex. Both conditions are required. Sabritas American Brisket, Takis Fuego and Doritos Nacho Cheese score 60 and have no ingredient text, so a public page for them would stay noindex. Phase 0 marks every preview page noindex regardless, including the ones that would pass.
+**Indexing rule, approved 16 November 2026.** A public product page is indexable only when completeness is **60 or more** and `ingredients_text` is present. Otherwise it is noindex. Both conditions are required. Sabritas American Brisket, Takis Fuego and Doritos Nacho Cheese score 60 and have no ingredient text, so their pages stay noindex. Korean nutrient rows have no ingredient text, so they stay noindex as well.
 
 ## Open data
 
 `data/chips/export/chips.json`, `chips.csv` and `ATTRIBUTION.txt` are the derived database.
 
 - **Database:** Open Database License 1.0 (https://opendatacommons.org/licenses/odbl/1-0/). Attribute Open Food Facts (https://world.openfoodfacts.org) and World of Chips. Share-alike applies to the database: a public reuse of the database stays under the ODbL.
-- **Photographs:** not part of the database. Each file keeps its own Commons licence (CC BY, CC BY-SA, CC0 or public domain). BY and BY-SA need the credit on the page. BY-SA also means an adapted photograph stays under that licence.
+- **Photographs:** not part of the database. Wikimedia files keep their own Commons licence (CC BY, CC BY-SA, CC0 or public domain). Open Food Facts photographs are CC BY-SA 3.0, resized to at most 480px, and stored as local WebP. BY and BY-SA need the credit on the page. BY-SA also means an adapted photograph stays under that licence.
 - **Trademarks:** names and pack designs in the photographs belong to their owners. A photo licence is not a trademark licence.
 
 `data/chips/mfds-kr.json` is a separate set. Those rows come from the Korean Ministry of Food and Drug Safety processed-food nutrient database (가공식품DB, file version 2026-09-29), checked at https://various.foodsafetykorea.go.kr/nutrient/general/down/list.do on 16 November 2026. The download states no licence. Each record has `source_licence` set to `unstated (government data, used with attribution)`. The builder previews them and leaves them out of `chips.json` and `chips.csv`. `validate_site.py` fails if one of those ids appears in either open file.
@@ -85,9 +83,9 @@ Regenerate the Ministry file from a name-filtered extract with `python3 scripts/
 
 The import keeps a row only when the name contains `감자칩`, `포테이토칩`, `포테토칩` or `감자스낵`, the subclass is `과자`, and the representative food is `스낵과자` or `일반과자`. It drops sweet potato, Jerusalem artichoke, and one schisandra snack whose nutrients are not a chip. The same name and manufacturer keep the later row. Nutrition is copied per 100 g and is not averaged or corrected.
 
-`name_en` stays null. `brand` is set only when the manufacturer or importer string is itself the brand (`농심`, `오리온`, `해태가루비`, `KEOGHS`, `AMICA CHIPS`, `SAN NICASIO`, `PAPAS ARGENTE`, or Dieffenbach's). `parent_company` stays null. There is no barcode, ingredient list, pack size, price, or photograph. The page uses the placeholder image. Pages stay under `/chips/_preview/<brand>/<product>/`, `noindex`, and out of the sitemap and the country guides.
+`name_en` stays null. `brand` is set only when the manufacturer or importer string is itself the brand (`농심`, `오리온`, `해태가루비`, `KEOGHS`, `AMICA CHIPS`, `SAN NICASIO`, `PAPAS ARGENTE`, or Dieffenbach's). `parent_company` stays null. There is no barcode, ingredient list, pack size, price, or photograph. The page uses the placeholder image. Pages are published at `/chips/<brand>/<product>/` and stay noindex. They are not in `sitemap-chips.xml` or the country guides.
 
-These files are in the repository for review. They are not a publish decision. Michael needs to accept the ODbL and the photo terms before any of this is linked from the public site.
+The ODbL and CC BY-SA obligations were accepted before this publish. The open download is linked from `/chips/`.
 
 ## What the builder will not do
 
