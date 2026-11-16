@@ -17,7 +17,7 @@ Approved public paths, not generated in this phase:
 - `/chips/<brand>/<product>/` one product
 - `/brands/<brand>/` brand hub
 
-Phase 0 writes the same shape under `/chips/_preview/`, including brand hubs at `/chips/_preview/brands/<brand>/`. Every preview page is `noindex, nofollow`, omitted from `sitemap.xml` and from the nav, and disallowed in `robots.txt`.
+Phase 0 writes the same shape under `/chips/_preview/`, including brand hubs at `/chips/_preview/brands/<brand>/`. It also writes `/chips/_preview/aisle/`, a review-only shelf view of the same records. That aisle is not an approved public path. Every preview page is `noindex, nofollow`, omitted from `sitemap.xml`, the nav and `llms.txt`, and disallowed in `robots.txt` by `Disallow: /chips/_preview/`.
 
 `id` is the stable key. `brand_slug` + `slug` is the path. Neither is reused. A discontinued product stays in the file with `status: "discontinued"`. Do not delete it to free the slug.
 

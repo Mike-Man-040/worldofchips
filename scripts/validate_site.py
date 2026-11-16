@@ -400,7 +400,25 @@ def check_chip_db(problems):
             if re.search(r"labelled as|labeled as", window, re.I) and re.search(r"\d{4}", window):
                 continue
             problems.append(f"{rel}: dietary claim {m.group(0)!r} (quote a certification as labelled as, with a date)")
-        if rel.count(os.sep) >= 3 and "/brands/" not in rel.replace("\\", "/"):
+        norm = rel.replace("\\", "/")
+        if norm == "chips/_preview/aisle/index.html":
+            if 'id="aisle-list"' not in html or 'class="aisle-catalog"' not in html:
+                problems.append(f"{rel}: aisle needs a crawlable HTML list of the bags")
+            if "IntersectionObserver" not in html or 'loading="lazy"' not in html:
+                problems.append(f"{rel}: aisle images must use loading=lazy and IntersectionObserver")
+            if "prefers-reduced-motion" not in html:
+                problems.append(f"{rel}: aisle must respect prefers-reduced-motion")
+            try:
+                recs = json.load(open(os.path.join(ROOT, "data", "chips", "records.json"), encoding="utf-8"))
+            except (OSError, ValueError) as e:
+                problems.append(f"{rel}: cannot read records.json: {e}")
+                recs = []
+            for rec in recs:
+                href = f"/chips/_preview/{rec.get('brand_slug', '')}/{rec.get('slug', '')}/"
+                if f'href="{href}"' not in html:
+                    problems.append(f"{rel}: HTML list missing {href}")
+            continue
+        if rel.count(os.sep) >= 3 and "/brands/" not in norm:
             if "Check the pack; recipes change." not in html:
                 problems.append(f"{rel}: missing pack-check line")
             if 'class="chip-ingredients"' not in html and "No ingredient text is recorded" not in html:
