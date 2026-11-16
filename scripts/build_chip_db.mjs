@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Chip database, phase 0. Reads data/chips/records.json and writes a review-only
-// preview under /chips/_preview/ plus an ODbL JSON/CSV export. Does not edit the
-// sitemap, the nav, country pages, flavour pages, or /pringles-index/.
+// preview under /chips/_preview/ (index, brand hubs, product pages, and the
+// aisle at /chips/_preview/aisle/) plus an ODbL JSON/CSV export. Does not edit the
+// sitemap, the nav, country pages, flavour pages, llms.txt, or /pringles-index/.
 //
 //   node scripts/build_chip_db.mjs           write files
 //   node scripts/build_chip_db.mjs --check   exit 1 if the generated files are stale
@@ -10,7 +11,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { tagFor, snackBoxLead, daebakBox, bolBox } from './affiliate_tags.mjs';
+import { tagFor, snackBoxLead, daebakBox, bolBox, UNIVERSAL_YUMS_AWIN, AWIN_REL, DAEBAK_LINK, DAEBAK_REL, BOL_REL, bolLink, bolSearchUrl } from './affiliate_tags.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://worldofchips.com';
@@ -268,7 +269,7 @@ const PAGE_CSS = `<style>
 .chip-list span{color:var(--muted);font-size:.85rem}
 </style>`;
 
-function shell({ title, description, canonical, image, imageAlt, jsonLd, body }) {
+function shell({ title, description, canonical, image, imageAlt, jsonLd, body, extraCss = '' }) {
   const nl = `<aside class="nl nl-compact" id="newsletter" aria-labelledby="nl-title">
 <h2 id="nl-title">Get the monthly Chip Report</h2>
 <p class="nl-pitch">New and weird chips from around the world, once a month. No spam.</p>
@@ -306,7 +307,7 @@ ${fontsLink}
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="stylesheet" href="/assets/extras.css">
 ${PAGE_CSS}
-${mlUniversal}
+${extraCss ? `${extraCss}\n` : ''}${mlUniversal}
 </head>
 <body>
 <p class="chip-review">Review copy, not published. This page is noindex and is not in the site menu or the sitemap. <a href="/${PREVIEW}/">All preview records</a></p>
@@ -527,6 +528,7 @@ function indexPage(records) {
   </div>
   <div class="cp-body">
     <p class="cp-intro">Ten sample products across the United States, the United Kingdom, the Netherlands, Japan, South Korea and Mexico. Nothing here is in the public menu. Check the pack; recipes change.</p>
+    <p class="cp-intro"><a href="/${PREVIEW}/aisle/">Browse the same ten records as a chip aisle</a>. That page is review-only too: noindex, and not in the menu or the sitemap.</p>
     <label for="chip-q">Search by name, brand, country or type</label>
     <input id="chip-q" class="chip-search" type="search" placeholder="Try salt, Calbee, Mexico, ridged">
     <div id="chip-list" class="chip-list"></div>
@@ -570,6 +572,441 @@ function indexPage(records) {
 </script>`;
   return shell({
     title, description, canonical: `${SITE}/${PREVIEW}/`, image: '/assets/photos/og-lays-classic.jpg', imageAlt: "Lay's Classic potato chips", jsonLd, body,
+  });
+}
+
+// Public pages that already discuss this record. Country pages, flavour pages and the
+// spice ladder are added in guideLinks when the record points at them. A missing file
+// is a build error so a renamed guide cannot leave a broken link.
+const GUIDE_PAGES = {
+  'calbee-usushio': [['/best-japanese-chips/', 'Japanese chips guide']],
+  'haitai-honey-butter-chip': [
+    ['/best-korean-chips-to-buy-online/', 'Korean chips guide'],
+    ['/where-to-buy-honey-butter-chip-europe/', 'Where to buy Honey Butter Chip'],
+  ],
+  'takis-fuego': [
+    ['/where-to-buy-takis-europe/', 'Where to buy Takis'],
+    ['/best-mexican-chips-to-buy-online/', 'Mexican chips guide'],
+  ],
+  'walkers-salt-and-vinegar': [['/best-british-crisps-to-buy-online/', 'British crisps guide']],
+  'pringles-original': [['/pringles-index/', 'Pringles Index']],
+};
+const PIXEL = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
+function pageExists(href) {
+  const rel = href.replace(/^\//, '').replace(/\/$/, '');
+  return fs.existsSync(path.join(ROOT, rel, 'index.html'));
+}
+
+function licensedImage(p) {
+  const img = p.image;
+  if (!img || !img.file || !img.alt || !img.licence || !img.licence_url || !img.credit || !img.source) return null;
+  for (const suffix of [`${img.file}-480.webp`, `${img.file}-960.webp`]) {
+    if (!fs.existsSync(path.join(ROOT, 'assets', 'photos', suffix))) return null;
+  }
+  return img;
+}
+
+function creditCaption(img) {
+  const lic = img.licence === 'Public domain'
+    ? 'public domain'
+    : `<a href="${esc(img.licence_url)}" target="_blank" rel="nofollow noopener">${esc(img.licence)}</a>`;
+  const resized = /BY/.test(img.licence) ? ', resized' : '';
+  return `Photo: <a href="${esc(img.source)}" target="_blank" rel="nofollow noopener">${esc(img.credit)}</a> via Wikimedia Commons, ${lic}${resized}.`;
+}
+
+function guideLinks(p) {
+  const out = [{ href: productPath(p), label: 'Sourced record' }];
+  const seen = new Set(out.map((l) => l.href));
+  const add = (href, label) => {
+    if (!href || seen.has(href)) return;
+    if (!pageExists(href)) die(`${p.id}: missing page ${href}`);
+    seen.add(href);
+    out.push({ href, label });
+  };
+  if (p.flavour_family) add(`/flavors/${p.flavour_family}/`, FLAVOUR_LABEL[p.flavour_family]);
+  if (p.heat_level != null) add('/spiciest-chips/', `Spice ladder, rung ${p.heat_level}`);
+  for (const [href, label] of GUIDE_PAGES[p.id] || []) add(href, label);
+  for (const c of p.countries_sold) {
+    const href = `/${c.country}/`;
+    if (!pageExists(href) || seen.has(href)) continue;
+    seen.add(href);
+    out.push({ href, label: countryName(c.country) });
+  }
+  return out;
+}
+
+function countryBits(p) {
+  if (!p.countries_sold.length) return 'Country not recorded';
+  return p.countries_sold.map((c) => {
+    const name = esc(countryName(c.country));
+    return pageExists(`/${c.country}/`) ? `<a href="/${c.country}/">${name}</a>` : name;
+  }).join(', ');
+}
+
+function dealBlock(p) {
+  const channels = new Set(p.where_to_buy.flatMap((row) => row.channels));
+  const bits = [];
+  if (channels.has('universal-yums')) {
+    bits.push(`<a href="${esc(UNIVERSAL_YUMS_AWIN)}" target="_blank" rel="${AWIN_REL}" class="buy-btn" data-affiliate="universalyums">Universal Yums snack box &#8594;</a>`);
+  }
+  if (channels.has('daebak')) {
+    bits.push(`<a href="${esc(DAEBAK_LINK)}" target="_blank" rel="${DAEBAK_REL}" class="buy-btn" data-affiliate="daebak">Daebak Korean snack box &#8594;</a>`);
+  }
+  if (channels.has('bol')) {
+    const row = p.where_to_buy.find((r) => r.channels.includes('bol'));
+    const q = (row && row.amazon_query) || `${p.brand} ${p.name_en}`;
+    bits.push(`<a href="${esc(bolLink(bolSearchUrl(q), `${p.brand} ${p.name_en}`))}" target="_blank" rel="${BOL_REL}" class="buy-btn" data-affiliate="bol">bol.com search &#8594;</a>`);
+  }
+  const amazonRows = [];
+  const seenQ = new Set();
+  for (const row of p.where_to_buy) {
+    if (!row.channels.includes('amazon') || !row.amazon_query || seenQ.has(row.amazon_query)) continue;
+    seenQ.add(row.amazon_query);
+    amazonRows.push(row);
+  }
+  amazonRows.forEach((row) => {
+    const label = amazonRows.length > 1
+      ? `Find it on Amazon (${countryName(row.country)})`
+      : `Find ${p.brand} ${p.name_en} on Amazon`;
+    bits.push(amazonLink(row.amazon_query, `${esc(label)} &#8594;`));
+  });
+  return bits.join('\n      ');
+}
+
+function bagMedia(img, defer) {
+  // Shelf slots are about 150px, so the 480px file is enough. The 960px file stays on the product page.
+  const small = `/assets/photos/${img.file}-480.webp`;
+  const common = `width="${img.width}" height="${img.height}" alt="${esc(img.alt)}" decoding="async"`;
+  if (!defer) return `<img ${common} src="${small}" loading="lazy">`;
+  return `<img class="aisle-lazy" ${common} src="${PIXEL}" data-src="${small}" loading="lazy">`;
+}
+
+function ghostBag(p) {
+  let n = 0;
+  for (const ch of p.id) n = (n + ch.charCodeAt(0)) % 8;
+  return `<span class="aisle-ghost" style="--bag:${n}" aria-hidden="true"><span class="aisle-ghost-crimp"></span><span class="aisle-ghost-brand">${esc(p.brand)}</span><span class="aisle-ghost-name">${esc(p.name_en)}</span></span>`;
+}
+
+function shelfTitle(slug) {
+  return slug === 'unrecorded' ? 'Country not recorded' : countryName(slug);
+}
+
+const AISLE_CSS = `<style>
+.cp-hero{padding:1.35rem 1.25rem 1.2rem}
+.cp-back{margin-bottom:.55rem}
+.cp-title{font-size:clamp(1.8rem,4vw,2.7rem)}
+.aisle{margin:0 -2rem 2rem;background:#1a1108;color:#fff8ec;padding:.85rem 0 1.15rem;scroll-margin-top:64px}
+.aisle-help{margin:0 1rem .85rem;color:#f5ecd7;font-size:.95rem;line-height:1.5}
+.aisle-skip{color:#f5d78e;font-weight:700}
+.aisle-shelf{margin:0 0 1.15rem}
+.aisle-shelf-head{display:flex;align-items:baseline;justify-content:space-between;gap:.75rem;padding:0 1rem .4rem}
+.aisle-shelf h2{margin:0;font-family:'Zilla Slab',serif;font-size:1.15rem;letter-spacing:.08em;text-transform:uppercase;color:#f5d78e}
+.aisle-shelf h2 a{color:inherit;text-decoration:underline;text-underline-offset:.15em}
+.aisle-count{color:#c4a574;font-size:.85rem}
+.aisle-row{display:flex;align-items:center;gap:.35rem;padding:0 .45rem}
+.aisle-nudge{flex:0 0 48px;width:48px;height:48px;border-radius:999px;border:2px solid #e8a838;background:#2a1c10;color:#fff8ec;font-size:1.7rem;line-height:1;cursor:pointer}
+.aisle-nudge:focus-visible,.aisle-bag:focus-visible,.aisle-close:focus-visible,.aisle-text-link:focus-visible{outline:3px solid #f5d78e;outline-offset:3px}
+.aisle-track{min-width:0;flex:1;display:flex;gap:.65rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:.55rem;padding:.7rem .55rem .85rem;background:linear-gradient(#c4a574,#a68456) bottom/100% 12px no-repeat,linear-gradient(#5c4630,#3d2b1a);border-radius:4px 4px 12px 12px;box-shadow:0 8px 0 #2a1c10;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.aisle-track::-webkit-scrollbar{height:8px}
+.aisle-track::-webkit-scrollbar-thumb{background:#e8a838;border-radius:8px}
+.aisle-bag{position:relative;flex:0 0 9.25rem;width:9.25rem;scroll-snap-align:start;display:flex;padding:.35rem;border-radius:12px;text-decoration:none;color:#fff8ec}
+.aisle-bag-face{height:11.5rem;width:100%;display:grid;place-items:center;background:#fff8ec;border-radius:10px;overflow:hidden;box-shadow:0 6px 0 rgba(0,0,0,.28)}
+.aisle-bag-face img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.aisle-bag-caption{position:absolute;left:.35rem;right:.35rem;bottom:.35rem;padding:.4rem .45rem .5rem;background:rgba(26,17,8,.9);border-radius:0 0 10px 10px}
+.aisle-bag-name{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:.92rem;font-weight:700;line-height:1.25;color:#fff8ec}
+.aisle-bag-where{display:block;margin-top:.1rem;font-size:.85rem;color:#f5d78e}
+.aisle-ghost{width:5.6rem;height:8.2rem;border-radius:1.15rem 1.15rem .7rem .7rem;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:.2rem;padding:.35rem .3rem .55rem;text-align:center;color:#fff8ec;background:linear-gradient(hsl(calc(var(--bag) * 42), 68%, 42%), hsl(calc(var(--bag) * 42), 58%, 30%))}
+.aisle-ghost-crimp{width:100%;height:.55rem;margin-bottom:auto;background:repeating-linear-gradient(90deg,#0003 0 6px,#fff6 6px 12px)}
+.aisle-ghost-brand,.aisle-ghost-name{font-size:.68rem;font-weight:700;line-height:1.15}
+.aisle-catalog{list-style:none;padding:0;margin:1rem 0 0;display:grid;gap:1rem}
+.aisle-catalog>li{background:var(--paper);border:1px solid var(--light-border);border-radius:14px;padding:1rem}
+.aisle-catalog h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--brown);margin:0 0 .15rem}
+.aisle-local,.aisle-type{margin:.1rem 0;color:var(--muted);font-size:.9rem}
+.aisle-countries{margin:.25rem 0 .5rem}
+.aisle-read,.aisle-deals{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
+.aisle-text-link{display:inline-flex;align-items:center;min-height:48px;padding:.4rem .9rem;border-radius:999px;border:1px solid var(--light-border);background:var(--cream);color:#1a4570;text-decoration:none;font-weight:600}
+.aisle-deals .buy-btn{margin:0}
+.aisle-catalog .woc-photo{margin:.4rem 0}
+.aisle-catalog .woc-photo img{max-height:200px}
+.aisle-dialog{position:fixed;top:50%;left:50%;right:auto;bottom:auto;transform:translate(-50%,-50%);height:auto;margin:0;border:none;border-radius:16px;padding:0 1.1rem 1rem;width:min(22.5rem,calc(100vw - 1.5rem));max-height:92vh;overflow:auto;background:var(--paper);color:var(--ink);box-shadow:0 18px 50px rgba(26,17,8,.35)}
+.aisle-dialog::backdrop{background:rgba(26,17,8,.66)}
+.aisle-dialog-bar{position:sticky;top:0;display:flex;justify-content:flex-end;background:var(--paper);padding-top:.35rem;z-index:1}
+.aisle-close{min-width:48px;min-height:48px;border:0;background:transparent;font:inherit;font-weight:700;color:var(--brown);cursor:pointer}
+.aisle-dialog h2{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--brown);margin:0 0 .35rem}
+.aisle-card-photo img{display:block;max-width:100%;height:auto;max-height:140px;margin:0 auto .35rem;object-fit:contain}
+.aisle-card-photo figcaption,.aisle-catalog figcaption{font-size:.75rem;line-height:1.4;color:var(--muted)}
+.aisle-dialog .aisle-read,.aisle-dialog .aisle-deals{flex-direction:column;align-items:stretch}
+.aisle-dialog .buy-btn,.aisle-dialog .aisle-text-link{justify-content:center;width:100%;box-sizing:border-box}
+@media (hover:hover){
+  .aisle-bag:hover{transform:translateY(-4px)}
+}
+@media (prefers-reduced-motion: reduce){
+  .aisle-bag,.aisle-nudge,.aisle-track{scroll-behavior:auto;transition:none}
+  .aisle-bag:hover{transform:none}
+}
+@media (max-width:600px){
+  .cp-body .aisle{margin-left:-2rem;margin-right:-2rem}
+  .aisle-bag{flex-basis:10.5rem;width:10.5rem}
+}
+</style>`;
+
+function aislePage(records) {
+  const title = 'Chip Aisle Preview | World of Chips';
+  if (title.length > 65) die(`aisle title too long (${title.length})`);
+  const description = 'Review-only shelves of the ten sourced chip records, grouped by country. Noindex, and not in the sitemap or the menu.';
+  const groups = new Map();
+  for (const p of records) {
+    const slugs = p.countries_sold.length ? p.countries_sold.map((c) => c.country) : ['unrecorded'];
+    for (const slug of slugs) {
+      if (!groups.has(slug)) groups.set(slug, []);
+      if (!groups.get(slug).some((row) => row.id === p.id)) groups.get(slug).push(p);
+    }
+  }
+  for (const list of groups.values()) list.sort((a, b) => `${a.brand} ${a.name_en}`.localeCompare(`${b.brand} ${b.name_en}`));
+  const shelfSlugs = [...groups.keys()].sort((a, b) => {
+    const diff = groups.get(b).length - groups.get(a).length;
+    return diff || shelfTitle(a).localeCompare(shelfTitle(b));
+  });
+  const listed = [];
+  const seen = new Set();
+  for (const slug of shelfSlugs) {
+    for (const p of groups.get(slug)) {
+      if (seen.has(p.id)) continue;
+      seen.add(p.id);
+      listed.push(p);
+    }
+  }
+  const any = { yums: false, daebak: false, bol: false };
+  for (const p of records) {
+    for (const row of p.where_to_buy) {
+      if (row.channels.includes('universal-yums')) any.yums = true;
+      if (row.channels.includes('daebak')) any.daebak = true;
+      if (row.channels.includes('bol')) any.bol = true;
+    }
+  }
+  const partnerNotes = [
+    any.yums ? 'Universal Yums ships snack boxes to the US and Canada only.' : '',
+    any.daebak ? 'Daebak is a Korean snack box that ships internationally.' : '',
+    any.bol ? 'bol.com delivers to the Netherlands and Belgium.' : '',
+  ].filter(Boolean).join(' ');
+  const shelves = shelfSlugs.map((slug) => {
+    const bags = groups.get(slug);
+    const heading = slug === 'unrecorded' || !pageExists(`/${slug}/`)
+      ? esc(shelfTitle(slug))
+      : `<a href="/${slug}/">${esc(shelfTitle(slug))}</a>`;
+    const trackId = `aisle-track-${slug}`;
+    const cards = bags.map((p, i) => {
+      const img = licensedImage(p);
+      const face = img ? bagMedia(img, i > 0) : ghostBag(p);
+      return `<a class="aisle-bag" href="#aisle-item-${p.id}">
+        <span class="aisle-bag-face">${face}</span>
+        <span class="aisle-bag-caption"><span class="aisle-bag-name">${esc(p.brand)} ${esc(p.name_en)}</span><span class="aisle-bag-where">${esc(shelfTitle(slug))}</span></span>
+      </a>`;
+    }).join('\n        ');
+    const noun = bags.length === 1 ? 'bag' : 'bags';
+    return `<section class="aisle-shelf" aria-labelledby="aisle-h-${slug}">
+      <div class="aisle-shelf-head"><h2 id="aisle-h-${slug}">${heading}</h2><span class="aisle-count">${bags.length} ${noun}</span></div>
+      <div class="aisle-row">
+        <button type="button" class="aisle-nudge" data-dir="-1" aria-controls="${trackId}" aria-label="Scroll the ${esc(shelfTitle(slug))} shelf back"><span aria-hidden="true">&#8249;</span></button>
+        <div class="aisle-track" id="${trackId}" tabindex="0">
+        ${cards}
+        </div>
+        <button type="button" class="aisle-nudge" data-dir="1" aria-controls="${trackId}" aria-label="Scroll the ${esc(shelfTitle(slug))} shelf forward"><span aria-hidden="true">&#8250;</span></button>
+      </div>
+    </section>`;
+  }).join('\n    ');
+  const items = listed.map((p) => {
+    const img = licensedImage(p);
+    const local = p.name_local && p.name_local !== p.name_en ? `<p class="aisle-local">${esc(p.name_local)}</p>` : '';
+    const photo = img ? `<figure class="woc-photo"><img src="/assets/photos/${img.file}-480.webp" sizes="200px" width="${img.width}" height="${img.height}" alt="${esc(img.alt)}" loading="lazy" decoding="async"><figcaption>${creditCaption(img)}</figcaption></figure>` : `<p class="aisle-type">No licensed photo is on file. The shelf shows a drawn bag.</p>`;
+    const reads = guideLinks(p).map((l) => `<a class="aisle-text-link" href="${l.href}">${esc(l.label)}</a>`).join('\n        ');
+    return `<li id="aisle-item-${p.id}">
+      <h3>${esc(p.brand)} ${esc(p.name_en)}</h3>
+      ${local}
+      <p class="aisle-countries">Sold in ${countryBits(p)}.</p>
+      <p class="aisle-type">${esc(TYPE_LABEL[p.type])}</p>
+      ${photo}
+      <div class="aisle-read">${reads}</div>
+      <div class="aisle-deals">${dealBlock(p)}</div>
+    </li>`;
+  }).join('\n      ');
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'ItemList',
+        name: 'Chip aisle preview',
+        itemListElement: listed.map((p, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: `${p.brand} ${p.name_en}`,
+          url: `${SITE}${productPath(p)}`,
+        })),
+      },
+      breadcrumbLd([
+        { name: 'Home', href: '/' },
+        { name: 'Chip database', href: `/${PREVIEW}/` },
+        { name: 'Aisle', href: `/${PREVIEW}/aisle/` },
+      ]),
+    ],
+  };
+  const body = `<article class="country-page active">
+  <div class="cp-hero">
+    <a href="/${PREVIEW}/" class="cp-back">&#8592; Chip database preview</a>
+    ${crumbs([{ name: 'Home', href: '/' }, { name: 'Chip database', href: `/${PREVIEW}/` }, { name: 'Aisle', href: `/${PREVIEW}/aisle/` }])}
+    <h1 class="cp-title">Chip aisle</h1>
+    <p class="cp-intro-dark">The same ten sourced records as the <a href="/${PREVIEW}/">chip database preview</a>, on country shelves. This is not a second index. It is noindex, and it is not in the menu or the sitemap.</p>
+  </div>
+  <div class="cp-body">
+    <div class="aisle">
+      <p class="aisle-help"><a class="aisle-skip" href="#aisle-list">Skip to the list</a>. Swipe a shelf, or use the round buttons. Arrow keys move between bags. Select a bag for its name and country.</p>
+      <noscript><p class="aisle-help">The shelves need JavaScript. Every bag is in the list below, with the same links.</p></noscript>
+      ${shelves}
+    </div>
+    <section class="cp-section" id="aisle-list">
+      <h2>Bags on this aisle</h2>
+      <p class="aff-disc">${DISCLOSURE}</p>
+      <p>One entry per record, in shelf order. A bag sold in two countries is on both shelves and only once in this list. The links are in the HTML, so they do not depend on JavaScript. ${partnerNotes} Snack-box links are above the Amazon search. A box or a search is not a claim that it contains this bag. Check the pack; recipes change.</p>
+      <p class="sb-muted">Packaging in a photograph is a trademark of its owner. The photo licence is not a trademark licence. Where a record has no licensed photo, the shelf draws a bag instead of using someone else's picture.</p>
+      <ol class="aisle-catalog">
+      ${items}
+      </ol>
+    </section>
+    <dialog id="aisle-dialog" class="aisle-dialog" aria-labelledby="aisle-dialog-title">
+      <div class="aisle-dialog-bar"><button type="button" class="aisle-close">Close</button></div>
+      <h2 id="aisle-dialog-title"></h2>
+      <div id="aisle-dialog-slot"></div>
+      <p class="sb-muted">A snack box or a search is not this bag. Check the pack; recipes change. Affiliate links: World of Chips may earn a commission, at no extra cost to you.</p>
+    </dialog>
+    ${newsletter()}
+  </div>
+</article>
+<script>
+(function () {
+  var dialog = document.getElementById('aisle-dialog');
+  var slot = document.getElementById('aisle-dialog-slot');
+  var title = document.getElementById('aisle-dialog-title');
+  var lastFocus = null;
+  var reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function motion() { return reduceQuery.matches ? 'auto' : 'smooth'; }
+  function loadImg(img) {
+    if (!img) return;
+    var src = img.getAttribute('data-src');
+    if (src) {
+      img.src = src;
+      img.removeAttribute('data-src');
+    }
+    var set = img.getAttribute('data-srcset');
+    if (set) {
+      img.srcset = set;
+      img.removeAttribute('data-srcset');
+    }
+  }
+  function scrollTrack(track, dir) {
+    track.scrollBy({ left: dir * Math.max(160, track.clientWidth * 0.75), behavior: motion() });
+  }
+  document.querySelectorAll('.aisle-nudge').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var track = document.getElementById(btn.getAttribute('aria-controls'));
+      if (track) scrollTrack(track, Number(btn.getAttribute('data-dir')) || 1);
+    });
+  });
+  document.querySelectorAll('.aisle-track').forEach(function (track) {
+    var imgs = track.querySelectorAll('img.aisle-lazy');
+    if (!('IntersectionObserver' in window)) {
+      imgs.forEach(loadImg);
+    } else if (imgs.length) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          loadImg(en.target);
+          io.unobserve(en.target);
+        });
+      }, { root: track, rootMargin: '120px', threshold: 0.01 });
+      imgs.forEach(function (img) { io.observe(img); });
+    }
+    track.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft' || e.altKey || e.metaKey || e.ctrlKey) return;
+      var bags = Array.prototype.slice.call(track.querySelectorAll('.aisle-bag'));
+      var index = bags.indexOf(document.activeElement);
+      if (index >= 0) {
+        var next = bags[index + (e.key === 'ArrowRight' ? 1 : -1)];
+        if (!next) return;
+        e.preventDefault();
+        next.focus();
+        next.scrollIntoView({ inline: 'start', block: 'nearest', behavior: motion() });
+        return;
+      }
+      e.preventDefault();
+      scrollTrack(track, e.key === 'ArrowRight' ? 1 : -1);
+    });
+  });
+  function openCard(bag) {
+    if (!dialog || !dialog.showModal) return;
+    var id = (bag.getAttribute('href') || '').split('#')[1];
+    var item = id && document.getElementById(id);
+    if (!item) return;
+    var head = item.querySelector('h3');
+    title.textContent = head ? head.textContent : '';
+    while (slot.firstChild) slot.removeChild(slot.firstChild);
+    var sourceImg = bag.querySelector('img');
+    var caption = item.querySelector('figcaption');
+    if (sourceImg || caption) {
+      if (sourceImg) loadImg(sourceImg);
+      var fig = document.createElement('figure');
+      fig.className = 'aisle-card-photo';
+      if (sourceImg && sourceImg.getAttribute('src') && sourceImg.getAttribute('src').indexOf('data:') !== 0) {
+        var pic = document.createElement('img');
+        pic.alt = sourceImg.alt;
+        pic.src = sourceImg.currentSrc || sourceImg.getAttribute('src');
+        pic.width = 240;
+        pic.height = 160;
+        pic.decoding = 'async';
+        fig.appendChild(pic);
+      }
+      if (caption) fig.appendChild(caption.cloneNode(true));
+      if (fig.firstChild) slot.appendChild(fig);
+    }
+    ['.aisle-local', '.aisle-countries', '.aisle-type', '.aisle-read', '.aisle-deals'].forEach(function (sel) {
+      var node = item.querySelector(sel);
+      if (node) slot.appendChild(node.cloneNode(true));
+    });
+    lastFocus = bag;
+    dialog.showModal();
+    var closeBtn = dialog.querySelector('.aisle-close');
+    if (closeBtn) closeBtn.focus();
+  }
+  document.querySelectorAll('.aisle-bag').forEach(function (bag) {
+    bag.addEventListener('click', function (e) {
+      if (!dialog || !dialog.showModal) return;
+      e.preventDefault();
+      openCard(bag);
+    });
+  });
+  if (dialog) {
+    dialog.addEventListener('close', function () {
+      if (lastFocus) lastFocus.focus();
+    });
+    dialog.addEventListener('click', function (e) {
+      var rect = dialog.getBoundingClientRect();
+      var inside = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
+      if (!inside) dialog.close();
+    });
+    var closeBtn = dialog.querySelector('.aisle-close');
+    if (closeBtn) closeBtn.addEventListener('click', function () { dialog.close(); });
+  }
+})();
+</script>`;
+  return shell({
+    title,
+    description,
+    canonical: `${SITE}/${PREVIEW}/aisle/`,
+    image: '/assets/photos/og-sabritas-shelf.jpg',
+    imageAlt: 'A supermarket display stacked with many varieties of Sabritas chips in Mexico',
+    jsonLd,
+    body,
+    extraCss: AISLE_CSS,
   });
 }
 
@@ -684,6 +1121,7 @@ function build() {
   const records = loadRecords().slice().sort((a, b) => a.id.localeCompare(b.id));
   const files = new Map();
   files.set(`${PREVIEW}/index.html`, indexPage(records));
+  files.set(`${PREVIEW}/aisle/index.html`, aislePage(records));
   for (const slug of [...new Set(records.map((p) => p.brand_slug))].sort()) {
     files.set(`${PREVIEW}/brands/${slug}/index.html`, brandPage(slug, records));
   }
