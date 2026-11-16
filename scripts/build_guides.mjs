@@ -912,6 +912,17 @@ GUIDES.push({ slug: 'about', flag: '🥔', crumb: 'About', checked: '2026-10-27'
   desc: 'World of Chips is a guide to potato chips around the world, founded by Michael van der Looij. How we research, source and fund the site.',
   introDark: 'A guide to potato chips around the world: brands, flavours, prices and where to buy them.',
   intro: 'World of Chips covers potato chips (crisps, not fries) country by country: the brands people actually buy, the flavours that only exist in one place, and where to get them online.',
+  afterIntro: `
+    <section class="cp-section" id="featured-in" aria-labelledby="featured-title">
+      <h2 id="featured-title">As Featured In</h2>
+      <p class="press-strip press-strip-lite">
+        <a href="https://www.bakeryandsnacks.com/Article/2026/11/06/pringles-index-why-snack-prices-vary-across-30-markets/" target="_blank" rel="noopener">Bakery &amp; Snacks</a>
+        <span class="press-sep" aria-hidden="true">·</span>
+        <a href="https://www.foodmanufacture.co.uk/Article/2026/11/06/pringles-index-why-snack-prices-vary-across-30-markets/" target="_blank" rel="noopener">Food Manufacture</a>
+        <span class="press-sep" aria-hidden="true">·</span>
+        <a href="https://www.hankyung.com/article/2026111600111" target="_blank" rel="noopener">Hankyung (Korea Economic Daily)</a>
+      </p>
+    </section>`,
   sections: [],
   body: `
     <section class="cp-section" id="founder">

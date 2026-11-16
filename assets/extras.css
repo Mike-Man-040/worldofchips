@@ -8,3 +8,48 @@
 .woc-share a{display:inline-flex;align-items:center;min-height:40px;padding:.45rem 1rem;border-radius:999px;border:1.5px solid var(--gold,#C48A20);color:var(--brown,#3D2B0F)!important;text-decoration:none;font-size:.85rem;font-weight:600;background:var(--paper,#fff)}
 .woc-share a:hover{background:var(--gold,#C48A20);color:#fff!important}
 .woc-social a{color:var(--gold-light,#E8A838);text-decoration:none;font-weight:600}
+
+/* Compact "As featured in" line. On the homepage it sits under the snack-box
+   buttons and above the Amazon links, so those buttons are not pushed down. */
+.hero-buy .press-strip{
+  flex-basis:100%;width:100%;
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;
+  gap:.12rem .4rem;margin:.1rem 0 .05rem;padding:0 .25rem;
+  font-size:.78rem;line-height:1.45;text-align:center;
+  color:rgba(245,236,215,.72);
+}
+.hero-buy .press-kicker{
+  font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.64rem;
+  color:var(--gold,#E8A838);
+}
+.hero-buy .press-strip a{
+  color:var(--gold-light,#F5D78E);font-weight:600;text-decoration:none;
+}
+.hero-buy .press-strip a:hover{color:#fff;text-decoration:underline;text-underline-offset:.15em}
+.hero-buy .press-sep{color:rgba(245,215,142,.55);font-weight:400}
+.hero-buy .press-strip a:focus-visible{outline:2px solid #F5D78E;outline-offset:3px;border-radius:2px}
+
+/* Korean visitors from the Hankyung piece: one quiet line in the gap under the nav.
+   Absolutely positioned so it does not push the snack-box buttons down. */
+.hero-kr{
+  position:absolute;z-index:4;top:.4rem;left:.5rem;right:.5rem;margin:0;
+  text-align:center;font-size:clamp(.68rem,2.55vw,.8rem);line-height:1.3;
+  white-space:nowrap;color:rgba(245,236,215,.92);
+  text-shadow:0 1px 8px rgba(0,0,0,.7);
+}
+.hero-kr a{color:var(--gold-light,#F5D78E);font-weight:600;text-decoration:none}
+.hero-kr a:hover{color:#fff;text-decoration:underline;text-underline-offset:.15em}
+.hero-kr a:focus-visible{outline:2px solid #F5D78E;outline-offset:3px;border-radius:2px}
+
+/* Same outlet list on /about/, in the light page style. */
+.press-strip-lite{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.2rem .55rem;
+  margin:0;font-size:.95rem;line-height:1.6;
+}
+.press-strip-lite .press-sep{color:var(--muted,#8B7355)}
+@media(max-width:560px){
+  .hero-buy .press-strip{font-size:.8rem;row-gap:.2rem}
+}
+@media(max-width:360px){
+  .hero-kr{font-size:.62rem}
+}
