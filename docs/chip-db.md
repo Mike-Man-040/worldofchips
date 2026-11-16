@@ -77,6 +77,16 @@ The builder scores 0–100. Heat and price are not scored: null is the right val
 - **Photographs:** not part of the database. Each file keeps its own Commons licence (CC BY, CC BY-SA, CC0 or public domain). BY and BY-SA need the credit on the page. BY-SA also means an adapted photograph stays under that licence.
 - **Trademarks:** names and pack designs in the photographs belong to their owners. A photo licence is not a trademark licence.
 
+`data/chips/mfds-kr.json` is a separate set. Those rows come from the Korean Ministry of Food and Drug Safety processed-food nutrient database (가공식품DB, file version 2026-09-29), checked at https://various.foodsafetykorea.go.kr/nutrient/general/down/list.do on 16 November 2026. The download states no licence. Each record has `source_licence` set to `unstated (government data, used with attribution)`. The builder previews them and leaves them out of `chips.json` and `chips.csv`. `validate_site.py` fails if one of those ids appears in either open file.
+
+Regenerate the Ministry file from a name-filtered extract with `python3 scripts/import_mfds_kr.py path/to.csv`, then `node scripts/build_chip_db.mjs`.
+
+## South Korea nutrient rows
+
+The import keeps a row only when the name contains `감자칩`, `포테이토칩`, `포테토칩` or `감자스낵`, the subclass is `과자`, and the representative food is `스낵과자` or `일반과자`. It drops sweet potato, Jerusalem artichoke, and one schisandra snack whose nutrients are not a chip. The same name and manufacturer keep the later row. Nutrition is copied per 100 g and is not averaged or corrected.
+
+`name_en` stays null. `brand` is set only when the manufacturer or importer string is itself the brand (`농심`, `오리온`, `해태가루비`, `KEOGHS`, `AMICA CHIPS`, `SAN NICASIO`, `PAPAS ARGENTE`, or Dieffenbach's). `parent_company` stays null. There is no barcode, ingredient list, pack size, price, or photograph. The page uses the placeholder image. Pages stay under `/chips/_preview/<brand>/<product>/`, `noindex`, and out of the sitemap and the country guides.
+
 These files are in the repository for review. They are not a publish decision. Michael needs to accept the ODbL and the photo terms before any of this is linked from the public site.
 
 ## What the builder will not do

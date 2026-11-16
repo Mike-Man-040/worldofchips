@@ -1,7 +1,9 @@
 #!/usr/bin/env node
-// Chip database, phase 0. Reads data/chips/records.json and writes a review-only
-// preview under /chips/_preview/ plus an ODbL JSON/CSV export. Does not edit the
-// sitemap, the nav, country pages, flavour pages, or /pringles-index/.
+// Chip database, phase 0. Reads data/chips/records.json and data/chips/mfds-kr.json
+// and writes a review-only preview under /chips/_preview/ plus an ODbL JSON/CSV
+// export. Ministry rows whose source states no licence are previewed with
+// attribution and left out of the ODbL files. Does not edit the sitemap, the
+// nav, country pages, flavour pages, or /pringles-index/.
 //
 //   node scripts/build_chip_db.mjs           write files
 //   node scripts/build_chip_db.mjs --check   exit 1 if the generated files are stale
@@ -26,6 +28,10 @@ function publicIndexable(p, score) {
   return score >= INDEX_MIN && hasIngredients(p);
 }
 const RECORDS_PATH = path.join(ROOT, 'data', 'chips', 'records.json');
+const MFDS_PATH = path.join(ROOT, 'data', 'chips', 'mfds-kr.json');
+const MFDS_URL = 'https://various.foodsafetykorea.go.kr/nutrient/general/down/list.do';
+const UNSTATED_LICENCE = 'unstated (government data, used with attribution)';
+const MFDS_CREDIT = 'Source: Ministry of Food and Drug Safety (식품의약품안전처), processed food nutrient database';
 
 if (process.argv.includes('--publish')) {
   console.error('build_chip_db: phase 0 does not publish. Pages stay under /chips/_preview/.');
@@ -121,7 +127,7 @@ function scoreOf(p) {
     ['equivalents', 10, p.equivalents.length > 0],
     ['pack_sizes_g', 6, p.pack_sizes_g.length > 0],
     ['ingredients_text', 10, !!(p.ingredients_text && p.ingredients_text.text)],
-    ['image', 6, !!(p.image && p.image.credit && p.image.licence && p.image.source)],
+    ['image', 6, !!(p.image && !p.image.placeholder && p.image.credit && p.image.licence && p.image.source)],
     ['where_to_buy', 4, p.where_to_buy.length > 0],
   ];
   const total = parts.reduce((n, [, w, ok]) => n + (ok ? w : 0), 0);
@@ -132,6 +138,10 @@ function scoreOf(p) {
 function loadRecords() {
   const records = JSON.parse(fs.readFileSync(RECORDS_PATH, 'utf8'));
   if (!Array.isArray(records) || records.length < 1) die('records.json must be a non-empty array');
+  if (!fs.existsSync(MFDS_PATH)) die('missing data/chips/mfds-kr.json');
+  const mfds = JSON.parse(fs.readFileSync(MFDS_PATH, 'utf8'));
+  if (!Array.isArray(mfds) || mfds.length < 1) die('mfds-kr.json must be a non-empty array');
+  records.push(...mfds);
   const ids = new Set();
   const paths = new Set();
   const titles = new Set();
@@ -188,9 +198,25 @@ function loadRecords() {
       if (!fs.existsSync(path.join(ROOT, 'assets', 'photos', suffix))) die(`${p.id}: missing assets/photos/${suffix}`);
     }
     if (!fs.existsSync(path.join(ROOT, 'assets', 'photos', `og-${img.file}.jpg`))) die(`${p.id}: missing og image for ${img.file}`);
-    const prose = JSON.stringify({ ...p, ingredients_text: null });
+    const fromMfds = (p.sources || []).some((s) => s.url === MFDS_URL) || p.source_licence === UNSTATED_LICENCE;
+    if (fromMfds) {
+      if (p.source_licence !== UNSTATED_LICENCE) die(`${p.id}: a Ministry row needs source_licence "${UNSTATED_LICENCE}"`);
+      if (!(p.sources || []).length || !(p.sources || []).every((s) => s.url === MFDS_URL && s.checked === '2026-11-16')) {
+        die(`${p.id}: every Ministry citation needs ${MFDS_URL} checked 2026-11-16`);
+      }
+      if (p.ingredients_text) die(`${p.id}: a Ministry row has no ingredient list`);
+      if (!p.image || p.image.placeholder !== true) die(`${p.id}: a Ministry row uses the photo placeholder`);
+      if (!p.product_report_number) die(`${p.id}: item report number is required`);
+      const nut = p.nutrition_per_100g;
+      if (!nut || nut.basis !== '100g' || nut.source !== MFDS_URL || nut.checked !== '2026-11-16') die(`${p.id}: nutrition must be per 100 g from the Ministry file`);
+      for (const k of ['energy_kcal', 'protein_g', 'fat_g', 'carbohydrate_g', 'sugars_g', 'sodium_mg', 'saturated_fat_g', 'trans_fat_g']) {
+        if (typeof nut[k] !== 'number') die(`${p.id}: nutrition ${k} must be a number`);
+      }
+    }
+    // name_local, manufacturer and importer are the source's own words, same as an ingredient quote.
+    const prose = JSON.stringify({ ...p, ingredients_text: null, name_local: null, manufacturer: null, importer: null });
     const hit = prose.match(DIETARY);
-    if (hit) die(`${p.id}: dietary wording "${hit[0]}" outside ingredients_text. Quote a certification as "labelled as" only when the pack shows it.`);
+    if (hit) die(`${p.id}: dietary wording "${hit[0]}" outside a source quotation. Quote a certification as "labelled as" only when the pack shows it.`);
   }
   return records;
 }
@@ -198,6 +224,12 @@ function loadRecords() {
 function figure(img, eager) {
   const big = `/assets/photos/${img.file}-960.webp`;
   const small = `/assets/photos/${img.file}-480.webp`;
+  if (img.placeholder) {
+    return `<figure class="woc-photo chip-photo-placeholder" data-photo="placeholder">
+  <img src="${big}" width="${img.width}" height="${img.height}" alt="${esc(img.alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
+  <figcaption>No product photograph is available.</figcaption>
+</figure>`;
+  }
   const lic = img.licence === 'Public domain'
     ? 'public domain'
     : `<a href="${esc(img.licence_url)}" target="_blank" rel="nofollow noopener">${esc(img.licence)}</a>`;
@@ -266,6 +298,8 @@ const PAGE_CSS = `<style>
 .chip-list a{display:block;background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:.9rem 1rem;text-decoration:none;color:inherit}
 .chip-list strong{display:block;color:var(--brown);font-family:'Playfair Display',serif;font-size:1.05rem}
 .chip-list span{color:var(--muted);font-size:.85rem}
+.chip-source-credit{background:#fff8e8;border:2px solid var(--gold);border-radius:12px;padding:.8rem 1rem;margin:0 0 1rem;font-weight:700;color:var(--brown)}
+.chip-photo-placeholder{background:var(--paper);border:1px dashed var(--gold);border-radius:12px;padding:1rem}
 </style>`;
 
 function shell({ title, description, canonical, image, imageAlt, jsonLd, body }) {
@@ -321,9 +355,12 @@ ${footerHtml}
 }
 
 function crumbs(items) {
-  const html = items.map((it, i) => i === items.length - 1
-    ? `<span>${esc(it.name)}</span>`
-    : `<a href="${it.href}">${esc(it.name)}</a>`).join(' &#8250; ');
+  const html = items.map((it, i) => {
+    const name = it.html ? it.name : esc(it.name);
+    return i === items.length - 1
+    ? `<span>${name}</span>`
+    : `<a href="${it.href}">${name}</a>`;
+  }).join(' &#8250; ');
   return `<nav class="cp-crumbs" aria-label="Breadcrumb">${html}</nav>`;
 }
 
@@ -331,13 +368,66 @@ function breadcrumbLd(items) {
   return {
     '@type': 'BreadcrumbList',
     itemListElement: items.map((it, i) => ({
-      '@type': 'ListItem', position: i + 1, name: it.name, item: it.href.startsWith('http') ? it.href : `${SITE}${it.href}`,
+      '@type': 'ListItem', position: i + 1, name: it.plain || it.name, item: it.href.startsWith('http') ? it.href : `${SITE}${it.href}`,
     })),
   };
 }
 
 function productPath(p) { return `/${PREVIEW}/${p.brand_slug}/${p.slug}/`; }
 function brandPath(slug) { return `/${PREVIEW}/brands/${slug}/`; }
+function productLabel(p) { return p.name_en || p.name_local; }
+function itemName(p) {
+  const name = productLabel(p);
+  return p.brand ? `${p.brand} ${name}` : name;
+}
+function partyPlain(p) { return p.brand || p.manufacturer || p.importer || 'Maker'; }
+function isMfds(p) { return p.source_licence === UNSTATED_LICENCE; }
+function creditParagraph() { return `<p class="chip-source-credit">${esc(MFDS_CREDIT)}</p>`; }
+function hubLabel(mine) {
+  const brands = [...new Set(mine.map((p) => p.brand).filter(Boolean))];
+  if (brands.length === 1 && mine.every((p) => !p.brand || p.brand === brands[0])) return brands[0];
+  return mine[0].manufacturer || mine[0].importer || mine[0].brand_slug;
+}
+function titleSafe(text) {
+  return String(text).replace(DIETARY, ' ').replace(/\s+/g, ' ').trim() || 'Maker';
+}
+function hubTitle(label) {
+  const suffix = ' | World of Chips';
+  const cleaned = titleSafe(label);
+  const full = `${cleaned} Chip Records${suffix}`;
+  if (full.length <= 65) return full;
+  const shorter = `${cleaned} records${suffix}`;
+  if (shorter.length <= 65) return shorter;
+  const room = 65 - suffix.length - ' records'.length - 1;
+  return `${cleaned.slice(0, Math.max(room, 1)).trim()}… records${suffix}`;
+}
+function hubDescription(label) {
+  if (DIETARY.test(label)) return 'Preview records for this maker. Review only: noindex, and not in the sitemap or the site menu.';
+  const text = `Preview records for ${label}. Review only: noindex, and not in the sitemap or the site menu.`;
+  return text.length <= 200 ? text : 'Preview records for this maker. Review only: noindex, and not in the sitemap or the site menu.';
+}
+function nutritionSection(p) {
+  const n = p.nutrition_per_100g;
+  if (!n) return '';
+  const lines = [
+    ['Energy', `${n.energy_kcal} kcal`],
+    ['Protein', `${n.protein_g} g`],
+    ['Fat', `${n.fat_g} g`],
+    ['Carbohydrate', `${n.carbohydrate_g} g`],
+    ['Sugars', `${n.sugars_g} g`],
+    ['Sodium', `${n.sodium_mg} mg`],
+    ['Saturated fat', `${n.saturated_fat_g} g`],
+    ['Trans fat', `${n.trans_fat_g} g`],
+  ];
+  return `
+    <section class="cp-section" id="nutrition">
+      <h2>Nutrition per 100 g</h2>
+      <div class="sb-table-wrap"><table class="sb-table"><tbody>
+        ${lines.map(([k, v]) => `<tr><th scope="row">${k}</th><td>${esc(v)}</td></tr>`).join('\n        ')}
+      </tbody></table></div>
+      <p class="sb-muted">Copied per 100 g from the source checked ${esc(longDate(n.checked))}. The numbers are not a health claim.</p>
+    </section>`;
+}
 
 function buySection(p) {
   return p.where_to_buy.map((row) => {
@@ -364,11 +454,14 @@ function productPage(p, all) {
   const urlPath = productPath(p);
   const canonical = `${SITE}${urlPath}`;
   const brandHref = brandPath(p.brand_slug);
+  const partyCrumb = p.brand
+    ? { name: p.brand, href: brandHref }
+    : { name: `<span class="chip-source-text">${esc(partyPlain(p))}</span>`, href: brandHref, html: true, plain: partyPlain(p) };
   const crumbItems = [
     { name: 'Home', href: '/' },
     { name: 'Chip database', href: `/${PREVIEW}/` },
-    { name: p.brand, href: brandHref },
-    { name: p.name_en, href: urlPath },
+    partyCrumb,
+    { name: productLabel(p), href: urlPath },
   ];
   const flavour = p.flavour_family
     ? `<a href="/flavors/${p.flavour_family}/">${esc(FLAVOUR_LABEL[p.flavour_family])}</a>`
@@ -382,7 +475,7 @@ function productPage(p, all) {
   const bars = p.barcodes.length ? p.barcodes.map(esc).join(', ') : 'Not recorded';
   const parent = p.parent_company ? esc(p.parent_company) : 'Not recorded';
   const rows = [
-    ['Brand', esc(p.brand)],
+    ['Brand', p.brand ? esc(p.brand) : 'Not recorded'],
     ['Parent company', parent],
     ['Type', esc(TYPE_LABEL[p.type])],
     ['Flavour family', flavour],
@@ -392,6 +485,9 @@ function productPage(p, all) {
     ['Pack size', packs],
     ['Price per 100 g', 'Not recorded'],
   ];
+  if (p.manufacturer) rows.push(['Manufacturer', `<span class="chip-source-text">${esc(p.manufacturer)}</span>`]);
+  if (p.importer) rows.push(['Importer', `<span class="chip-source-text">${esc(p.importer)}</span>`]);
+  if (p.product_report_number) rows.push(['Item report', `<span class="chip-source-text">${esc(p.product_report_number)}</span>`]);
   const equivList = p.equivalents.length
     ? `<ul class="sb-list">${p.equivalents.map((e) => {
       const href = e.id ? productPath(all.find((r) => r.id === e.id)) : '';
@@ -401,6 +497,11 @@ function productPage(p, all) {
     : '<p>No brand-name equivalent is recorded. A blank here means the sources we checked did not name one.</p>';
   const equivHtml = `<p class="chip-pack">These are brand names as stated by the sources. Recipes may differ.</p>\n      ${equivList}`;
   const soldRows = p.countries_sold.map((c) => `<tr><td>${countryLink(c.country)}</td><td><a href="${esc(c.source)}" target="_blank" rel="nofollow noopener">${esc(c.source.replace(/^https?:\/\//, ''))}</a></td><td>${esc(longDate(c.checked))}</td></tr>`).join('');
+  const soldInner = p.countries_sold.length
+    ? `<div class="sb-table-wrap"><table class="sb-table"><thead><tr><th>Country</th><th>Source</th><th>Checked</th></tr></thead><tbody>
+        ${soldRows}
+      </tbody></table></div>`
+    : '<p>Not recorded.</p>';
   const ing = p.ingredients_text
     ? `<blockquote class="chip-ingredients">${esc(p.ingredients_text.text)}</blockquote>
       <p class="sb-muted">Copied from the source dated ${esc(longDate(p.ingredients_text.checked))}${p.ingredients_text.note ? `. ${esc(p.ingredients_text.note)}` : ''}</p>`
@@ -418,10 +519,10 @@ function productPage(p, all) {
   const productLd = {
     '@type': 'Product',
     '@id': `${canonical}#product`,
-    name: `${p.brand} ${p.name_en}`,
+    name: p.brand ? `${p.brand} ${productLabel(p)}` : productLabel(p),
     description: p.description,
     image: `${SITE}/assets/photos/${p.image.file}-960.webp`,
-    brand: { '@type': 'Brand', name: p.brand },
+    ...(p.brand ? { brand: { '@type': 'Brand', name: p.brand } } : {}),
     category: TYPE_LABEL[p.type],
     sku: p.id,
     url: canonical,
@@ -432,12 +533,12 @@ function productPage(p, all) {
   <div class="cp-hero">
     <a href="/${PREVIEW}/" class="cp-back">&#8592; Chip database preview</a>
     ${crumbs(crumbItems)}
-    <h1 class="cp-title">${esc(p.brand)} ${esc(p.name_en)}</h1>
+    <h1 class="cp-title">${p.brand ? `${esc(p.brand)} ${esc(productLabel(p))}` : esc(productLabel(p))}</h1>
     <span class="cp-region">Sources checked ${esc(longDate('2026-11-16'))}</span>
     <p class="cp-intro-dark">${esc(p.description)}</p>
   </div>
   <div class="cp-body">
-    <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>
+${isMfds(p) ? `    ${creditParagraph()}\n` : ''}    <p class="aff-disc sb-top-disc">${DISCLOSURE}</p>
     ${figure(p.image, true)}
     <p class="chip-pack">Check the pack; recipes change.</p>
     <section class="cp-section" id="facts">
@@ -446,7 +547,7 @@ function productPage(p, all) {
         ${rows.map(([k, v]) => `<tr><th scope="row">${k}</th><td>${v}</td></tr>`).join('\n        ')}
       </tbody></table></div>
       <p class="sb-muted">Completeness ${score.total}/100.${thresholdNote} Heat and price are not part of the score. A null heat level is correct when the product is not on the spice ladder.</p>
-    </section>
+    </section>${nutritionSection(p)}
     <section class="cp-section" id="ingredients">
       <h2>Ingredients</h2>
       ${ing}
@@ -458,9 +559,7 @@ function productPage(p, all) {
     </section>
     <section class="cp-section" id="sold">
       <h2>Where sold</h2>
-      <div class="sb-table-wrap"><table class="sb-table"><thead><tr><th>Country</th><th>Source</th><th>Checked</th></tr></thead><tbody>
-        ${soldRows}
-      </tbody></table></div>
+      ${soldInner}
     </section>
     ${buySection(p)}
     <section class="cp-section" id="similar">
@@ -495,17 +594,19 @@ ${nlForm}
 }
 
 function indexPage(records) {
+  const nMinistry = records.filter(isMfds).length;
   const title = 'Chip Database Preview | World of Chips';
-  const description = 'Review-only index of ten sourced chip records. Search runs in the browser. These pages are noindex and are not in the sitemap.';
+  const description = `Review-only index of ${records.length} sourced chip records. Search runs in the browser. These pages are noindex and are not in the sitemap.`;
   const items = records.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
-    name: `${p.brand} ${p.name_en}`,
+    name: itemName(p),
     url: `${SITE}${productPath(p)}`,
   }));
   const searchData = records.map((p) => ({
-    name: `${p.brand} ${p.name_en}`,
-    brand: p.brand,
+    name: itemName(p),
+    brand: p.brand || '',
+    maker: p.manufacturer || p.importer || '',
     type: TYPE_LABEL[p.type],
     countries: p.countries_sold.map((c) => countryName(c.country)).join(', '),
     flavour: p.flavour_family ? FLAVOUR_LABEL[p.flavour_family] : '',
@@ -526,14 +627,16 @@ function indexPage(records) {
     <p class="cp-intro-dark">${esc(description)}</p>
   </div>
   <div class="cp-body">
-    <p class="cp-intro">Ten sample products across the United States, the United Kingdom, the Netherlands, Japan, South Korea and Mexico. Nothing here is in the public menu. Check the pack; recipes change.</p>
+    <p class="cp-intro">Open Food Facts samples and ${nMinistry} Korean nutrient-database rows. The Korean rows are not in the ODbL download. Nothing here is in the public menu. Check the pack; recipes change.</p>
+    ${creditParagraph()}
     <label for="chip-q">Search by name, brand, country or type</label>
     <input id="chip-q" class="chip-search" type="search" placeholder="Try salt, Calbee, Mexico, ridged">
     <div id="chip-list" class="chip-list"></div>
     <p id="chip-empty" class="sb-muted" hidden>No records match.</p>
     <section class="cp-section"><h2>Brands</h2><div class="cp-explore-grid">${[...new Set(records.map((p) => p.brand_slug))].sort().map((s) => {
-      const name = records.find((p) => p.brand_slug === s).brand;
-      return `<a class="cp-explore-link" href="${brandPath(s)}">${esc(name)}</a>`;
+      const label = hubLabel(records.filter((p) => p.brand_slug === s));
+      const text = DIETARY.test(label) ? `<span class="chip-source-text">${esc(label)}</span>` : esc(label);
+      return `<a class="cp-explore-link" href="${brandPath(s)}">${text}</a>`;
     }).join('')}</div></section>
     ${newsletter()}
   </div>
@@ -549,7 +652,7 @@ function indexPage(records) {
     while (list.firstChild) list.removeChild(list.firstChild);
     var n = 0;
     data.forEach(function (p) {
-      var hay = (p.name + ' ' + p.brand + ' ' + p.countries + ' ' + p.type + ' ' + p.flavour).toLowerCase();
+      var hay = (p.name + ' ' + p.brand + ' ' + p.maker + ' ' + p.countries + ' ' + p.type + ' ' + p.flavour).toLowerCase();
       if (s && hay.indexOf(s) === -1) return;
       n += 1;
       var a = document.createElement('a');
@@ -575,36 +678,40 @@ function indexPage(records) {
 
 function brandPage(slug, records) {
   const mine = records.filter((p) => p.brand_slug === slug);
-  const brand = mine[0].brand;
-  const title = `${brand} Chip Records | World of Chips`;
+  const label = hubLabel(mine);
+  const title = hubTitle(label);
   if (title.length > 65) die(`brand title too long: ${title}`);
-  const description = `Preview records for ${brand}. Review only: noindex, and not in the sitemap or the site menu.`;
+  const description = hubDescription(label);
   const urlPath = brandPath(slug);
   const crumbItems = [
     { name: 'Home', href: '/' },
     { name: 'Chip database', href: `/${PREVIEW}/` },
-    { name: brand, href: urlPath },
+    { name: titleSafe(label), href: urlPath, plain: label },
   ];
+  const heading = DIETARY.test(label)
+    ? `<span class="chip-source-text">${esc(label)}</span>`
+    : esc(label);
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'ItemList',
-        name: `${brand} preview records`,
-        itemListElement: mine.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: `${p.brand} ${p.name_en}`, url: `${SITE}${productPath(p)}` })),
+        name: `${titleSafe(label)} preview records`,
+        itemListElement: mine.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: itemName(p), url: `${SITE}${productPath(p)}` })),
       },
       breadcrumbLd(crumbItems),
     ],
   };
+  const credit = mine.some(isMfds) ? `\n    ${creditParagraph()}` : '';
   const body = `<article class="country-page active">
   <div class="cp-hero">
     <a href="/${PREVIEW}/" class="cp-back">&#8592; Chip database preview</a>
     ${crumbs(crumbItems)}
-    <h1 class="cp-title">${esc(brand)}</h1>
+    <h1 class="cp-title">${heading}</h1>
     <p class="cp-intro-dark">${esc(description)}</p>
   </div>
-  <div class="cp-body">
-    <section class="cp-section"><h2>Records</h2><div class="cp-explore-grid">${mine.map((p) => `<a class="cp-explore-link" href="${productPath(p)}">${esc(p.name_en)}</a>`).join('')}</div></section>
+  <div class="cp-body">${credit}
+    <section class="cp-section"><h2>Records</h2><div class="cp-explore-grid">${mine.map((p) => `<a class="cp-explore-link" href="${productPath(p)}">${esc(productLabel(p))}</a>`).join('')}</div></section>
     <p class="chip-pack">Check the pack; recipes change.</p>
     ${newsletter()}
   </div>
@@ -620,7 +727,9 @@ function csvEscape(v) {
 }
 
 function exportsFor(records) {
-  const products = records.map((p) => {
+  const open = records.filter((p) => p.source_licence !== UNSTATED_LICENCE);
+  const heldBack = records.length - open.length;
+  const products = open.map((p) => {
     const score = scoreOf(p);
     const indexable = publicIndexable(p, score.total);
     return {
@@ -676,6 +785,8 @@ price_per_100g is empty in this preview. Do not fill it from the Pringles Index.
 Indexing rule, approved 16 Nov 2026: a public product page is indexable only when completeness is ${INDEX_MIN} or more and ingredients_text is present. Otherwise it is noindex. This preview is noindex either way.
 
 Equivalents are brand names as stated by the sources. Recipes may differ.
+
+${heldBack} records from the Korean Ministry of Food and Drug Safety processed-food nutrient database are stored in data/chips/mfds-kr.json. That download states no licence. Those records are not in chips.json or chips.csv and are not part of this ODbL database. The preview pages cite the Ministry.
 `;
   return { json, csv, attribution };
 }

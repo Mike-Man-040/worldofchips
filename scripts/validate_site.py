@@ -394,7 +394,9 @@ def check_chip_db(problems):
             problems.append(f"{rel}: preview page must be noindex")
         check(path, problems, set())
         titles.append(re.search(r"<title>(.*?)</title>", html, re.S).group(1) if re.search(r"<title>", html) else "")
-        visible = re.sub(r'<blockquote class="chip-ingredients">[\s\S]*?</blockquote>', " ", html)
+        visible = re.sub(r"<script\b[\s\S]*?</script>", " ", html)
+        visible = re.sub(r'<blockquote class="chip-ingredients">[\s\S]*?</blockquote>', " ", visible)
+        visible = re.sub(r'<span class="chip-source-text">[\s\S]*?</span>', " ", visible)
         for m in DIETARY_RE.finditer(visible):
             window = visible[max(0, m.start() - 80):m.end() + 40]
             if re.search(r"labelled as|labeled as", window, re.I) and re.search(r"\d{4}", window):
@@ -407,8 +409,13 @@ def check_chip_db(problems):
                 problems.append(f"{rel}: missing ingredients")
             if 'id="sources"' not in html or "checked" not in html.lower():
                 problems.append(f"{rel}: missing sources")
-            figs = re.findall(r'<figure class="woc-photo">.*?</figure>', html, re.S)
-            if not figs or any("commons.wikimedia.org" not in f or "<figcaption>" not in f for f in figs):
+            figs = re.findall(r'<figure class="woc-photo(?:\s[^"]*)?"[\s\S]*?</figure>', html)
+            if 'data-photo="placeholder"' in html:
+                if "No product photograph is available." not in html:
+                    problems.append(f"{rel}: placeholder must say that no product photograph is available")
+                if any("commons.wikimedia.org" in f for f in figs if 'data-photo="placeholder"' in f):
+                    problems.append(f"{rel}: placeholder must not claim a Wikimedia Commons photograph")
+            elif not figs or any("commons.wikimedia.org" not in f or "<figcaption>" not in f for f in figs):
                 problems.append(f"{rel}: photo needs a Wikimedia Commons credit")
             if "aggregateRating" in html or '"review"' in html or '"ratingValue"' in html:
                 problems.append(f"{rel}: Product structured data must not include ratings")
@@ -454,6 +461,66 @@ def check_chip_db(problems):
             problems.append(f"chip-db: {pid} should say a public page would be indexable")
         if not expect and "would stay noindex" not in html:
             problems.append(f"chip-db: {pid} should say the public page would stay noindex")
+    unstated = "unstated (government data, used with attribution)"
+    credit = "Source: Ministry of Food and Drug Safety (식품의약품안전처), processed food nutrient database"
+    mfds_url = "https://various.foodsafetykorea.go.kr/nutrient/general/down/list.do"
+    mfds_path = os.path.join(ROOT, "data", "chips", "mfds-kr.json")
+    if not os.path.isfile(mfds_path):
+        problems.append("chip-db: data/chips/mfds-kr.json is missing")
+        return
+    try:
+        mfds = json.load(open(mfds_path, encoding="utf-8"))
+        base = json.load(open(os.path.join(ROOT, "data", "chips", "records.json"), encoding="utf-8"))
+    except ValueError as e:
+        problems.append(f"chip-db: records do not parse: {e}")
+        return
+    if not isinstance(mfds, list) or not mfds:
+        problems.append("chip-db: mfds-kr.json must be a non-empty array")
+        return
+    csv_path = os.path.join(ROOT, "data", "chips", "export", "chips.csv")
+    csv_text = open(csv_path, encoding="utf-8").read() if os.path.isfile(csv_path) else ""
+    if unstated in blob or unstated in csv_text:
+        problems.append("chip-db: ODbL JSON or CSV contains a record marked with an unstated licence")
+    export_ids = {p.get("id") for p in data.get("products") or []}
+    csv_ids = set()
+    if csv_text:
+        for line in csv_text.splitlines()[1:]:
+            csv_ids.add(line.split(",", 1)[0].strip('"'))
+    open_ids = {r.get("id") for r in base if r.get("source_licence") != unstated}
+    if export_ids != open_ids or csv_ids != open_ids:
+        problems.append("chip-db: ODbL JSON/CSV must contain the open records and nothing else")
+    korea = open(os.path.join(ROOT, "south-korea", "index.html"), encoding="utf-8").read()
+    if "/chips/" in korea:
+        problems.append("chip-db: south-korea page must not link the new chip records yet")
+    for r in mfds:
+        pid = r.get("id", "?")
+        if r.get("source_licence") != unstated:
+            problems.append(f"chip-db: {pid} must use the unstated government-data licence")
+        if pid in export_ids or pid in csv_ids:
+            problems.append(f"chip-db: {pid} must be excluded from the ODbL JSON and CSV")
+        if r.get("ingredients_text"):
+            problems.append(f"chip-db: {pid} has no ingredient list, so it cannot be indexed")
+        if not (r.get("image") or {}).get("placeholder"):
+            problems.append(f"chip-db: {pid} must use the photo placeholder")
+        cited = r.get("sources") or []
+        if not cited or any(s.get("url") != mfds_url or s.get("checked") != "2026-11-16" for s in cited):
+            problems.append(f"chip-db: {pid} must cite the Ministry URL checked 2026-11-16")
+        page = os.path.join(ROOT, CHIP_PREVIEW, r.get("brand_slug", ""), r.get("slug", ""), "index.html")
+        if not os.path.isfile(page):
+            problems.append(f"chip-db: missing preview page for {pid}")
+            continue
+        html = open(page, encoding="utf-8").read()
+        rel = os.path.relpath(page, ROOT)
+        if 'content="noindex' not in html:
+            problems.append(f"{rel}: Ministry page must be noindex")
+        if credit not in html:
+            problems.append(f"{rel}: missing Ministry source credit")
+        if mfds_url not in html or "16 November 2026" not in html:
+            problems.append(f"{rel}: Ministry page must show the source URL and the 16 November 2026 check")
+        if "would stay noindex" not in html:
+            problems.append(f"{rel}: no ingredient text, so the page must stay noindex")
+        if f"{SITE}/chips/{r.get('brand_slug')}/" in html:
+            problems.append(f"{rel}: Ministry page must not be published at /chips/ yet")
 
 
 def main():

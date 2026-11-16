@@ -13,3 +13,5 @@ price_per_100g is empty in this preview. Do not fill it from the Pringles Index.
 Indexing rule, approved 16 Nov 2026: a public product page is indexable only when completeness is 60 or more and ingredients_text is present. Otherwise it is noindex. This preview is noindex either way.
 
 Equivalents are brand names as stated by the sources. Recipes may differ.
+
+418 records from the Korean Ministry of Food and Drug Safety processed-food nutrient database are stored in data/chips/mfds-kr.json. That download states no licence. Those records are not in chips.json or chips.csv and are not part of this ODbL database. The preview pages cite the Ministry.
