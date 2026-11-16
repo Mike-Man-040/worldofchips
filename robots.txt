@@ -49,3 +49,4 @@ Allow: /
 Disallow: /chips/_preview/
 
 Sitemap: https://worldofchips.com/sitemap.xml
+Sitemap: https://worldofchips.com/sitemap-chips.xml

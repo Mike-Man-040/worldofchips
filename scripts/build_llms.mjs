@@ -14,6 +14,12 @@ const unesc = (s) => s.replace(/<[^>]+>/g, '').replace(/&#(\d+);/g, (_, n) => St
   .replace(/&quot;/g, '"').replace(/&#x27;|&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>')
   .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
 const locs = [...fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+const chipSitemap = path.join(ROOT, 'sitemap-chips.xml');
+if (!fs.existsSync(chipSitemap)) {
+  console.error('sitemap-chips.xml is missing. Run node scripts/build_chip_db.mjs first.');
+  process.exit(1);
+}
+const chipLocs = [...fs.readFileSync(chipSitemap, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 
 const pages = locs.map((loc) => {
   const rel = loc.replace(SITE, '').replace(/^\//, '');
@@ -27,6 +33,14 @@ const pages = locs.map((loc) => {
   const facts = [...((html.match(/<table class="cp-facts">([\s\S]*?)<\/table>/) || [])[1] || '')
     .matchAll(/<th scope="row">([\s\S]*?)<\/th><td>([\s\S]*?)<\/td>/g)].map((m) => [unesc(m[1]), unesc(m[2])]);
   return { loc, rel, title, desc, faq, facts, isCountry: facts.length > 0 };
+});
+
+const chips = chipLocs.map((loc) => {
+  const rel = loc.replace(SITE, '').replace(/^\//, '').replace(/\/$/, '');
+  const html = fs.readFileSync(path.join(ROOT, rel, 'index.html'), 'utf8');
+  const title = unesc((html.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || loc).replace(/\s*\|\s*World of Chips$/, '');
+  const desc = unesc((html.match(/<meta name="description" content="([^"]*)"/) || [])[1] || '');
+  return { loc, rel, title, desc };
 });
 
 const home = pages.find((p) => p.rel === '');
@@ -62,6 +76,12 @@ ${guides.map(line).join('\n')}
 
 ${flavors.map(line).join('\n')}
 
+## Chip database
+
+Indexable chip records. A product page is listed here only when completeness is 60 or more and an ingredient text is present. Korean nutrient rows stay noindex and out of this list. The open download is ODbL and attributes Open Food Facts.
+
+${chips.map((p) => `- [${p.title}](${p.loc}): ${p.desc}`).join('\n')}
+
 ## Optional
 
 - [Full fact sheet (Markdown)](${SITE}/llms-full.txt): Per-country quick facts and FAQs in one file.
@@ -95,6 +115,15 @@ ${p.faq.length ? '\n' + p.faq.map(([q, a]) => `**Q: ${q}**\nA: ${a}`).join('\n\n
 ## News
 
 ${news.map(line).join('\n')}
+
+## Chip database
+
+${chips.map((p) => `### ${p.title}
+
+URL: ${p.loc}
+
+${p.desc}
+`).join('\n')}
 `;
 
 let stale = false;

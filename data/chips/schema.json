@@ -140,7 +140,7 @@
       "additionalProperties": false,
       "required": ["file", "width", "height", "alt", "licence", "licence_url", "credit", "source"],
       "properties": {
-        "file": { "type": "string", "description": "Key for /assets/photos/<file>-960.webp, <file>-480.webp and og-<file>.jpg." },
+        "file": { "type": "string", "description": "Photo key. Wikimedia files use <file>-960.webp, <file>-480.webp and og-<file>.jpg. Open Food Facts files use <file>-480.webp only." },
         "width": { "type": "integer" },
         "height": { "type": "integer" },
         "alt": { "type": "string", "minLength": 1 },
@@ -148,7 +148,22 @@
         "licence_url": { "type": "string", "format": "uri" },
         "credit": { "type": "string" },
         "source": { "type": "string", "format": "uri" },
+        "photo_host": { "type": "string", "enum": ["openfoodfacts", "wikimedia"], "description": "openfoodfacts images are a local 480px WebP under CC BY-SA. wikimedia images keep the 960, 480, and og files." },
         "placeholder": { "type": "boolean", "description": "True when no product photograph exists. The file is a placeholder, not a picture of this product." }
+      }
+    },
+    "certifications": {
+      "type": "array",
+      "description": "Certification labels copied from the source. The page quotes them as labelled as, with the checked date. Not a claim by World of Chips.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "source", "checked"],
+        "properties": {
+          "label": { "type": "string", "minLength": 1 },
+          "source": { "type": "string", "format": "uri" },
+          "checked": { "type": "string", "format": "date" }
+        }
       }
     },
     "where_to_buy": {
