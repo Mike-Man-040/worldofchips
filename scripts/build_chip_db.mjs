@@ -17,7 +17,14 @@ const SITE = 'https://worldofchips.com';
 const CHECK = process.argv.includes('--check');
 const PREVIEW = 'chips/_preview';
 const CHIP_TAG = tagFor('guides'); // existing section tag. No new Associates id.
-const NOINDEX_BELOW = 60;
+const INDEX_MIN = 60;
+// A public product page is indexable only when both are true. Preview pages are noindex either way.
+function hasIngredients(p) {
+  return !!(p.ingredients_text && String(p.ingredients_text.text || '').trim());
+}
+function publicIndexable(p, score) {
+  return score >= INDEX_MIN && hasIngredients(p);
+}
 const RECORDS_PATH = path.join(ROOT, 'data', 'chips', 'records.json');
 
 if (process.argv.includes('--publish')) {
@@ -385,13 +392,14 @@ function productPage(p, all) {
     ['Pack size', packs],
     ['Price per 100 g', 'Not recorded'],
   ];
-  const equivHtml = p.equivalents.length
+  const equivList = p.equivalents.length
     ? `<ul class="sb-list">${p.equivalents.map((e) => {
       const href = e.id ? productPath(all.find((r) => r.id === e.id)) : '';
       const name = href ? `<a href="${href}">${esc(e.name)}</a>` : esc(e.name);
       return `<li><strong>${name}</strong> (${esc(e.region)}). ${esc(e.note)} <span class="sb-muted">Source checked ${esc(longDate(e.checked))}.</span></li>`;
     }).join('')}</ul>`
-    : '<p>No same-product equivalent is recorded. A blank here means the sources we checked did not name one.</p>';
+    : '<p>No brand-name equivalent is recorded. A blank here means the sources we checked did not name one.</p>';
+  const equivHtml = `<p class="chip-pack">These are brand names as stated by the sources. Recipes may differ.</p>\n      ${equivList}`;
   const soldRows = p.countries_sold.map((c) => `<tr><td>${countryLink(c.country)}</td><td><a href="${esc(c.source)}" target="_blank" rel="nofollow noopener">${esc(c.source.replace(/^https?:\/\//, ''))}</a></td><td>${esc(longDate(c.checked))}</td></tr>`).join('');
   const ing = p.ingredients_text
     ? `<blockquote class="chip-ingredients">${esc(p.ingredients_text.text)}</blockquote>
@@ -402,9 +410,10 @@ function productPage(p, all) {
   if (p.flavour_family) similar.push(`<a href="/flavors/${p.flavour_family}/" class="cp-explore-link">${esc(FLAVOUR_LABEL[p.flavour_family])}</a>`);
   if (p.heat_level != null) similar.push('<a href="/spiciest-chips/" class="cp-explore-link">Spice ladder</a>');
   similar.push('<a href="/flavors/" class="cp-explore-link">All flavour pages</a>');
-  const thresholdNote = score.total < NOINDEX_BELOW
-    ? ` This score is below ${NOINDEX_BELOW}, so the page would stay noindex even after a later publish.`
-    : ` This score meets the proposed threshold of ${NOINDEX_BELOW}. The preview is noindex anyway until publishing is switched on.`;
+  const indexable = publicIndexable(p, score.total);
+  const thresholdNote = indexable
+    ? ` A public page would be indexable: completeness is ${score.total} and an ingredient text is present. This preview is noindex until publishing is switched on.`
+    : ` This page would stay noindex. A public page is indexable only when completeness is ${INDEX_MIN} or more and an ingredient text is present.`;
   const gtin = p.barcodes.find((b) => /^\d{8,14}$/.test(b));
   const productLd = {
     '@type': 'Product',
@@ -436,7 +445,7 @@ function productPage(p, all) {
       <div class="sb-table-wrap"><table class="sb-table"><tbody>
         ${rows.map(([k, v]) => `<tr><th scope="row">${k}</th><td>${v}</td></tr>`).join('\n        ')}
       </tbody></table></div>
-      <p class="sb-muted">Completeness ${score.total}/100. Proposed rule: noindex below ${NOINDEX_BELOW}.${thresholdNote} Heat and price are not part of the score. A null heat level is correct when the product is not on the spice ladder.</p>
+      <p class="sb-muted">Completeness ${score.total}/100.${thresholdNote} Heat and price are not part of the score. A null heat level is correct when the product is not on the spice ladder.</p>
     </section>
     <section class="cp-section" id="ingredients">
       <h2>Ingredients</h2>
@@ -613,11 +622,17 @@ function csvEscape(v) {
 function exportsFor(records) {
   const products = records.map((p) => {
     const score = scoreOf(p);
+    const indexable = publicIndexable(p, score.total);
     return {
       ...p,
       completeness: score.total,
+      ingredients_present: hasIngredients(p),
+      public_indexable: indexable,
       noindex: true,
-      noindex_reason: score.total < NOINDEX_BELOW ? `below ${NOINDEX_BELOW}` : 'phase 0 preview',
+      noindex_reason: indexable ? 'phase 0 preview' : ['phase 0 preview'].concat([
+        score.total < INDEX_MIN ? `completeness below ${INDEX_MIN}` : '',
+        hasIngredients(p) ? '' : 'ingredients_text missing',
+      ].filter(Boolean)).join('; '),
     };
   });
   const doc = {
@@ -625,12 +640,13 @@ function exportsFor(records) {
     license: 'ODbL-1.0',
     license_url: 'https://opendatacommons.org/licenses/odbl/1-0/',
     attribution: 'Contains information from Open Food Facts (https://world.openfoodfacts.org), which is made available under the Open Database License. Photographs are not part of this database; each image.licence applies to that file only.',
-    noindex_below: NOINDEX_BELOW,
+    index_rule: `A public product page is indexable only when completeness is ${INDEX_MIN} or more and ingredients_text is present. Otherwise it is noindex. Preview pages are noindex regardless.`,
+    index_min: INDEX_MIN,
     preview: true,
     products,
   };
   const json = JSON.stringify(doc, null, 2) + '\n';
-  const header = ['id', 'slug', 'brand_slug', 'brand', 'parent_company', 'name_local', 'name_en', 'type', 'flavour_family', 'heat_level', 'status', 'barcodes', 'countries_sold', 'pack_sizes_g', 'ingredients_text', 'ingredients_source', 'image_file', 'image_licence', 'image_credit', 'image_source', 'completeness', 'price_per_100g'];
+  const header = ['id', 'slug', 'brand_slug', 'brand', 'parent_company', 'name_local', 'name_en', 'type', 'flavour_family', 'heat_level', 'status', 'barcodes', 'countries_sold', 'pack_sizes_g', 'ingredients_text', 'ingredients_source', 'image_file', 'image_licence', 'image_credit', 'image_source', 'completeness', 'ingredients_present', 'public_indexable', 'noindex', 'price_per_100g'];
   const lines = [header.join(',')];
   for (const p of products) {
     lines.push([
@@ -641,7 +657,7 @@ function exportsFor(records) {
       p.ingredients_text ? p.ingredients_text.text : '',
       p.ingredients_text ? p.ingredients_text.source : '',
       p.image.file, p.image.licence, p.image.credit, p.image.source,
-      p.completeness, '',
+      p.completeness, p.ingredients_present, p.public_indexable, p.noindex, '',
     ].map(csvEscape).join(','));
   }
   const csv = lines.join('\n') + '\n';
@@ -657,7 +673,9 @@ Photographs live in assets/photos/ and stay under the licence named in image_lic
 
 price_per_100g is empty in this preview. Do not fill it from the Pringles Index.
 
-Proposed rule for a later public site: a product page with completeness below ${NOINDEX_BELOW} stays noindex.
+Indexing rule, approved 16 Nov 2026: a public product page is indexable only when completeness is ${INDEX_MIN} or more and ingredients_text is present. Otherwise it is noindex. This preview is noindex either way.
+
+Equivalents are brand names as stated by the sources. Recipes may differ.
 `;
   return { json, csv, attribution };
 }

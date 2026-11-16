@@ -3,7 +3,8 @@
   "license": "ODbL-1.0",
   "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
   "attribution": "Contains information from Open Food Facts (https://world.openfoodfacts.org), which is made available under the Open Database License. Photographs are not part of this database; each image.licence applies to that file only.",
-  "noindex_below": 60,
+  "index_rule": "A public product page is indexable only when completeness is 60 or more and ingredients_text is present. Otherwise it is noindex. Preview pages are noindex regardless.",
+  "index_min": 60,
   "preview": true,
   "products": [
     {
@@ -127,6 +128,8 @@
         }
       ],
       "completeness": 84,
+      "ingredients_present": true,
+      "public_indexable": true,
       "noindex": true,
       "noindex_reason": "phase 0 preview"
     },
@@ -238,8 +241,10 @@
         }
       ],
       "completeness": 60,
+      "ingredients_present": false,
+      "public_indexable": false,
       "noindex": true,
-      "noindex_reason": "phase 0 preview"
+      "noindex_reason": "phase 0 preview; ingredients_text missing"
     },
     {
       "id": "haitai-honey-butter-chip",
@@ -377,6 +382,8 @@
         }
       ],
       "completeness": 94,
+      "ingredients_present": true,
+      "public_indexable": true,
       "noindex": true,
       "noindex_reason": "phase 0 preview"
     },
@@ -511,6 +518,8 @@
         }
       ],
       "completeness": 100,
+      "ingredients_present": true,
+      "public_indexable": true,
       "noindex": true,
       "noindex_reason": "phase 0 preview"
     },
@@ -660,6 +669,8 @@
         }
       ],
       "completeness": 94,
+      "ingredients_present": true,
+      "public_indexable": true,
       "noindex": true,
       "noindex_reason": "phase 0 preview"
     },
@@ -786,6 +797,8 @@
         }
       ],
       "completeness": 84,
+      "ingredients_present": true,
+      "public_indexable": true,
       "noindex": true,
       "noindex_reason": "phase 0 preview"
     },
@@ -936,6 +949,8 @@
         }
       ],
       "completeness": 94,
+      "ingredients_present": true,
+      "public_indexable": true,
       "noindex": true,
       "noindex_reason": "phase 0 preview"
     },
@@ -1046,8 +1061,10 @@
         }
       ],
       "completeness": 60,
+      "ingredients_present": false,
+      "public_indexable": false,
       "noindex": true,
-      "noindex_reason": "phase 0 preview"
+      "noindex_reason": "phase 0 preview; ingredients_text missing"
     },
     {
       "id": "takis-fuego",
@@ -1175,8 +1192,10 @@
         }
       ],
       "completeness": 60,
+      "ingredients_present": false,
+      "public_indexable": false,
       "noindex": true,
-      "noindex_reason": "phase 0 preview"
+      "noindex_reason": "phase 0 preview; ingredients_text missing"
     },
     {
       "id": "walkers-salt-and-vinegar",
@@ -1287,6 +1306,8 @@
         }
       ],
       "completeness": 94,
+      "ingredients_present": true,
+      "public_indexable": true,
       "noindex": true,
       "noindex_reason": "phase 0 preview"
     }

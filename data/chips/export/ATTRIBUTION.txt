@@ -10,4 +10,6 @@ Photographs live in assets/photos/ and stay under the licence named in image_lic
 
 price_per_100g is empty in this preview. Do not fill it from the Pringles Index.
 
-Proposed rule for a later public site: a product page with completeness below 60 stays noindex.
+Indexing rule, approved 16 Nov 2026: a public product page is indexable only when completeness is 60 or more and ingredients_text is present. Otherwise it is noindex. This preview is noindex either way.
+
+Equivalents are brand names as stated by the sources. Recipes may differ.

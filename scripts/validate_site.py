@@ -419,12 +419,41 @@ def check_chip_db(problems):
     if len(set(titles)) != len(titles):
         problems.append("chip-db: duplicate preview titles")
     export = os.path.join(ROOT, "data", "chips", "export", "chips.json")
-    if os.path.isfile(export):
-        blob = open(export, encoding="utf-8").read()
-        if "ODbL" not in blob or "Open Food Facts" not in blob:
-            problems.append("chip-db: export is missing the ODbL / Open Food Facts attribution")
-    else:
+    if not os.path.isfile(export):
         problems.append("chip-db: data/chips/export/chips.json is missing")
+        return
+    blob = open(export, encoding="utf-8").read()
+    if "ODbL" not in blob or "Open Food Facts" not in blob:
+        problems.append("chip-db: export is missing the ODbL / Open Food Facts attribution")
+    try:
+        data = json.loads(blob)
+    except ValueError as e:
+        problems.append(f"chip-db: chips.json does not parse: {e}")
+        return
+    if data.get("preview") is not True or data.get("index_min") != 60:
+        problems.append("chip-db: export must stay a preview and keep index_min 60")
+    for p in data.get("products") or []:
+        ing = p.get("ingredients_text")
+        has_ing = isinstance(ing, dict) and str(ing.get("text") or "").strip() != ""
+        expect = (p.get("completeness") or 0) >= 60 and has_ing
+        pid = p.get("id", "?")
+        if p.get("ingredients_present") is not has_ing:
+            problems.append(f"chip-db: {pid} ingredients_present does not match ingredients_text")
+        if p.get("public_indexable") is not expect:
+            problems.append(f"chip-db: {pid} public_indexable must be true only when completeness is 60 or more and ingredients_text is present")
+        if p.get("noindex") is not True:
+            problems.append(f"chip-db: {pid} preview export must stay noindex")
+        page = os.path.join(ROOT, CHIP_PREVIEW, p.get("brand_slug", ""), p.get("slug", ""), "index.html")
+        if not os.path.isfile(page):
+            problems.append(f"chip-db: missing preview page for {pid}")
+            continue
+        html = open(page, encoding="utf-8").read()
+        if "Recipes may differ." not in html:
+            problems.append(f"chip-db: {pid} equivalents section must say recipes may differ")
+        if expect and "would be indexable" not in html:
+            problems.append(f"chip-db: {pid} should say a public page would be indexable")
+        if not expect and "would stay noindex" not in html:
+            problems.append(f"chip-db: {pid} should say the public page would stay noindex")
 
 
 def main():

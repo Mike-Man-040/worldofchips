@@ -34,7 +34,7 @@ Phase 0 writes the same shape under `/chips/_preview/`, including brand hubs at 
 | `flavour_family` | One of the ten pages under `/flavors/`, or null. The slugs are `prawn-cocktail`, `ketchup`, `salt-and-vinegar`, `sour-cream-and-onion`, `paprika`, `nori-seaweed`, `bbq`, `dill-pickle`, `flamin-hot`, `cheese-and-onion`. |
 | `heat_level` | The rung on `/spiciest-chips/` when this product is that rung, otherwise null. It is not a Scoville number. The map lives in `scripts/build_chip_db.mjs`. |
 | `countries_sold` | `{country, source, checked}` for each country. `checked` is `YYYY-MM-DD`. |
-| `equivalents` | The same product under another brand. A brand-name note (Lay's / Walkers / Smith's / Sabritas) is allowed when the source says that, and the note must say it is the brand, not a shared recipe, unless the source says otherwise. |
+| `equivalents` | Brand names as stated by the sources (Lay's / Walkers / Smith's / Sabritas, and the others a source names). The page says recipes may differ. This is not a claim that the recipes match. |
 | `pack_sizes_g` | Grams per country, each with a source and date. No converted ounces unless the source already states the grams. |
 | `price_per_100g` | Null, or `{country, amount, currency, source, checked}`. The source has to be a retailer. A Pringles Index URL is rejected. The preview leaves this null. |
 | `status` | `current`, `limited`, `discontinued`, `unknown`. Unknown when the source does not say it is on shelf now. |
@@ -67,7 +67,7 @@ The builder scores 0–100. Heat and price are not scored: null is the right val
 | Credited image | 6 |
 | A where-to-buy row | 4 |
 
-**Proposed rule:** a public page with a score **below 60** stays noindex. A score of 60 meets the line. Three preview records (Sabritas American Brisket, Takis Fuego, Doritos Nacho Cheese) score 60 with no ingredient text, because that text was not in the potato-crisp slice. If ingredients should be required before a page is indexed, the threshold needs to be higher than 60, or the ingredient points need to rise. Phase 0 marks every preview page noindex regardless of score.
+**Indexing rule, approved 16 November 2026.** A public product page is indexable only when completeness is **60 or more** and `ingredients_text` is present. Otherwise it is noindex. Both conditions are required. Sabritas American Brisket, Takis Fuego and Doritos Nacho Cheese score 60 and have no ingredient text, so a public page for them would stay noindex. Phase 0 marks every preview page noindex regardless, including the ones that would pass.
 
 ## Open data
 
