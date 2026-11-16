@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 // Submit every sitemap URL to IndexNow (Bing, Yandex, Seznam, Naver, ... share submissions).
+// Reads sitemap.xml and sitemap-chips.xml. There is no deploy hook: run this after the
+// files are live. See README.md.
 // Run AFTER the key file /<key>.txt is live on https://worldofchips.com (i.e. after deploy).
 // Usage: node scripts/indexnow_ping.mjs [--dry-run]
 import fs from 'node:fs';
@@ -12,7 +14,13 @@ const KEY = '70db554b0a1ac11d64c90d0d452d821e';
 const keyFile = path.join(ROOT, `${KEY}.txt`);
 if (!fs.existsSync(keyFile) || fs.readFileSync(keyFile, 'utf8').trim() !== KEY) throw new Error(`${KEY}.txt missing or wrong`);
 
-const urlList = [...fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+function locs(file) {
+  const p = path.join(ROOT, file);
+  if (!fs.existsSync(p)) return [];
+  return [...fs.readFileSync(p, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+}
+// sitemap.xml is the editorial site. sitemap-chips.xml is the indexable chip database.
+const urlList = [...new Set([...locs('sitemap.xml'), ...locs('sitemap-chips.xml')])];
 const body = { host: HOST, key: KEY, keyLocation: `https://${HOST}/${KEY}.txt`, urlList };
 if (process.argv.includes('--dry-run')) { console.log(JSON.stringify(body, null, 2)); process.exit(0); }
 
