@@ -87,8 +87,9 @@ python3 scripts/validate_site.py
   (from `scripts/build_country_pages.mjs`; answers use only data already on the page).
 - `node scripts/build_llms.mjs` regenerates `/llms.txt` and `/llms-full.txt` from the built pages.
   Run it after the other builders; `--check` (also run by `validate_site.py`) fails if stale.
-- IndexNow key file: `/70db554b0a1ac11d64c90d0d452d821e.txt`. After a deploy, run
-  `node scripts/indexnow_ping.mjs` (or `--dry-run` to preview) to submit every sitemap URL.
+- IndexNow key file: `/70db554b0a1ac11d64c90d0d452d821e.txt`. There is no deploy hook.
+  After the files are live on https://worldofchips.com, run `node scripts/indexnow_ping.mjs`
+  (or `--dry-run` to preview). It submits every URL in `sitemap.xml` and `sitemap-chips.xml`.
 
 ## Community flavour submissions (moderated)
 

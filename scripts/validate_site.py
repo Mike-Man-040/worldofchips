@@ -393,6 +393,13 @@ def check_chip_db(problems):
     nav = home.split("<!-- SITE-NAV:START", 1)[1].split("<!-- SITE-NAV:END -->", 1)[0]
     if "/chips/_preview" in nav:
         problems.append("chip-db: site nav links to the chip preview")
+    primary = nav.split('<details class="nav-more">', 1)[0]
+    if 'href="/chips/"' in primary:
+        problems.append("chip-db: /chips/ belongs under More, not in the main nav")
+    more = nav.split('<details class="nav-more">', 1)[1].split('</details>', 1)[0] if '<details class="nav-more">' in nav else ''
+    mobile = nav.split('<details class="nav-mobile">', 1)[1] if '<details class="nav-mobile">' in nav else ''
+    if 'href="/chips/">Chip database</a>' not in more or 'href="/chips/">Chip database</a>' not in mobile:
+        problems.append("chip-db: More menu and the mobile menu must link /chips/ as Chip database")
     sm = open(os.path.join(ROOT, "sitemap.xml"), encoding="utf-8").read()
     if "/chips/" in sm or "/brands/" in sm:
         problems.append("chip-db: sitemap.xml must not list /chips/ or /brands/ URLs")
@@ -551,7 +558,8 @@ def check_chip_db(problems):
     credit = "Source: Ministry of Food and Drug Safety (식품의약품안전처), processed food nutrient database"
     mfds_url = "https://various.foodsafetykorea.go.kr/nutrient/general/down/list.do"
     korea = open(os.path.join(ROOT, "south-korea", "index.html"), encoding="utf-8").read()
-    if "/chips/" in korea:
+    korea_body = korea.split("<!-- SITE-NAV:END -->", 1)[-1]
+    if "/chips/" in korea_body or "/brands/" in korea_body:
         problems.append("chip-db: south-korea country guide must not link the chip records")
     for row in mfds:
         pid = row.get("id", "?")
