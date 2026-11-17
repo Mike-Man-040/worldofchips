@@ -3,6 +3,7 @@
 // Facts are sourced (see each page's Sources). Product links are Amazon searches for named models
 // (Amazon served captchas, so single ASIN pages were not re-verified); no prices or specs are quoted.
 import { flavourChipsSection } from './chip_links.mjs';
+import { ingredientStudy, MEASURES as STUDY_MEASURES } from './ingredient_study.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import pringlesPage from './pringles_page.mjs';
@@ -577,5 +578,85 @@ var m=location.search.match(/[?&]r=([a-z-]+)/);if(m)show(m[1],false);})();`;
     ],
     sources: [], related: [['pringles-index', '📊 Pringles Index'], ['limited-edition-chips', '📅 Limited-edition drops'], ['united-kingdom', '🇬🇧 United Kingdom']] };
 
-  return [...hubAndRecipe, ...cluster.map((g) => ({ ...CK, ...g })), spice, flavorIndex, ...flavorPages, calendar, halloween, quiz, submit, pringlesPage({ esc, ROOT, CK }), shrink].map((g) => ({ ...CK, ...g }));
+  // ---------- ingredient study (scripts/ingredient_study.mjs, Open Food Facts 16 Nov 2026) ----------
+  const ST = ingredientStudy();
+  const SR = Object.fromEntries(ST.rows.map((r) => [r.slug, r]));
+  const fmt = (n) => n.toLocaleString('en-US');
+  const pc = (v) => `${v.pct.toFixed(1)}%`;
+  const ofN = (r, k) => `${r.measures[k].count} of ${fmt(r.n)}`;
+  const us = SR['united-states'], uk = SR['united-kingdom'], nl = SR.netherlands, mx = SR.mexico;
+  const bar = (r, k, colour) => `<div style="display:flex;align-items:center;gap:.6rem;margin:.25rem 0"><span style="width:8.5rem;flex:none;font-size:.85rem">${esc(r.name)}</span><span style="flex:1;background:var(--light-border);border-radius:4px;height:1.1rem;position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:${r.measures[k].pct}%;background:${colour};border-radius:4px"></span></span><span style="width:3.5rem;flex:none;text-align:right;font-weight:700;font-size:.85rem">${pc(r.measures[k])}</span></div>`;
+  const chart = (k, title, colour) => `<figure style="margin:1rem 0 1.4rem"><figcaption style="font-weight:700;color:var(--brown);margin-bottom:.4rem">${title}</figcaption>${ST.rows.map((r) => bar(r, k, colour)).join('')}</figure>`;
+  const ci = (v) => `${v.ci[0]}&#8211;${v.ci[1]}%`;
+  const tableRows = [
+    ['Products in the sample', (r) => fmt(r.n)],
+    ['Median number of ingredients', (r) => String(r.median_ingredients)],
+    ['Three ingredients or fewer', (r) => pc(r.plain)],
+    ...STUDY_MEASURES.map((m) => [esc(m.label), (r) => `${pc(r.measures[m.key])} <span class="sb-muted">(${r.measures[m.key].count})</span>`]),
+  ];
+  const study = { slug: 'whats-in-a-bag-of-chips', flag: '🧪', crumb: 'What’s in a Bag of Chips?', checked: '2026-11-16', checkedLabel: '16 November 2026', disc: false,
+    h1: `What’s in a Bag of Chips? ${fmt(ST.unique_products)} Ingredient Lists Compared`,
+    title: 'What’s in a Bag of Chips? US, UK, NL & Mexico | World of Chips',
+    desc: `We read ${fmt(ST.unique_products)} chip ingredient lists from Open Food Facts. ${pc(uk.measures.yeast)} of UK chips list yeast extract but ${pc(uk.measures.msg)} list MSG; in the US, ${pc(us.measures.msg)} list MSG.`,
+    introDark: 'MSG, yeast extract, sugar and frying oil in the United States, United Kingdom, Netherlands and Mexico, from the labels themselves.',
+    intro: `We read the ingredient lists of ${fmt(ST.unique_products)} potato chips and crisps recorded in <a href="https://world.openfoodfacts.org/" target="_blank" rel="nofollow noopener">Open Food Facts</a> for the United States, the United Kingdom, the Netherlands and Mexico, and counted how often each one names MSG, yeast extract, sugar and each frying oil. These are counts of products listed in an open, volunteer-built database, not sales. The method and its limits are set out below, and the figures can be downloaded.`,
+    sections: [],
+    body: `
+    <section class="cp-section" id="findings">
+      <h2>What We Found</h2>
+      <ul class="sb-list">
+        <li><strong>British crisps use yeast extract, not MSG.</strong> ${pc(uk.measures.yeast)} of UK crisps list yeast extract (${ofN(uk, 'yeast')}), while ${pc(uk.measures.msg)} list MSG (${ofN(uk, 'msg')}).</li>
+        <li><strong>MSG is more common in American chips.</strong> ${pc(us.measures.msg)} of US chips list MSG (${ofN(us, 'msg')}), about ${Math.round(us.measures.msg.pct / uk.measures.msg.pct * 10) / 10} times the UK share.</li>
+        <li><strong>In Mexico, nearly half list MSG:</strong> ${pc(mx.measures.msg)} (${ofN(mx, 'msg')}). Mexico&#8217;s sample is small, so the true share could be anywhere from about ${mx.measures.msg.ci[0]}% to ${mx.measures.msg.ci[1]}%.</li>
+        <li><strong>Cottonseed oil is an American habit.</strong> It appears in ${pc(us.measures.cottonseed)} of US ingredient lists (${ofN(us, 'cottonseed')}) and in none of the ${fmt(uk.n)} British or ${fmt(nl.n)} Dutch ones.</li>
+        <li><strong>Sugar is common everywhere.</strong> Sugar or dextrose appears in ${pc(uk.measures.sugar)} of UK, ${pc(nl.measures.sugar)} of Dutch, ${pc(us.measures.sugar)} of US and ${pc(mx.measures.sugar)} of Mexican chips. Palm oil is rare: ${pc(us.measures.palm)} or less in every country.</li>
+      </ul>
+    </section>
+    <section class="cp-section" id="charts">
+      <h2>MSG and Yeast Extract by Country</h2>
+      <p>Share of products whose ingredient list names each one.</p>
+      ${chart('msg', 'Lists MSG (monosodium glutamate, E621)', 'var(--gold)')}
+      ${chart('yeast', 'Lists yeast extract', 'var(--brown)')}
+    </section>
+    <section class="cp-section" id="table">
+      <h2>All the Figures</h2>
+      <div class="sb-table-wrap">
+      <table class="sb-table">
+        <thead><tr><th scope="col">Share of products that list&#8230;</th>${ST.rows.map((r) => `<th scope="col">${esc(r.name)}</th>`).join('')}</tr></thead>
+        <tbody>
+          ${tableRows.map(([label, f]) => `<tr><th scope="row">${label}</th>${ST.rows.map((r) => `<td>${f(r)}</td>`).join('')}</tr>`).join('\n          ')}
+        </tbody>
+      </table>
+      </div>
+      <p class="sb-muted">Number of products in brackets. An oil counts when the list names it anywhere, including &#8220;and/or&#8221; blends such as &#8220;canola, sunflower and/or corn oil&#8221;, so oil shares add up to more than 100%.</p>
+      <p>Download: <a href="/data/chips/export/ingredients-by-country.csv">ingredients-by-country.csv</a> (with 95% confidence intervals). Open Database License; contains information from Open Food Facts.</p>
+    </section>
+    <section class="cp-section" id="method">
+      <h2>How We Counted</h2>
+      <ol class="sb-list">
+        <li><strong>Data.</strong> The Open Food Facts nightly export of 16 November 2026, filtered to potato crisps that have an ingredient list. The same records power our <a href="/chips/">chip database</a>.</li>
+        <li><strong>Countries.</strong> A product counts in every study country Open Food Facts tags it with. We left out France: most of its records are British supermarket crisps also sold there. Other countries had too few records.</li>
+        <li><strong>Matching.</strong> We searched each list as printed, in English, Dutch, Spanish, French and German, for terms such as &#8220;monosodium glutamate&#8221;, &#8220;E621&#8221;, &#8220;glutamato monos&#243;dico&#8221; and &#8220;gistextract&#8221;, including common typos on scanned labels. Claims such as &#8220;no added MSG&#8221; were removed first, so they do not count as MSG.</li>
+        <li><strong>Ingredient count.</strong> Ingredients separated by commas, with sub-ingredients in brackets folded into their parent. It is a rough guide, not an exact count.</li>
+        <li><strong>Uncertainty.</strong> The CSV gives a 95% confidence interval for every share. For example, UK MSG is ${pc(uk.measures.msg)} (${ci(uk.measures.msg)}) and Mexico MSG is ${pc(mx.measures.msg)} (${ci(mx.measures.msg)}).</li>
+      </ol>
+    </section>
+    <section class="cp-section" id="limits">
+      <h2>What This Can&#8217;t Tell You</h2>
+      <ul class="sb-list">
+        <li>Open Food Facts is built by volunteers who scan packs. It covers some brands and shops better than others, and it is not weighted by sales: a best-seller counts the same as a niche bag.</li>
+        <li>Some products appear more than once (different sizes or barcodes), and some ingredient lists are old or contain scanning errors.</li>
+        <li>Yeast extract contains naturally occurring glutamate. This study counts what the label names, not what the food contains.</li>
+        <li>Recipes change. Check the pack.</li>
+      </ul>
+    </section>`,
+    faqs: [
+      ['Do British crisps contain MSG?', `Few list it. In our sample, ${pc(uk.measures.msg)} of UK crisps (${ofN(uk, 'msg')}) list MSG, while ${pc(uk.measures.yeast)} list yeast extract, which is often used for a similar savoury taste.`],
+      ['Do American chips have more MSG than British crisps?', `In our sample, yes: ${pc(us.measures.msg)} of US chips list MSG, against ${pc(uk.measures.msg)} of UK crisps. These are counts of products listed in Open Food Facts, not sales.`],
+      ['Is palm oil common in potato chips?', `Not in these four countries. Palm oil appears in ${pc(us.measures.palm)} of US, ${pc(uk.measures.palm)} of UK, ${pc(nl.measures.palm)} of Dutch and ${pc(mx.measures.palm)} of Mexican ingredient lists in our sample.`],
+    ],
+    sources: ['https://world.openfoodfacts.org/', 'https://opendatacommons.org/licenses/odbl/1-0/'],
+    related: [['chips', '🔎 Chip database'], ['pringles-index', '📊 Pringles Index'], ['united-kingdom', '🇬🇧 United Kingdom'], ['united-states', '🇺🇸 United States'], ['mexico', '🇲🇽 Mexico']] };
+
+  return [...hubAndRecipe, ...cluster.map((g) => ({ ...CK, ...g })), spice, flavorIndex, ...flavorPages, calendar, halloween, quiz, submit, pringlesPage({ esc, ROOT, CK }), shrink, study].map((g) => ({ ...CK, ...g }));
 }

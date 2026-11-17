@@ -15,6 +15,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { tagFor, snackBoxLead, daebakBox, bolBox } from './affiliate_tags.mjs';
+import { ingredientStudyCsv } from './ingredient_study.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://worldofchips.com';
@@ -734,6 +735,7 @@ function indexPage(records) {
   <div class="cp-body">
     <p class="cp-intro">${nOff} Open Food Facts potato-crisp records and ${nMinistry} Korean nutrient-database rows. Check the pack; recipes change.</p>
     ${creditParagraph()}
+    <p>New: <a href="/whats-in-a-bag-of-chips/">What&#8217;s in a bag of chips?</a> compares MSG, yeast extract, sugar and oils across the United States, United Kingdom, Netherlands and Mexico.</p>
     <p>Open download, ODbL 1.0: <a href="/data/chips/export/chips.json">chips.json</a>, <a href="/data/chips/export/chips.csv">chips.csv</a>, <a href="/data/chips/export/ATTRIBUTION.txt">attribution</a>. The database attributes Open Food Facts. Photographs are separate: Open Food Facts photos are CC BY-SA 3.0, and the Korean rows are not in the download.</p>
     <label for="chip-q">Search by name, brand, country or type</label>
     <input id="chip-q" class="chip-search" type="search" placeholder="Try salt, Calbee, Mexico, ridged">
@@ -991,6 +993,7 @@ function build() {
   files.set('data/chips/export/ATTRIBUTION.txt', exp.attribution);
   files.set('sitemap-chips.xml', chipsSitemap(records));
   files.set('data/chips/indexed.json', indexedLinks(records));
+  files.set('data/chips/export/ingredients-by-country.csv', ingredientStudyCsv());
   const titles = new Map();
   for (const [rel, text] of files) {
     if (!rel.endsWith('.html')) continue;

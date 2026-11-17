@@ -1,0 +1,6 @@
+# World of Chips ingredient study, Open Food Facts export of 2026-11-16. Counts of listed products, not sales. ODbL 1.0: contains information from Open Food Facts. Method: https://worldofchips.com/whats-in-a-bag-of-chips/
+country,products,median_ingredients,plain_count,plain_pct,msg_count,msg_pct,msg_ci95_low,msg_ci95_high,yeast_count,yeast_pct,yeast_ci95_low,yeast_ci95_high,sugar_count,sugar_pct,sugar_ci95_low,sugar_ci95_high,sunflower_count,sunflower_pct,sunflower_ci95_low,sunflower_ci95_high,rapeseed_count,rapeseed_pct,rapeseed_ci95_low,rapeseed_ci95_high,cottonseed_count,cottonseed_pct,cottonseed_ci95_low,cottonseed_ci95_high,palm_count,palm_pct,palm_ci95_low,palm_ci95_high
+united-states,959,9,292,30.4,145,15.1,13,17.5,317,33.1,30.2,36.1,496,51.7,48.6,54.9,705,73.5,70.6,76.2,521,54.3,51.2,57.5,202,21.1,18.6,23.8,39,4.1,3,5.5
+united-kingdom,617,8,159,25.8,37,6,4.4,8.2,274,44.4,40.5,48.4,398,64.5,60.7,68.2,509,82.5,79.3,85.3,301,48.8,44.9,52.7,0,0,0,0.6,8,1.3,0.7,2.5
+netherlands,170,8,44,25.9,17,10,6.3,15.4,28,16.5,11.6,22.8,105,61.8,54.3,68.7,150,88.2,82.5,92.3,48,28.2,22,35.4,0,0,0,2.2,2,1.2,0.3,4.2
+mexico,53,13,18,34,25,47.2,34.4,60.3,9,17,9.2,29.2,24,45.3,32.7,58.5,5,9.4,4.1,20.3,4,7.5,3,17.9,3,5.7,1.9,15.4,1,1.9,0.3,9.9
