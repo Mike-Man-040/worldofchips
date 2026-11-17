@@ -377,7 +377,8 @@ def check_pringles_untouched(problems):
 
 def check_chip_db(problems):
     """Published chip pages: sourced, credited, no unquoted dietary claims, valid affiliate tags.
-    A product page is indexable only at completeness >= 60 with ingredients. Korean rows stay noindex
+    A product page is eligible at completeness >= 60 with ingredients and indexed only when it is also in
+    release wave 1 (wave_1). A brand hub is indexed only with 3+ indexed products. Korean rows stay noindex
     and out of the ODbL export. Indexable URLs live in sitemap-chips.xml, not sitemap.xml."""
     r = subprocess.run(["node", os.path.join(ROOT, "scripts", "build_chip_db.mjs"), "--check"], capture_output=True, text=True)
     if r.returncode:
@@ -450,17 +451,29 @@ def check_chip_db(problems):
             problems.append(f"chip-db: {pid} ingredients_present does not match ingredients_text")
         if p.get("public_indexable") is not expect:
             problems.append(f"chip-db: {pid} public_indexable must be true only when completeness is 60 or more and ingredients_text is present")
-        if p.get("noindex") is expect:
-            problems.append(f"chip-db: {pid} noindex must be the opposite of public_indexable")
+        wave = p.get("wave_1") is True
+        if wave and not expect:
+            problems.append(f"chip-db: {pid} is in wave 1 but not eligible (completeness 60+ and ingredients)")
+        indexed = expect and wave
+        if p.get("noindex") is indexed:
+            problems.append(f"chip-db: {pid} noindex must be the opposite of public_indexable and wave_1")
         page = os.path.join(ROOT, "chips", p.get("brand_slug", ""), p.get("slug", ""), "index.html")
         if not os.path.isfile(page):
             problems.append(f"chip-db: missing page for {pid}")
             continue
-        if expect:
+        page_html = open(page, encoding="utf-8").read()
+        if indexed and 'content="index, follow"' not in page_html:
+            problems.append(f"chip-db: {pid} is in wave 1 but its page is not index, follow")
+        if not indexed and 'content="noindex' not in page_html:
+            problems.append(f"chip-db: {pid} is outside wave 1 but its page is indexable")
+        if indexed:
             indexable_products.append(p)
-    indexable_brands = set()
+    if len(indexable_products) > int(data.get("wave_size") or 0):
+        problems.append(f"chip-db: {len(indexable_products)} indexed products exceed wave_size {data.get('wave_size')}")
+    brand_counts = {}
     for p in indexable_products:
-        indexable_brands.add(p.get("brand_slug"))
+        brand_counts[p.get("brand_slug")] = brand_counts.get(p.get("brand_slug"), 0) + 1
+    indexable_brands = {b for b, n in brand_counts.items() if n >= 3}
     chip_sm = ET.parse(os.path.join(ROOT, "sitemap-chips.xml")).getroot()
     ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
     locs = {e.text for e in chip_sm.findall("s:url/s:loc", ns)}
@@ -542,11 +555,13 @@ def check_chip_db(problems):
         rel = os.path.relpath(page, ROOT)
         expect = p.get("public_indexable") is True and p.get("noindex") is False
         if expect:
-            if 'content="noindex' in html or "This page is indexable" not in html:
-                problems.append(f"{rel}: indexable product page must say so and omit noindex")
+            if 'content="index, follow"' not in html:
+                problems.append(f"{rel}: indexable product page must be index, follow")
         else:
-            if 'content="noindex' not in html or "This page is noindex" not in html:
+            if 'content="noindex' not in html:
                 problems.append(f"{rel}: {pid} must be noindex")
+        if re.search(r"Completeness \d+/100|This page is (?:noindex|indexable)", html):
+            problems.append(f"{rel}: internal indexing notes must not show on the page")
     for slug in indexable_brands:
         page = os.path.join(ROOT, "brands", slug, "index.html")
         if not os.path.isfile(page):
@@ -580,7 +595,7 @@ def check_chip_db(problems):
             continue
         html = open(page, encoding="utf-8").read()
         rel = os.path.relpath(page, ROOT)
-        if 'content="noindex' not in html or "This page is noindex" not in html:
+        if 'content="noindex' not in html:
             problems.append(f"{rel}: Ministry page must stay noindex")
         if credit not in html:
             problems.append(f"{rel}: missing Ministry source credit")
