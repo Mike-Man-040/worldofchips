@@ -1,0 +1,3248 @@
+{
+ "generated_by": "scripts/build_chip_db.mjs",
+ "products": [
+  {
+   "id": "calbee-usushio",
+   "name": "Calbee Potato Chips, lightly salted",
+   "url": "/chips/calbee/usushio/",
+   "brand_slug": "calbee",
+   "countries": [
+    "japan"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "haitai-honey-butter-chip",
+   "name": "Haitai Honey Butter Chips",
+   "url": "/chips/haitai/honey-butter-chip/",
+   "brand_slug": "haitai",
+   "countries": [
+    "south-korea",
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "lays-cheese-onion",
+   "name": "Lay's Cheese Onion",
+   "url": "/chips/lays/cheese-onion/",
+   "brand_slug": "lays",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "lays-classic",
+   "name": "Lay's Classic",
+   "url": "/chips/lays/classic/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0000200000282",
+   "name": "Walkers Cheese Onion Crisps",
+   "url": "/chips/walkers/walkers-cheese-and-onion-crisps/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-0000200004390",
+   "name": "Walkers Grilled Cheese Toastie Crisps",
+   "url": "/chips/walkers/grilled-cheese-toastie-crisps/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0000200008274",
+   "name": "Walkers Cheese Toastie with Heinz Beanz Flavour Potato Crisps",
+   "url": "/chips/walkers/cheese-toastie-with-heinz-beanz-flavour-potato-c/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0000200010279",
+   "name": "Walkers Seriously Salt Vinegar",
+   "url": "/chips/walkers/seriously-salt-and-vinegar/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-0000200010400",
+   "name": "Walkers Supreme Prawn Cocktail",
+   "url": "/chips/walkers/supreme-prawn-cocktail/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "prawn-cocktail"
+  },
+  {
+   "id": "off-0005100000100",
+   "name": "Walkers Ready Salted Crisps",
+   "url": "/chips/walkers/ready-salted-crisps-000100/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00066549",
+   "name": "Marks Spencers Sweet Smoky BBQ",
+   "url": "/chips/marks-and-spencers/sweet-and-smoky-bbq/",
+   "brand_slug": "marks-and-spencers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-0008226502339",
+   "name": "Fairfields Farm Roast Rib of Beef Flavour Potato Crisps",
+   "url": "/chips/fairfields-farm/roast-rib-of-beef-flavour-potato-crisps/",
+   "brand_slug": "fairfields-farm",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0011110088840",
+   "name": "Kroger Wavy Lightly Salted Potatoe Chips",
+   "url": "/chips/kroger/wavy-lightly-salted-potatoe-chips/",
+   "brand_slug": "kroger",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0011594022026",
+   "name": "Tim's Potato Chips Jalapeño",
+   "url": "/chips/tims/potato-chips-jalape-o/",
+   "brand_slug": "tims",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0020685000256",
+   "name": "Cape Cod Kettle Cooked Waffle Cut Potato Chips",
+   "url": "/chips/cape-cod/kettle-cooked-waffle-cut-potato-chips/",
+   "brand_slug": "cape-cod",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0020685000744",
+   "name": "CAPE COD Kettle Cooked Potato Chips",
+   "url": "/chips/cape-cod/kettle-cooked-potato-chips/",
+   "brand_slug": "cape-cod",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0020685001659",
+   "name": "Cape Cod Original Potato Chips",
+   "url": "/chips/cape-cod/original-potato-chips/",
+   "brand_slug": "cape-cod",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0020685003165",
+   "name": "Cape Cod Kettle Cooked Potato Chips Sea Salt Vinegar",
+   "url": "/chips/cape-cod/kettle-cooked-potato-chips-sea-salt-and-vinegar-003165/",
+   "brand_slug": "cape-cod",
+   "countries": [
+    "bolivia",
+    "united-states"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-0020685084713",
+   "name": "CAPE COD Original made with Sea Salt",
+   "url": "/chips/cape-cod/original-made-with-sea-salt/",
+   "brand_slug": "cape-cod",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400002912",
+   "name": "Ruffles CHEDDAR SOUR CREAM FLAVORED",
+   "url": "/chips/ruffles/cheddar-and-sour-cream-flavored-002912/",
+   "brand_slug": "ruffles",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400009973",
+   "name": "Miss Vickie's Sea Salt",
+   "url": "/chips/miss-vickies/sea-salt/",
+   "brand_slug": "miss-vickies",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400012065",
+   "name": "Lay's Potato Chips Barbecue",
+   "url": "/chips/lays/potato-chips-barbecue/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-0028400012089",
+   "name": "Ruffles",
+   "url": "/chips/ruffles/ruffles/",
+   "brand_slug": "ruffles",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400019934",
+   "name": "Ruffles Original Potato Chips",
+   "url": "/chips/ruffles/original-potato-chips/",
+   "brand_slug": "ruffles",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400043809",
+   "name": "Lay's Wavy Original",
+   "url": "/chips/lays/wavy-original/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400055116",
+   "name": "Lay's Lays cheddar imp",
+   "url": "/chips/lays/lays-cheddar-imp/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400071888",
+   "name": "Lay's Baked Original",
+   "url": "/chips/lays/baked-original/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400076913",
+   "name": "Frito Lay Maui style potato chips",
+   "url": "/chips/frito-lay/maui-style-potato-chips/",
+   "brand_slug": "frito-lay",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400090179",
+   "name": "Ruffles Cheddar Sour Cream",
+   "url": "/chips/ruffles/cheddar-and-sour-cream-090179/",
+   "brand_slug": "ruffles",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400090858",
+   "name": "Lay's Classic Potato Chips",
+   "url": "/chips/lays/classic-potato-chips-090858/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400090889",
+   "name": "Lay's Sour Cream Onion Flavored Potato Chips",
+   "url": "/chips/lays/sour-cream-and-onion-flavored-potato-chips-090889/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "sour-cream-and-onion"
+  },
+  {
+   "id": "off-0028400159630",
+   "name": "Ruffles Sour cream onion flavored potato chips",
+   "url": "/chips/ruffles/sour-cream-onion-flavored-potato-chips/",
+   "brand_slug": "ruffles",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400160148",
+   "name": "Lay's Classic Potato Chips 10 Ounce Plastic Bag",
+   "url": "/chips/lays/lays-classic-potato-chips-10-ounce-plastic-bag/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400199148",
+   "name": "Lay's Classic",
+   "url": "/chips/lays/classic-199148/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400200592",
+   "name": "Lay's Classic Lightly Salted Potato Chips",
+   "url": "/chips/lays/classic-lightly-salted-potato-chips/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400201315",
+   "name": "Lay's Flamin' Hot",
+   "url": "/chips/lays/flamin-hot-201315/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "flamin-hot"
+  },
+  {
+   "id": "off-0028400243247",
+   "name": "Lay's Kettle Cooked Sea Salt Vinegar Flavored",
+   "url": "/chips/lays/kettle-cooked-sea-salt-and-vinegar-flavored/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-0028400372985",
+   "name": "Lay's Kettle cooked original",
+   "url": "/chips/lays/kettle-cooked-original/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400376495",
+   "name": "Lay's Chile Limon Chips",
+   "url": "/chips/lays/chile-limon-chips/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400377027",
+   "name": "Lay's Dill Pickle",
+   "url": "/chips/lays/dill-pickle-377027/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "dill-pickle"
+  },
+  {
+   "id": "off-0028400431439",
+   "name": "Ruffles Chips, Cheddar Sour Cream",
+   "url": "/chips/ruffles/ruffles-chips-cheddar-and-sour-cream/",
+   "brand_slug": "ruffles",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400674775",
+   "name": "Lay's Lays Potato Chips Lightly Salted Cheddar and Sour Cream",
+   "url": "/chips/lays/lays-potato-chips-lightly-salted-cheddar-and-sou/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400679114",
+   "name": "Ruffles Simply Ruffles Sea Salted",
+   "url": "/chips/ruffles/simply-ruffles-sea-salted/",
+   "brand_slug": "ruffles",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400679589",
+   "name": "Simply Ruffles Sea Salted",
+   "url": "/chips/simply/simply-ruffles-sea-salted/",
+   "brand_slug": "simply",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400686723",
+   "name": "Miss Vickie's Spicy Dill Pickle Flavored Kettle Cooked Potato Chips",
+   "url": "/chips/miss-vickies/spicy-dill-pickle-flavored-kettle-cooked-potato/",
+   "brand_slug": "miss-vickies",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "dill-pickle"
+  },
+  {
+   "id": "off-0028400689670",
+   "name": "Sun Chips Sun Chips Fiber Spicy Jalapeño",
+   "url": "/chips/sun-chips/sun-chips-fiber-spicy-jalape-o/",
+   "brand_slug": "sun-chips",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400761772",
+   "name": "Miss Vickie's Spicey Dill Pickle Kettle Chips",
+   "url": "/chips/miss-vickies/spicey-dill-pickle-kettle-chips/",
+   "brand_slug": "miss-vickies",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "dill-pickle"
+  },
+  {
+   "id": "off-0028400768917",
+   "name": "Cheetos Crunchy",
+   "url": "/chips/cheetos/cheetos-crunchy/",
+   "brand_slug": "cheetos",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400769075",
+   "name": "Ruffles CHEDDAR SOUR CREAM",
+   "url": "/chips/ruffles/cheddar-and-sour-cream-769075/",
+   "brand_slug": "ruffles",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400769228",
+   "name": "Cheetos Flamin' Hot Crunchy",
+   "url": "/chips/cheetos/flamin-hot-crunchy-769228/",
+   "brand_slug": "cheetos",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "flamin-hot"
+  },
+  {
+   "id": "off-0028400770088",
+   "name": "Lay's Original Potato Chips",
+   "url": "/chips/lays/original-potato-chips/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400791809",
+   "name": "Lay's Classic Lightly Salted",
+   "url": "/chips/lays/classic-lightly-salted/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400796644",
+   "name": "Lay's Baked Not Fried - Roasted Garlic Herbs",
+   "url": "/chips/lays/baked-not-fried-roasted-garlic-and-herbs/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0028400809832",
+   "name": "Lay's Roasted Holiday Turkey potato chips",
+   "url": "/chips/lays/roasted-holiday-turkey-potato-chips/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00355643",
+   "name": "Sainsbury's BBQ bourbon beef flavour",
+   "url": "/chips/sainsburys/bbq-bourbon-beef-flavour/",
+   "brand_slug": "sainsburys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-00355810",
+   "name": "Sainsbury's Taste the difference thai sweet chilli hand cooked crisps",
+   "url": "/chips/sainsburys/taste-the-difference-thai-sweet-chilli-hand-cook/",
+   "brand_slug": "sainsburys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00355827",
+   "name": "Sainsbury's Sea Salt Suffolk Cider Vinegar",
+   "url": "/chips/sainsburys/sea-salt-and-suffolk-cider-vinegar/",
+   "brand_slug": "sainsburys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00355858",
+   "name": "Sainsbury's Lightly sea salted",
+   "url": "/chips/sainsburys/lightly-sea-salted/",
+   "brand_slug": "sainsburys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0037578800800",
+   "name": "Jimmy John's Jimmy Chips BBQ Flavored Potato Chips",
+   "url": "/chips/jimmy-johns/jimmy-chips-bbq-flavored-potato-chips/",
+   "brand_slug": "jimmy-johns",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-0038000846748",
+   "name": "Pringles Sour Cream Onion",
+   "url": "/chips/pringles/sour-cream-and-onion-846748/",
+   "brand_slug": "pringles",
+   "countries": [
+    "bolivia",
+    "colombia",
+    "costa-rica",
+    "dominican-republic",
+    "el-salvador",
+    "honduras",
+    "jamaica",
+    "mexico",
+    "nicaragua",
+    "panama",
+    "peru",
+    "puerto-rico",
+    "trinidad-and-tobago",
+    "united-states"
+   ],
+   "flavour_family": "sour-cream-and-onion"
+  },
+  {
+   "id": "off-00388290",
+   "name": "Sainsbury's BRITISH GROWN POTATOES CLASSIC VARIETY ASSORTED CR",
+   "url": "/chips/sainsburys/british-grown-potatoes-classic-variety-assorted/",
+   "brand_slug": "sainsburys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0041262286672",
+   "name": "Wise Golden Potato Honey BBQ",
+   "url": "/chips/wise/golden-potato-honey-bbq-286672/",
+   "brand_slug": "wise",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-0041262288706",
+   "name": "WISE Cheez doodles",
+   "url": "/chips/wise/cheez-doodles/",
+   "brand_slug": "wise",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0041780000118",
+   "name": "Utz Potato Chips",
+   "url": "/chips/utz/potato-chips/",
+   "brand_slug": "utz",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0041780351012",
+   "name": "Utz Ripples Sour Cream Onion",
+   "url": "/chips/utz/utz-ripples-sour-cream-and-onion/",
+   "brand_slug": "utz",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "sour-cream-and-onion"
+  },
+  {
+   "id": "off-00492676",
+   "name": "M S Food Reduced Fat Ready Salted Crisps",
+   "url": "/chips/m-and-s-food/reduced-fat-ready-salted-crisps/",
+   "brand_slug": "m-and-s-food",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00492720",
+   "name": "Marks Spencers Salt and vinegar chips",
+   "url": "/chips/marks-and-spencers/salt-and-vinegar-chips/",
+   "brand_slug": "marks-and-spencers",
+   "countries": [
+    "france",
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-00517638",
+   "name": "Sainsbury's Sea salted ridge cut hand cooked crisps",
+   "url": "/chips/sainsburys/sea-salted-ridge-cut-hand-cooked-crisps/",
+   "brand_slug": "sainsburys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00558235",
+   "name": "M S Food Hand Cooked sea salt sherry vinegar crisps",
+   "url": "/chips/m-and-s-food/hand-cooked-sea-salt-and-sherry-vinegar-crisps/",
+   "brand_slug": "m-and-s-food",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0060410050910",
+   "name": "Lay's Potato Chips",
+   "url": "/chips/lays/potato-chips-050910/",
+   "brand_slug": "lays",
+   "countries": [
+    "canada",
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0060410061039",
+   "name": "Lay's Oven Baked Original Potato Chips",
+   "url": "/chips/lays/oven-baked-original-potato-chips/",
+   "brand_slug": "lays",
+   "countries": [
+    "canada",
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0060410079492",
+   "name": "Lay's Sour Cream Onion",
+   "url": "/chips/lays/sour-cream-and-onion-079492/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "sour-cream-and-onion"
+  },
+  {
+   "id": "off-00610162",
+   "name": "Trader Joe's White Truffle Potato Chips",
+   "url": "/chips/trader-joes/white-truffle-potato-chips/",
+   "brand_slug": "trader-joes",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00629102",
+   "name": "Trader Joe's Sea Salted Saddle Potato Crisps",
+   "url": "/chips/trader-joes/sea-salted-saddle-potato-crisps/",
+   "brand_slug": "trader-joes",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0066343152158",
+   "name": "Old Dutch Dill Pickle Flavoured Potato Chips",
+   "url": "/chips/old-dutch/dill-pickle-flavoured-potato-chips/",
+   "brand_slug": "old-dutch",
+   "countries": [
+    "canada",
+    "united-states"
+   ],
+   "flavour_family": "dill-pickle"
+  },
+  {
+   "id": "off-0071146005884",
+   "name": "Calbee Pizza Potato Chips Melty Cheese",
+   "url": "/chips/calbee/pizza-potato-chips-melty-cheese-calbee/",
+   "brand_slug": "calbee",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0071146006140",
+   "name": "Calbee jagarico hokkaido butter",
+   "url": "/chips/calbee/calbee-jagarico-hokkaido-butter/",
+   "brand_slug": "calbee",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0071146007437",
+   "name": "Calbee Honey Butter Potato Chips",
+   "url": "/chips/calbee/honey-butter-potato-chips/",
+   "brand_slug": "calbee",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00719469",
+   "name": "Trader Joe's Carolina Gold Style BBQ Flavored Ridge Cut Potato Chips",
+   "url": "/chips/trader-joes/carolina-gold-style-bbq-flavored-ridge-cut-potat/",
+   "brand_slug": "trader-joes",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-00722803",
+   "name": "Marks Spencers Lightly Sea Salted Crisps",
+   "url": "/chips/marks-and-spencers/lightly-sea-salted-crisps/",
+   "brand_slug": "marks-and-spencers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0072600008861",
+   "name": "Herr's Potato Chips",
+   "url": "/chips/herrs/potato-chips/",
+   "brand_slug": "herrs",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0072600031562",
+   "name": "Herr's Potato Chips",
+   "url": "/chips/herrs/potato-chips-031562/",
+   "brand_slug": "herrs",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0072600033771",
+   "name": "Herr’s Mozzarella Sticks Marinara",
+   "url": "/chips/herrs/mozzarella-sticks-and-marinara/",
+   "brand_slug": "herrs",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00762724",
+   "name": "Marks Spencer Salt vinegar chiplets",
+   "url": "/chips/marks-and-spencer/salt-and-vinegar-chiplets/",
+   "brand_slug": "marks-and-spencer",
+   "countries": [
+    "france",
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-00767736",
+   "name": "Marks Spencer Ready Salted Crisps",
+   "url": "/chips/marks-and-spencer/ready-salted-crisps/",
+   "brand_slug": "marks-and-spencer",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00767743",
+   "name": "Marks Spencers Reduced Fat Crinkle Cut Crisps Ready Salted",
+   "url": "/chips/marks-and-spencers/reduced-fat-crinkle-cut-crisps-ready-salted/",
+   "brand_slug": "marks-and-spencers",
+   "countries": [
+    "united-kingdom",
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0078742294988",
+   "name": "Great value Veggie straws",
+   "url": "/chips/great-value/veggie-straws/",
+   "brand_slug": "great-value",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0078742354958",
+   "name": "Great Value Potato Chips (Original - Salted)",
+   "url": "/chips/great-value/potato-chips-original-salted/",
+   "brand_slug": "great-value",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0078742355023",
+   "name": "Great Value Barbecue Potato Chips",
+   "url": "/chips/great-value/barbecue-potato-chips/",
+   "brand_slug": "great-value",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-00798174",
+   "name": "Trader Joe's Irish Potato Chips",
+   "url": "/chips/trader-joes/irish-potato-chips/",
+   "brand_slug": "trader-joes",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00801539",
+   "name": "Trader Joe's Deli Sandwich Potato Chips",
+   "url": "/chips/trader-joes/deli-sandwich-potato-chips/",
+   "brand_slug": "trader-joes",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00833684",
+   "name": "Trader Joe's BBQ Flavored Potato Chips",
+   "url": "/chips/trader-joes/bbq-flavored-potato-chips/",
+   "brand_slug": "trader-joes",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-0084000199988",
+   "name": "Lay's Cheddar Sour Cream Flavored Potato Chips",
+   "url": "/chips/lays/lays-cheddar-and-sour-cream-flavored-potato-chip/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0084114105974",
+   "name": "Diamond Foods Inc. Salt Fresh Ground Pepper",
+   "url": "/chips/diamond-foods-inc/salt-and-fresh-ground-pepper/",
+   "brand_slug": "diamond-foods-inc",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0084114108548",
+   "name": "Kettle Krinkle Cut Potato Chips Dill Pickle",
+   "url": "/chips/kettle/krinkle-cut-potato-chips-dill-pickle/",
+   "brand_slug": "kettle",
+   "countries": [
+    "united-states",
+    "world"
+   ],
+   "flavour_family": "dill-pickle"
+  },
+  {
+   "id": "off-0084114113917",
+   "name": "Kettle Potato Chips Backyard Barbeque",
+   "url": "/chips/kettle/potato-chips-backyard-barbeque/",
+   "brand_slug": "kettle",
+   "countries": [
+    "mexico",
+    "united-states",
+    "world"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-0084114903167",
+   "name": "Kettle Brand Air Fried Jalapeño",
+   "url": "/chips/kettle-brand/air-fried-jalape-o/",
+   "brand_slug": "kettle-brand",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00898942",
+   "name": "Trader Joe's Kettle Cooked Potato Chips",
+   "url": "/chips/trader-joes/kettle-cooked-potato-chips/",
+   "brand_slug": "trader-joes",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00917490",
+   "name": "Trader Joe's Ridge Cut Kettle Cooked Potato Chips with Sea Salt",
+   "url": "/chips/trader-joes/ridge-cut-kettle-cooked-potato-chips-with-sea-sa/",
+   "brand_slug": "trader-joes",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00917506",
+   "name": "Trader Joe's Ridge Cut Potato Chips Salt Pepper",
+   "url": "/chips/trader-joes/ridge-cut-potato-chips-salt-and-pepper/",
+   "brand_slug": "trader-joes",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00939805",
+   "name": "Marks Spencer Sour cream chice reduced fat",
+   "url": "/chips/marks-and-spencer/sour-cream-and-chice-reduced-fat/",
+   "brand_slug": "marks-and-spencer",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-00954174",
+   "name": "Trader Joe's Potato Chips",
+   "url": "/chips/trader-joes/potato-chips-954174/",
+   "brand_slug": "trader-joes",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-01061345",
+   "name": "Sainsbury's Ready Salted Crisps",
+   "url": "/chips/sainsburys/ready-salted-crisps/",
+   "brand_slug": "sainsburys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-01062168",
+   "name": "Sainsbury's Classic Variety multi pack",
+   "url": "/chips/sainsburys/classic-variety-multi-pack/",
+   "brand_slug": "sainsburys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-01141225",
+   "name": "Aldi Snackrite Salt Vinegar Crisps",
+   "url": "/chips/aldi/aldi-snackrite-salt-and-vinegar-crisps/",
+   "brand_slug": "aldi",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-0194346570492",
+   "name": "Great Value Ripple Cheddar Sour Cream",
+   "url": "/chips/great-value/ripple-cheddar-and-sour-cream/",
+   "brand_slug": "great-value",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-03808306",
+   "name": "Pringles Snack Stacks Original",
+   "url": "/chips/pringles/snack-stacks-original/",
+   "brand_slug": "pringles",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0539866008085",
+   "name": "Siete Serrano Sea Salt Vinegar Potato Chips",
+   "url": "/chips/siete/serrano-sea-salt-vinegar-potato-chips/",
+   "brand_slug": "siete",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0708163261046",
+   "name": "Boulder Canyon Avocado Oil Spicy Green Chili Kettle Style Potato Chips",
+   "url": "/chips/boulder-canyon/avocado-oil-spicy-green-chili-kettle-style-potat-261046/",
+   "brand_slug": "boulder-canyon",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0708163261060",
+   "name": "Boulder Canyon Wavy Sea Salt",
+   "url": "/chips/boulder-canyon/wavy-sea-salt/",
+   "brand_slug": "boulder-canyon",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0850063756051",
+   "name": "Torres Mediterranean Salt Potato Chips",
+   "url": "/chips/torres/mediterranean-salt-potato-chips/",
+   "brand_slug": "torres",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0850804008487",
+   "name": "Keogh's Irish Potato Chips, Truffle And Irish Butter",
+   "url": "/chips/keoghs/irish-potato-chips-truffle-and-irish-butter/",
+   "brand_slug": "keoghs",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0853986008108",
+   "name": "Siete Chile Lime Potato Chips",
+   "url": "/chips/siete/chile-lime-potato-chips/",
+   "brand_slug": "siete",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-0857776002673",
+   "name": "Great Lakes Potato Chip Co SEA SALT VINEGAR",
+   "url": "/chips/great-lakes-potato-chip-co/sea-salt-and-vinegar/",
+   "brand_slug": "great-lakes-potato-chip-co",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-0897399001028",
+   "name": "Oishi cracklings (bwn) 90g salt vinegar",
+   "url": "/chips/oishi/cracklings-bwn-90g-salt-and-vinegar/",
+   "brand_slug": "oishi",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-11583271",
+   "name": "Deep River Snacks Zesty Jalapeño Flavored Kettle Cooked Potato Chips",
+   "url": "/chips/deep-river-snacks/zesty-jalape-o-flavored-kettle-cooked-potato-chi/",
+   "brand_slug": "deep-river-snacks",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-13917821",
+   "name": "Walkers Cheese Onion Crisps",
+   "url": "/chips/walkers/walkers-cheese-and-onion-crisps-917821/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-13918811",
+   "name": "Walkers French Fries - Cheese Onion",
+   "url": "/chips/walkers/french-fries-cheese-and-onion/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-14871252",
+   "name": "Walkers Ready salted crisp",
+   "url": "/chips/walkers/ready-salted-crisp/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-20453923",
+   "name": "Deluxe Sweet Chilli Sour Cream Hand cooked Potato Crisps",
+   "url": "/chips/deluxe/deluxe-sweet-chilli-and-sour-cream-hand-cooked-p/",
+   "brand_slug": "deluxe",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-20453930",
+   "name": "Deluxe Mature cheddar red onion",
+   "url": "/chips/deluxe/mature-cheddar-and-red-onion/",
+   "brand_slug": "deluxe",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-20846077",
+   "name": "Snack Day Prawn Cocktail 6 Pack",
+   "url": "/chips/snack-day/prawn-cocktail-6-pack/",
+   "brand_slug": "snack-day",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "prawn-cocktail"
+  },
+  {
+   "id": "off-25334098",
+   "name": "Snackrite Teddy Faces",
+   "url": "/chips/snackrite/teddy-faces/",
+   "brand_slug": "snackrite",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-29214303",
+   "name": "Marks Spencer Sea salt vinegar crisps",
+   "url": "/chips/marks-and-spencer/sea-salt-and-vinegar-crisps/",
+   "brand_slug": "marks-and-spencer",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-29434411",
+   "name": "Marks Spencers salt and pepper seasoned shaped potato snacks",
+   "url": "/chips/marks-and-spencers/salt-and-pepper-seasoned-shaped-potato-snacks/",
+   "brand_slug": "marks-and-spencers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-29436637",
+   "name": "Marks Spencer 100% Extra Virgin Olive Oil Crisps with Mediterranean Sea Salt",
+   "url": "/chips/marks-and-spencer/100-extra-virgin-olive-oil-crisps-with-mediterra/",
+   "brand_slug": "marks-and-spencer",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-36271474",
+   "name": "Lorenz Crunchips Papryka",
+   "url": "/chips/lorenz/crunchips-papryka/",
+   "brand_slug": "lorenz",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4018077005411",
+   "name": "Lorenz Crunchips X'Cut Paprika",
+   "url": "/chips/lorenz/crunchips-xcut-paprika/",
+   "brand_slug": "lorenz",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-4056489248415",
+   "name": "Snaktastic Original Flavour Potato Snacks",
+   "url": "/chips/snaktastic/original-flavour-potato-snacks/",
+   "brand_slug": "snaktastic",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4056489519911",
+   "name": "Lidl Ridge Cut Paprika Potato Crisps",
+   "url": "/chips/lidl/ridge-cut-paprika-potato-crisps/",
+   "brand_slug": "lidl",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-4056489519997",
+   "name": "Lidl Lightly salted hand cooked potato crisps multipack",
+   "url": "/chips/lidl/lightly-salted-hand-cooked-potato-crisps-multipa/",
+   "brand_slug": "lidl",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4056489520009",
+   "name": "Lidl Cheddar and Red Onion crisps",
+   "url": "/chips/lidl/cheddar-and-red-onion-crisps/",
+   "brand_slug": "lidl",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4056489540045",
+   "name": "Deluxe RIDGE CUT SEA SALTED HAND COOKED POTATO CRISPS",
+   "url": "/chips/deluxe/ridge-cut-sea-salted-hand-cooked-potato-crisps/",
+   "brand_slug": "deluxe",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4056489540090",
+   "name": "Lidl Sea Salt Suffolk Cider Vinegar",
+   "url": "/chips/lidl/sea-salt-and-suffolk-cider-vinegar/",
+   "brand_slug": "lidl",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4056489540120",
+   "name": "Deluxe Sea Salt Crushed Black Pepper Hand Cooked Potato Crisps",
+   "url": "/chips/deluxe/sea-salt-and-crushed-black-pepper-hand-cooked-po/",
+   "brand_slug": "deluxe",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4056489559528",
+   "name": "Lidl Lightly salted hand cooked potato crisps",
+   "url": "/chips/lidl/lightly-salted-hand-cooked-potato-crisps/",
+   "brand_slug": "lidl",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4056489900979",
+   "name": "Snaktastic Ready Salted Crisps",
+   "url": "/chips/snaktastic/ready-salted-crisps/",
+   "brand_slug": "snaktastic",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4056489901044",
+   "name": "Snaktastic Ridge Cut Crisp Cheddar Onion",
+   "url": "/chips/snaktastic/ridge-cut-crisp-cheddar-and-onion/",
+   "brand_slug": "snaktastic",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4061459106695",
+   "name": "Snackrite Mighty crisps",
+   "url": "/chips/snackrite/mighty-crisps/",
+   "brand_slug": "snackrite",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4061459764307",
+   "name": "Snackrite THICK CUT IDGE VARIETY",
+   "url": "/chips/snackrite/thick-cut-idge-variety/",
+   "brand_slug": "snackrite",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4069365018873",
+   "name": "Clancy's Avocado Oil Sea Salt Vinegar Kettle Cooked Potato Chips",
+   "url": "/chips/clancys/avocado-oil-sea-salt-and-vinegar-kettle-cooked-p/",
+   "brand_slug": "clancys",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-4088600007878",
+   "name": "Aldi Hand Cooked Crisps",
+   "url": "/chips/aldi/hand-cooked-crisps/",
+   "brand_slug": "aldi",
+   "countries": [
+    "ireland",
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4088600007885",
+   "name": "Specially Selected Sea Salt Cracked Black Pepper Hand Cooked Crisps",
+   "url": "/chips/specially-selected/sea-salt-and-cracked-black-pepper-hand-cooked-cr/",
+   "brand_slug": "specially-selected",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4088600165936",
+   "name": "Snackrite Prawn Cocktail Crisps",
+   "url": "/chips/snackrite/prawn-cocktail-crisps/",
+   "brand_slug": "snackrite",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "prawn-cocktail"
+  },
+  {
+   "id": "off-4088600165943",
+   "name": "Snackrite",
+   "url": "/chips/snackrite/snackrite/",
+   "brand_slug": "snackrite",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4088600166018",
+   "name": "Snackrite Salt Vinegar Crisps",
+   "url": "/chips/snackrite/snackrite-salt-and-vinegar-crisps/",
+   "brand_slug": "snackrite",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-4088600167138",
+   "name": "Aldi Prawn Cocktail flavour crisps",
+   "url": "/chips/aldi/prawn-cocktail-flavour-crisps/",
+   "brand_slug": "aldi",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "prawn-cocktail"
+  },
+  {
+   "id": "off-4088600167145",
+   "name": "Snackrite Ready salted crisps",
+   "url": "/chips/snackrite/ready-salted-crisps/",
+   "brand_slug": "snackrite",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4088600167152",
+   "name": "Snackrite 6 Pack Salt and Vinegar Potato Crisps",
+   "url": "/chips/snackrite/snackrite-6-pack-salt-and-vinegar-potato-crisps/",
+   "brand_slug": "snackrite",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-4088600167169",
+   "name": "Snackrite Cheese and onion crisps",
+   "url": "/chips/snackrite/cheese-and-onion-crisps/",
+   "brand_slug": "snackrite",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-4088600167176",
+   "name": "Snackrite Crisps",
+   "url": "/chips/snackrite/crisps/",
+   "brand_slug": "snackrite",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4088600195162",
+   "name": "Aldi Thick Cut Ridged",
+   "url": "/chips/aldi/thick-cut-ridged/",
+   "brand_slug": "aldi",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4088600195179",
+   "name": "Snackrite Lights",
+   "url": "/chips/snackrite/lights/",
+   "brand_slug": "snackrite",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4088600198392",
+   "name": "Aldi Specially Selected Sea salt chardonny vinegar",
+   "url": "/chips/aldi-specially-selected/sea-salt-and-chardonny-vinegar/",
+   "brand_slug": "aldi-specially-selected",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4088600206400",
+   "name": "Specially Selected Hand Cooked Lightly Salted Potato Crisps",
+   "url": "/chips/specially-selected/hand-cooked-lightly-salted-potato-crisps/",
+   "brand_slug": "specially-selected",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4088600206417",
+   "name": "Aldi Mature Cheddar and Red Onion Hand Cooked Crisps",
+   "url": "/chips/aldi/mature-cheddar-and-red-onion-hand-cooked-crisps/",
+   "brand_slug": "aldi",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4088600213095",
+   "name": "Aldi Hoops",
+   "url": "/chips/aldi/hoops/",
+   "brand_slug": "aldi",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4088600314945",
+   "name": "Specially Selected Roast beef with horseradish crisps",
+   "url": "/chips/specially-selected/roast-beef-with-horseradish-crisps/",
+   "brand_slug": "specially-selected",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4088600365046",
+   "name": "Snackrite Perfections roast chicken and thyme",
+   "url": "/chips/snackrite/perfections-roast-chicken-and-thyme/",
+   "brand_slug": "snackrite",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4088600565354",
+   "name": "Snackrite Pop Outs BBQ Flavour",
+   "url": "/chips/snackrite/pop-outs-bbq-flavour/",
+   "brand_slug": "snackrite",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-4088600569093",
+   "name": "SNACKRITE Cheese and onion flavour chrisps",
+   "url": "/chips/snackrite/cheese-and-onion-flavour-chrisps/",
+   "brand_slug": "snackrite",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-4099100032307",
+   "name": "Clancy's Kettle Chips Jalapeño Flavored",
+   "url": "/chips/clancys/kettle-chips-jalape-o-flavored/",
+   "brand_slug": "clancys",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4099100066852",
+   "name": "Clancy’s Sour Cream Onion Flavored Potato Chips",
+   "url": "/chips/clancys/sour-cream-and-onion-flavored-potato-chips/",
+   "brand_slug": "clancys",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": "sour-cream-and-onion"
+  },
+  {
+   "id": "off-4099100069136",
+   "name": "Clancy's Original Potato Crisps",
+   "url": "/chips/clancys/original-potato-crisps/",
+   "brand_slug": "clancys",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4099100337174",
+   "name": "Clancy's Garlic Mashed Wavy Potato Chips",
+   "url": "/chips/clancys/garlic-mashed-wavy-potato-chips/",
+   "brand_slug": "clancys",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4718900948815",
+   "name": "Albert Heijn Chips paprika",
+   "url": "/chips/albert-heijn/chips-paprika/",
+   "brand_slug": "albert-heijn",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-4800194115063",
+   "name": "Oishi potato chips plain salted",
+   "url": "/chips/oishi/oishi-potato-chips-plain-salted/",
+   "brand_slug": "oishi",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-4901330513580",
+   "name": "Calbee Norishio Potato Chips",
+   "url": "/chips/calbee/norishio-potato-chips/",
+   "brand_slug": "calbee",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000119126115",
+   "name": "Tesco Cheese Onion Crisps",
+   "url": "/chips/tesco/cheese-and-onion-crisps/",
+   "brand_slug": "tesco",
+   "countries": [
+    "france",
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-5000119143020",
+   "name": "Tesco tescos variety pack",
+   "url": "/chips/tesco/tescos-variety-pack/",
+   "brand_slug": "tesco",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000119794819",
+   "name": "Tesco Ready Salted Potato Chips",
+   "url": "/chips/tesco/tesco-ready-salted-potato-chips/",
+   "brand_slug": "tesco",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000128708579",
+   "name": "Coop Aberdeen Angus Steak Peppercorn Cut Crisps",
+   "url": "/chips/coop/aberdeen-angus-steak-and-peppercorn-cut-crisps/",
+   "brand_slug": "coop",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000128785587",
+   "name": "Coop Irresistible Hand Cooked",
+   "url": "/chips/coop/coop-irresistible-hand-cooked/",
+   "brand_slug": "coop",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000128893510",
+   "name": "Coop Sweet thai chilli crinkle cut crisps",
+   "url": "/chips/coop/sweet-thai-chilli-crinkle-cut-crisps/",
+   "brand_slug": "coop",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000169028247",
+   "name": "Waitrose Hand Cooked Sea Salt Crisps",
+   "url": "/chips/waitrose/hand-cooked-sea-salt-crisps/",
+   "brand_slug": "waitrose",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000169052860",
+   "name": "Waitrose Ready salted potato crisps",
+   "url": "/chips/waitrose/ready-salted-potato-crisps/",
+   "brand_slug": "waitrose",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000169103777",
+   "name": "Waitrose Calorie Controlled Ready Salted Crinkle Cut Crisps",
+   "url": "/chips/waitrose/calorie-controlled-ready-salted-crinkle-cut-cris/",
+   "brand_slug": "waitrose",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237088296",
+   "name": "KP Snacks Skips Prawn Cocktail Flavour",
+   "url": "/chips/kp-snacks/skips-prawn-cocktail-flavour-088296/",
+   "brand_slug": "kp-snacks",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "prawn-cocktail"
+  },
+  {
+   "id": "off-5000237117446",
+   "name": "HULA HOOPS ORIGINAL SALTED POTATO RINGS",
+   "url": "/chips/hula-hoops/original-salted-potato-rings-117446/",
+   "brand_slug": "hula-hoops",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237117460",
+   "name": "Hula Hoops BBQ Beef Flavour",
+   "url": "/chips/hula-hoops/bbq-beef-flavour-hula-hoops/",
+   "brand_slug": "hula-hoops",
+   "countries": [
+    "ireland",
+    "united-kingdom"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-5000237127773",
+   "name": "Hula Hoops Hula Hoops Flavarings Salt And Vinegar",
+   "url": "/chips/hula-hoops/hula-hoops-flavarings-salt-and-vinegar/",
+   "brand_slug": "hula-hoops",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5000237128244",
+   "name": "Discos - Cheese Onion flavour",
+   "url": "/chips/discos/discos-cheese-and-onion-flavour/",
+   "brand_slug": "discos",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-5000237128251",
+   "name": "Frisps",
+   "url": "/chips/frisps/frisps/",
+   "brand_slug": "frisps",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237128268",
+   "name": "Frisps cheese and onion",
+   "url": "/chips/frisps/frisps-cheese-and-onion/",
+   "brand_slug": "frisps",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-5000237128299",
+   "name": "Frisps KP Frisps Assorted 6pk",
+   "url": "/chips/frisps/kp-frisps-assorted-6pk/",
+   "brand_slug": "frisps",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237128978",
+   "name": "Hula Hoops Original Salted Potato Rings",
+   "url": "/chips/hula-hoops/original-salted-potato-rings/",
+   "brand_slug": "hula-hoops",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237129906",
+   "name": "McCoy's Salt Malt Vinegar Flavour Potato Crisps",
+   "url": "/chips/mccoys/salt-and-malt-vinegar-flavour-potato-crisps-129906/",
+   "brand_slug": "mccoys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237129913",
+   "name": "McCoy's Cheddar Onion Flavour Potato Crisps",
+   "url": "/chips/mccoys/cheddar-and-onion-flavour-potato-crisps/",
+   "brand_slug": "mccoys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237129975",
+   "name": "McCoy's Thai Sweet Chicken",
+   "url": "/chips/mccoys/mccoys-thai-sweet-chicken/",
+   "brand_slug": "mccoys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237130018",
+   "name": "McCoy's McCoys Salt Malt Vinegar 6pk",
+   "url": "/chips/mccoys/mccoys-salt-and-malt-vinegar-6pk/",
+   "brand_slug": "mccoys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237130933",
+   "name": "Mccoy's Crisps",
+   "url": "/chips/mccoys/crisps/",
+   "brand_slug": "mccoys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237131091",
+   "name": "KP Snacks Skips Prawn Cocktail Flavour",
+   "url": "/chips/kp-snacks/skips-prawn-cocktail-flavour/",
+   "brand_slug": "kp-snacks",
+   "countries": [
+    "ireland",
+    "united-kingdom"
+   ],
+   "flavour_family": "prawn-cocktail"
+  },
+  {
+   "id": "off-5000237134580",
+   "name": "Popchips pop chip bbq",
+   "url": "/chips/popchips/pop-chip-bbq/",
+   "brand_slug": "popchips",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-5000237135600",
+   "name": "KP Snacks T-Bome Steak Roysters",
+   "url": "/chips/kp-snacks/t-bome-steak-roysters/",
+   "brand_slug": "kp-snacks",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237138328",
+   "name": "Hula Hoops BIG HOOPS BARBECUE BEEF FLAVOUR",
+   "url": "/chips/hula-hoops/big-hoops-barbecue-beef-flavour/",
+   "brand_slug": "hula-hoops",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-5000237138342",
+   "name": "Hula Hoops Salted Potato Rings",
+   "url": "/chips/hula-hoops/salted-potato-rings/",
+   "brand_slug": "hula-hoops",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237138380",
+   "name": "KP Snacks Nik Naks Nice 'N' Spicy",
+   "url": "/chips/kp-snacks/nik-naks-nice-n-spicy/",
+   "brand_slug": "kp-snacks",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237138403",
+   "name": "Hula Hoops Big Hoops Sharp Salt Vinegar Flavour",
+   "url": "/chips/hula-hoops/big-hoops-sharp-salt-and-vinegar-flavour/",
+   "brand_slug": "hula-hoops",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5000237138540",
+   "name": "McCoy's Thai Sweet Chicken Flavour Potato Crisps",
+   "url": "/chips/mccoys/thai-sweet-chicken-flavour-potato-crisps/",
+   "brand_slug": "mccoys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237138564",
+   "name": "MCCOY's Salted Flavour Potato Crisps",
+   "url": "/chips/mccoys/salted-flavour-potato-crisps/",
+   "brand_slug": "mccoys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237138601",
+   "name": "McCoy's Cheddar Onion Flavour Potato Crisps",
+   "url": "/chips/mccoys/cheddar-and-onion-flavour-potato-crisps-138601/",
+   "brand_slug": "mccoys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237138625",
+   "name": "McCoy's Salt Malt Vinegar Flavour Potato Crisps",
+   "url": "/chips/mccoys/salt-and-malt-vinegar-flavour-potato-crisps/",
+   "brand_slug": "mccoys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237138700",
+   "name": "McCoy's Flame Grilled Steak Flavour Potato Crisps",
+   "url": "/chips/mccoys/flame-grilled-steak-flavour-potato-crisps/",
+   "brand_slug": "mccoys",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237139172",
+   "name": "KP Snacks Mini Chips: beef flavour",
+   "url": "/chips/kp-snacks/mini-chips-beef-flavour/",
+   "brand_slug": "kp-snacks",
+   "countries": [
+    "ireland",
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000237139394",
+   "name": "Popchips sour cream onion flavour potato snacks",
+   "url": "/chips/popchips/sour-cream-and-onion-flavour-potato-snacks/",
+   "brand_slug": "popchips",
+   "countries": [
+    "ireland",
+    "united-kingdom"
+   ],
+   "flavour_family": "sour-cream-and-onion"
+  },
+  {
+   "id": "off-5000237203033",
+   "name": "KP Snacks Popchips Sea Salt and vinegar",
+   "url": "/chips/kp-snacks/popchips-sea-salt-and-vinegar/",
+   "brand_slug": "kp-snacks",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5000237205679",
+   "name": "Tyrrells Beef brisket and black peppercorn",
+   "url": "/chips/tyrrells/beef-brisket-and-black-peppercorn/",
+   "brand_slug": "tyrrells",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328013602",
+   "name": "Walkers cheese and onion",
+   "url": "/chips/walkers/walkers-cheese-and-onion/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-5000328013626",
+   "name": "Walkers Seriously Salt and Vinegar crisps",
+   "url": "/chips/walkers/seriously-salt-and-vinegar-crisps-013626/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5000328013961",
+   "name": "Walkers - Lightly Salted",
+   "url": "/chips/walkers/walkers-lightly-salted/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328015897",
+   "name": "Walkers oven baked cheese onion flavour potato snack",
+   "url": "/chips/walkers/oven-baked-cheese-and-onion-flavour-potato-snack/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-5000328015941",
+   "name": "Walkers oven baked",
+   "url": "/chips/walkers/oven-baked/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328016467",
+   "name": "Walkers unbelievable BBQ pork ribs 5 pack",
+   "url": "/chips/walkers/walkers-unbelievable-bbq-pork-ribs-5-pack/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-5000328017891",
+   "name": "Walkers squares salt and vinegar",
+   "url": "/chips/walkers/squares-salt-and-vinegar/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5000328019406",
+   "name": "Walkers Max Hot Chicken Crisps 140g",
+   "url": "/chips/walkers/walkers-max-hot-chicken-crisps-140g/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328020068",
+   "name": "Walkers x20 Meaty Pack",
+   "url": "/chips/walkers/walkers-x20-meaty-pack/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328020112",
+   "name": "Walkers Classic Variety Multipack Crisps 24 X 25G",
+   "url": "/chips/walkers/walkers-classic-variety-multipack-crisps-24-x-25/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328022550",
+   "name": "walkers Max pizza hut pepperoni feast crisps",
+   "url": "/chips/walkers-max/pizza-hut-pepperoni-feast-crisps/",
+   "brand_slug": "walkers-max",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328024165",
+   "name": "Walkers crinkles simply salted potato chips",
+   "url": "/chips/walkers/crinkles-simply-salted-potato-chips/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328025438",
+   "name": "Walkers Crushed Sea Salt Black Peppercorn Crisps",
+   "url": "/chips/walkers/crushed-sea-salt-and-black-peppercorn-crisps/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328028941",
+   "name": "WALKERS SENSATIONS THAI SWEET CHILLI FLAVOUR POTATO CRISPS",
+   "url": "/chips/walkers-sensations/thai-sweet-chilli-flavour-potato-crisps/",
+   "brand_slug": "walkers-sensations",
+   "countries": [
+    "ireland",
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328028972",
+   "name": "Walkers Sensations Sweet Chilli",
+   "url": "/chips/walkers/sensations-sweet-chilli/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328030838",
+   "name": "Walkers Sensations Honey Glased Roast Ham Crisps",
+   "url": "/chips/walkers-sensations/honey-glased-roast-ham-crisps/",
+   "brand_slug": "walkers-sensations",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328035369",
+   "name": "Walkers Salt Vinegar Crisps 6pk",
+   "url": "/chips/walkers/walkers-salt-vinegar-crisps-6pk/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328036526",
+   "name": "Walkers Cheese Onion Flavour Potato Crisps",
+   "url": "/chips/walkers/cheese-and-onion-flavour-potato-crisps/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-5000328037837",
+   "name": "Walkers K e WALKERS Masala Chicken FLAVOUR POTATO CRISPS",
+   "url": "/chips/walkers/k-e-walkers-masala-chicken-flavour-potato-crisps/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328039718",
+   "name": "Walkers MAX Jalapeño Cheese",
+   "url": "/chips/walkers-max/jalape-o-and-cheese/",
+   "brand_slug": "walkers-max",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328041803",
+   "name": "Walkers Powdery Paprika Ridged Potato Crisps",
+   "url": "/chips/walkers/powdery-paprika-ridged-potato-crisps/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-5000328078458",
+   "name": "Walkers Chorizo and Onion Crisps",
+   "url": "/chips/walkers/chorizo-and-onion-crisps/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328080222",
+   "name": "Walkers Max KFC original chicken flavour crisp",
+   "url": "/chips/walkers/max-kfc-original-chicken-flavour-crisp/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328101460",
+   "name": "Walkers Poppables - Sweet Chilli Flavour",
+   "url": "/chips/walkers/poppables-sweet-chilli-flavour/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328123097",
+   "name": "Walkers Max Strong Jalapeño and Cheese",
+   "url": "/chips/walkers/max-strong-jalape-o-and-cheese/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328123301",
+   "name": "Walkers PUNCHY PAPRIKA",
+   "url": "/chips/walkers/punchy-paprika/",
+   "brand_slug": "walkers",
+   "countries": [
+    "france",
+    "united-kingdom"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-5000328192871",
+   "name": "Walkers Sensations Thai Sweet Chilli Crisps",
+   "url": "/chips/walkers/sensations-thai-sweet-chilli-crisps/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328197364",
+   "name": "Walkers Max double crunch",
+   "url": "/chips/walkers/max-double-crunch/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328197876",
+   "name": "Walkers Max Double Crunch Cheddar Onion",
+   "url": "/chips/walkers/max-double-crunch-cheddar-and-onion/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "off-5000328200378",
+   "name": "Walkers max punchy paprika",
+   "url": "/chips/walkers/walkers-max-punchy-paprika/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-5000328270630",
+   "name": "Walkers Seriously Salt and Vinegar Crisps",
+   "url": "/chips/walkers/seriously-salt-and-vinegar-crisps/",
+   "brand_slug": "walkers",
+   "countries": [
+    "italy",
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5000328270715",
+   "name": "Walkers Cheese Onion Potato Crisps",
+   "url": "/chips/walkers/cheese-and-onion-potato-crisps/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-5000328270890",
+   "name": "Walkers Supreme prawn cocktail",
+   "url": "/chips/walkers/supreme-prawn-cocktail-270890/",
+   "brand_slug": "walkers",
+   "countries": [
+    "ireland",
+    "united-kingdom"
+   ],
+   "flavour_family": "prawn-cocktail"
+  },
+  {
+   "id": "off-5000328328812",
+   "name": "Walkers Wotsits Crunchy Sweet Spicy Flamin' Hot flavour corn puffs",
+   "url": "/chips/walkers/wotsits-crunchy-sweet-and-spicy-flamin-hot-flavo/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "flamin-hot"
+  },
+  {
+   "id": "off-5000328375618",
+   "name": "Walkers Salt Vinegar crisps 6 Pack - OUTER PACKAGING ONLY",
+   "url": "/chips/walkers/walkers-salt-and-vinegar-crisps-6-pack-outer-pac/",
+   "brand_slug": "walkers",
+   "countries": [
+    "france",
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5000328376240",
+   "name": "Walkers Prawn cocktail",
+   "url": "/chips/walkers/prawn-cocktail-walkers/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "prawn-cocktail"
+  },
+  {
+   "id": "off-5000328397160",
+   "name": "Walkers Max Flamin' Hot Crisps",
+   "url": "/chips/walkers/max-flamin-hot-crisps/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "flamin-hot"
+  },
+  {
+   "id": "off-5000328461755",
+   "name": "Walkers Salt Vinegar Crisps",
+   "url": "/chips/walkers/salt-and-vinegar-crisps/",
+   "brand_slug": "walkers",
+   "countries": [
+    "ireland",
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5000328475905",
+   "name": "Walkers Squares Salt Vinegar",
+   "url": "/chips/walkers/squares-salt-and-vinegar-475905/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5000328529233",
+   "name": "Walkers Cheese And Onion Crisps",
+   "url": "/chips/walkers/cheese-and-onion-crisps/",
+   "brand_slug": "walkers",
+   "countries": [
+    "france",
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-5000328698823",
+   "name": "Walkers Cheese Onion Crisps",
+   "url": "/chips/walkers/cheese-and-onion-crisps-698823/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-5000328908137",
+   "name": "Walkers Max punchy paprika 6pk",
+   "url": "/chips/walkers/walkers-max-punchy-paprika-6pk/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-5000328941653",
+   "name": "Walkers Punchy Paprika Flavour Ridged Potato Crisps",
+   "url": "/chips/walkers/punchy-paprika-flavour-ridged-potato-crisps/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-5016451062134",
+   "name": "Seabrook Sea Salt and vinegar",
+   "url": "/chips/seabrook/sea-salt-and-vinegar/",
+   "brand_slug": "seabrook",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5016451062578",
+   "name": "Seabrook Prawn Cocktail Crisps",
+   "url": "/chips/seabrook/prawn-cocktail-crisps-062578/",
+   "brand_slug": "seabrook",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "prawn-cocktail"
+  },
+  {
+   "id": "off-5016451761129",
+   "name": "Seabrook cheese and onion",
+   "url": "/chips/seabrook/cheese-and-onion/",
+   "brand_slug": "seabrook",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-5016451761167",
+   "name": "Seabrook Prawn Cocktail flavour Crinkle Cut crisps",
+   "url": "/chips/seabrook/prawn-cocktail-flavour-crinkle-cut-crisps/",
+   "brand_slug": "seabrook",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "prawn-cocktail"
+  },
+  {
+   "id": "off-5016451768012",
+   "name": "Seabrook lattice cheese and onion flavour",
+   "url": "/chips/seabrook/lattice-cheese-and-onion-flavour/",
+   "brand_slug": "seabrook",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-5017764112059",
+   "name": "Kettle Chips Honey Barbecue",
+   "url": "/chips/kettle/chips-honey-barbecue/",
+   "brand_slug": "kettle",
+   "countries": [
+    "belgium",
+    "france",
+    "germany",
+    "netherlands"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-5039378004384",
+   "name": "Mackie's Sea Salt Vinegar Crisps",
+   "url": "/chips/mackies/sea-salt-and-vinegar-crisps/",
+   "brand_slug": "mackies",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5039378004919",
+   "name": "Taylors Potato Crisps Sea Salt Vinegar",
+   "url": "/chips/taylors/potato-crisps-sea-salt-and-vinegar/",
+   "brand_slug": "taylors",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5051008181975",
+   "name": "TESCO Salt Vinegar Twirls",
+   "url": "/chips/tesco/salt-and-vinegar-twirls/",
+   "brand_slug": "tesco",
+   "countries": [
+    "ireland",
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5053990161966",
+   "name": "Pringles Texas BBQ Sauce",
+   "url": "/chips/pringles/texas-bbq-sauce/",
+   "brand_slug": "pringles",
+   "countries": [
+    "france",
+    "germany",
+    "greece",
+    "morocco",
+    "netherlands",
+    "romania",
+    "united-kingdom"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-5053990172160",
+   "name": "Pringles Sour Cream Onion",
+   "url": "/chips/pringles/sour-cream-and-onion/",
+   "brand_slug": "pringles",
+   "countries": [
+    "libya",
+    "united-kingdom"
+   ],
+   "flavour_family": "sour-cream-and-onion"
+  },
+  {
+   "id": "off-5060042642052",
+   "name": "Tyrrell’s Hand Cooked English Crisps smoked paprika imp",
+   "url": "/chips/tyrrells/hand-cooked-english-crisps-smoked-paprika-imp/",
+   "brand_slug": "tyrrells",
+   "countries": [
+    "france",
+    "germany",
+    "switzerland",
+    "united-kingdom"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-5060042643509",
+   "name": "Tyrrell’s Sea Salt Vinegar Furrows",
+   "url": "/chips/tyrrells/sea-salt-and-vinegar-furrows/",
+   "brand_slug": "tyrrells",
+   "countries": [
+    "france",
+    "germany",
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5060292308500",
+   "name": "Popchips Sea Salt Vinegar Potato Chips",
+   "url": "/chips/popchips/sea-salt-and-vinegar-potato-chips/",
+   "brand_slug": "popchips",
+   "countries": [
+    "france",
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5061009831298",
+   "name": "Swaha Salt and vinegar crinkle cut potato crisps",
+   "url": "/chips/swaha/salt-and-vinegar-crinkle-cut-potato-crisps/",
+   "brand_slug": "swaha",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-51000005",
+   "name": "Walkers Cheese Onion crisps",
+   "url": "/chips/walkers/walkers-cheese-and-onion-crisps-000005/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-51000009",
+   "name": "Walkers Salt and Vinegar Flavour Potato Crisps",
+   "url": "/chips/walkers/salt-and-vinegar-flavour-potato-crisps/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-51000012",
+   "name": "Walkers Supreme Prawn Cocktail",
+   "url": "/chips/walkers/walkers-supreme-prawn-cocktail/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "prawn-cocktail"
+  },
+  {
+   "id": "off-51000638",
+   "name": "Walkers french fries Cheese Onion",
+   "url": "/chips/walkers/french-fries-cheese-and-onion-000638/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "cheese-and-onion"
+  },
+  {
+   "id": "off-51000646",
+   "name": "Walkers SQUARES Salt Vinegar",
+   "url": "/chips/walkers/squares-salt-and-vinegar-000646/",
+   "brand_slug": "walkers",
+   "countries": [
+    "guernsey",
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  },
+  {
+   "id": "off-5414359911019",
+   "name": "Croky Paprika",
+   "url": "/chips/croky/paprika/",
+   "brand_slug": "croky",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-5414359922015",
+   "name": "Croky Paprika",
+   "url": "/chips/croky/croky-paprika/",
+   "brand_slug": "croky",
+   "countries": [
+    "belgium",
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-5414359931512",
+   "name": "Croky Paprika flavour",
+   "url": "/chips/croky/croky-paprika-flavour/",
+   "brand_slug": "croky",
+   "countries": [
+    "france",
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-5414359962646",
+   "name": "Croky Explosions paprika bel",
+   "url": "/chips/croky/croky-explosions-paprika-bel/",
+   "brand_slug": "croky",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-5900259130686",
+   "name": "Lay's Barbecue Rib Crisps",
+   "url": "/chips/lays/barbecue-rib-crisps/",
+   "brand_slug": "lays",
+   "countries": [
+    "lithuania",
+    "united-kingdom"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-5900259353276",
+   "name": "Cheetos 377004 Ketchup flavoured",
+   "url": "/chips/cheetos/377004-ketchup-flavoured/",
+   "brand_slug": "cheetos",
+   "countries": [
+    "hungary",
+    "united-kingdom"
+   ],
+   "flavour_family": "ketchup"
+  },
+  {
+   "id": "off-5905187114746",
+   "name": "Lorenz Potato crisps with paprika flavour.",
+   "url": "/chips/lorenz/potato-crisps-with-paprika-flavour/",
+   "brand_slug": "lorenz",
+   "countries": [
+    "poland",
+    "united-kingdom"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-5941000031944",
+   "name": "Lay's Lays Cu gust de paprica. Paprika",
+   "url": "/chips/lays/lays-cu-gust-de-paprica-paprika/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-6559066948770",
+   "name": "Albert Heijn Ribbelchips paprika",
+   "url": "/chips/albert-heijn/ribbelchips-paprika/",
+   "brand_slug": "albert-heijn",
+   "countries": [
+    "belgium",
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-7500478030309",
+   "name": "Sabritas Stax Flamin' Hot",
+   "url": "/chips/sabritas/stax-flamin-hot/",
+   "brand_slug": "sabritas",
+   "countries": [
+    "mexico"
+   ],
+   "flavour_family": "flamin-hot"
+  },
+  {
+   "id": "off-7501011159266",
+   "name": "Sabritas Receta Crujiente Flamin Hot",
+   "url": "/chips/sabritas/receta-crujiente-flamin-hot/",
+   "brand_slug": "sabritas",
+   "countries": [
+    "mexico"
+   ],
+   "flavour_family": "flamin-hot"
+  },
+  {
+   "id": "off-8710398159496",
+   "name": "Lay's Paprika",
+   "url": "/chips/lays/lays-paprika/",
+   "brand_slug": "lays",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-8710398307583",
+   "name": "Lay's Paprika Chips",
+   "url": "/chips/lays/paprika-chips/",
+   "brand_slug": "lays",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-8710398500434",
+   "name": "Lay's Lays paprika",
+   "url": "/chips/lays/lays-paprika-500434/",
+   "brand_slug": "lays",
+   "countries": [
+    "belgium",
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-8710398507006",
+   "name": "Lay's Paprika Flavour",
+   "url": "/chips/lays/paprika-flavour-507006/",
+   "brand_slug": "lays",
+   "countries": [
+    "belgium",
+    "france",
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-8710398524195",
+   "name": "Lay's MAX PAPRIKA FLAVOUR",
+   "url": "/chips/lays/max-paprika-flavour/",
+   "brand_slug": "lays",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-8710398525918",
+   "name": "Lay's Paprika chips",
+   "url": "/chips/lays/paprika-chips-525918/",
+   "brand_slug": "lays",
+   "countries": [
+    "belgium",
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-8710398528889",
+   "name": "Lay's Paprika Flavour",
+   "url": "/chips/lays/paprika-flavour-528889/",
+   "brand_slug": "lays",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-8710398530097",
+   "name": "Lay's Max Flamin Hot",
+   "url": "/chips/lays/max-flamin-hot/",
+   "brand_slug": "lays",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "flamin-hot"
+  },
+  {
+   "id": "off-8710871355124",
+   "name": "1de Beste Paprika ribbelchips",
+   "url": "/chips/1de-beste/paprika-ribbelchips/",
+   "brand_slug": "1de-beste",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-8718781203375",
+   "name": "Kettle Honey Barbecue",
+   "url": "/chips/kettle/honey-barbecue/",
+   "brand_slug": "kettle",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-8718906948655",
+   "name": "Albert Heijn Minifriet paprika",
+   "url": "/chips/albert-heijn/minifriet-paprika/",
+   "brand_slug": "albert-heijn",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-8718906948730",
+   "name": "Albert Heijn AH Ribbelchips paprika",
+   "url": "/chips/albert-heijn/ah-ribbelchips-paprika/",
+   "brand_slug": "albert-heijn",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-8718989031183",
+   "name": "Epixs Paprika Flavoured Chips",
+   "url": "/chips/epixs/paprika-flavoured-chips/",
+   "brand_slug": "epixs",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-8719587110720",
+   "name": "Albert Heijn Ribbel chips paprika",
+   "url": "/chips/albert-heijn/ribbel-chips-paprika/",
+   "brand_slug": "albert-heijn",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "off-8964002346677",
+   "name": "Lay's Lays wavy texts bbq",
+   "url": "/chips/lays/lays-wavy-texts-bbq/",
+   "brand_slug": "lays",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "bbq"
+  },
+  {
+   "id": "off-9000159161660",
+   "name": "Chio Popchips paprika",
+   "url": "/chips/chio/popchips-paprika/",
+   "brand_slug": "chio",
+   "countries": [
+    "netherlands"
+   ],
+   "flavour_family": "paprika"
+  },
+  {
+   "id": "pringles-original",
+   "name": "Pringles Original",
+   "url": "/chips/pringles/original/",
+   "brand_slug": "pringles",
+   "countries": [
+    "united-states",
+    "bolivia"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "ruffles-original",
+   "name": "Ruffles Original",
+   "url": "/chips/ruffles/original/",
+   "brand_slug": "ruffles",
+   "countries": [
+    "united-states"
+   ],
+   "flavour_family": null
+  },
+  {
+   "id": "walkers-salt-and-vinegar",
+   "name": "Walkers Salt Vinegar",
+   "url": "/chips/walkers/salt-and-vinegar/",
+   "brand_slug": "walkers",
+   "countries": [
+    "united-kingdom"
+   ],
+   "flavour_family": "salt-and-vinegar"
+  }
+ ],
+ "brands": [
+  {
+   "slug": "albert-heijn",
+   "name": "Albert Heijn",
+   "url": "/brands/albert-heijn/"
+  },
+  {
+   "slug": "aldi",
+   "name": "Aldi",
+   "url": "/brands/aldi/"
+  },
+  {
+   "slug": "calbee",
+   "name": "Calbee",
+   "url": "/brands/calbee/"
+  },
+  {
+   "slug": "cape-cod",
+   "name": "Cape Cod",
+   "url": "/brands/cape-cod/"
+  },
+  {
+   "slug": "cheetos",
+   "name": "Cheetos",
+   "url": "/brands/cheetos/"
+  },
+  {
+   "slug": "clancys",
+   "name": "Clancys",
+   "url": "/brands/clancys/"
+  },
+  {
+   "slug": "coop",
+   "name": "Coop",
+   "url": "/brands/coop/"
+  },
+  {
+   "slug": "croky",
+   "name": "Croky",
+   "url": "/brands/croky/"
+  },
+  {
+   "slug": "deluxe",
+   "name": "Deluxe",
+   "url": "/brands/deluxe/"
+  },
+  {
+   "slug": "frisps",
+   "name": "Frisps",
+   "url": "/brands/frisps/"
+  },
+  {
+   "slug": "great-value",
+   "name": "Great Value",
+   "url": "/brands/great-value/"
+  },
+  {
+   "slug": "herrs",
+   "name": "Herrs",
+   "url": "/brands/herrs/"
+  },
+  {
+   "slug": "hula-hoops",
+   "name": "Hula Hoops",
+   "url": "/brands/hula-hoops/"
+  },
+  {
+   "slug": "kettle",
+   "name": "Kettle",
+   "url": "/brands/kettle/"
+  },
+  {
+   "slug": "kp-snacks",
+   "name": "KP Snacks",
+   "url": "/brands/kp-snacks/"
+  },
+  {
+   "slug": "lays",
+   "name": "Lay's",
+   "url": "/brands/lays/"
+  },
+  {
+   "slug": "lidl",
+   "name": "Lidl",
+   "url": "/brands/lidl/"
+  },
+  {
+   "slug": "lorenz",
+   "name": "Lorenz",
+   "url": "/brands/lorenz/"
+  },
+  {
+   "slug": "marks-and-spencer",
+   "name": "Marks And Spencer",
+   "url": "/brands/marks-and-spencer/"
+  },
+  {
+   "slug": "marks-and-spencers",
+   "name": "Marks Spencers",
+   "url": "/brands/marks-and-spencers/"
+  },
+  {
+   "slug": "mccoys",
+   "name": "Mccoys",
+   "url": "/brands/mccoys/"
+  },
+  {
+   "slug": "miss-vickies",
+   "name": "Miss Vickies",
+   "url": "/brands/miss-vickies/"
+  },
+  {
+   "slug": "popchips",
+   "name": "Popchips",
+   "url": "/brands/popchips/"
+  },
+  {
+   "slug": "pringles",
+   "name": "Pringles",
+   "url": "/brands/pringles/"
+  },
+  {
+   "slug": "ruffles",
+   "name": "Ruffles",
+   "url": "/brands/ruffles/"
+  },
+  {
+   "slug": "sainsburys",
+   "name": "Sainsbury's",
+   "url": "/brands/sainsburys/"
+  },
+  {
+   "slug": "seabrook",
+   "name": "Seabrook",
+   "url": "/brands/seabrook/"
+  },
+  {
+   "slug": "snackrite",
+   "name": "Snackrite",
+   "url": "/brands/snackrite/"
+  },
+  {
+   "slug": "snaktastic",
+   "name": "Snaktastic",
+   "url": "/brands/snaktastic/"
+  },
+  {
+   "slug": "specially-selected",
+   "name": "Specially Selected",
+   "url": "/brands/specially-selected/"
+  },
+  {
+   "slug": "tesco",
+   "name": "Tesco",
+   "url": "/brands/tesco/"
+  },
+  {
+   "slug": "trader-joes",
+   "name": "Trader Joe's",
+   "url": "/brands/trader-joes/"
+  },
+  {
+   "slug": "tyrrells",
+   "name": "Tyrrells",
+   "url": "/brands/tyrrells/"
+  },
+  {
+   "slug": "waitrose",
+   "name": "Waitrose",
+   "url": "/brands/waitrose/"
+  },
+  {
+   "slug": "walkers",
+   "name": "Walkers",
+   "url": "/brands/walkers/"
+  }
+ ]
+}

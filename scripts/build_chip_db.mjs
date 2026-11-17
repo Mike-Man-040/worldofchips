@@ -917,6 +917,45 @@ ${heldBack} records from the Korean Ministry of Food and Drug Safety processed-f
   return { json, csv, attribution };
 }
 
+// Indexed wave pages for other builders (country guides, flavour pages) to link to.
+// Read by scripts/chip_links.mjs. Names go through plainPublic: no dietary words outside quotes.
+// Tidy an Open Food Facts name for a link list: collapse repeated words ("Aldi Aldi")
+// and drop a brand repeated at the end. Product pages keep the source's own name.
+function linkName(brand, label) {
+  let name = brand ? `${brand} ${label}` : label;
+  name = name.replace(/\b(\S+)(\s+\1\b)+/gi, '$1');
+  if (brand && name.toLowerCase().endsWith(` ${brand.toLowerCase()}`) && name.length > brand.length * 2 + 1) {
+    name = name.slice(0, -(brand.length + 1));
+  }
+  return name.replace(/\s+/g, ' ').trim();
+}
+function linkBrand(label) {
+  const s = String(label);
+  if (s !== s.toLowerCase()) return s;
+  return s.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+}
+function indexedLinks(records) {
+  const products = records
+    .filter((p) => !pageNoindex(p, scoreOf(p).total))
+    .map((p) => ({
+      id: p.id,
+      name: plainPublic(linkName(p.brand ? linkBrand(p.brand) : '', productLabel(p))),
+      url: productPath(p),
+      brand_slug: p.brand_slug,
+      countries: [...new Set(p.countries_sold.map((c) => c.country))],
+      flavour_family: p.flavour_family || null,
+    }));
+  const byBrand = new Map();
+  for (const p of records) {
+    if (!byBrand.has(p.brand_slug)) byBrand.set(p.brand_slug, []);
+    byBrand.get(p.brand_slug).push(p);
+  }
+  const brands = [...byBrand.keys()].sort()
+    .filter((slug) => brandIndexable(byBrand.get(slug)))
+    .map((slug) => ({ slug, name: plainPublic(linkBrand(hubLabel(byBrand.get(slug)))), url: brandPath(slug) }));
+  return JSON.stringify({ generated_by: 'scripts/build_chip_db.mjs', products, brands }, null, 1) + '\n';
+}
+
 function chipsSitemap(records) {
   const urls = [{ loc: `${SITE}/chips/`, pri: '0.8' }];
   const byBrand = new Map();
@@ -951,6 +990,7 @@ function build() {
   files.set('data/chips/export/chips.csv', exp.csv);
   files.set('data/chips/export/ATTRIBUTION.txt', exp.attribution);
   files.set('sitemap-chips.xml', chipsSitemap(records));
+  files.set('data/chips/indexed.json', indexedLinks(records));
   const titles = new Map();
   for (const [rel, text] of files) {
     if (!rel.endsWith('.html')) continue;
