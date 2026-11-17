@@ -337,6 +337,17 @@ const SEO = {
   colombia: ['Colombian Chips: Margarita, Súper Ricas & More | World of Chips', "Margarita, Súper Ricas and Yupi: Colombia's top chip brands, chicken and lime flavours, Todo Rico mixes and where to buy them."],
   france: ['French Chips: Poulet Rôti, Bret\'s & Vico | World of Chips', "Roast-chicken chips and goat's cheese & chilli: Lay's, Bret's and Vico in France. Top brands, unique flavors and where to buy."],
   'south-korea': ['Korean Chips: Honey Butter, Octopus & More | World of Chips', "Honey Butter, Octopus and more: Nongshim, Orion and Calbee chips in South Korea. Top brands, the flavors to try and where to buy."],
+  // 17 Nov 2026: rewritten from Search Console queries (3 months to 16 Nov). Facts are this page's own data.
+  australia: ['Australian Chips: Smith\'s, Red Rock Deli & Thins | World of Chips', "The most popular chips in Australia: Smith's, Red Rock Deli, Thins and Kettle, plus chicken and honey soy chicken flavors and where to buy them."],
+  canada: ['Top Chip Brands in Canada & Ketchup Chips | World of Chips', "Canada's top potato chip brands: Lay's, Old Dutch, Humpty Dumpty and Yum Yum, plus why ketchup and all dressed chips are Canadian classics, and where to buy."],
+  mexico: ['Mexican Chips: Sabritas, Barcel, Takis & Totis | World of Chips', "Chips in Mexico: Sabritas (Lay's), Barcel, Takis and Totis, popular flavors like chile & limón and salsa verde, unique ones like chamoy, and where to buy."],
+  japan: ['Japanese Chips: Calbee, Koikeya & Top Flavors | World of Chips', "Japanese chip brands Calbee and Koikeya, classic flavors like usushio, consommé and nori-shio, unique ones like wasabi and mentaiko, and where to buy."],
+  'south-africa': ['South African Chips: Simba, Lay\'s & Willards | World of Chips', "Top chip brands in South Africa: Simba, Lay's, Willards and Messaris, plus local flavors like Mrs H.S. Ball's Chutney and chilli biltong, and where to buy."],
+  egypt: ['Egyptian Chips: Chipsy, Tiger & Kebab Flavor | World of Chips', "Chip brands in Egypt: Chipsy (Lay's), Tiger and Spuds, flavors like kebab and shatta & lemon, and where to buy Egyptian chips."],
+  italy: ['Italian Chips: San Carlo, Pata & Amica Chips | World of Chips', "Italian chip brands San Carlo, Pata and Amica Chips, flavors like pizza and olive oil & rosemary, unique ones like tartufo and pesto, and where to buy."],
+  'united-states': ['American Chips: Lay\'s, Ruffles, Utz & Cape Cod | World of Chips', "Top American chip brands: Lay's, Ruffles, Pringles, Kettle Brand, Cape Cod and Utz, favorite flavors like sour cream & onion and BBQ, and where to buy."],
+  'united-kingdom': ['UK Crisps & Chips: Walkers, Tyrrell\'s & McCoy\'s | World of Chips', "Crisps in the UK: Walkers, Tyrrell's, McCoy's and Pipers, classics like cheese & onion and prawn cocktail, odd ones like Marmite, and where to buy."],
+  india: ['Indian Chips: Lay\'s, Balaji, Haldiram\'s & Bingo! | World of Chips', "Chip brands in India: Lay's, Balaji, Haldiram's, Bingo! and Uncle Chipps, flavors like Magic Masala, chaat and mango pickle, and where to buy."],
   germany: ['German Chips: Currywurst, Paprika & Lorenz | World of Chips', "Currywurst and Döner chips: Lorenz, Funny-Frisch and Chio in Germany. Why Paprika rules, unique flavors and where to buy."],
 };
 // ---------- 3. page template ----------
