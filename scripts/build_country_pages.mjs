@@ -10,7 +10,7 @@
 //   /sitemap.xml            homepage + every country URL (keeps /news/ and /snack-boxes/)
 //   index.html              only the regions between BUILD:* markers
 //
-// Usage:  node scripts/build_country_pages.mjs [--lastmod YYYY-MM-DD]
+// Usage:  node scripts/build_country_pages.mjs [--lastmod YYYY-MM-DD] [--touch slug,slug]
 // Requires Node 16+. No npm install needed.
 
 import fs from 'node:fs';
@@ -19,6 +19,7 @@ import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { retag, daebakBox, bolBox, snackBoxLead } from './affiliate_tags.mjs';
 import { PAGE_PHOTO, photoFor, photoFigure, ogPhoto, shareRow, PHOTO_CSS_LINK } from './photos.mjs';
+import { countryChipsSection } from './chip_links.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://worldofchips.com';
@@ -28,6 +29,9 @@ const argv = process.argv.slice(2);
 const lmIdx = argv.indexOf('--lastmod');
 const LASTMOD = lmIdx >= 0 ? argv[lmIdx + 1] : new Date().toISOString().slice(0, 10);
 if (!/^\d{4}-\d{2}-\d{2}$/.test(LASTMOD)) throw new Error('--lastmod must be YYYY-MM-DD');
+// --touch slug,slug: only these pages take --lastmod; every other page keeps the date already in the sitemap.
+const tIdx = argv.indexOf('--touch');
+const TOUCH = tIdx >= 0 ? new Set(argv[tIdx + 1].split(',').map((t) => `${SITE}/${t.replace(/^\/|\/$/g, '')}/`)) : null;
 
 const indexPath = path.join(ROOT, 'index.html');
 let indexHtml = fs.readFileSync(indexPath, 'utf8');
@@ -474,7 +478,7 @@ ${d.marketSize ? `      <div class="cp-stat"><div class="val">${esc(d.marketSize
         ${d.topBrands.map((b) => `<span class="cp-tag brand">${brandTag(b)}</span>`).join('\n        ')}
       </div>
     </section>
-
+${countryChipsSection(slug, inName(name))}
     <section class="cp-section">
       <h2>Most Popular Chip Flavors</h2>
       <p>These are the bestselling, most widely available potato chip flavors you'll find on shelves across ${esc(name)}.</p>
@@ -545,6 +549,7 @@ const prevLastmod = new Map([...prevSitemap.matchAll(/<loc>([^<]+)<\/loc>\s*<las
 // A nav rebuild must not roll a page's date back. Keep the later of --lastmod and the date already in the sitemap.
 function pageLastmod(loc) {
   const prev = prevLastmod.get(loc);
+  if (TOUCH && prev && !TOUCH.has(loc)) return prev;
   return prev && prev > LASTMOD ? prev : LASTMOD;
 }
 

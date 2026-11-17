@@ -2,6 +2,7 @@
 // make-chips-at-home cluster, spice ladder, flavour pages, limited-edition calendar and the chip quiz.
 // Facts are sourced (see each page's Sources). Product links are Amazon searches for named models
 // (Amazon served captchas, so single ASIN pages were not re-verified); no prices or specs are quoted.
+import { flavourChipsSection } from './chip_links.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import pringlesPage from './pringles_page.mjs';
@@ -338,7 +339,7 @@ export default function morePages({ amazonSearch, esc, ROOT }) {
     <section class="cp-section" id="countries">
       <h2>Where It&#8217;s Big</h2>
       <div class="cp-explore-grid">${f.countries.map(([s, l]) => `<a href="/${s}/" class="cp-explore-link">${l} chip guide</a>`).join('')}</div>
-    </section>
+    </section>${flavourChipsSection(f.s, plain(f.n))}
     <section class="cp-section" id="buy">
       <h2>Where to Buy</h2>
       <p>Imported bags go in and out of stock, so this links to an Amazon search rather than a single listing. Check the pack size and seller.</p>
