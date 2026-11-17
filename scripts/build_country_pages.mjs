@@ -337,6 +337,11 @@ const SEO = {
   colombia: ['Colombian Chips: Margarita, Súper Ricas & More | World of Chips', "Margarita, Súper Ricas and Yupi: Colombia's top chip brands, chicken and lime flavours, Todo Rico mixes and where to buy them."],
   france: ['French Chips: Poulet Rôti, Bret\'s & Vico | World of Chips', "Roast-chicken chips and goat's cheese & chilli: Lay's, Bret's and Vico in France. Top brands, unique flavors and where to buy."],
   'south-korea': ['Korean Chips: Honey Butter, Octopus & More | World of Chips', "Honey Butter, Octopus and more: Nongshim, Orion and Calbee chips in South Korea. Top brands, the flavors to try and where to buy."],
+  // 17 Nov 2026: rewritten from Search Console queries (3 months to 16 Nov). Facts are this page's own data.
+  australia: ['Australian Chips: Smith\'s, Red Rock Deli & Thins | World of Chips', "The most popular chips in Australia: Smith's, Red Rock Deli, Thins and Kettle, plus chicken and honey soy chicken flavors and where to buy them."],
+  canada: ['Top Chip Brands in Canada & Ketchup Chips | World of Chips', "Canada's top potato chip brands: Lay's, Old Dutch, Humpty Dumpty and Yum Yum, plus why ketchup and all dressed chips are Canadian classics, and where to buy."],
+  mexico: ['Mexican Chips: Sabritas, Barcel, Takis & Totis | World of Chips', "Chips in Mexico: Sabritas (Lay's), Barcel, Takis and Totis, popular flavors like chile & limón and salsa verde, unique ones like chamoy, and where to buy."],
+  japan: ['Japanese Chips: Calbee, Koikeya & Top Flavors | World of Chips', "Japanese chip brands Calbee and Koikeya, classic flavors like usushio, consommé and nori-shio, unique ones like wasabi and mentaiko, and where to buy."],
   germany: ['German Chips: Currywurst, Paprika & Lorenz | World of Chips', "Currywurst and Döner chips: Lorenz, Funny-Frisch and Chio in Germany. Why Paprika rules, unique flavors and where to buy."],
 };
 // ---------- 3. page template ----------
