@@ -12,7 +12,7 @@ Open Food Facts photographs copied for this database are CC BY-SA 3.0, resized t
 
 price_per_100g is empty. Do not fill it from the Pringles Index.
 
-Indexing rule, approved 16 Nov 2026: a public product page is indexable only when completeness is 60 or more and ingredients_text is present. Otherwise it is noindex.
+Indexing rule, 17 Nov 2026: a public product page is eligible when completeness is 60 or more and ingredients_text is present. Only eligible pages in release wave 1 (at most 300, field wave_1) are indexed; the rest are noindex until a later wave.
 
 Equivalents are brand names as stated by the sources. Recipes may differ.
 

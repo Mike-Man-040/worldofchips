@@ -2,9 +2,11 @@
 // Chip database. Reads data/chips/records.json, data/chips/off.json, and
 // data/chips/mfds-kr.json. Writes public pages at /chips/<brand>/<product>/,
 // /brands/<brand>/, and /chips/, plus the ODbL export and sitemap-chips.xml.
-// A product page is indexable only when completeness is 60 or more and an
-// ingredient text is present. Korean Ministry rows stay noindex and out of the
-// ODbL files. Does not edit the nav, country pages, flavour pages, sitemap.xml,
+// A product page is eligible when completeness is 60 or more and an ingredient
+// text is present. Only eligible pages in the current release wave (WAVE_SIZE,
+// ranked by computeWave) are indexed; the rest stay noindex and out of the
+// sitemap. A brand hub is indexed only with BRAND_MIN or more wave pages.
+// Korean Ministry rows stay noindex and out of the ODbL files. Does not edit the nav, country pages, flavour pages, sitemap.xml,
 // or /pringles-index/. Leaves /chips/_preview/aisle/ alone.
 //
 //   node scripts/build_chip_db.mjs           write files
@@ -27,8 +29,29 @@ function hasIngredients(p) {
 function publicIndexable(p, score) {
   return score >= INDEX_MIN && hasIngredients(p);
 }
+// Release waves (17 Nov 2026 review): index about 300 pages first, then add more in waves.
+// Raise WAVE_SIZE (or add hand-checked data) only with Michael's OK.
+const WAVE_SIZE = 300;
+const BRAND_MIN = 3;
+let WAVE = new Set();
+function isCurated(p) { return !String(p.id).startsWith('off-') && !isMfds(p); }
+function computeWave(records) {
+  const eligible = records.filter((p) => !isMfds(p) && publicIndexable(p, scoreOf(p).total));
+  const perBrand = new Map();
+  for (const p of eligible) perBrand.set(p.brand_slug, (perBrand.get(p.brand_slug) || 0) + 1);
+  const candidates = eligible.filter((p) => isCurated(p) || (perBrand.get(p.brand_slug) >= BRAND_MIN && p.pack_sizes_g.length > 0));
+  candidates.sort((a, b) => (Number(isCurated(b)) - Number(isCurated(a)))
+    || (Number(!!b.flavour_family) - Number(!!a.flavour_family))
+    || (scoreOf(b).total - scoreOf(a).total)
+    || a.id.localeCompare(b.id));
+  return new Set(candidates.slice(0, WAVE_SIZE).map((p) => p.id));
+}
+function inWave(p) { return WAVE.has(p.id); }
 function pageNoindex(p, score) {
-  return isMfds(p) || !publicIndexable(p, score);
+  return isMfds(p) || !publicIndexable(p, score) || !inWave(p);
+}
+function brandIndexable(mine) {
+  return mine.filter((p) => !pageNoindex(p, scoreOf(p).total)).length >= BRAND_MIN;
 }
 const RECORDS_PATH = path.join(ROOT, 'data', 'chips', 'records.json');
 const OFF_PATH = path.join(ROOT, 'data', 'chips', 'off.json');
@@ -440,6 +463,13 @@ function itemName(p) {
 }
 function partyPlain(p) { return p.brand || p.manufacturer || p.importer || 'Maker'; }
 function isMfds(p) { return p.source_licence === UNSTATED_LICENCE; }
+function sourceName(url) {
+  const host = String(url).replace(/^https?:\/\//, '').split('/')[0].replace(/^www\./, '');
+  if (/openfoodfacts\.org$/.test(host)) return 'Open Food Facts';
+  if (/wikipedia\.org$/.test(host)) return 'Wikipedia';
+  if (host === 'various.foodsafetykorea.go.kr') return 'Korea Ministry of Food and Drug Safety';
+  return host;
+}
 function creditParagraph() { return `<p class="chip-source-credit">${esc(MFDS_CREDIT)}</p>`; }
 function hubLabel(mine) {
   const brands = [...new Set(mine.map((p) => p.brand).filter(Boolean))];
@@ -460,9 +490,7 @@ function hubTitle(label) {
   return `${cleaned.slice(0, Math.max(room, 1)).trim()}… records${suffix}`;
 }
 function hubDescription(label, indexable) {
-  const tail = indexable
-    ? 'Sourced chip records. Check the pack; recipes change.'
-    : 'Sourced chip records. This page is noindex.';
+  const tail = 'Sourced chip records. Check the pack; recipes change.';
   if (DIETARY.test(label)) {
     const text = `Records for this maker. ${tail}`;
     return text.length <= 200 ? text : tail;
@@ -548,10 +576,9 @@ function productPage(p, all) {
     ['Flavour family', flavour],
     ['Spice ladder', heat],
     ['Barcodes', bars],
-    ['Status', esc(p.status)],
     ['Pack size', packs],
-    ['Price per 100 g', 'Not recorded'],
   ];
+  if (p.status !== 'unknown') rows.splice(6, 0, ['Status', esc(p.status)]);
   if (p.manufacturer) rows.push(['Manufacturer', `<span class="chip-source-text">${esc(p.manufacturer)}</span>`]);
   if (p.importer) rows.push(['Importer', `<span class="chip-source-text">${esc(p.importer)}</span>`]);
   if (p.product_report_number) rows.push(['Item report', `<span class="chip-source-text">${esc(p.product_report_number)}</span>`]);
@@ -571,17 +598,16 @@ function productPage(p, all) {
     : '<p>Not recorded.</p>';
   const ing = p.ingredients_text
     ? `<blockquote class="chip-ingredients">${esc(p.ingredients_text.text)}</blockquote>
-      <p class="sb-muted">Copied from the source dated ${esc(longDate(p.ingredients_text.checked))}${p.ingredients_text.note ? `. ${esc(p.ingredients_text.note)}` : ''}</p>`
+      <p class="sb-muted">Copied from <a href="${esc(p.ingredients_text.source)}" target="_blank" rel="nofollow noopener">${esc(sourceName(p.ingredients_text.source))}</a>, checked ${esc(longDate(p.ingredients_text.checked))}.</p>`
     : '<p>No ingredient text is recorded. The note in Sources says where we looked.</p>';
-  const sourceItems = p.sources.map((s) => `<li><strong>${esc(s.field)}</strong>, checked ${esc(longDate(s.checked))}: <a href="${esc(s.url)}" target="_blank" rel="nofollow noopener">${esc(s.url)}</a>${s.note ? `. ${esc(s.note)}` : ''}</li>`).join('');
+  const seenSources = new Map();
+  for (const s of p.sources) if (!seenSources.has(s.url)) seenSources.set(s.url, s.checked);
+  const sourceItems = [...seenSources].map(([url, checked]) => `<li><a href="${esc(url)}" target="_blank" rel="nofollow noopener">${esc(sourceName(url))}</a>, checked ${esc(longDate(checked))}</li>`).join('');
   const similar = [];
   if (p.flavour_family) similar.push(`<a href="/flavors/${p.flavour_family}/" class="cp-explore-link">${esc(FLAVOUR_LABEL[p.flavour_family])}</a>`);
   if (p.heat_level != null) similar.push('<a href="/spiciest-chips/" class="cp-explore-link">Spice ladder</a>');
   similar.push('<a href="/flavors/" class="cp-explore-link">All flavour pages</a>');
   const indexable = !pageNoindex(p, score.total);
-  const thresholdNote = indexable
-    ? ` This page is indexable: completeness is ${score.total} and an ingredient text is present.`
-    : ` This page is noindex. A page is indexable only when completeness is ${INDEX_MIN} or more and an ingredient text is present.`;
   const certs = (p.certifications || []).map((c) => `Labelled as ${esc(c.label)} (checked ${esc(longDate(c.checked))}).`).join(' ');
   const certHtml = certs
     ? `<p>${certs}</p><p class="sb-muted">That is the certification label stored on the source record, not a check by World of Chips.</p>`
@@ -617,7 +643,6 @@ ${isMfds(p) ? `    ${creditParagraph()}\n` : ''}    <p class="aff-disc sb-top-di
       <div class="sb-table-wrap"><table class="sb-table"><tbody>
         ${rows.map(([k, v]) => `<tr><th scope="row">${k}</th><td>${v}</td></tr>`).join('\n        ')}
       </tbody></table></div>
-      <p class="sb-muted">Completeness ${score.total}/100.${thresholdNote} Heat and price are not part of the score. A null heat level is correct when the product is not on the spice ladder.</p>
       ${certHtml}
     </section>${nutritionSection(p)}
     <section class="cp-section" id="ingredients">
@@ -707,7 +732,7 @@ function indexPage(records) {
     <p class="cp-intro-dark">${esc(description)}</p>
   </div>
   <div class="cp-body">
-    <p class="cp-intro">${nOff} Open Food Facts potato-crisp records and ${nMinistry} Korean nutrient-database rows. A product page is indexed only when its completeness is ${INDEX_MIN} or more and an ingredient text is present. The Korean rows stay noindex. Check the pack; recipes change.</p>
+    <p class="cp-intro">${nOff} Open Food Facts potato-crisp records and ${nMinistry} Korean nutrient-database rows. Check the pack; recipes change.</p>
     ${creditParagraph()}
     <p>Open download, ODbL 1.0: <a href="/data/chips/export/chips.json">chips.json</a>, <a href="/data/chips/export/chips.csv">chips.csv</a>, <a href="/data/chips/export/ATTRIBUTION.txt">attribution</a>. The database attributes Open Food Facts. Photographs are separate: Open Food Facts photos are CC BY-SA 3.0, and the Korean rows are not in the download.</p>
     <label for="chip-q">Search by name, brand, country or type</label>
@@ -774,7 +799,7 @@ function brandPage(slug, records) {
   const label = hubLabel(mine);
   const title = hubTitle(label);
   if (title.length > 65) die(`brand title too long: ${title}`);
-  const indexable = mine.some((p) => !pageNoindex(p, scoreOf(p).total));
+  const indexable = brandIndexable(mine);
   const description = hubDescription(label, indexable);
   const urlPath = brandPath(slug);
   const crumbItems = [
@@ -827,15 +852,18 @@ function exportsFor(records) {
   const products = open.map((p) => {
     const score = scoreOf(p);
     const indexable = publicIndexable(p, score.total);
+    const wave = inWave(p);
     return {
       ...p,
       completeness: score.total,
       ingredients_present: hasIngredients(p),
       public_indexable: indexable,
-      noindex: !indexable,
-      noindex_reason: indexable ? '' : [
+      wave_1: wave,
+      noindex: !(indexable && wave),
+      noindex_reason: indexable && wave ? '' : [
         score.total < INDEX_MIN ? `completeness below ${INDEX_MIN}` : '',
         hasIngredients(p) ? '' : 'ingredients_text missing',
+        indexable && !wave ? 'not in release wave 1' : '',
       ].filter(Boolean).join('; '),
     };
   });
@@ -844,13 +872,14 @@ function exportsFor(records) {
     license: 'ODbL-1.0',
     license_url: 'https://opendatacommons.org/licenses/odbl/1-0/',
     attribution: 'Contains information from Open Food Facts (https://world.openfoodfacts.org), which is made available under the Open Database License. Photographs are not part of this database; each image.licence applies to that file only.',
-    index_rule: `A public product page is indexable only when completeness is ${INDEX_MIN} or more and ingredients_text is present. Otherwise it is noindex.`,
+    index_rule: `A public product page is eligible when completeness is ${INDEX_MIN} or more and ingredients_text is present. Only eligible pages in release wave 1 (wave_1, at most ${WAVE_SIZE}) are indexed. Otherwise it is noindex.`,
     index_min: INDEX_MIN,
+    wave_size: WAVE_SIZE,
     preview: false,
     products,
   };
   const json = JSON.stringify(doc, null, 2) + '\n';
-  const header = ['id', 'slug', 'brand_slug', 'brand', 'parent_company', 'name_local', 'name_en', 'type', 'flavour_family', 'heat_level', 'status', 'barcodes', 'countries_sold', 'pack_sizes_g', 'ingredients_text', 'ingredients_source', 'image_file', 'image_licence', 'image_credit', 'image_source', 'completeness', 'ingredients_present', 'public_indexable', 'noindex', 'price_per_100g'];
+  const header = ['id', 'slug', 'brand_slug', 'brand', 'parent_company', 'name_local', 'name_en', 'type', 'flavour_family', 'heat_level', 'status', 'barcodes', 'countries_sold', 'pack_sizes_g', 'ingredients_text', 'ingredients_source', 'image_file', 'image_licence', 'image_credit', 'image_source', 'completeness', 'ingredients_present', 'public_indexable', 'wave_1', 'noindex', 'price_per_100g'];
   const lines = [header.join(',')];
   for (const p of products) {
     lines.push([
@@ -861,7 +890,7 @@ function exportsFor(records) {
       p.ingredients_text ? p.ingredients_text.text : '',
       p.ingredients_text ? p.ingredients_text.source : '',
       p.image.file, p.image.licence, p.image.credit, p.image.source,
-      p.completeness, p.ingredients_present, p.public_indexable, p.noindex, '',
+      p.completeness, p.ingredients_present, p.public_indexable, p.wave_1, p.noindex, '',
     ].map(csvEscape).join(','));
   }
   const csv = lines.join('\n') + '\n';
@@ -879,7 +908,7 @@ Open Food Facts photographs copied for this database are CC BY-SA 3.0, resized t
 
 price_per_100g is empty. Do not fill it from the Pringles Index.
 
-Indexing rule, approved 16 Nov 2026: a public product page is indexable only when completeness is ${INDEX_MIN} or more and ingredients_text is present. Otherwise it is noindex.
+Indexing rule, 17 Nov 2026: a public product page is eligible when completeness is ${INDEX_MIN} or more and ingredients_text is present. Only eligible pages in release wave 1 (at most ${WAVE_SIZE}, field wave_1) are indexed; the rest are noindex until a later wave.
 
 Equivalents are brand names as stated by the sources. Recipes may differ.
 
@@ -897,7 +926,7 @@ function chipsSitemap(records) {
   }
   for (const slug of [...byBrand.keys()].sort()) {
     const mine = byBrand.get(slug);
-    if (mine.some((p) => !pageNoindex(p, scoreOf(p).total))) urls.push({ loc: `${SITE}/brands/${slug}/`, pri: '0.6' });
+    if (brandIndexable(mine)) urls.push({ loc: `${SITE}/brands/${slug}/`, pri: '0.6' });
   }
   for (const p of records) {
     if (!pageNoindex(p, scoreOf(p).total)) urls.push({ loc: `${SITE}${productPath(p)}`, pri: '0.5' });
@@ -909,6 +938,7 @@ function chipsSitemap(records) {
 
 function build() {
   const records = loadRecords().slice().sort((a, b) => a.id.localeCompare(b.id));
+  WAVE = computeWave(records);
   const files = new Map();
   files.set('chips/index.html', indexPage(records));
   files.set('chips/search-index.json', searchIndex(records));
