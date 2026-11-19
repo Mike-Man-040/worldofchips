@@ -30,6 +30,7 @@ def kicker(slug):
     if slug.startswith("flavors-"): return "Chip flavour guide"
     if slug == "which-chip-are-you": return "Five questions. Ten countries. One chip."
     if slug == "pringles-index": return "What a can of Pringles costs in 30 countries"
+    if slug == "whats-in-a-bag-of-chips": return "Ingredient study · US, UK, Netherlands & Mexico"
     return None
 
 def draw(slug, title, sub):

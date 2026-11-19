@@ -1150,6 +1150,21 @@ A: Yes, in several markets. For example, Verbraucherzentrale Hamburg recorded Ge
 **Q: What is the biggest chip shrinkflation case in the log?**
 A: Smiths Frazzles and Chipsticks multipacks (United Kingdom, 2021), which went from 8 packs to 6 packs, a change of -25.0%.
 
+### What’s in a Bag of Chips? US, UK, NL & Mexico
+
+URL: https://worldofchips.com/whats-in-a-bag-of-chips/
+
+We read 1,785 chip ingredient lists from Open Food Facts. 44.4% of UK chips list yeast extract but 6.0% list MSG; in the US, 15.1% list MSG.
+
+**Q: Do British crisps contain MSG?**
+A: Few list it. In our sample, 6.0% of UK crisps (37 of 617) list MSG, while 44.4% list yeast extract, which is often used for a similar savoury taste.
+
+**Q: Do American chips have more MSG than British crisps?**
+A: In our sample, yes: 15.1% of US chips list MSG, against 6.0% of UK crisps. These are counts of products listed in Open Food Facts, not sales.
+
+**Q: Is palm oil common in potato chips?**
+A: Not in these four countries. Palm oil appears in 4.1% of US, 1.3% of UK, 1.2% of Dutch and 1.9% of Mexican ingredient lists in our sample.
+
 ### Christmas Snack Box Comparison 2026
 
 URL: https://worldofchips.com/christmas-snack-box-comparison-2026/

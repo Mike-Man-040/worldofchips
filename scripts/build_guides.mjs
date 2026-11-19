@@ -968,14 +968,14 @@ ${nlForm}
 </aside>`.split('\n').map((l, i) => (i ? indent + (l.startsWith('<aside') || l.startsWith('</aside') ? '' : '  ') + l : l)).join('\n');
 
 // Author box + Person schema on buying guides and the Pringles Index (facts only: name, role, finance background).
-const hasAuthor = (g) => g.slug === 'pringles-index' || /^best-|-buy|^where-to-buy-|^chip-seasoning-powders$|^christmas-/.test(g.slug);
+const hasAuthor = (g) => g.slug === 'pringles-index' || g.slug === 'whats-in-a-bag-of-chips' || /^best-|-buy|^where-to-buy-|^chip-seasoning-powders$|^christmas-/.test(g.slug);
 const authorBox = `
     <aside class="cp-section" aria-label="About the author" style="background:var(--paper);border:1px solid var(--light-border);border-radius:12px;padding:1rem 1.2rem">
       <p style="margin:0"><strong style="color:var(--brown);font-family:'Playfair Display',serif">Michael van der Looij, founder of World of Chips</strong></p>
       <p class="sb-muted" style="margin-top:.4rem">Michael has a background in finance and runs World of Chips, a guide to potato chips from around the world: the brands, the flavours and what they cost. Every guide links to its sources. <a href="/about/">About World of Chips</a></p>
     </aside>
 `;
-const MORE = [['pringles-index', '📊 Pringles Index'], ['shrinkflation', '📉 Shrinkflation'], ['spiciest-chips', '🌶️ Spice Ladder'], ['which-chip-are-you', '❓ Chip Quiz'], ['make-chips-at-home', '🥔 Make at Home'], ['flavors', '🌍 Flavours'], ['limited-edition-chips', '📅 Drops'], ['submit-a-flavor', '📸 Add your flavour']];
+const MORE = [['pringles-index', '📊 Pringles Index'], ['whats-in-a-bag-of-chips', '🧪 What\u2019s in a bag?'], ['shrinkflation', '📉 Shrinkflation'], ['spiciest-chips', '🌶️ Spice Ladder'], ['which-chip-are-you', '❓ Chip Quiz'], ['make-chips-at-home', '🥔 Make at Home'], ['flavors', '🌍 Flavours'], ['limited-edition-chips', '📅 Drops'], ['submit-a-flavor', '📸 Add your flavour']];
 const isFeature = (slug) => MORE.some(([s]) => s === slug) || slug.startsWith('flavors/') || ['homemade-crisps-recipe', 'best-mandoline-slicers-for-chips', 'best-deep-fryers-for-chips', 'best-air-fryers-for-chips', 'chip-seasoning-powders'].includes(slug);
 const moreRow = (slug) => `
     <nav class="cp-section" aria-label="More to explore">
