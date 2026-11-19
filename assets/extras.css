@@ -53,3 +53,27 @@
 @media(max-width:360px){
   .hero-kr{font-size:.62rem}
 }
+
+/* Homepage finder and mobile hero (19 Nov 2026): content first, then the snack-box panel. */
+.hero-find{margin:1.3rem auto 1rem;max-width:600px;background:rgba(26,17,8,.62);border:1px solid rgba(232,168,56,.42);border-radius:16px;padding:.9rem 1rem 1rem;backdrop-filter:blur(12px)}
+.hero-find-label{display:block;color:var(--cream,#F5ECD7);font-weight:700;font-size:.95rem;margin-bottom:.5rem}
+.hero-find select{width:100%;min-height:48px;border-radius:12px;border:1px solid rgba(232,168,56,.6);background:#FFF8EC;color:#1A1108;font-size:1rem;padding:0 .9rem}
+.hero-flags{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;margin-top:.65rem}
+.hero-flags a{color:var(--cream,#F5ECD7);text-decoration:none;font-size:.84rem;background:rgba(245,236,215,.08);border:1px solid rgba(232,168,56,.3);border-radius:999px;padding:.38rem .75rem;min-height:36px;display:inline-flex;align-items:center}
+.hero-flags a:hover{border-color:#F5D78E;color:#fff}
+.hero-find-db{display:inline-block;margin-top:.75rem;color:#F5D78E;font-weight:700;font-size:.92rem;text-underline-offset:.2em}
+.hero-find select:focus-visible,.hero-flags a:focus-visible,.hero-find-db:focus-visible{outline:2px solid #F5D78E;outline-offset:3px}
+@media(max-width:600px){
+  .hero{min-height:auto;align-items:flex-start}
+  .hero-center{padding:1rem 1rem 2rem}
+  .hero-eyebrow{margin-bottom:.7rem}
+  .hero .hero-brand{font-size:2.6rem}
+  .hero-sub{display:none}
+  .hero-desc{font-size:.86rem;margin-top:.35rem}
+  .hero-find{margin-top:1rem}
+  .hero-buy-panel{padding:.8rem .7rem .6rem;gap:.45rem}
+  .hero-buy-btn{font-size:.9rem;padding:.6rem 1rem;min-height:44px}
+  .hero-buy-yums{font-size:.92rem;padding:.65rem 1.1rem}
+  .hero-buy-kicker{font-size:.98rem}
+  .scroll-indicator{display:none}
+}
