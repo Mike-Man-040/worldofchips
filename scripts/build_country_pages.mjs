@@ -282,6 +282,33 @@ ${rest.length ? `      <div class="buy-grid" style="justify-content:center">
 
 `;
 }
+// Answer-first box at the top of every guide (19 Nov 2026): the page's own data, no new claims.
+// Pages with a snack-box lead point to it; Amazon never sits above a snack box.
+function glanceBox(x) {
+  const { name, slug, d } = x;
+  const N = esc(inName(name));
+  const first = (csm[name] || defaultShop)[0];
+  let buy;
+  if (slug === 'south-korea') buy = '<a href="#daebak">Korean snack box and Amazon picks &#8595;</a>';
+  else if (SNACK_LEAD.has(slug)) buy = '<a href="#snack-box">Snack box and Amazon picks &#8595;</a>';
+  else buy = `<a href="${esc(retag(first.u, 'country'))}" target="_blank" rel="sponsored nofollow noopener">${esc(first.n)}</a> <span class="cp-glance-note">(Amazon)</span>`;
+  const rows = [
+    ['Top brands', esc(listAnd(d.topBrands))],
+    ['Most popular flavors', esc(listAnd(d.popularFlavors.slice(0, 3)))],
+    ['Only-here flavors', esc(listAnd(d.uniqueFlavors.slice(0, 3)))],
+    ['Typical bag price', esc(d.avgCost)],
+    ['Where to buy', buy],
+  ];
+  const jump = [['brands', 'Brands'], ['flavors', 'Flavors'], ...(countryChipsSection(slug, inName(name)) ? [['chip-database', 'Chips in our database']] : []), ['faq', 'FAQ'], ['shop', 'Buy online']];
+  return `    <section class="cp-glance" id="at-a-glance" aria-labelledby="glance-title">
+      <h2 id="glance-title">At a Glance: Chips in ${N}</h2>
+      <dl class="cp-glance-grid">
+${rows.map(([k, v]) => `        <div><dt>${k}</dt><dd>${v}</dd></div>`).join('\n')}
+      </dl>
+      <nav class="cp-jump" aria-label="On this page">${jump.map(([id, l]) => `<a href="#${id}">${l}</a>`).join('')}</nav>
+    </section>
+`;
+}
 function quickFacts(x) {
   const { name, d, c } = x;
   const rows = [
@@ -453,6 +480,17 @@ ${PHOTO_CSS_LINK}
 .snack-more{margin:.7rem auto 0;max-width:34rem;text-align:left}
 .snack-more summary{cursor:pointer;font-weight:700;color:var(--brown)}
 .snack-more .buy-btn{margin-top:.35rem}` : ''}
+.cp-glance{background:var(--paper);border:1px solid var(--light-border);border-left:4px solid var(--gold);border-radius:12px;padding:1.1rem 1.3rem;margin:0 0 2rem}
+.cp-glance h2{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--brown);margin:0 0 .7rem}
+.cp-glance-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.6rem 1.4rem;margin:0}
+.cp-glance-grid dt{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.cp-glance-grid dd{margin:.1rem 0 0;font-size:.98rem;line-height:1.45;color:var(--ink)}
+.cp-glance-grid a{color:var(--brown);font-weight:700}
+.cp-glance-note{font-size:.78rem;color:var(--muted)}
+.cp-jump{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem}
+.cp-jump a{font-size:.82rem;font-weight:600;color:var(--brown);background:#fff;border:1px solid var(--light-border);border-radius:999px;padding:.35rem .8rem;text-decoration:none}
+.cp-jump a:hover{border-color:var(--gold)}
+@media(max-width:600px){.cp-hero{padding:1.6rem 1rem 1.5rem}.cp-flag{font-size:2.4rem;margin-bottom:.2rem}.cp-title{font-size:1.85rem;line-height:1.15}.cp-crumbs{margin-bottom:.5rem}.cp-region{margin-top:.5rem}.cp-body{padding:1.4rem 1rem 3rem}.cp-glance{padding:1rem}}
 .cp-faq h3{font-size:1rem;color:var(--brown);margin-top:1.2rem}
 .cp-faq p{margin-top:.3rem}
 .cp-cta h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--brown);margin-bottom:.6rem}
@@ -466,14 +504,13 @@ ${siteNav}
 <main>
 <article class="country-page active" id="cp-${slug}">
   <div class="cp-hero">
-    <a href="/" class="cp-back">← Back to World of Chips</a>
     <nav class="cp-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › <span>${esc(name)}</span></nav>
     <span class="cp-flag">${d.flag}</span>
     <h1 class="cp-title">Potato Chips in ${esc(inName(name))}</h1>
     <span class="cp-region">${esc(d.region)}</span>
   </div>
   <div class="cp-body">
-    <p class="cp-intro">${esc(c.intro)}</p>
+${glanceBox(x)}    <p class="cp-intro">${esc(c.intro)}</p>
 ${photo ? photoFigure(photo, { eager: true }) : ''}
 ${slug === 'south-korea' ? daebakBox() : ''}${snackLead(slug)}${buyBox(x)}${x.slug === 'netherlands' ? bolBox([{ n: 'Shop chips', q: 'chips' }, { n: 'Pringles', q: 'pringles' }, { n: "Lay's", q: 'lays chips' }, { n: 'Paprika chips', q: 'paprika chips' }]) + '\n' : ''}${quickFacts(x)}
     <div class="cp-stats">
@@ -482,7 +519,7 @@ ${d.marketSize ? `      <div class="cp-stat"><div class="val">${esc(d.marketSize
     </div>
     ${PC_SRC[name] ? `<p style="font-size:.72rem;color:var(--muted);margin-top:.4rem">Per-capita source: <a href="${PC_SRC[name][1]}" target="_blank" rel="nofollow noopener" style="color:var(--muted)">${PC_SRC[name][0]}</a> (potato-chip consumption per person; methods differ between sources).</p>` : ''}${d.perCapita && d.perCapita.includes('est.') ? '<p style="font-size:.72rem;color:var(--muted);margin-top:.4rem">Per-capita figure is an editorial estimate, not an official statistic. <a href="/#consumption">How we estimate</a>.</p>' : ''}
 
-    <section class="cp-section">
+    <section class="cp-section" id="brands">
       <h2>Top Potato Chip Brands in ${esc(inName(name))}</h2>
       <p>${esc(c.brandStory)}</p>
       <div class="cp-brand-list">
@@ -490,7 +527,7 @@ ${d.marketSize ? `      <div class="cp-stat"><div class="val">${esc(d.marketSize
       </div>
     </section>
 ${countryChipsSection(slug, inName(name))}
-    <section class="cp-section">
+    <section class="cp-section" id="flavors">
       <h2>Most Popular Chip Flavors</h2>
       <p>These are the bestselling, most widely available potato chip flavors you'll find on shelves across ${esc(name)}.</p>
       <div class="cp-flavor-grid">
@@ -498,7 +535,7 @@ ${countryChipsSection(slug, inName(name))}
       </div>
     </section>
 
-    <section class="cp-section">
+    <section class="cp-section" id="unique-flavors">
       <h2>Unique &amp; Exotic Flavors</h2>
       <p>These distinctive flavors are what make ${esc(name)}'s chip culture truly unique — flavors you're unlikely to find anywhere else in the world.</p>
       <div class="cp-flavor-grid">
