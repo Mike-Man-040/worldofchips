@@ -658,5 +658,63 @@ var m=location.search.match(/[?&]r=([a-z-]+)/);if(m)show(m[1],false);})();`;
     sources: ['https://world.openfoodfacts.org/', 'https://opendatacommons.org/licenses/odbl/1-0/'],
     related: [['chips', '🔎 Chip database'], ['pringles-index', '📊 Pringles Index'], ['united-kingdom', '🇬🇧 United Kingdom'], ['united-states', '🇺🇸 United States'], ['mexico', '🇲🇽 Mexico']] };
 
-  return [...hubAndRecipe, ...cluster.map((g) => ({ ...CK, ...g })), spice, flavorIndex, ...flavorPages, calendar, halloween, quiz, submit, pringlesPage({ esc, ROOT, CK }), shrink, study].map((g) => ({ ...CK, ...g }));
+  // ---------- why chips can't be called parmesan (Hallandsposten, 21 Nov 2026) ----------
+  const HP = 'https://www.hallandsposten.se/hallands-affarer/populara-chipsen-forbjuds-far-inte-heta-parmesan.898b4e77-06f4-52be-aa38-032195e91d84';
+  const REG = 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1143';
+  const PARMCASE = 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62005CJ0132';
+  const FETACASE = 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62002CJ0465';
+  const FETAEC = 'https://agriculture.ec.europa.eu/farming/geographical-indications-and-quality-schemes/geographical-indications-food-and-drink/feta-pdo_en';
+  const CHAMP = 'https://www.gov.uk/protected-food-drink-names/champagne';
+  const extA = (href, label) => `<a href="${esc(href)}" target="_blank" rel="nofollow noopener">${label}</a>`;
+  const parmesan = { slug: 'why-chips-cant-be-called-parmesan', flag: '🧀', crumb: 'Why chips can’t be called parmesan', checked: '2026-11-22', checkedLabel: '22 November 2026', disc: false,
+    h1: 'Why Chips Can’t Be Called Parmesan',
+    title: 'Why Chips Can’t Be Called Parmesan | World of Chips',
+    desc: 'Parmesan is an EU protected name for Parmigiano Reggiano. Gårdschips in Laholm, Sweden, is renaming two flavours from 1 May 2027. The recipe stays the same.',
+    introDark: 'A protected cheese name, a cheese powder, and a Swedish crisp that is changing its label.',
+    intro: `In the European Union, parmesan is not a free word for any hard, salty cheese. It points to Parmigiano Reggiano, a protected designation of origin. That is why a chip factory in Laholm, Sweden, is dropping the name from its best-selling flavour. The facts of the case below are from ${extA(HP, 'Hallandsposten')} (Jonatan Gernes, 21 November 2026). The short version is in our <a href="/news/#gardschips-parmesan-name-ban-2026">news item</a>.`,
+    sections: [],
+    body: `
+    <section class="cp-section" id="protected-names">
+      <h2>What a protected food name is</h2>
+      <p>A protected designation of origin is a name the EU registers for a product from a specific place, region or, in exceptional cases, a country. The product&#8217;s quality or characteristics have to be essentially or exclusively due to that place, and every production step has to happen in the defined area. ${extA(REG, 'Regulation (EU) 2024/1143')}, Article 46, is the current definition for agricultural products.</p>
+      <p>Once a name is on the register, Article 26 of that regulation protects it against misuse, imitation and evocation. The protection still applies if the true origin is shown, if the name is translated, or if the product is used as an ingredient. Words such as &#8220;style&#8221;, &#8220;type&#8221; or &#8220;flavour&#8221; next to the name do not lift the protection.</p>
+      <p>Parmigiano Reggiano is one of those registered names. In 2008 the EU Court of Justice said that using &#8220;Parmesan&#8221; on a hard cheese, grated or meant to be grated, evokes Parmigiano Reggiano: the names sound and look alike, and they are conceptually close. The Court dismissed the Commission&#8217;s case against Germany because the Commission had not proved that Germany failed to meet its obligations. The useful point for labelling is the evocation finding, in ${extA(PARMCASE, 'Case C-132/05, Commission v Germany')} (26 February 2008).</p>
+    </section>
+    <section class="cp-section" id="powder">
+      <h2>Why the powder mattered in this case</h2>
+      <p>A separate rule covers a protected name in the name of another food. Article 27 of the same regulation says the name may be used for a processed product that contains the protected product as an ingredient only when three things are true: the food contains no comparable product in its place, the protected ingredient is used in a large enough quantity to give the food an essential characteristic, and the label states the percentage.</p>
+      <p>The regulation does not set out a special rule for cheese that has been turned into powder. In the Gårdschips case, that was the reason the local authority gave. Hallandsposten reports that Annica Hegefeldt, environment chief for Laholm municipality, said that once the cheese is ground, frozen and given anti-caking agents to make a powder, it has been changed enough that it cannot be called parmesan, even though real parmesan is used. Laholm&#8217;s environment unit drafted the decision with guidance from Livsmedelsverket, the Swedish Food Agency.</p>
+    </section>
+    <section class="cp-section" id="gardschips">
+      <h2>The Gårdschips case</h2>
+      <p>Gårdschips is made at the chip factory in Laholm, in Halland, <a href="/sweden/">Sweden</a>. Hallandsposten reports that the company is owned by SNX Production AB and that Peter Eriksson is its chief executive. Parmesan is its best-selling flavour.</p>
+      <p>An Italian producer group representing the cheesemakers objected about two years ago. The objection cited the EU protected designation of origin Parmigiano Reggiano, a cheese from <a href="/italy/">Italy</a>.</p>
+      <p>Laholm&#8217;s environment unit drafted a decision to ban the products named Parmesan and Dill och parmesan from 1 May 2027. The company will comply. It is renaming the product and is not changing the recipe. The new name is not finalised. Site manager Hanna Åhsberg said grated cheese would not stick to hot chips, so the cheese has to be a powder. Hallandsposten reports that the manufacturer has five months to change the packaging.</p>
+      <p>Dill och parmesan is a dill-and-parmesan flavour, not the same thing as the dill-pickle chips on our <a href="/flavors/dill-pickle/">dill pickle page</a> or the British <a href="/flavors/cheese-and-onion/">cheese and onion</a> crisp. Those pages are here because cheese and dill are the flavour families this dispute sits next to.</p>
+    </section>
+    <section class="cp-section" id="other-names">
+      <h2>Other protected names</h2>
+      <p>The same kind of protection applies to other registered names.</p>
+      <ul class="sb-list">
+        <li><strong>Feta</strong> is a protected designation of origin for a cheese from Greece. The Court of Justice upheld that registration in 2005 (${extA(FETACASE, 'joined cases C-465/02 and C-466/02')}). The European Commission&#8217;s <a href="${esc(FETAEC)}" target="_blank" rel="nofollow noopener">feta page</a> describes the cheese.</li>
+        <li><strong>Champagne</strong> is a protected designation of origin for wine from the Champagne region of France. The UK&#8217;s register of protected names, which records the earlier EU registration, lists it as a wine PDO first registered with the EU on 18 September 1973 (${extA(CHAMP, 'Champagne on GOV.UK')}).</li>
+      </ul>
+      <p>In each case the registered name is reserved for the product that meets the specification. Using it on something else is a labelling question of the same family, not a claim that any particular crisp brand has been told to rename a bag.</p>
+    </section>
+    <section class="cp-section" id="shoppers">
+      <h2>What it means for shoppers</h2>
+      <p>If you buy Gårdschips Parmesan or Dill och parmesan, the taste is not what is changing. The company is keeping the recipe and changing the name. From 1 May 2027 those two names are the ones the draft decision would take off the bags.</p>
+      <p>This page will be updated when the new name is announced.</p>
+    </section>`,
+    faqs: [
+      ['Why can&#8217;t chips be called parmesan?', 'In the EU, Parmesan evokes the protected name Parmigiano Reggiano. A processed food may use a protected name in its own name only when it contains no comparable substitute, uses enough of the ingredient to give the food an essential characteristic, and prints the percentage. In this case, Hallandsposten reports that Laholm municipality has drafted a decision stopping Gårdschips from using Parmesan and Dill och parmesan from 1 May 2027, because the cheese is ground, frozen and given anti-caking agents to make a powder.'],
+      ['Will Gårdschips Parmesan taste different?', 'No change of recipe has been announced. Hallandsposten reports that the company will comply by renaming the product and will not change the recipe. The new name is not finalised.'],
+      ['When do the Parmesan names have to come off the bags?', 'The draft decision bans the names Parmesan and Dill och parmesan from 1 May 2027. Hallandsposten reports that the manufacturer has five months to change the packaging.'],
+      ['What is a protected designation of origin?', 'It is an EU name for a product from a defined place, whose quality or characteristics are essentially or exclusively due to that place, and whose production steps all take place there. Registered names are protected against misuse, imitation and evocation, including translations and use on a food that contains the product as an ingredient.'],
+      ['When will this page give the new flavour name?', 'The new name is not finalised. This page will be updated when the new name is announced.'],
+    ],
+    sources: [HP, REG, PARMCASE, FETACASE, FETAEC, CHAMP],
+    related: [['sweden', '🇸🇪 Chips in Sweden'], ['italy', '🇮🇹 Chips in Italy'], ['flavors/cheese-and-onion', '🧀 Cheese &amp; onion'], ['flavors/dill-pickle', '🥒 Dill pickle'], ['flavors', '🌍 All chip flavours']] };
+
+  return [...hubAndRecipe, ...cluster.map((g) => ({ ...CK, ...g })), spice, flavorIndex, ...flavorPages, calendar, halloween, quiz, submit, pringlesPage({ esc, ROOT, CK }), shrink, study, parmesan].map((g) => ({ ...CK, ...g }));
 }

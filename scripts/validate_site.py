@@ -177,9 +177,17 @@ def check_news(problems, sitemap_root, ns):
         for k in NEWS_FIELDS:
             if not isinstance(s.get(k), str) or not s[k].strip():
                 problems.append(f"{where}: missing/empty '{k}'")
-        unknown = set(s) - set(NEWS_FIELDS) - {"country"}
+        unknown = set(s) - set(NEWS_FIELDS) - {"country", "guide", "guide_label"}
         if unknown:
             problems.append(f"{where}: unknown fields {sorted(unknown)}")
+        if "guide" in s or "guide_label" in s:
+            if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", s.get("guide", "")):
+                problems.append(f"{where}: guide must be a lowercase-hyphen slug")
+            label = s.get("guide_label", "")
+            if not isinstance(label, str) or not label.strip() or len(label) > 80:
+                problems.append(f"{where}: guide_label must be a non-empty string of at most 80 characters")
+            elif not os.path.isfile(os.path.join(ROOT, s.get("guide", ""), "index.html")):
+                problems.append(f"{where}: guide page /{s.get('guide')}/ is missing")
         if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", s.get("id", "")):
             problems.append(f"{where}: id must be a lowercase-hyphen slug")
         if s.get("id") in seen_ids:

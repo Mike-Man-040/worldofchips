@@ -173,7 +173,7 @@ const GUIDE_LINKS = {
   colombia: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   peru: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
   nigeria: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs']],
-  sweden: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe'], ['where-to-buy-takis-europe', '🌶️ Where to buy Takis in Sweden, NL & Germany'], ['where-to-buy-honey-butter-chip-europe', '🍯 Where to buy Honey Butter Chip in Sweden, NL & Germany']],
+  sweden: [['best-international-chip-variety-packs', '🌍 Best international chip variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Where to buy imported chips in Europe'], ['where-to-buy-takis-europe', '🌶️ Where to buy Takis in Sweden, NL & Germany'], ['where-to-buy-honey-butter-chip-europe', '🍯 Where to buy Honey Butter Chip in Sweden, NL & Germany'], ['why-chips-cant-be-called-parmesan', '🧀 Why chips can’t be called parmesan']],
 };
 // Community finds: moderated visitor submissions from data/community_flavors.json (see README).
 // Entry: { "id": "2026-11-uk-1", "country": "united-kingdom", "city": "Leeds", "flavor": "Chip Shop Curry",
@@ -351,6 +351,7 @@ const HOME_GUIDES = [['halloween-chips-2026', '🎃 Halloween chips 2026'], ['ch
   ['best-british-crisps-to-buy-online', '🇬🇧 Best British crisps'], ['best-japanese-chips', '🇯🇵 Best Japanese chips'],
   ['best-international-chip-variety-packs', '🌍 International variety packs'], ['where-to-buy-asian-chips-europe', '🇪🇺 Buying chips in Europe'],
   ['snack-boxes', '🍱 Snack boxes compared'],
+  ['why-chips-cant-be-called-parmesan', '🧀 Why chips can’t be called parmesan'],
   ['where-to-buy-takis-europe', '🌶️ Where to buy Takis (SE, NL, DE)'], ['where-to-buy-honey-butter-chip-europe', '🍯 Where to buy Honey Butter Chip (SE, NL, DE)']];
 const link = (o) => `<a href="/${o.slug}/" class="cp-explore-link">${o.d.flag} ${esc(o.name)}</a>`;
 

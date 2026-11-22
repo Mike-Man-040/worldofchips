@@ -87,6 +87,10 @@ for (const s of stories) {
   if (!CATEGORIES[s.category]) throw new Error(`story ${s.id}: unknown category ${s.category}`);
   if (s.country && !bySlug.has(s.country)) throw new Error(`story ${s.id}: unknown country slug ${s.country}`);
   if (!/^https?:\/\//.test(s.source_url)) throw new Error(`story ${s.id}: source_url must be absolute`);
+  if (s.guide || s.guide_label) {
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s.guide || '')) throw new Error(`story ${s.id}: guide must be a lowercase-hyphen slug`);
+    if (typeof s.guide_label !== 'string' || !s.guide_label.trim()) throw new Error(`story ${s.id}: guide_label is required with guide`);
+  }
 }
 // Newest first; ties broken by id so the order is stable.
 const sorted = [...stories].sort((x, y) => (x.date < y.date ? 1 : x.date > y.date ? -1 : x.id.localeCompare(y.id)));
@@ -96,10 +100,11 @@ const LATEST = sorted[0].date;
 function card(s) {
   const c = s.country && bySlug.get(s.country);
   const countryLink = c ? `<a class="news-card-country" href="/${c.slug}/">${c.flag} Chips in ${esc(inName(c.name))} &#8594;</a>` : '';
+  const guideLink = s.guide ? `<a class="news-card-country" href="/${esc(s.guide)}/">${esc(s.guide_label)} &#8594;</a>` : '';
   return `<article class="news-card" id="${esc(s.id)}"><div class="news-card-top" style="background:linear-gradient(90deg,${CATEGORIES[s.category]})"></div>` +
     `<div class="news-card-body"><span class="news-card-cat">${esc(s.category)}</span>` +
     `<h3><a href="${esc(s.source_url)}" target="_blank" rel="noopener">${esc(s.title)}</a></h3>` +
-    `<p>${esc(s.summary)}</p>${countryLink}</div>` +
+    `<p>${esc(s.summary)}</p>${countryLink}${guideLink}</div>` +
     `<div class="news-card-meta"><time datetime="${s.date}">${fmtDate(s.date)}</time>` +
     `<a href="${esc(s.source_url)}" target="_blank" rel="noopener">${esc(s.source_name)} &#8599;</a></div></article>`;
 }

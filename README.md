@@ -35,6 +35,7 @@ Each story in `data/news.json` (an array; order doesn't matter, the build sorts 
 | `summary` | 40–80 words in **our own words** – never copy the source's text |
 | `category` | one of `Industry`, `New Flavor`, `Safety Recall`, `Innovation`, `Sustainability`, `Investment`, `Regional` |
 | `country` | optional country-page slug (e.g. `japan`, `united-kingdom`) – adds a link to that guide |
+| `guide` / `guide_label` | optional. Both together. `guide` is an existing page slug (no slashes); the card links to it with `guide_label` as the text |
 | `source_name` / `source_url` | the credible page you verified the story on (company release, regulator, trade/news outlet) |
 
 Weekly workflow:

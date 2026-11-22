@@ -975,7 +975,7 @@ const authorBox = `
       <p class="sb-muted" style="margin-top:.4rem">Michael has a background in finance and runs World of Chips, a guide to potato chips from around the world: the brands, the flavours and what they cost. Every guide links to its sources. <a href="/about/">About World of Chips</a></p>
     </aside>
 `;
-const MORE = [['pringles-index', '📊 Pringles Index'], ['whats-in-a-bag-of-chips', '🧪 What\u2019s in a bag?'], ['shrinkflation', '📉 Shrinkflation'], ['spiciest-chips', '🌶️ Spice Ladder'], ['which-chip-are-you', '❓ Chip Quiz'], ['make-chips-at-home', '🥔 Make at Home'], ['flavors', '🌍 Flavours'], ['limited-edition-chips', '📅 Drops'], ['submit-a-flavor', '📸 Add your flavour']];
+const MORE = [['pringles-index', '📊 Pringles Index'], ['whats-in-a-bag-of-chips', '🧪 What\u2019s in a bag?'], ['why-chips-cant-be-called-parmesan', '🧀 Parmesan names'], ['shrinkflation', '📉 Shrinkflation'], ['spiciest-chips', '🌶️ Spice Ladder'], ['which-chip-are-you', '❓ Chip Quiz'], ['make-chips-at-home', '🥔 Make at Home'], ['flavors', '🌍 Flavours'], ['limited-edition-chips', '📅 Drops'], ['submit-a-flavor', '📸 Add your flavour']];
 const isFeature = (slug) => MORE.some(([s]) => s === slug) || slug.startsWith('flavors/') || ['homemade-crisps-recipe', 'best-mandoline-slicers-for-chips', 'best-deep-fryers-for-chips', 'best-air-fryers-for-chips', 'chip-seasoning-powders'].includes(slug);
 const moreRow = (slug) => `
     <nav class="cp-section" aria-label="More to explore">
