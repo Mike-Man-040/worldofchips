@@ -7,7 +7,7 @@ World of Chips is an independent guide to potato chip culture around the world: 
 ## Main
 
 - [World of Chips: Global Chip Map](https://worldofchips.com/): Interactive world map and overview of every country guide.
-- [Potato Chip News: New Flavors & Recalls](https://worldofchips.com/news/): Potato chip and crisps news from around the world, updated weekly: new flavor launches, food-safety recalls, industry deals and regional snack trends. Updated 10 Nov 2026.
+- [Potato Chip News: New Flavors & Recalls](https://worldofchips.com/news/): Potato chip and crisps news from around the world, updated weekly: new flavor launches, food-safety recalls, industry deals and regional snack trends. Updated 21 Nov 2026.
 
 ## Country guides
 
@@ -69,6 +69,7 @@ World of Chips is an independent guide to potato chip culture around the world: 
 - [The Pringles Index 2026: What a Can of Pringles Costs in 30 Countries](https://worldofchips.com/pringles-index/): A Big Mac Index for chips: the regular price of Pringles Original in 30 countries per 100 g in USD. Turkey is the priciest (about $3.96–4.20 per 100 g); India and France are the cheapest at about $1.08. Sources for every price.
 - [Chip Shrinkflation Tracker](https://worldofchips.com/shrinkflation/): A sourced log of chip and crisp packs that got smaller: 11 cases from Lay's, Walkers, Pringles, Doritos and others in the UK, US, Germany and the Netherlands, with old and new sizes.
 - [What’s in a Bag of Chips? US, UK, NL & Mexico](https://worldofchips.com/whats-in-a-bag-of-chips/): We read 1,785 chip ingredient lists from Open Food Facts. 44.4% of UK chips list yeast extract but 6.0% list MSG; in the US, 15.1% list MSG.
+- [Why Chips Can’t Be Called Parmesan](https://worldofchips.com/why-chips-cant-be-called-parmesan/): Parmesan is an EU protected name for Parmigiano Reggiano. Gårdschips in Laholm, Sweden, is renaming two flavours from 1 May 2027. The recipe stays the same.
 - [Christmas Snack Box Comparison 2026](https://worldofchips.com/christmas-snack-box-comparison-2026/): Compare international snack boxes to give this Christmas: Universal Yums, Bokksu, TokyoTreat, Sakuraco, MexiCrate, SnackCrate and Daebak. Price tiers, origin, what is inside and shipping, from each company’s own site.
 - [About World of Chips: Who Runs the Site](https://worldofchips.com/about/): World of Chips is a guide to potato chips around the world, founded by Michael van der Looij. How we research, source and fund the site.
 

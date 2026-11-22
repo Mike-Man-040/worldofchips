@@ -1165,6 +1165,27 @@ A: In our sample, yes: 15.1% of US chips list MSG, against 6.0% of UK crisps. Th
 **Q: Is palm oil common in potato chips?**
 A: Not in these four countries. Palm oil appears in 4.1% of US, 1.3% of UK, 1.2% of Dutch and 1.9% of Mexican ingredient lists in our sample.
 
+### Why Chips Can’t Be Called Parmesan
+
+URL: https://worldofchips.com/why-chips-cant-be-called-parmesan/
+
+Parmesan is an EU protected name for Parmigiano Reggiano. Gårdschips in Laholm, Sweden, is renaming two flavours from 1 May 2027. The recipe stays the same.
+
+**Q: Why can’t chips be called parmesan?**
+A: In the EU, Parmesan evokes the protected name Parmigiano Reggiano. A processed food may use a protected name in its own name only when it contains no comparable substitute, uses enough of the ingredient to give the food an essential characteristic, and prints the percentage. In this case, Hallandsposten reports that Laholm municipality has drafted a decision stopping Gårdschips from using Parmesan and Dill och parmesan from 1 May 2027, because the cheese is ground, frozen and given anti-caking agents to make a powder.
+
+**Q: Will Gårdschips Parmesan taste different?**
+A: No change of recipe has been announced. Hallandsposten reports that the company will comply by renaming the product and will not change the recipe. The new name is not finalised.
+
+**Q: When do the Parmesan names have to come off the bags?**
+A: The draft decision bans the names Parmesan and Dill och parmesan from 1 May 2027. Hallandsposten reports that the manufacturer has five months to change the packaging.
+
+**Q: What is a protected designation of origin?**
+A: It is an EU name for a product from a defined place, whose quality or characteristics are essentially or exclusively due to that place, and whose production steps all take place there. Registered names are protected against misuse, imitation and evocation, including translations and use on a food that contains the product as an ingredient.
+
+**Q: When will this page give the new flavour name?**
+A: The new name is not finalised. This page will be updated when the new name is announced.
+
 ### Christmas Snack Box Comparison 2026
 
 URL: https://worldofchips.com/christmas-snack-box-comparison-2026/
@@ -1203,7 +1224,7 @@ A: Yes. Some Amazon links are affiliate links, and World of Chips earns from qua
 
 ## News
 
-- [Potato Chip News: New Flavors & Recalls](https://worldofchips.com/news/): Potato chip and crisps news from around the world, updated weekly: new flavor launches, food-safety recalls, industry deals and regional snack trends. Updated 10 Nov 2026.
+- [Potato Chip News: New Flavors & Recalls](https://worldofchips.com/news/): Potato chip and crisps news from around the world, updated weekly: new flavor launches, food-safety recalls, industry deals and regional snack trends. Updated 21 Nov 2026.
 
 ## Chip database
 
